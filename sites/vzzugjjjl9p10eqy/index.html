@@ -8,9 +8,9 @@
     <meta name="keywords" content="TNT MOD, مود صفحه کلاچ, صفحه کلاچ جم بینهایت, دانلود صفحه کلاچ مود شده, سکه بینهایت کلاچ, مود کلاچ ۲۰۲۶" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large" />
     
-    <!-- آدرس نهایی پروژه با نام "صفحه-کلاچ" -->
-    <link rel="canonical" href="https://s09383181-ship-it.github.io/%D8%B5%D9%81%D8%AD%D9%87-%DA%A9%D9%84%D8%A7%DA%86/" />
-    <meta property="og:url" content="https://s09383181-ship-it.github.io/%D8%B5%D9%81%D8%AD%D9%87-%DA%A9%D9%84%D8%A7%DA%86/" />
+    <!-- آدرس ثابت (همون لینک خودت) -->
+    <link rel="canonical" href="https://s09383181-ship-it.github.io/sites/sites/vzzugjjjl9p10eqy/" />
+    <meta property="og:url" content="https://s09383181-ship-it.github.io/sites/sites/vzzugjjjl9p10eqy/" />
     
     <meta property="og:title" content="TNT MOD | دانلود مود صفحه کلاچ با سکه و جم بینهایت" />
     <meta property="og:description" content="TNT MOD - مود صفحه کلاچ با سکه و جم بینهایت. کاملاً تست شده در ۲۰۲۶." />
@@ -21,7 +21,6 @@
     <meta name="twitter:description" content="TNT MOD - مود صفحه کلاچ با سکه و جم بینهایت. کاملاً تست شده در ۲۰۲۶." />
     <meta name="theme-color" content="#0f1a2e" />
 
-    <!-- فونت و آیکون با CDN سریع -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
@@ -49,7 +48,7 @@
             overflow-x: hidden;
         }
 
-        /* ===== پس‌زمینه سه‌بعدی سبک ===== */
+        /* ===== پس‌زمینه سه‌بعدی ===== */
         .bg-3d {
             position: fixed;
             inset: 0;
@@ -226,7 +225,7 @@
             margin-left: 8px;
         }
 
-        /* ===== بخش محتوای متنی (سئو) ===== */
+        /* ===== بخش محتوای متنی (تقویت سئو) ===== */
         .content-section {
             margin: 30px 0 25px;
             padding: 20px 22px;
@@ -499,14 +498,8 @@
         }
 
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .loading-content {
@@ -553,12 +546,8 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .loading-text {
@@ -628,170 +617,52 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 640px) {
-            .card {
-                padding: 24px 18px 20px;
-                border-radius: 28px;
-            }
-
-            .tnt-brand .brand-text {
-                font-size: 1.6rem;
-            }
-            .tnt-brand .logo-icon {
-                font-size: 1.8rem;
-            }
-            .tnt-sub {
-                font-size: 0.65rem;
-                padding: 3px 12px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-            h1 i {
-                font-size: 1.7rem;
-            }
-
-            .desc {
-                font-size: 0.9rem;
-            }
-
-            .content-section {
-                padding: 16px;
-            }
-            .content-section h2 {
-                font-size: 1.3rem;
-            }
-            .content-section p {
-                font-size: 0.85rem;
-            }
-            .content-section ul li {
-                font-size: 0.8rem;
-            }
-
-            .stats-wrapper {
-                padding: 14px 14px 12px;
-                border-radius: 20px;
-            }
-            .stats-grid {
-                gap: 10px;
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .stat-item {
-                padding: 8px 16px 8px 20px;
-                justify-content: flex-start;
-                min-width: unset;
-            }
-            .stat-item .info .value {
-                font-size: 1.3rem;
-            }
-
-            .btn-download {
-                font-size: 1.1rem;
-                padding: 14px 16px;
-                gap: 12px;
-            }
-            .btn-download i {
-                font-size: 1.3rem;
-            }
-
-            .more a {
-                padding: 10px 22px;
-                font-size: 0.9rem;
-            }
-
-            .footer {
-                font-size: 0.65rem;
-                gap: 14px;
-            }
-
-            .cube {
-                display: none;
-            }
-
-            .loading-content {
-                padding: 20px 16px;
-                border-radius: 24px;
-                margin: 0 10px;
-            }
-            .loading-text {
-                font-size: 0.95rem;
-                line-height: 1.8;
-            }
-            .loading-spinner {
-                width: 60px;
-                height: 60px;
-            }
-            .loading-btn {
-                font-size: 0.9rem;
-                padding: 12px 24px;
-            }
-            .loading-timer {
-                font-size: 0.85rem;
-            }
-            .loading-timer span {
-                font-size: 1.2rem;
-                min-width: 36px;
-            }
+            .card { padding: 24px 18px 20px; border-radius: 28px; }
+            .tnt-brand .brand-text { font-size: 1.6rem; }
+            .tnt-brand .logo-icon { font-size: 1.8rem; }
+            .tnt-sub { font-size: 0.65rem; padding: 3px 12px; }
+            h1 { font-size: 2rem; }
+            h1 i { font-size: 1.7rem; }
+            .desc { font-size: 0.9rem; }
+            .content-section { padding: 16px; }
+            .content-section h2 { font-size: 1.3rem; }
+            .content-section p { font-size: 0.85rem; }
+            .content-section ul li { font-size: 0.8rem; }
+            .stats-wrapper { padding: 14px 14px 12px; border-radius: 20px; }
+            .stats-grid { gap: 10px; flex-direction: column; align-items: stretch; }
+            .stat-item { padding: 8px 16px 8px 20px; justify-content: flex-start; min-width: unset; }
+            .stat-item .info .value { font-size: 1.3rem; }
+            .btn-download { font-size: 1.1rem; padding: 14px 16px; gap: 12px; }
+            .btn-download i { font-size: 1.3rem; }
+            .more a { padding: 10px 22px; font-size: 0.9rem; }
+            .footer { font-size: 0.65rem; gap: 14px; }
+            .cube { display: none; }
+            .loading-content { padding: 20px 16px; border-radius: 24px; margin: 0 10px; }
+            .loading-text { font-size: 0.95rem; line-height: 1.8; }
+            .loading-spinner { width: 60px; height: 60px; }
+            .loading-btn { font-size: 0.9rem; padding: 12px 24px; }
+            .loading-timer { font-size: 0.85rem; }
+            .loading-timer span { font-size: 1.2rem; min-width: 36px; }
         }
 
         @media (max-width: 400px) {
-            .card {
-                padding: 16px 10px 14px;
-                border-radius: 22px;
-            }
-
-            .tnt-brand .brand-text {
-                font-size: 1.3rem;
-            }
-            .tnt-brand .logo-icon {
-                font-size: 1.4rem;
-            }
-
-            h1 {
-                font-size: 1.6rem;
-            }
-            h1 i {
-                font-size: 1.3rem;
-            }
-
-            .stat-item .info .value {
-                font-size: 1.1rem;
-            }
-
-            .btn-download {
-                font-size: 0.9rem;
-                padding: 10px 12px;
-            }
-            .btn-download i {
-                font-size: 1rem;
-            }
-
-            .more a {
-                padding: 8px 14px;
-                font-size: 0.8rem;
-            }
-
-            .footer {
-                font-size: 0.55rem;
-                gap: 10px;
-            }
+            .card { padding: 16px 10px 14px; border-radius: 22px; }
+            .tnt-brand .brand-text { font-size: 1.3rem; }
+            .tnt-brand .logo-icon { font-size: 1.4rem; }
+            h1 { font-size: 1.6rem; }
+            h1 i { font-size: 1.3rem; }
+            .stat-item .info .value { font-size: 1.1rem; }
+            .btn-download { font-size: 0.9rem; padding: 10px 12px; }
+            .btn-download i { font-size: 1rem; }
+            .more a { padding: 8px 14px; font-size: 0.8rem; }
+            .footer { font-size: 0.55rem; gap: 10px; }
         }
 
         @media (min-width: 1200px) {
-            .card {
-                padding: 50px 46px 40px;
-            }
-            .tnt-brand .brand-text {
-                font-size: 2.8rem;
-            }
-            h1 {
-                font-size: 3.4rem;
-            }
-            .btn-download {
-                font-size: 1.6rem;
-                padding: 20px 28px;
-            }
+            .card { padding: 50px 46px 40px; }
+            .tnt-brand .brand-text { font-size: 2.8rem; }
+            h1 { font-size: 3.4rem; }
+            .btn-download { font-size: 1.6rem; padding: 20px 28px; }
         }
     </style>
 </head>
@@ -985,7 +856,6 @@
                 startDownload();
             });
 
-            // اگر کاربر روی اوورلی کلیک کرد، تایمر متوقف نشود
             overlay.addEventListener('click', function(e) {
                 if (e.target === overlay) {
                     // هیچ کاری انجام نده
