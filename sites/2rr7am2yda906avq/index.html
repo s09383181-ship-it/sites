@@ -2,20 +2,10 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TNT MOD | دانلود مود صفحه کلاچ با سکه و جم بینهایت</title>
-    <meta name="description" content="TNT MOD - دانلود مود صفحه کلاچ با سکه و جم بینهایت. مود شده و کاملاً تست شده در ۲۰۲۶." />
-    <meta name="keywords" content="TNT MOD, مود صفحه کلاچ, صفحه کلاچ جم بینهایت, دانلود صفحه کلاچ مود شده" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://yourdomain.com/tnt-mod-clutch" />
-    <meta property="og:title" content="TNT MOD | دانلود مود صفحه کلاچ" />
-    <meta property="og:description" content="TNT MOD - مود صفحه کلاچ با سکه و جم بینهایت." />
-    <meta property="og:type" content="website" />
-    <meta name="theme-color" content="#0f1a2e" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>TNT MOD</title>
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
     <style>
         * {
             margin: 0;
@@ -23,22 +13,36 @@
             box-sizing: border-box;
         }
 
+        html,
         body {
             font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            color: #e8edf5;
+            padding: 16px;
+            color: #e8f0e8;
             direction: rtl;
-            background: #0a0e1a;
-            perspective: 1200px;
-            overflow: hidden;
+            background: #0a120a;
+            overflow-x: hidden;
+            overflow-y: auto;
             position: relative;
         }
 
-        .bg-3d {
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            border-radius: 10px;
+        }
+
+        /* ===== پس‌زمینه جنگلی-یخی ===== */
+        .bg-forest-ice {
             position: fixed;
             top: 0;
             left: 0;
@@ -49,233 +53,251 @@
             pointer-events: none;
         }
 
-        .cube {
+        /* تکسچر برگ و درخت */
+        .bg-forest-ice .leaf-texture {
             position: absolute;
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 215, 0, 0.04);
-            border: 1px solid rgba(255, 215, 0, 0.06);
-            border-radius: 16px;
-            animation: rotateCube 25s infinite linear;
-            transform-style: preserve-3d;
-            box-shadow: 0 0 40px rgba(255, 215, 0, 0.02);
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 30%, rgba(74, 222, 128, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.02) 0%, transparent 60%);
+            animation: leafDrift 30s ease-in-out infinite alternate;
         }
 
-        .cube::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(135deg, rgba(255, 107, 107, 0.08), rgba(108, 92, 231, 0.08), rgba(0, 206, 209, 0.08));
-            border-radius: 18px;
-            animation: glowPulse 4s ease-in-out infinite;
+        .bg-forest-ice .leaf-texture:nth-child(2) {
+            animation-duration: 45s;
+            animation-direction: reverse;
+            opacity: 0.6;
+            background: 
+                radial-gradient(ellipse at 30% 60%, rgba(74, 222, 128, 0.02) 0%, transparent 40%),
+                radial-gradient(ellipse at 70% 20%, rgba(34, 197, 94, 0.02) 0%, transparent 40%);
         }
 
-        .cube:nth-child(1) {
-            top: 10%;
-            left: 5%;
-            width: 80px;
-            height: 80px;
-            animation-duration: 20s;
-            animation-delay: 0s;
-        }
-        .cube:nth-child(2) {
-            top: 70%;
-            left: 85%;
-            width: 50px;
-            height: 50px;
-            animation-duration: 30s;
-            animation-delay: 2s;
-        }
-        .cube:nth-child(3) {
-            top: 40%;
-            left: 90%;
-            width: 100px;
-            height: 100px;
-            animation-duration: 22s;
-            animation-delay: 4s;
-        }
-        .cube:nth-child(4) {
-            top: 85%;
-            left: 10%;
-            width: 70px;
-            height: 70px;
-            animation-duration: 28s;
-            animation-delay: 1s;
-        }
-        .cube:nth-child(5) {
-            top: 20%;
-            left: 80%;
-            width: 45px;
-            height: 45px;
-            animation-duration: 35s;
-            animation-delay: 3s;
-        }
-        .cube:nth-child(6) {
-            top: 55%;
-            left: 2%;
-            width: 90px;
-            height: 90px;
-            animation-duration: 18s;
-            animation-delay: 5s;
-        }
-        .cube:nth-child(7) {
-            top: 5%;
-            left: 50%;
-            width: 55px;
-            height: 55px;
-            animation-duration: 40s;
-            animation-delay: 0.5s;
-        }
-        .cube:nth-child(8) {
-            top: 92%;
-            left: 50%;
-            width: 65px;
-            height: 65px;
-            animation-duration: 26s;
-            animation-delay: 2.5s;
-        }
-        .cube:nth-child(9) {
-            top: 30%;
-            left: 20%;
-            width: 35px;
-            height: 35px;
-            animation-duration: 32s;
-            animation-delay: 1.5s;
-        }
-        .cube:nth-child(10) {
-            top: 60%;
-            left: 65%;
-            width: 40px;
-            height: 40px;
-            animation-duration: 28s;
-            animation-delay: 3.5s;
-        }
-        .cube:nth-child(11) {
-            top: 15%;
-            left: 45%;
-            width: 50px;
-            height: 50px;
-            animation-duration: 38s;
-            animation-delay: 0.8s;
-        }
-        .cube:nth-child(12) {
-            top: 80%;
-            left: 30%;
-            width: 45px;
-            height: 45px;
-            animation-duration: 24s;
-            animation-delay: 4.2s;
-        }
-
-        @keyframes rotateCube {
+        @keyframes leafDrift {
             0% {
-                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateY(0px) scale(1);
+                transform: translate(0, 0) scale(1);
             }
             33% {
-                transform: rotateX(120deg) rotateY(60deg) rotateZ(30deg) translateY(-20px) scale(1.1);
+                transform: translate(15px, -20px) scale(1.03);
             }
             66% {
-                transform: rotateX(240deg) rotateY(120deg) rotateZ(60deg) translateY(20px) scale(0.9);
+                transform: translate(-15px, 15px) scale(0.97);
             }
             100% {
-                transform: rotateX(360deg) rotateY(180deg) rotateZ(90deg) translateY(0px) scale(1);
+                transform: translate(10px, -10px) scale(1.01);
             }
         }
 
-        @keyframes glowPulse {
-            0%,
-            100% {
-                opacity: 0.2;
+        /* دایره‌های سه‌بعدی جنگلی-یخی */
+        .forest-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.2;
+            animation: floatForest 25s ease-in-out infinite alternate;
+            transform-style: preserve-3d;
+        }
+
+        .forest-orb:nth-child(3) {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, #4ade80, transparent);
+            top: -200px;
+            right: -200px;
+            animation-duration: 30s;
+            transform: rotateX(20deg) rotateY(30deg);
+        }
+        .forest-orb:nth-child(4) {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #22c55e, transparent);
+            bottom: -150px;
+            left: -150px;
+            animation-duration: 35s;
+            animation-delay: 5s;
+            transform: rotateX(-30deg) rotateY(-20deg);
+        }
+        .forest-orb:nth-child(5) {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, #7dd3fc, transparent);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotateX(15deg) rotateY(45deg);
+            animation-duration: 40s;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatForest {
+            0% {
+                transform: translate(0, 0) scale(1);
             }
-            50% {
-                opacity: 0.6;
+            33% {
+                transform: translate(25px, -30px) scale(1.08);
+            }
+            66% {
+                transform: translate(-20px, 25px) scale(0.92);
+            }
+            100% {
+                transform: translate(15px, -15px) scale(1.04);
             }
         }
 
-        .card {
-            max-width: 720px;
+        /* ذرات برف و برگ */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            background: rgba(15, 22, 45, 0.88);
-            backdrop-filter: blur(22px);
-            -webkit-backdrop-filter: blur(22px);
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            font-size: 1.2rem;
+            animation: fall linear infinite;
+        }
+
+        .particle:nth-child(1) {
+            left: 10%;
+            animation-duration: 12s;
+            animation-delay: 0s;
+            font-size: 1rem;
+            color: rgba(74, 222, 128, 0.15);
+        }
+        .particle:nth-child(2) {
+            left: 25%;
+            animation-duration: 15s;
+            animation-delay: 2s;
+            font-size: 0.8rem;
+            color: rgba(125, 211, 252, 0.12);
+        }
+        .particle:nth-child(3) {
+            left: 40%;
+            animation-duration: 10s;
+            animation-delay: 4s;
+            font-size: 1.4rem;
+            color: rgba(74, 222, 128, 0.1);
+        }
+        .particle:nth-child(4) {
+            left: 55%;
+            animation-duration: 18s;
+            animation-delay: 1s;
+            font-size: 0.6rem;
+            color: rgba(34, 197, 94, 0.12);
+        }
+        .particle:nth-child(5) {
+            left: 70%;
+            animation-duration: 14s;
+            animation-delay: 3s;
+            font-size: 1rem;
+            color: rgba(125, 211, 252, 0.1);
+        }
+        .particle:nth-child(6) {
+            left: 85%;
+            animation-duration: 16s;
+            animation-delay: 5s;
+            font-size: 0.9rem;
+            color: rgba(74, 222, 128, 0.13);
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(0vh) rotate(30deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg) scale(0.5);
+                opacity: 0;
+            }
+        }
+
+        /* ===== کارت جنگلی-یخی ===== */
+        .card {
+            max-width: 700px;
+            width: 100%;
+            background: rgba(10, 25, 15, 0.55);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
             border-radius: 48px;
-            padding: 40px 36px 34px;
-            border: 1px solid rgba(255, 215, 0, 0.06);
-            box-shadow: 0 40px 80px -20px #000000ee, 0 0 0 1px rgba(255, 215, 0, 0.03) inset;
+            padding: 38px 32px 30px;
+            border: 1px solid rgba(74, 222, 128, 0.08);
+            box-shadow: 0 40px 80px -20px #000000ee, inset 0 1px 0 rgba(74, 222, 128, 0.04);
             position: relative;
             z-index: 1;
+            margin: 10px 0;
         }
 
+        /* ===== هدر ===== */
         .tnt-header {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 24px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid rgba(255, 215, 0, 0.06);
+            gap: 18px;
+            margin-bottom: 22px;
+            padding-bottom: 18px;
+            border-bottom: 1px solid rgba(74, 222, 128, 0.06);
+            flex-wrap: wrap;
         }
 
         .tnt-icon {
-            width: 130px;
-            height: 130px;
-            border-radius: 35px;
-            background: linear-gradient(135deg, #ff6b6b, #f7c948);
+            width: 80px;
+            height: 80px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 15px 45px rgba(255, 107, 107, 0.35);
-            margin-bottom: 14px;
-            transition: 0.3s;
-            border: 2px solid rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 35px rgba(34, 197, 94, 0.2);
             overflow: hidden;
-            position: relative;
-        }
-
-        .tnt-icon::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 35px;
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
-            pointer-events: none;
+            border: 2px solid rgba(74, 222, 128, 0.1);
+            flex-shrink: 0;
+            transition: 0.3s;
         }
 
         .tnt-icon:hover {
-            transform: scale(1.04) rotate(-2deg);
-            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.45);
+            transform: scale(1.05) rotate(-3deg);
+            box-shadow: 0 15px 45px rgba(34, 197, 94, 0.3);
         }
 
         .tnt-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 35px;
+            border-radius: 24px;
         }
 
         .tnt-brand {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 4px;
+            gap: 2px;
+            flex: 1;
         }
 
         .tnt-brand .brand-text {
-            font-size: 2.6rem;
+            font-size: 2.2rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #ff6b6b 0%, #f7c948 40%, #00ced1 70%, #ff6b6b 100%);
+            background: linear-gradient(135deg, #86efac, #4ade80, #22c55e, #7dd3fc);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: gradientShift 4s ease-in-out infinite;
-            letter-spacing: 1px;
+            animation: forestShift 5s ease-in-out infinite;
+            letter-spacing: 0.5px;
+            line-height: 1.2;
         }
 
-        @keyframes gradientShift {
+        @keyframes forestShift {
             0% {
                 background-position: 0% 50%;
             }
@@ -288,94 +310,100 @@
         }
 
         .tnt-sub {
-            font-size: 0.8rem;
-            color: #8aa3d6;
+            font-size: 0.75rem;
+            color: #4ade80;
             font-weight: 400;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 4px 18px;
+            background: rgba(74, 222, 128, 0.04);
+            padding: 3px 14px;
             border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(74, 222, 128, 0.06);
+            display: inline-block;
+            align-self: flex-start;
         }
 
         .tnt-sub i {
-            color: #f7c948;
+            color: #4ade80;
             margin-left: 6px;
         }
 
+        /* ===== نشان ===== */
         .badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #00ced1, #20b2aa);
+            gap: 6px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
             color: #fff;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             font-weight: 800;
-            padding: 6px 22px;
+            padding: 5px 18px;
             border-radius: 40px;
-            margin-bottom: 16px;
-            border: 1px solid rgba(0, 206, 209, 0.3);
-            box-shadow: 0 0 30px rgba(0, 206, 209, 0.15);
+            margin-bottom: 14px;
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.1);
             text-transform: uppercase;
         }
 
+        /* ===== عنوان ===== */
         h1 {
-            font-size: 2.6rem;
+            font-size: 2.4rem;
             font-weight: 900;
-            color: #ffffff;
+            color: #e8f0e8;
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 6px;
+            gap: 12px;
+            margin-bottom: 4px;
             letter-spacing: -0.5px;
         }
 
         h1 i {
-            color: #f7c948;
-            font-size: 2.2rem;
-            filter: drop-shadow(0 0 20px rgba(247, 200, 72, 0.2));
+            color: #4ade80;
+            font-size: 2rem;
+            filter: drop-shadow(0 0 20px rgba(74, 222, 128, 0.15));
         }
 
+        /* ===== توضیح ===== */
         .desc {
-            font-size: 1rem;
-            color: #9aafd6;
-            border-right: 3px solid #00ced1;
-            padding-right: 16px;
-            margin-bottom: 28px;
+            font-size: 0.95rem;
+            color: #86efac;
+            border-right: 3px solid #22c55e;
+            padding-right: 14px;
+            margin-bottom: 24px;
             line-height: 1.8;
             font-weight: 400;
         }
 
         .desc i {
-            color: #00ced1;
+            color: #22c55e;
             margin-left: 8px;
         }
 
+        /* ===== آمار ===== */
         .stats-wrapper {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 24px;
-            padding: 20px 22px 18px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
+            background: rgba(0, 25, 10, 0.25);
+            border-radius: 20px;
+            padding: 16px 18px 14px;
+            margin-bottom: 26px;
+            border: 1px solid rgba(74, 222, 128, 0.04);
         }
 
         .stats-label {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #b0c4ec;
+            color: #4ade80;
             font-weight: 600;
-            font-size: 0.85rem;
-            margin-bottom: 14px;
+            font-size: 0.8rem;
+            margin-bottom: 12px;
         }
 
         .stats-label i {
-            color: #f7c948;
-            font-size: 1rem;
+            color: #4ade80;
+            font-size: 0.9rem;
         }
 
         .stats-grid {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: space-around;
         }
@@ -383,178 +411,185 @@
         .stat-item {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 10px 22px 10px 26px;
-            border-radius: 60px;
+            gap: 12px;
+            padding: 8px 18px 8px 22px;
+            border-radius: 50px;
             transition: 0.3s;
             flex: 1 1 auto;
-            min-width: 130px;
+            min-width: 110px;
             justify-content: center;
         }
 
         .stat-coin {
-            background: rgba(247, 200, 72, 0.08);
-            border: 1px solid rgba(247, 200, 72, 0.15);
+            background: rgba(74, 222, 128, 0.04);
+            border: 1px solid rgba(74, 222, 128, 0.06);
         }
         .stat-coin i {
-            color: #f7c948;
-            text-shadow: 0 0 30px rgba(247, 200, 72, 0.25);
+            color: #4ade80;
+            text-shadow: 0 0 20px rgba(74, 222, 128, 0.1);
         }
         .stat-coin .value {
-            color: #f7c948;
+            color: #4ade80;
         }
 
         .stat-gem {
-            background: rgba(108, 92, 231, 0.08);
-            border: 1px solid rgba(108, 92, 231, 0.15);
+            background: rgba(56, 189, 248, 0.04);
+            border: 1px solid rgba(56, 189, 248, 0.06);
         }
         .stat-gem i {
-            color: #a29bfe;
-            text-shadow: 0 0 30px rgba(108, 92, 231, 0.25);
+            color: #38bdf8;
+            text-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
         }
         .stat-gem .value {
-            color: #a29bfe;
+            color: #38bdf8;
         }
 
         .stat-infinity {
-            background: rgba(0, 206, 209, 0.08);
-            border: 1px solid rgba(0, 206, 209, 0.15);
+            background: rgba(147, 197, 253, 0.04);
+            border: 1px solid rgba(147, 197, 253, 0.06);
         }
         .stat-infinity i {
-            color: #00ced1;
-            text-shadow: 0 0 30px rgba(0, 206, 209, 0.2);
+            color: #93c5fd;
+            text-shadow: 0 0 20px rgba(147, 197, 253, 0.1);
         }
         .stat-infinity .value {
-            color: #00ced1;
+            color: #93c5fd;
         }
 
         .stat-item .info {
             display: flex;
             flex-direction: column;
-            line-height: 1.3;
+            line-height: 1.2;
         }
 
         .stat-item .info .value {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 900;
             letter-spacing: 0.5px;
         }
 
         .stat-item .info .label {
-            font-size: 0.75rem;
-            color: #8aa3d6;
+            font-size: 0.7rem;
+            color: #86efac;
             font-weight: 400;
         }
 
         .stat-item:hover {
-            transform: scale(1.03);
+            transform: scale(1.04);
+            background: rgba(74, 222, 128, 0.06);
         }
 
+        /* ===== دکمه دانلود ===== */
         .btn-download {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 16px;
+            gap: 14px;
             width: 100%;
-            background: linear-gradient(135deg, #00ced1, #20b2aa);
+            background: linear-gradient(135deg, #4ade80, #22c55e);
             border: none;
             border-radius: 60px;
-            padding: 18px 24px;
+            padding: 16px 22px;
             font-family: 'Vazirmatn', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 800;
-            color: #fff;
+            color: #0a120a;
             text-decoration: none;
-            box-shadow: 0 10px 40px -8px rgba(0, 206, 209, 0.4);
+            box-shadow: 0 10px 35px -8px rgba(34, 197, 94, 0.3);
             transition: 0.3s;
-            margin: 22px 0 16px 0;
-            border: 1px solid rgba(0, 206, 209, 0.2);
+            margin: 20px 0 14px 0;
+            border: 1px solid rgba(74, 222, 128, 0.15);
             cursor: pointer;
+            letter-spacing: 0.3px;
         }
 
         .btn-download i {
-            font-size: 1.6rem;
-            color: #fff;
+            font-size: 1.4rem;
+            color: #0a120a;
         }
 
         .btn-download:hover {
             transform: scale(1.02) translateY(-3px);
-            box-shadow: 0 18px 50px -8px rgba(0, 206, 209, 0.5);
-            background: linear-gradient(135deg, #40e0d0, #20b2aa);
+            box-shadow: 0 16px 45px -8px rgba(34, 197, 94, 0.4);
+            background: linear-gradient(135deg, #86efac, #22c55e);
         }
 
         .btn-download:active {
             transform: scale(0.96);
         }
 
+        /* ===== مودهای بیشتر ===== */
         .more {
             display: flex;
             justify-content: center;
-            margin: 8px 0 22px;
+            margin: 6px 0 18px;
         }
 
         .more a {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(74, 222, 128, 0.04);
             border-radius: 50px;
-            padding: 12px 34px;
+            padding: 10px 28px;
             font-family: 'Vazirmatn', sans-serif;
             font-weight: 600;
-            color: #c8d6f5;
+            color: #86efac;
             text-decoration: none;
             transition: 0.3s;
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            font-size: 1rem;
+            gap: 10px;
+            font-size: 0.95rem;
         }
 
         .more a i {
-            color: #00ced1;
-            font-size: 1.1rem;
+            color: #4ade80;
+            font-size: 1rem;
         }
 
         .more a:hover {
-            background: rgba(0, 206, 209, 0.08);
-            border-color: rgba(0, 206, 209, 0.25);
-            color: #fff;
+            background: rgba(74, 222, 128, 0.04);
+            border-color: rgba(74, 222, 128, 0.1);
+            color: #e8f0e8;
             transform: scale(1.02);
         }
 
+        /* ===== فوتر ===== */
         .footer {
-            margin-top: 24px;
-            color: #5d6a8a;
-            font-size: 0.75rem;
+            margin-top: 20px;
+            color: #2d6a3e;
+            font-size: 0.7rem;
             text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.04);
-            padding-top: 20px;
+            border-top: 1px solid rgba(74, 222, 128, 0.04);
+            padding-top: 16px;
             display: flex;
             justify-content: center;
-            gap: 28px;
+            gap: 24px;
             flex-wrap: wrap;
         }
 
         .footer i {
-            color: #00ced1;
-            margin-left: 6px;
+            color: #4ade80;
+            margin-left: 5px;
         }
 
-        /* ===== پاپ‌آپ زیبا ===== */
+        /* ===== پاپ‌آپ دیجیتالی جنگلی-یخی ===== */
         .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 14, 26, 0.88);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(10, 18, 10, 0.88);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             z-index: 9999;
             display: none;
             align-items: center;
             justify-content: center;
             flex-direction: column;
             animation: fadeInPopup 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 20px;
+            overflow-y: auto;
         }
 
         .loading-overlay.active {
@@ -564,7 +599,7 @@
         @keyframes fadeInPopup {
             from {
                 opacity: 0;
-                transform: scale(0.92) translateY(30px);
+                transform: scale(0.95) translateY(20px);
             }
             to {
                 opacity: 1;
@@ -574,21 +609,47 @@
 
         .loading-content {
             text-align: center;
-            max-width: 480px;
+            max-width: 440px;
             width: 100%;
-            padding: 40px 32px 36px;
-            background: rgba(20, 30, 55, 0.75);
-            border-radius: 36px;
-            border: 1px solid rgba(255, 215, 0, 0.06);
-            box-shadow: 0 50px 80px -20px #000000cc, inset 0 1px 0 rgba(255, 255, 255, 0.02);
+            padding: 34px 28px 30px;
+            background: rgba(10, 25, 15, 0.6);
+            border-radius: 32px;
+            border: 1px solid rgba(74, 222, 128, 0.04);
+            box-shadow: 0 40px 70px -20px #000000cc, inset 0 0 60px rgba(74, 222, 128, 0.02);
             backdrop-filter: blur(10px);
+            margin: auto;
+            position: relative;
+            overflow: hidden;
         }
 
+        .loading-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-conic-gradient(rgba(74, 222, 128, 0.02) 0% 10%, transparent 10% 20%);
+            animation: rotateBg 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateBg {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* اسپینر دیجیتالی */
         .loading-spinner {
-            width: 72px;
-            height: 72px;
-            margin: 0 auto 24px;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
             position: relative;
+            z-index: 1;
         }
 
         .loading-spinner .ring {
@@ -600,15 +661,15 @@
         }
 
         .loading-spinner .ring:nth-child(1) {
-            border-top: 3px solid #f7c948;
-            border-right: 3px solid rgba(247, 200, 72, 0.2);
-            animation: spin 0.9s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+            border-top: 3px solid #4ade80;
+            border-right: 3px solid rgba(74, 222, 128, 0.15);
+            animation: spin 0.8s cubic-bezier(0.6, 0, 0.4, 1) infinite;
         }
 
         .loading-spinner .ring:nth-child(2) {
-            border-bottom: 3px solid #ff6b6b;
-            border-left: 3px solid rgba(255, 107, 107, 0.2);
-            animation: spin 1.2s cubic-bezier(0.6, 0, 0.4, 1) infinite reverse;
+            border-bottom: 3px solid #38bdf8;
+            border-left: 3px solid rgba(56, 189, 248, 0.15);
+            animation: spin 1.1s cubic-bezier(0.6, 0, 0.4, 1) infinite reverse;
             width: 80%;
             height: 80%;
             top: 10%;
@@ -616,9 +677,9 @@
         }
 
         .loading-spinner .ring:nth-child(3) {
-            border-right: 3px solid #00ced1;
-            border-bottom: 3px solid rgba(0, 206, 209, 0.2);
-            animation: spin 0.7s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+            border-right: 3px solid #86efac;
+            border-bottom: 3px solid rgba(134, 239, 172, 0.15);
+            animation: spin 0.6s cubic-bezier(0.6, 0, 0.4, 1) infinite;
             width: 60%;
             height: 60%;
             top: 20%;
@@ -632,11 +693,12 @@
             transform: translate(-50%, -50%);
             font-size: 1.8rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #f7c948, #ff6b6b);
+            background: linear-gradient(135deg, #4ade80, #38bdf8);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
             letter-spacing: -1px;
+            z-index: 2;
         }
 
         @keyframes spin {
@@ -649,151 +711,199 @@
         }
 
         .loading-text {
-            color: #e8edf5;
-            font-size: 1.1rem;
+            color: #e8f0e8;
+            font-size: 1rem;
             font-weight: 500;
-            line-height: 2;
-            margin-bottom: 20px;
+            line-height: 1.9;
+            margin-bottom: 18px;
+            position: relative;
+            z-index: 1;
         }
 
         .loading-text .highlight {
-            color: #f7c948;
+            color: #4ade80;
             font-weight: 700;
         }
 
         .loading-text .highlight2 {
-            color: #00ced1;
+            color: #38bdf8;
             font-weight: 700;
         }
 
+        /* دکمه عضویت */
         .loading-btn {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #f7c948, #d9a52b);
-            color: #0b0d15;
+            gap: 10px;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            color: #0a120a;
             font-family: 'Vazirmatn', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 700;
-            padding: 14px 36px;
+            padding: 12px 32px;
             border-radius: 60px;
             border: none;
             cursor: pointer;
             transition: 0.3s;
-            box-shadow: 0 8px 35px rgba(247, 200, 72, 0.25);
+            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.15);
             text-decoration: none;
+            position: relative;
+            z-index: 1;
         }
 
         .loading-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 45px rgba(247, 200, 72, 0.35);
-            background: linear-gradient(135deg, #fddc6a, #e6b42e);
+            transform: scale(1.04);
+            box-shadow: 0 12px 40px rgba(34, 197, 94, 0.25);
+            background: linear-gradient(135deg, #86efac, #22c55e);
         }
 
         .loading-btn i {
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
 
+        /* شمارش معکوس دیجیتالی */
         .loading-timer {
-            color: #8aa3d6;
-            font-size: 0.95rem;
-            margin-top: 16px;
+            color: #2d6a3e;
+            font-size: 0.9rem;
+            margin-top: 14px;
             letter-spacing: 0.3px;
+            position: relative;
+            z-index: 1;
         }
 
-        .loading-timer span {
-            color: #ff6b6b;
-            font-weight: 800;
-            font-size: 1.5rem;
-            background: rgba(255, 107, 107, 0.06);
-            padding: 2px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 107, 107, 0.06);
+        .loading-timer .digit {
             display: inline-block;
-            min-width: 44px;
+            font-family: 'Vazirmatn', monospace;
+            font-weight: 900;
+            font-size: 2.2rem;
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.04);
+            padding: 4px 18px;
+            border-radius: 12px;
+            border: 1px solid rgba(74, 222, 128, 0.06);
+            min-width: 55px;
+            text-shadow: 0 0 30px rgba(74, 222, 128, 0.1);
+            transition: 0.1s;
+            letter-spacing: 2px;
         }
+
+        .loading-timer .digit.pulse {
+            animation: digitPulse 0.5s ease;
+        }
+
+        @keyframes digitPulse {
+            0%,
+            100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.15);
+                color: #86efac;
+                text-shadow: 0 0 40px rgba(74, 222, 128, 0.2);
+            }
+        }
+
+        .loading-timer .unit {
+            color: #4ade80;
+            font-weight: 600;
+            margin: 0 4px;
+        }
+
+        /* ===== RESPONSIVE ===== */
 
         @media (max-width: 640px) {
             .card {
-                padding: 24px 16px 20px;
-                border-radius: 32px;
+                padding: 22px 14px 18px;
+                border-radius: 28px;
+            }
+
+            .tnt-header {
+                gap: 12px;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
             }
 
             .tnt-icon {
-                width: 100px;
-                height: 100px;
-                border-radius: 28px;
+                width: 70px;
+                height: 70px;
+                border-radius: 20px;
             }
             .tnt-icon img {
-                border-radius: 28px;
-            }
-            .tnt-brand .brand-text {
-                font-size: 2rem;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-            h1 i {
-                font-size: 1.7rem;
-            }
-
-            .desc {
-                font-size: 0.9rem;
-            }
-
-            .stats-wrapper {
-                padding: 14px 14px 12px;
                 border-radius: 20px;
             }
 
+            .tnt-brand .brand-text {
+                font-size: 1.8rem;
+                text-align: center;
+            }
+            .tnt-sub {
+                align-self: center;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                justify-content: center;
+            }
+            h1 i {
+                font-size: 1.5rem;
+            }
+
+            .desc {
+                font-size: 0.85rem;
+                border-right: 2px solid #22c55e;
+                padding-right: 12px;
+                text-align: right;
+            }
+
+            .stats-wrapper {
+                padding: 12px 12px 10px;
+                border-radius: 16px;
+            }
+
             .stats-grid {
-                gap: 10px;
+                gap: 8px;
                 flex-direction: column;
                 align-items: stretch;
             }
 
             .stat-item {
-                padding: 8px 16px 8px 20px;
+                padding: 6px 14px 6px 18px;
                 justify-content: flex-start;
                 min-width: unset;
             }
 
             .stat-item .info .value {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
 
             .btn-download {
-                font-size: 1.1rem;
-                padding: 14px 16px;
-                gap: 12px;
+                font-size: 1rem;
+                padding: 12px 14px;
+                gap: 10px;
             }
             .btn-download i {
-                font-size: 1.3rem;
+                font-size: 1.1rem;
             }
 
             .more a {
-                padding: 10px 22px;
-                font-size: 0.9rem;
+                padding: 8px 18px;
+                font-size: 0.85rem;
             }
 
             .footer {
-                font-size: 0.65rem;
-                gap: 14px;
-            }
-
-            .cube {
-                display: none;
+                font-size: 0.6rem;
+                gap: 12px;
             }
 
             .loading-content {
-                padding: 28px 18px 24px;
-                border-radius: 28px;
-                margin: 0 12px;
+                padding: 24px 16px 20px;
+                border-radius: 24px;
+                margin: 10px;
             }
 
             .loading-text {
-                font-size: 0.95rem;
+                font-size: 0.9rem;
                 line-height: 1.8;
             }
 
@@ -806,109 +916,148 @@
             }
 
             .loading-btn {
-                font-size: 0.9rem;
-                padding: 12px 24px;
+                font-size: 0.85rem;
+                padding: 10px 20px;
             }
 
-            .loading-timer {
-                font-size: 0.85rem;
+            .loading-timer .digit {
+                font-size: 1.8rem;
+                min-width: 45px;
+                padding: 2px 14px;
             }
-            .loading-timer span {
-                font-size: 1.2rem;
-                min-width: 36px;
+
+            body {
+                padding: 10px;
+                align-items: flex-start;
+                padding-top: 16px;
+                padding-bottom: 16px;
+            }
+
+            .forest-orb {
+                display: none;
+            }
+            .particle {
+                display: none;
             }
         }
 
         @media (max-width: 400px) {
             .card {
-                padding: 16px 10px 14px;
-                border-radius: 24px;
+                padding: 14px 10px 12px;
+                border-radius: 22px;
             }
 
             .tnt-icon {
-                width: 80px;
-                height: 80px;
-                border-radius: 22px;
+                width: 60px;
+                height: 60px;
+                border-radius: 16px;
             }
             .tnt-icon img {
-                border-radius: 22px;
+                border-radius: 16px;
             }
+
             .tnt-brand .brand-text {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
 
             h1 {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
             h1 i {
-                font-size: 1.3rem;
+                font-size: 1.2rem;
             }
 
             .stat-item .info .value {
-                font-size: 1.1rem;
-            }
-
-            .btn-download {
-                font-size: 0.9rem;
-                padding: 10px 12px;
-            }
-            .btn-download i {
                 font-size: 1rem;
             }
 
+            .btn-download {
+                font-size: 0.85rem;
+                padding: 10px 12px;
+            }
+            .btn-download i {
+                font-size: 0.9rem;
+            }
+
             .more a {
-                padding: 8px 14px;
-                font-size: 0.8rem;
+                padding: 6px 12px;
+                font-size: 0.75rem;
             }
 
             .footer {
-                font-size: 0.55rem;
-                gap: 10px;
+                font-size: 0.5rem;
+                gap: 8px;
+            }
+
+            body {
+                padding: 6px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .loading-timer .digit {
+                font-size: 1.5rem;
+                min-width: 38px;
+                padding: 2px 10px;
             }
         }
 
         @media (min-width: 1200px) {
             .card {
-                padding: 48px 44px 38px;
+                padding: 44px 40px 36px;
             }
             .tnt-icon {
-                width: 150px;
-                height: 150px;
-                border-radius: 40px;
+                width: 100px;
+                height: 100px;
+                border-radius: 28px;
             }
             .tnt-icon img {
-                border-radius: 40px;
+                border-radius: 28px;
             }
             .tnt-brand .brand-text {
-                font-size: 3rem;
+                font-size: 2.8rem;
             }
             h1 {
-                font-size: 3.2rem;
+                font-size: 3rem;
             }
             .btn-download {
-                font-size: 1.6rem;
-                padding: 20px 28px;
+                font-size: 1.5rem;
+                padding: 18px 26px;
+            }
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            .loading-overlay {
+                -webkit-overflow-scrolling: touch;
+            }
+            body {
+                -webkit-overflow-scrolling: touch;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-3d">
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
-        <div class="cube"></div>
+    <!-- ===== پس‌زمینه جنگلی-یخی ===== -->
+    <div class="bg-forest-ice">
+        <div class="leaf-texture"></div>
+        <div class="leaf-texture"></div>
+        <div class="forest-orb"></div>
+        <div class="forest-orb"></div>
+        <div class="forest-orb"></div>
     </div>
 
+    <!-- ===== ذرات ===== -->
+    <div class="particles">
+        <div class="particle">❄</div>
+        <div class="particle">🍃</div>
+        <div class="particle">❄</div>
+        <div class="particle">🍃</div>
+        <div class="particle">❄</div>
+        <div class="particle">🍃</div>
+    </div>
+
+    <!-- ===== پاپ‌آپ دیجیتالی ===== -->
     <div class="loading-overlay" id="loadingOverlay">
         <div class="loading-content">
             <div class="loading-spinner">
@@ -919,7 +1068,7 @@
             </div>
             <div class="loading-text">
                 <span class="highlight">کاربر گرامی</span><br />
-                قبل از دانلود موده بازی جهت دریافت آپدیت و مود های بیشتر <br />
+                قبل از دانلود جهت دانلود کردن مود های بازی های دیگه<br />
                 عضو چنل ما در <span class="highlight2">روبيکا</span> شوید
             </div>
             <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" class="loading-btn" id="loadingBtn">
@@ -927,11 +1076,13 @@
                 عضویت در چنل روبیکا
             </a>
             <div class="loading-timer">
-                <span id="timerCountdown">10</span> ثانیه تا دانلود
+                <span class="digit" id="timerCountdown">10</span>
+                <span class="unit">ثانیه تا دانلود</span>
             </div>
         </div>
     </div>
 
+    <!-- ===== CARD ===== -->
     <div class="card">
 
         <div class="tnt-header">
@@ -947,7 +1098,7 @@
         </div>
 
         <div class="badge">
-            <i class="fas fa-bolt"></i> نسخه ۲۰۲۶
+            <i class="fas fa-leaf"></i> نسخه ۲۰۲۶
         </div>
 
         <h1>
@@ -992,14 +1143,14 @@
         <button class="btn-download" id="downloadBtn">
             <i class="fas fa-download"></i>
             دانلود مود صفحه کلاچ
-            <i class="fas fa-arrow-left" style="font-size: 1.1rem;"></i>
+            <i class="fas fa-arrow-left" style="font-size: 1rem;"></i>
         </button>
 
         <div class="more">
             <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener noreferrer nofollow">
                 <i class="fas fa-gamepad"></i>
                 مودهای بیشتر!
-                <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.7rem; opacity: 0.6;"></i>
+                <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.5;"></i>
             </a>
         </div>
 
@@ -1008,22 +1159,6 @@
             <span><i class="fas fa-shield-alt"></i> بدون بن</span>
             <span><i class="fas fa-robot"></i> آپدیت خودکار</span>
         </div>
-
-        <script type="application/ld+json">
-            {
-                "@context": "https://schema.org",
-                "@type": "SoftwareApplication",
-                "name": "TNT MOD - مود صفحه کلاچ با سکه و جم بینهایت",
-                "description": "دانلود مود صفحه کلاچ با سکه و جم بینهایت از TNT MOD.",
-                "applicationCategory": "GameApplication",
-                "operatingSystem": "Android",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "IRR"
-                }
-            }
-        </script>
 
     </div>
 
@@ -1046,10 +1181,14 @@
                 overlay.classList.add('active');
                 countdown = 10;
                 timerSpan.textContent = countdown;
+                timerSpan.classList.add('pulse');
 
                 timerInterval = setInterval(function() {
                     countdown--;
                     timerSpan.textContent = countdown;
+                    timerSpan.classList.remove('pulse');
+                    void timerSpan.offsetWidth;
+                    timerSpan.classList.add('pulse');
 
                     if (countdown <= 0) {
                         clearInterval(timerInterval);
