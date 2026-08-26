@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<title>TNT MOD | صفحه اصلی</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+html,body{font-family:'Vazirmatn',sans-serif;min-height:100vh;background:#030014;color:#e8f0ff;direction:rtl;overflow-x:hidden;overflow-y:auto}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:rgba(255,255,255,0.02)}
+::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#f7c948,#a29bfe);border-radius:10px}
+
+/* ===== GALACTIC BACKGROUND ===== */
+.cosmos{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
+.nebula{position:absolute;width:140%;height:140%;top:-20%;left:-20%;background:
+  radial-gradient(ellipse at 15% 25%,rgba(247,200,72,0.09) 0%,transparent 45%),
+  radial-gradient(ellipse at 85% 70%,rgba(162,155,254,0.11) 0%,transparent 50%),
+  radial-gradient(ellipse at 50% 50%,rgba(56,189,248,0.06) 0%,transparent 55%),
+  radial-gradient(ellipse at 70% 15%,rgba(236,72,153,0.05) 0%,transparent 40%);
+  animation:nebulaDrift 40s ease-in-out infinite alternate}
+.nebula2{position:absolute;inset:0;background:
+  radial-gradient(ellipse at 30% 80%,rgba(99,102,241,0.07) 0%,transparent 45%),
+  radial-gradient(ellipse at 80% 30%,rgba(247,200,72,0.05) 0%,transparent 40%);
+  animation:nebulaDrift 55s ease-in-out infinite alternate-reverse;opacity:0.7}
+@keyframes nebulaDrift{
+  0%{transform:translate(0,0) scale(1) rotate(0deg)}
+  50%{transform:translate(-30px,20px) scale(1.05) rotate(1deg)}
+  100%{transform:translate(20px,-15px) scale(0.98) rotate(-1deg)}
+}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);opacity:0.18;animation:orbFloat 28s ease-in-out infinite alternate}
+.orb.o1{width:420px;height:420px;background:radial-gradient(circle,#f7c948,transparent 70%);top:-180px;right:-120px;animation-duration:32s}
+.orb.o2{width:380px;height:380px;background:radial-gradient(circle,#a29bfe,transparent 70%);bottom:-140px;left:-100px;animation-duration:38s;animation-delay:4s}
+.orb.o3{width:300px;height:300px;background:radial-gradient(circle,#38bdf8,transparent 70%);top:40%;left:45%;animation-duration:45s;animation-delay:8s}
+@keyframes orbFloat{
+  0%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(25px,-30px) scale(1.08)}
+  66%{transform:translate(-20px,25px) scale(0.92)}
+  100%{transform:translate(15px,-10px) scale(1.03)}
+}
+.stars{position:absolute;inset:0}
+.star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d) ease-in-out infinite alternate}
+@keyframes twinkle{0%{opacity:0.15;transform:scale(0.7)}100%{opacity:0.9;transform:scale(1.3)}}
+.shooting{position:absolute;width:80px;height:1.5px;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:0;animation:shoot 8s linear infinite}
+@keyframes shoot{
+  0%{transform:translateX(0) translateY(0) rotate(-35deg);opacity:0}
+  5%{opacity:0.7}
+  15%{opacity:0}
+  100%{transform:translateX(-600px) translateY(400px) rotate(-35deg);opacity:0}
+}
+
+/* ===== LAYOUT ===== */
+.wrapper{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;padding-bottom:30px}
+.card{max-width:720px;width:100%;background:rgba(8,8,22,0.72);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-radius:36px;padding:28px 24px 22px;border:1px solid rgba(247,200,72,0.12);box-shadow:0 0 0 1px rgba(162,155,254,0.06),0 25px 50px -12px rgba(0,0,0,0.7),0 0 80px rgba(247,200,72,0.04);position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(247,200,72,0.4),transparent)}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid rgba(255,255,255,0.04)}
+.brand{font-size:1.9rem;font-weight:900;background:linear-gradient(135deg,#f7c948 0%,#ffd700 40%,#f7c948 60%,#ffd700 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 5s linear infinite;letter-spacing:0.5px}
+@keyframes shine{to{background-position:200% center}}
+.tag{font-size:0.68rem;color:#f7c948;background:rgba(247,200,72,0.08);padding:3px 11px;border-radius:20px;border:1px solid rgba(247,200,72,0.15);margin-right:8px}
+.menu-btn{width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,0.04);border:1px solid rgba(247,200,72,0.12);color:#e8f0ff;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.25s}
+.menu-btn:hover,.menu-btn:active{background:rgba(247,200,72,0.12);border-color:rgba(247,200,72,0.3);transform:scale(1.05)}
+.version{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f7c948,#d9a52b);color:#0a0a14;font-size:0.65rem;font-weight:800;padding:5px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:0.5px}
+h2{font-size:1.25rem;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:10px;color:#f0f4ff}
+h2 i{color:#f7c948}
+
+/* ===== GRID CARDS ===== */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px;margin-bottom:18px}
+.mod-card{background:rgba(255,255,255,0.03);border:1px solid rgba(247,200,72,0.08);border-radius:22px;padding:18px 12px 14px;text-align:center;text-decoration:none;color:inherit;transition:all 0.3s cubic-bezier(0.16,1,0.3,1);display:block;position:relative;overflow:hidden}
+.mod-card:hover{transform:translateY(-5px);background:rgba(247,200,72,0.06);border-color:rgba(247,200,72,0.22);box-shadow:0 12px 30px -8px rgba(247,200,72,0.15)}
+.mod-card.coming{opacity:0.55;cursor:default}
+.mod-card.coming:hover{transform:translateY(-2px);background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);box-shadow:none}
+.icon-box{width:78px;height:78px;margin:0 auto 12px;border-radius:20px;overflow:hidden;background:rgba(0,0,0,0.3);border:1px solid rgba(247,200,72,0.1);display:flex;align-items:center;justify-content:center;font-size:2.6rem}
+.icon-box img{width:100%;height:100%;object-fit:cover}
+.mod-name{font-size:0.98rem;font-weight:700;margin-bottom:3px}
+.mod-desc{font-size:0.68rem;color:#8aa3d6;margin-bottom:8px}
+.badge{font-size:0.55rem;padding:3px 10px;border-radius:20px;display:inline-flex;align-items:center;gap:4px;background:rgba(74,222,128,0.1);color:#4ade80;border:1px solid rgba(74,222,128,0.2)}
+.badge.soon{background:rgba(255,255,255,0.04);color:#6b7280;border-color:rgba(255,255,255,0.08)}
+.footer{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.04);display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:0.62rem;color:#5a6a8a}
+.footer i{color:#f7c948;margin-left:3px}
+
+/* ===== SIDE MENU (RTL friendly - from right) ===== */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);z-index:100;opacity:0;visibility:hidden;transition:all 0.3s}
+.overlay.open{opacity:1;visibility:visible}
+.side-menu{position:fixed;top:0;right:0;width:280px;height:100%;background:rgba(8,8,22,0.95);backdrop-filter:blur(24px);z-index:101;padding:28px 18px;transform:translateX(100%);transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);border-left:1px solid rgba(247,200,72,0.1);display:flex;flex-direction:column}
+.side-menu.open{transform:translateX(0)}
+.side-menu .close-btn{position:absolute;top:18px;left:18px;width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.05);border:none;color:#a0b0d0;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.side-menu .close-btn:hover{color:#f7c948;background:rgba(247,200,72,0.1)}
+.side-brand{font-size:1.5rem;font-weight:900;background:linear-gradient(135deg,#f7c948,#ffd700);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:28px;margin-top:8px}
+.menu-link{display:flex;align-items:center;gap:14px;padding:13px 14px;border-radius:14px;color:#c8d6f5;text-decoration:none;font-weight:500;margin-bottom:6px;border:1px solid transparent;transition:all 0.25s;cursor:pointer}
+.menu-link:hover{background:rgba(247,200,72,0.08);border-color:rgba(247,200,72,0.15);color:#fff}
+.menu-link i{width:22px;text-align:center;color:#f7c948;font-size:1.15rem}
+.menu-link .arrow{margin-right:auto;color:#4a5568;font-size:0.75rem}
+.menu-link.gold{background:rgba(247,200,72,0.08);border-color:rgba(247,200,72,0.15)}
+.menu-link.gold:hover{background:rgba(247,200,72,0.14)}
+.menu-link.disabled{opacity:0.35;cursor:default;pointer-events:none}
+.menu-div{height:1px;background:rgba(255,255,255,0.05);margin:12px 0}
+
+/* ===== MINI GAMES UI ===== */
+.back-btn{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(247,200,72,0.12);color:#e8f0ff;font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.games-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px}
+.game-tile{background:rgba(255,255,255,0.03);border:1px solid rgba(247,200,72,0.1);border-radius:24px;padding:26px 14px;text-align:center;cursor:pointer;transition:all 0.3s}
+.game-tile:hover{background:rgba(247,200,72,0.07);border-color:rgba(247,200,72,0.25);transform:translateY(-4px)}
+.game-tile .emoji{font-size:3.4rem;margin-bottom:10px;display:block}
+.game-tile .title{font-size:1.15rem;font-weight:700}
+.game-tile .sub{font-size:0.75rem;color:#8aa3d6;margin-top:4px}
+
+/* Tic-tac-toe */
+.mode-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0 18px}
+.mode-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(247,200,72,0.12);border-radius:24px;padding:8px 18px;color:#e8f0ff;font-family:inherit;font-size:0.88rem;cursor:pointer;transition:all 0.25s}
+.mode-btn:hover,.mode-btn.active{background:rgba(247,200,72,0.15);border-color:rgba(247,200,72,0.35);color:#f7c948}
+#board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:260px;margin:0 auto}
+.cell{aspect-ratio:1;background:rgba(255,255,255,0.03);border:1px solid rgba(247,200,72,0.1);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;font-weight:800;cursor:pointer;transition:all 0.2s;color:#4a5568}
+.cell:hover:not(.filled){background:rgba(247,200,72,0.08);border-color:rgba(247,200,72,0.25)}
+.cell.x{color:#f7c948}
+.cell.o{color:#38bdf8}
+.status{text-align:center;margin-top:16px;font-size:0.95rem;color:#8aa3d6;min-height:28px}
+.status.win{color:#f7c948;font-weight:700}
+
+/* Number guess */
+.guess-area{text-align:center;padding:10px 0 6px}
+.guess-area .big{font-size:3.2rem;margin-bottom:8px}
+.guess-area h3{font-size:1.15rem;margin-bottom:6px}
+.hint{color:#8aa3d6;font-size:0.9rem;margin-bottom:18px;min-height:24px}
+.input-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.input-row input{width:120px;padding:11px 14px;border-radius:24px;border:1px solid rgba(247,200,72,0.15);background:rgba(255,255,255,0.04);color:#e8f0ff;font-family:inherit;font-size:1rem;text-align:center;outline:none}
+.input-row input:focus{border-color:rgba(247,200,72,0.4)}
+.btn-primary{background:linear-gradient(135deg,#f7c948,#d9a52b);border:none;border-radius:24px;padding:11px 24px;color:#0a0a14;font-family:inherit;font-weight:700;font-size:0.92rem;cursor:pointer}
+.btn-secondary{background:rgba(255,255,255,0.04);border:1px solid rgba(247,200,72,0.12);border-radius:24px;padding:11px 18px;color:#8aa3d6;font-family:inherit;font-size:0.85rem;cursor:pointer}
+.stats{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;font-size:0.82rem;color:#8aa3d6}
+.stats span{color:#f7c948;font-weight:700}
+
+/* Responsive */
+@media(max-width:640px){
+  .card{padding:20px 14px 16px;border-radius:28px}
+  .brand{font-size:1.55rem}
+  .grid{grid-template-columns:repeat(2,1fr);gap:11px}
+  .icon-box{width:68px;height:68px;font-size:2.2rem}
+  .mod-name{font-size:0.9rem}
+  .side-menu{width:260px}
+}
+@media(max-width:380px){
+  .card{padding:16px 10px 12px;border-radius:22px}
+  .brand{font-size:1.35rem}
+  .icon-box{width:58px;height:58px;font-size:1.9rem}
+  .games-grid{gap:10px}
+  .game-tile{padding:18px 10px}
+  .game-tile .emoji{font-size:2.6rem}
+}
+</style>
+</head>
+<body>
+<div class="cosmos">
+  <div class="nebula"></div>
+  <div class="nebula2"></div>
+  <div class="orb o1"></div>
+  <div class="orb o2"></div>
+  <div class="orb o3"></div>
+  <div class="stars" id="stars"></div>
+  <div class="shooting" style="top:12%;left:80%;animation-delay:0s"></div>
+  <div class="shooting" style="top:35%;left:90%;animation-delay:3.5s"></div>
+  <div class="shooting" style="top:60%;left:70%;animation-delay:6s"></div>
+</div>
+
+<!-- SIDE MENU -->
+<div class="overlay" id="overlay"></div>
+<nav class="side-menu" id="sideMenu">
+  <button class="close-btn" id="closeMenu"><i class="fas fa-times"></i></button>
+  <div class="side-brand">TNT MOD</div>
+  <a class="menu-link gold" href="#" id="btnMiniGames"><i class="fas fa-gamepad"></i>مینی گیم<span class="arrow"><i class="fas fa-chevron-left"></i></span></a>
+  <a class="menu-link" href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener"><i class="fas fa-paper-plane"></i>چنل روبیکا<span class="arrow"><i class="fas fa-chevron-left"></i></span></a>
+  <div class="menu-div"></div>
+  <a class="menu-link disabled" href="#"><i class="fas fa-cog"></i>تنظیمات<span class="arrow"><i class="fas fa-chevron-left"></i></span></a>
+  <a class="menu-link disabled" href="#"><i class="fas fa-question-circle"></i>راهنما<span class="arrow"><i class="fas fa-chevron-left"></i></span></a>
+</nav>
+
+<div class="wrapper">
+  <div class="card" id="app">
+    <!-- HOME -->
+    <div id="page-home">
+      <div class="header">
+        <div style="display:flex;align-items:center">
+          <span class="brand">TNT MOD</span>
+          <span class="tag"><i class="fas fa-home"></i> خانه</span>
+        </div>
+        <button class="menu-btn" id="openMenu"><i class="fas fa-bars"></i></button>
+      </div>
+      <div class="version"><i class="fas fa-star"></i> نسخه ۲۰۲۶</div>
+      <h2><i class="fas fa-rocket"></i> مودهای موجود</h2>
+      <div class="grid">
+        <a class="mod-card" href="https://B2n.ir/footballia2" target="_blank" rel="noopener">
+          <div class="icon-box">
+            <img src="https://uploadkon.ir/uploads/thumbs/5fab26_26Screenshot-2026-08-19-16-54-30-458-ir-mservices-market-edit.jpg" alt="فوتبالیا ۲" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div style="display:none;font-size:2.4rem">⚽</div>
+          </div>
+          <div class="mod-name">فوتبالیا ۲ مود</div>
+          <div class="mod-desc">سکه بینهایت</div>
+          <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
+        </a>
+        <a class="mod-card" href="https://B2n.ir/clutchplate1" target="_blank" rel="noopener">
+          <div class="icon-box">
+            <img src="https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg" alt="صفحه کلاچ" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div style="display:none;font-size:2.4rem">🏎️</div>
+          </div>
+          <div class="mod-name">صفحه کلاچ مود</div>
+          <div class="mod-desc">سکه و جم بینهایت</div>
+          <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
+        </a>
+        <div class="mod-card coming">
+          <div class="icon-box">🎯</div>
+          <div class="mod-name">بزودی...</div>
+          <div class="mod-desc">در حال ساخت</div>
+          <span class="badge soon">به زودی</span>
+        </div>
+        <div class="mod-card coming">
+          <div class="icon-box">🏆</div>
+          <div class="mod-name">بزودی...</div>
+          <div class="mod-desc">در حال ساخت</div>
+          <span class="badge soon">به زودی</span>
+        </div>
+        <div class="mod-card coming">
+          <div class="icon-box">🚀</div>
+          <div class="mod-name">بزودی...</div>
+          <div class="mod-desc">در حال ساخت</div>
+          <span class="badge soon">به زودی</span>
+        </div>
+        <div class="mod-card coming">
+          <div class="icon-box">⚡</div>
+          <div class="mod-name">بزودی...</div>
+          <div class="mod-desc">در حال ساخت</div>
+          <span class="badge soon">به زودی</span>
+        </div>
+      </div>
+      <div class="footer">
+        <span><i class="fas fa-check-circle"></i> تست شده در ۲۰۲۶</span>
+        <span><i class="fas fa-shield-alt"></i> بدون بن</span>
+        <span><i class="fas fa-robot"></i> آپدیت خودکار</span>
+      </div>
+    </div>
+
+    <!-- MINI GAMES LIST -->
+    <div id="page-games" style="display:none">
+      <div class="header">
+        <div style="display:flex;align-items:center">
+          <span class="brand" style="font-size:1.5rem">🎮 مینی گیم</span>
+          <span class="tag"><i class="fas fa-gamepad"></i> بازی</span>
+        </div>
+        <button class="back-btn" onclick="showPage('home')"><i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="games-grid">
+        <div class="game-tile" onclick="showPage('dots')">
+          <span class="emoji">⭕</span>
+          <div class="title">دوز</div>
+          <div class="sub">با ربات یا دو نفره</div>
+        </div>
+        <div class="game-tile" onclick="showPage('guess')">
+          <span class="emoji">🔢</span>
+          <div class="title">حدس عدد</div>
+          <div class="sub">۱ تا ۱۰۰</div>
+        </div>
+      </div>
+      <div class="footer" style="margin-top:22px"><span><i class="fas fa-check-circle"></i> تست شده در ۲۰۲۶</span></div>
+    </div>
+
+    <!-- TIC-TAC-TOE -->
+    <div id="page-dots" style="display:none">
+      <div class="header">
+        <div style="display:flex;align-items:center">
+          <span class="brand" style="font-size:1.45rem">⭕ دوز</span>
+          <span class="tag"><i class="fas fa-gamepad"></i> بازی</span>
+        </div>
+        <button class="back-btn" onclick="showPage('games')"><i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="mode-btns">
+        <button class="mode-btn" onclick="startDots('easy')">😊 ساده</button>
+        <button class="mode-btn" onclick="startDots('hard')">😈 سخت</button>
+        <button class="mode-btn" onclick="startDots('two')">👫 دو نفره</button>
+      </div>
+      <div id="board"></div>
+      <div class="status" id="dotsStatus">یک حالت را انتخاب کنید</div>
+      <div class="footer" style="margin-top:18px"><span><i class="fas fa-check-circle"></i> تست شده در ۲۰۲۶</span></div>
+    </div>
+
+    <!-- NUMBER GUESS -->
+    <div id="page-guess" style="display:none">
+      <div class="header">
+        <div style="display:flex;align-items:center">
+          <span class="brand" style="font-size:1.45rem">🔢 حدس عدد</span>
+          <span class="tag"><i class="fas fa-gamepad"></i> بازی</span>
+        </div>
+        <button class="back-btn" onclick="showPage('games')"><i class="fas fa-arrow-right"></i></button>
+      </div>
+      <div class="guess-area">
+        <div class="big">❓</div>
+        <h3>حدس عدد بین ۱ تا ۱۰۰</h3>
+        <div class="hint" id="guessHint">یک عدد وارد کنید</div>
+        <div class="input-row">
+          <input type="number" id="guessInput" min="1" max="100" placeholder="عدد" onkeydown="if(event.key==='Enter')checkGuess()">
+          <button class="btn-primary" onclick="checkGuess()">حدس</button>
+          <button class="btn-secondary" onclick="resetGuess()">🔄 جدید</button>
+        </div>
+        <div class="stats">
+          <div>تعداد حدس‌ها: <span id="guessCount">۰</span></div>
+          <div>حدس‌های قبلی: <span id="guessHistory" style="color:#38bdf8">-</span></div>
+        </div>
+      </div>
+      <div class="footer" style="margin-top:18px"><span><i class="fas fa-check-circle"></i> تست شده در ۲۰۲۶</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Stars
+(function(){
+  const c=document.getElementById('stars');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    const size=Math.random()*2.2+0.4;
+    s.style.cssText=`width:\( {size}px;height: \){size}px;top:\( {Math.random()*100}%;left: \){Math.random()*100}%;--d:\( {(Math.random()*4+2).toFixed(1)}s;animation-delay: \){(Math.random()*3).toFixed(1)}s`;
+    c.appendChild(s);
+  }
+})();
+
+// Menu
+const overlay=document.getElementById('overlay');
+const sideMenu=document.getElementById('sideMenu');
+document.getElementById('openMenu').onclick=()=>{sideMenu.classList.add('open');overlay.classList.add('open')};
+document.getElementById('closeMenu').onclick=closeMenu;
+overlay.onclick=closeMenu;
+function closeMenu(){sideMenu.classList.remove('open');overlay.classList.remove('open')}
+document.getElementById('btnMiniGames').onclick=(e)=>{e.preventDefault();closeMenu();setTimeout(()=>showPage('games'),280)};
+
+// Pages
+function showPage(name){
+  ['home','games','dots','guess'].forEach(p=>{
+    const el=document.getElementById('page-'+p);
+    if(el) el.style.display = (p===name) ? 'block' : 'none';
+  });
+  if(name==='dots'){
+    document.getElementById('board').innerHTML='';
+    document.getElementById('dotsStatus').textContent='یک حالت را انتخاب کنید';
+    document.getElementById('dotsStatus').className='status';
+  }
+  if(name==='guess') resetGuess();
+}
+
+/* ========== TIC-TAC-TOE ========== */
+let board, current, over, mode, player='X', bot='O';
+
+function startDots(m){
+  mode=m;
+  board=Array(9).fill('');
+  current='X';
+  over=false;
+  document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderBoard();
+  setStatus(mode==='two' ? 'نوبت بازیکن X' : 'نوبت شما (X)');
+}
+
+function renderBoard(){
+  const el=document.getElementById('board');
+  el.innerHTML='';
+  board.forEach((v,i)=>{
+    const cell=document.createElement('div');
+    cell.className='cell'+(v?' filled':'')+(v==='X'?' x':v==='O'?' o':'');
+    cell.textContent=v||'';
+    cell.onclick=()=>move(i);
+    el.appendChild(cell);
+  });
+}
+
+function move(i){
+  if(over||board[i]) return;
+  if(mode!=='two' && current!==player) return;
+
+  board[i]=current;
+  renderBoard();
+  if(checkWin(current)){
+    over=true;
+    setStatus(mode==='two' ? `🎉 بازیکن ${current} برنده شد!` : (current===player?'🎉 شما برنده شدید!':'😈 ربات برنده شد'),true);
+    return;
+  }
+  if(board.every(c=>c)){
+    over=true;
+    setStatus('🤝 مساوی شد!',true);
+    return;
+  }
+  current = current==='X' ? 'O' : 'X';
+  if(mode==='two'){
+    setStatus(`نوبت بازیکن ${current}`);
+  }else{
+    setStatus('نوبت ربات...');
+    setTimeout(botMove, 380);
+  }
+}
+
+function botMove(){
+  if(over) return;
+  let idx;
+  if(mode==='hard'){
+    idx = bestMove();
+  }else{
+    const empty=board.map((v,i)=>v===''?i:null).filter(v=>v!==null);
+    idx=empty[Math.floor(Math.random()*empty.length)];
+  }
+  board[idx]=bot;
+  renderBoard();
+  if(checkWin(bot)){
+    over=true;
+    setStatus('😈 ربات برنده شد',true);
+    return;
+  }
+  if(board.every(c=>c)){
+    over=true;
+    setStatus('🤝 مساوی شد!',true);
+    return;
+  }
+  current=player;
+  setStatus('نوبت شما (X)');
+}
+
+function bestMove(){
+  // simple minimax for hard
+  let bestScore=-Infinity, move=-1;
+  for(let i=0;i<9;i++){
+    if(board[i]===''){
+      board[i]=bot;
+      let score=minimax(false);
+      board[i]='';
+      if(score>bestScore){bestScore=score;move=i}
+    }
+  }
+  return move;
+}
+function minimax(isMax){
+  if(checkWin(bot)) return 10;
+  if(checkWin(player)) return -10;
+  if(board.every(c=>c)) return 0;
+  if(isMax){
+    let best=-Infinity;
+    for(let i=0;i<9;i++){
+      if(board[i]===''){board[i]=bot;best=Math.max(best,minimax(false));board[i]='';}
+    }
+    return best;
+  }else{
+    let best=Infinity;
+    for(let i=0;i<9;i++){
+      if(board[i]===''){board[i]=player;best=Math.min(best,minimax(true));board[i]='';}
+    }
+    return best;
+  }
+}
+
+function checkWin(p){
+  const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  return lines.some(([a,b,c])=>board[a]===p&&board[b]===p&&board[c]===p);
+}
+function setStatus(t,win=false){
+  const s=document.getElementById('dotsStatus');
+  s.textContent=t;
+  s.className='status'+(win?' win':'');
+}
+
+/* ========== NUMBER GUESS ========== */
+let target, count, history;
+function resetGuess(){
+  target=Math.floor(Math.random()*100)+1;
+  count=0;
+  history=[];
+  const input=document.getElementById('guessInput');
+  if(input){input.value='';input.disabled=false}
+  const h=document.getElementById('guessHint');
+  if(h){h.textContent='یک عدد وارد کنید';h.style.color='#8aa3d6'}
+  document.getElementById('guessCount').textContent='۰';
+  document.getElementById('guessHistory').textContent='-';
+}
+function checkGuess(){
+  const input=document.getElementById('guessInput');
+  const hint=document.getElementById('guessHint');
+  const val=parseInt(input.value);
+  if(isNaN(val)||val<1||val>100){
+    hint.textContent='⚠️ عدد بین ۱ تا ۱۰۰ وارد کن';
+    hint.style.color='#f87171';
+    return;
+  }
+  count++;
+  history.push(val);
+  document.getElementById('guessCount').textContent=count;
+  document.getElementById('guessHistory').textContent=history.join(' ، ');
+  if(val===target){
+    hint.textContent='🎉 آفرین! درست حدس زدی! 🎉';
+    hint.style.color='#4ade80';
+    input.disabled=true;
+    return;
+  }
+  if(val<target){
+    hint.textContent=`📈 عدد ${val} کوچیک‌تره`;
+    hint.style.color='#38bdf8';
+  }else{
+    hint.textContent=`📉 عدد ${val} بزرگ‌تره`;
+    hint.style.color='#a78bfa';
+  }
+  input.value='';
+  input.focus();
+}
+</script>
+</body>
+</html>
