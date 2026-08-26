@@ -1,1211 +1,153 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-    <title>TNT MOD</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html,
-        body {
-            font-family: 'Vazirmatn', 'Segoe UI', Tahoma, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 16px;
-            color: #e8f0e8;
-            direction: rtl;
-            background: #0a120a;
-            overflow-x: hidden;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            border-radius: 10px;
-        }
-
-        /* ===== پس‌زمینه جنگلی-یخی ===== */
-        .bg-forest-ice {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        /* تکسچر برگ و درخت */
-        .bg-forest-ice .leaf-texture {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at 20% 30%, rgba(74, 222, 128, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 70%, rgba(34, 197, 94, 0.03) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(16, 185, 129, 0.02) 0%, transparent 60%);
-            animation: leafDrift 30s ease-in-out infinite alternate;
-        }
-
-        .bg-forest-ice .leaf-texture:nth-child(2) {
-            animation-duration: 45s;
-            animation-direction: reverse;
-            opacity: 0.6;
-            background: 
-                radial-gradient(ellipse at 30% 60%, rgba(74, 222, 128, 0.02) 0%, transparent 40%),
-                radial-gradient(ellipse at 70% 20%, rgba(34, 197, 94, 0.02) 0%, transparent 40%);
-        }
-
-        @keyframes leafDrift {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(15px, -20px) scale(1.03);
-            }
-            66% {
-                transform: translate(-15px, 15px) scale(0.97);
-            }
-            100% {
-                transform: translate(10px, -10px) scale(1.01);
-            }
-        }
-
-        /* دایره‌های سه‌بعدی جنگلی-یخی */
-        .forest-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.2;
-            animation: floatForest 25s ease-in-out infinite alternate;
-            transform-style: preserve-3d;
-        }
-
-        .forest-orb:nth-child(3) {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, #4ade80, transparent);
-            top: -200px;
-            right: -200px;
-            animation-duration: 30s;
-            transform: rotateX(20deg) rotateY(30deg);
-        }
-        .forest-orb:nth-child(4) {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #22c55e, transparent);
-            bottom: -150px;
-            left: -150px;
-            animation-duration: 35s;
-            animation-delay: 5s;
-            transform: rotateX(-30deg) rotateY(-20deg);
-        }
-        .forest-orb:nth-child(5) {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, #7dd3fc, transparent);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) rotateX(15deg) rotateY(45deg);
-            animation-duration: 40s;
-            animation-delay: 10s;
-        }
-
-        @keyframes floatForest {
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-            33% {
-                transform: translate(25px, -30px) scale(1.08);
-            }
-            66% {
-                transform: translate(-20px, 25px) scale(0.92);
-            }
-            100% {
-                transform: translate(15px, -15px) scale(1.04);
-            }
-        }
-
-        /* ذرات برف و برگ */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            font-size: 1.2rem;
-            animation: fall linear infinite;
-        }
-
-        .particle:nth-child(1) {
-            left: 10%;
-            animation-duration: 12s;
-            animation-delay: 0s;
-            font-size: 1rem;
-            color: rgba(74, 222, 128, 0.15);
-        }
-        .particle:nth-child(2) {
-            left: 25%;
-            animation-duration: 15s;
-            animation-delay: 2s;
-            font-size: 0.8rem;
-            color: rgba(125, 211, 252, 0.12);
-        }
-        .particle:nth-child(3) {
-            left: 40%;
-            animation-duration: 10s;
-            animation-delay: 4s;
-            font-size: 1.4rem;
-            color: rgba(74, 222, 128, 0.1);
-        }
-        .particle:nth-child(4) {
-            left: 55%;
-            animation-duration: 18s;
-            animation-delay: 1s;
-            font-size: 0.6rem;
-            color: rgba(34, 197, 94, 0.12);
-        }
-        .particle:nth-child(5) {
-            left: 70%;
-            animation-duration: 14s;
-            animation-delay: 3s;
-            font-size: 1rem;
-            color: rgba(125, 211, 252, 0.1);
-        }
-        .particle:nth-child(6) {
-            left: 85%;
-            animation-duration: 16s;
-            animation-delay: 5s;
-            font-size: 0.9rem;
-            color: rgba(74, 222, 128, 0.13);
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg) scale(0.5);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-                transform: translateY(0vh) rotate(30deg) scale(1);
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg) scale(0.5);
-                opacity: 0;
-            }
-        }
-
-        /* ===== کارت جنگلی-یخی ===== */
-        .card {
-            max-width: 700px;
-            width: 100%;
-            background: rgba(10, 25, 15, 0.55);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            border-radius: 48px;
-            padding: 38px 32px 30px;
-            border: 1px solid rgba(74, 222, 128, 0.08);
-            box-shadow: 0 40px 80px -20px #000000ee, inset 0 1px 0 rgba(74, 222, 128, 0.04);
-            position: relative;
-            z-index: 1;
-            margin: 10px 0;
-        }
-
-        /* ===== هدر ===== */
-        .tnt-header {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-            margin-bottom: 22px;
-            padding-bottom: 18px;
-            border-bottom: 1px solid rgba(74, 222, 128, 0.06);
-            flex-wrap: wrap;
-        }
-
-        .tnt-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 24px;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 35px rgba(34, 197, 94, 0.2);
-            overflow: hidden;
-            border: 2px solid rgba(74, 222, 128, 0.1);
-            flex-shrink: 0;
-            transition: 0.3s;
-        }
-
-        .tnt-icon:hover {
-            transform: scale(1.05) rotate(-3deg);
-            box-shadow: 0 15px 45px rgba(34, 197, 94, 0.3);
-        }
-
-        .tnt-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 24px;
-        }
-
-        .tnt-brand {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            flex: 1;
-        }
-
-        .tnt-brand .brand-text {
-            font-size: 2.2rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #86efac, #4ade80, #22c55e, #7dd3fc);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: forestShift 5s ease-in-out infinite;
-            letter-spacing: 0.5px;
-            line-height: 1.2;
-        }
-
-        @keyframes forestShift {
-            0% {
-                background-position: 0% 50%;
-            }
-            50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        .tnt-sub {
-            font-size: 0.75rem;
-            color: #4ade80;
-            font-weight: 400;
-            background: rgba(74, 222, 128, 0.04);
-            padding: 3px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(74, 222, 128, 0.06);
-            display: inline-block;
-            align-self: flex-start;
-        }
-
-        .tnt-sub i {
-            color: #4ade80;
-            margin-left: 6px;
-        }
-
-        /* ===== نشان ===== */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: linear-gradient(135deg, #22c55e, #16a34a);
-            color: #fff;
-            font-size: 0.65rem;
-            font-weight: 800;
-            padding: 5px 18px;
-            border-radius: 40px;
-            margin-bottom: 14px;
-            border: 1px solid rgba(34, 197, 94, 0.2);
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.1);
-            text-transform: uppercase;
-        }
-
-        /* ===== عنوان ===== */
-        h1 {
-            font-size: 2.4rem;
-            font-weight: 900;
-            color: #e8f0e8;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 4px;
-            letter-spacing: -0.5px;
-        }
-
-        h1 i {
-            color: #4ade80;
-            font-size: 2rem;
-            filter: drop-shadow(0 0 20px rgba(74, 222, 128, 0.15));
-        }
-
-        /* ===== توضیح ===== */
-        .desc {
-            font-size: 0.95rem;
-            color: #86efac;
-            border-right: 3px solid #22c55e;
-            padding-right: 14px;
-            margin-bottom: 24px;
-            line-height: 1.8;
-            font-weight: 400;
-        }
-
-        .desc i {
-            color: #22c55e;
-            margin-left: 8px;
-        }
-
-        /* ===== آمار ===== */
-        .stats-wrapper {
-            background: rgba(0, 25, 10, 0.25);
-            border-radius: 20px;
-            padding: 16px 18px 14px;
-            margin-bottom: 26px;
-            border: 1px solid rgba(74, 222, 128, 0.04);
-        }
-
-        .stats-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #4ade80;
-            font-weight: 600;
-            font-size: 0.8rem;
-            margin-bottom: 12px;
-        }
-
-        .stats-label i {
-            color: #4ade80;
-            font-size: 0.9rem;
-        }
-
-        .stats-grid {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            justify-content: space-around;
-        }
-
-        .stat-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 18px 8px 22px;
-            border-radius: 50px;
-            transition: 0.3s;
-            flex: 1 1 auto;
-            min-width: 110px;
-            justify-content: center;
-        }
-
-        .stat-coin {
-            background: rgba(74, 222, 128, 0.04);
-            border: 1px solid rgba(74, 222, 128, 0.06);
-        }
-        .stat-coin i {
-            color: #4ade80;
-            text-shadow: 0 0 20px rgba(74, 222, 128, 0.1);
-        }
-        .stat-coin .value {
-            color: #4ade80;
-        }
-
-        .stat-gem {
-            background: rgba(56, 189, 248, 0.04);
-            border: 1px solid rgba(56, 189, 248, 0.06);
-        }
-        .stat-gem i {
-            color: #38bdf8;
-            text-shadow: 0 0 20px rgba(56, 189, 248, 0.1);
-        }
-        .stat-gem .value {
-            color: #38bdf8;
-        }
-
-        .stat-infinity {
-            background: rgba(147, 197, 253, 0.04);
-            border: 1px solid rgba(147, 197, 253, 0.06);
-        }
-        .stat-infinity i {
-            color: #93c5fd;
-            text-shadow: 0 0 20px rgba(147, 197, 253, 0.1);
-        }
-        .stat-infinity .value {
-            color: #93c5fd;
-        }
-
-        .stat-item .info {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
-        }
-
-        .stat-item .info .value {
-            font-size: 1.3rem;
-            font-weight: 900;
-            letter-spacing: 0.5px;
-        }
-
-        .stat-item .info .label {
-            font-size: 0.7rem;
-            color: #86efac;
-            font-weight: 400;
-        }
-
-        .stat-item:hover {
-            transform: scale(1.04);
-            background: rgba(74, 222, 128, 0.06);
-        }
-
-        /* ===== دکمه دانلود ===== */
-        .btn-download {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 14px;
-            width: 100%;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            border: none;
-            border-radius: 60px;
-            padding: 16px 22px;
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 800;
-            color: #0a120a;
-            text-decoration: none;
-            box-shadow: 0 10px 35px -8px rgba(34, 197, 94, 0.3);
-            transition: 0.3s;
-            margin: 20px 0 14px 0;
-            border: 1px solid rgba(74, 222, 128, 0.15);
-            cursor: pointer;
-            letter-spacing: 0.3px;
-        }
-
-        .btn-download i {
-            font-size: 1.4rem;
-            color: #0a120a;
-        }
-
-        .btn-download:hover {
-            transform: scale(1.02) translateY(-3px);
-            box-shadow: 0 16px 45px -8px rgba(34, 197, 94, 0.4);
-            background: linear-gradient(135deg, #86efac, #22c55e);
-        }
-
-        .btn-download:active {
-            transform: scale(0.96);
-        }
-
-        /* ===== مودهای بیشتر ===== */
-        .more {
-            display: flex;
-            justify-content: center;
-            margin: 6px 0 18px;
-        }
-
-        .more a {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(74, 222, 128, 0.04);
-            border-radius: 50px;
-            padding: 10px 28px;
-            font-family: 'Vazirmatn', sans-serif;
-            font-weight: 600;
-            color: #86efac;
-            text-decoration: none;
-            transition: 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95rem;
-        }
-
-        .more a i {
-            color: #4ade80;
-            font-size: 1rem;
-        }
-
-        .more a:hover {
-            background: rgba(74, 222, 128, 0.04);
-            border-color: rgba(74, 222, 128, 0.1);
-            color: #e8f0e8;
-            transform: scale(1.02);
-        }
-
-        /* ===== فوتر ===== */
-        .footer {
-            margin-top: 20px;
-            color: #2d6a3e;
-            font-size: 0.7rem;
-            text-align: center;
-            border-top: 1px solid rgba(74, 222, 128, 0.04);
-            padding-top: 16px;
-            display: flex;
-            justify-content: center;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .footer i {
-            color: #4ade80;
-            margin-left: 5px;
-        }
-
-        /* ===== پاپ‌آپ دیجیتالی جنگلی-یخی ===== */
-        .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(10, 18, 10, 0.88);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            animation: fadeInPopup 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .loading-overlay.active {
-            display: flex;
-        }
-
-        @keyframes fadeInPopup {
-            from {
-                opacity: 0;
-                transform: scale(0.95) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .loading-content {
-            text-align: center;
-            max-width: 440px;
-            width: 100%;
-            padding: 34px 28px 30px;
-            background: rgba(10, 25, 15, 0.6);
-            border-radius: 32px;
-            border: 1px solid rgba(74, 222, 128, 0.04);
-            box-shadow: 0 40px 70px -20px #000000cc, inset 0 0 60px rgba(74, 222, 128, 0.02);
-            backdrop-filter: blur(10px);
-            margin: auto;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .loading-content::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-conic-gradient(rgba(74, 222, 128, 0.02) 0% 10%, transparent 10% 20%);
-            animation: rotateBg 20s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes rotateBg {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* اسپینر دیجیتالی */
-        .loading-spinner {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .loading-spinner .ring {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid transparent;
-        }
-
-        .loading-spinner .ring:nth-child(1) {
-            border-top: 3px solid #4ade80;
-            border-right: 3px solid rgba(74, 222, 128, 0.15);
-            animation: spin 0.8s cubic-bezier(0.6, 0, 0.4, 1) infinite;
-        }
-
-        .loading-spinner .ring:nth-child(2) {
-            border-bottom: 3px solid #38bdf8;
-            border-left: 3px solid rgba(56, 189, 248, 0.15);
-            animation: spin 1.1s cubic-bezier(0.6, 0, 0.4, 1) infinite reverse;
-            width: 80%;
-            height: 80%;
-            top: 10%;
-            left: 10%;
-        }
-
-        .loading-spinner .ring:nth-child(3) {
-            border-right: 3px solid #86efac;
-            border-bottom: 3px solid rgba(134, 239, 172, 0.15);
-            animation: spin 0.6s cubic-bezier(0.6, 0, 0.4, 1) infinite;
-            width: 60%;
-            height: 60%;
-            top: 20%;
-            left: 20%;
-        }
-
-        .loading-spinner .logo-mini {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.8rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #4ade80, #38bdf8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -1px;
-            z-index: 2;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        .loading-text {
-            color: #e8f0e8;
-            font-size: 1rem;
-            font-weight: 500;
-            line-height: 1.9;
-            margin-bottom: 18px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .loading-text .highlight {
-            color: #4ade80;
-            font-weight: 700;
-        }
-
-        .loading-text .highlight2 {
-            color: #38bdf8;
-            font-weight: 700;
-        }
-
-        /* دکمه عضویت */
-        .loading-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #4ade80, #22c55e);
-            color: #0a120a;
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
-            font-weight: 700;
-            padding: 12px 32px;
-            border-radius: 60px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 8px 30px rgba(34, 197, 94, 0.15);
-            text-decoration: none;
-            position: relative;
-            z-index: 1;
-        }
-
-        .loading-btn:hover {
-            transform: scale(1.04);
-            box-shadow: 0 12px 40px rgba(34, 197, 94, 0.25);
-            background: linear-gradient(135deg, #86efac, #22c55e);
-        }
-
-        .loading-btn i {
-            font-size: 1rem;
-        }
-
-        /* شمارش معکوس دیجیتالی */
-        .loading-timer {
-            color: #2d6a3e;
-            font-size: 0.9rem;
-            margin-top: 14px;
-            letter-spacing: 0.3px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .loading-timer .digit {
-            display: inline-block;
-            font-family: 'Vazirmatn', monospace;
-            font-weight: 900;
-            font-size: 2.2rem;
-            color: #4ade80;
-            background: rgba(74, 222, 128, 0.04);
-            padding: 4px 18px;
-            border-radius: 12px;
-            border: 1px solid rgba(74, 222, 128, 0.06);
-            min-width: 55px;
-            text-shadow: 0 0 30px rgba(74, 222, 128, 0.1);
-            transition: 0.1s;
-            letter-spacing: 2px;
-        }
-
-        .loading-timer .digit.pulse {
-            animation: digitPulse 0.5s ease;
-        }
-
-        @keyframes digitPulse {
-            0%,
-            100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.15);
-                color: #86efac;
-                text-shadow: 0 0 40px rgba(74, 222, 128, 0.2);
-            }
-        }
-
-        .loading-timer .unit {
-            color: #4ade80;
-            font-weight: 600;
-            margin: 0 4px;
-        }
-
-        /* ===== RESPONSIVE ===== */
-
-        @media (max-width: 640px) {
-            .card {
-                padding: 22px 14px 18px;
-                border-radius: 28px;
-            }
-
-            .tnt-header {
-                gap: 12px;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .tnt-icon {
-                width: 70px;
-                height: 70px;
-                border-radius: 20px;
-            }
-            .tnt-icon img {
-                border-radius: 20px;
-            }
-
-            .tnt-brand .brand-text {
-                font-size: 1.8rem;
-                text-align: center;
-            }
-            .tnt-sub {
-                align-self: center;
-            }
-
-            h1 {
-                font-size: 1.8rem;
-                justify-content: center;
-            }
-            h1 i {
-                font-size: 1.5rem;
-            }
-
-            .desc {
-                font-size: 0.85rem;
-                border-right: 2px solid #22c55e;
-                padding-right: 12px;
-                text-align: right;
-            }
-
-            .stats-wrapper {
-                padding: 12px 12px 10px;
-                border-radius: 16px;
-            }
-
-            .stats-grid {
-                gap: 8px;
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .stat-item {
-                padding: 6px 14px 6px 18px;
-                justify-content: flex-start;
-                min-width: unset;
-            }
-
-            .stat-item .info .value {
-                font-size: 1.1rem;
-            }
-
-            .btn-download {
-                font-size: 1rem;
-                padding: 12px 14px;
-                gap: 10px;
-            }
-            .btn-download i {
-                font-size: 1.1rem;
-            }
-
-            .more a {
-                padding: 8px 18px;
-                font-size: 0.85rem;
-            }
-
-            .footer {
-                font-size: 0.6rem;
-                gap: 12px;
-            }
-
-            .loading-content {
-                padding: 24px 16px 20px;
-                border-radius: 24px;
-                margin: 10px;
-            }
-
-            .loading-text {
-                font-size: 0.9rem;
-                line-height: 1.8;
-            }
-
-            .loading-spinner {
-                width: 60px;
-                height: 60px;
-            }
-            .loading-spinner .logo-mini {
-                font-size: 1.4rem;
-            }
-
-            .loading-btn {
-                font-size: 0.85rem;
-                padding: 10px 20px;
-            }
-
-            .loading-timer .digit {
-                font-size: 1.8rem;
-                min-width: 45px;
-                padding: 2px 14px;
-            }
-
-            body {
-                padding: 10px;
-                align-items: flex-start;
-                padding-top: 16px;
-                padding-bottom: 16px;
-            }
-
-            .forest-orb {
-                display: none;
-            }
-            .particle {
-                display: none;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .card {
-                padding: 14px 10px 12px;
-                border-radius: 22px;
-            }
-
-            .tnt-icon {
-                width: 60px;
-                height: 60px;
-                border-radius: 16px;
-            }
-            .tnt-icon img {
-                border-radius: 16px;
-            }
-
-            .tnt-brand .brand-text {
-                font-size: 1.5rem;
-            }
-
-            h1 {
-                font-size: 1.4rem;
-            }
-            h1 i {
-                font-size: 1.2rem;
-            }
-
-            .stat-item .info .value {
-                font-size: 1rem;
-            }
-
-            .btn-download {
-                font-size: 0.85rem;
-                padding: 10px 12px;
-            }
-            .btn-download i {
-                font-size: 0.9rem;
-            }
-
-            .more a {
-                padding: 6px 12px;
-                font-size: 0.75rem;
-            }
-
-            .footer {
-                font-size: 0.5rem;
-                gap: 8px;
-            }
-
-            body {
-                padding: 6px;
-                padding-top: 10px;
-                padding-bottom: 10px;
-            }
-
-            .loading-timer .digit {
-                font-size: 1.5rem;
-                min-width: 38px;
-                padding: 2px 10px;
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .card {
-                padding: 44px 40px 36px;
-            }
-            .tnt-icon {
-                width: 100px;
-                height: 100px;
-                border-radius: 28px;
-            }
-            .tnt-icon img {
-                border-radius: 28px;
-            }
-            .tnt-brand .brand-text {
-                font-size: 2.8rem;
-            }
-            h1 {
-                font-size: 3rem;
-            }
-            .btn-download {
-                font-size: 1.5rem;
-                padding: 18px 26px;
-            }
-        }
-
-        @supports (-webkit-touch-callout: none) {
-            .loading-overlay {
-                -webkit-overflow-scrolling: touch;
-            }
-            body {
-                -webkit-overflow-scrolling: touch;
-            }
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0"/>
+<title>TNT MOD</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Vazirmatn','Segoe UI',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:16px;color:#e8f0e8;direction:rtl;background:#0a0a0f;overflow-x:hidden;overflow-y:auto;position:relative}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:rgba(255,255,255,0.02);border-radius:10px}
+::-webkit-scrollbar-thumb{background:linear-gradient(135deg,#f7c948,#d9a52b);border-radius:10px}
+.bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;pointer-events:none}
+.bg .g1{position:absolute;width:100%;height:100%;background:radial-gradient(ellipse at 20% 30%,rgba(247,200,72,0.04)0%,transparent 50%),radial-gradient(ellipse at 80% 70%,rgba(162,155,254,0.04)0%,transparent 50%),radial-gradient(ellipse at 50% 50%,rgba(56,189,248,0.03)0%,transparent 60%);animation:gdrift 30s ease-in-out infinite alternate}
+.bg .g2{position:absolute;width:100%;height:100%;animation-duration:45s;animation-direction:reverse;opacity:0.6;background:radial-gradient(ellipse at 30% 60%,rgba(247,200,72,0.03)0%,transparent 40%),radial-gradient(ellipse at 70% 20%,rgba(162,155,254,0.03)0%,transparent 40%);animation:gdrift2 45s ease-in-out infinite alternate}
+@keyframes gdrift{0%{transform:translate(0,0)scale(1)}33%{transform:translate(15px,-20px)scale(1.03)}66%{transform:translate(-15px,15px)scale(0.97)}100%{transform:translate(10px,-10px)scale(1.01)}}
+@keyframes gdrift2{0%{transform:translate(0,0)scale(1)}50%{transform:translate(-20px,25px)scale(1.05)}100%{transform:translate(20px,-15px)scale(0.95)}}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:0.15;animation:flt 25s ease-in-out infinite alternate;transform-style:preserve-3d}
+.orb:nth-child(3){width:550px;height:550px;background:radial-gradient(circle,#f7c948,transparent);top:-200px;right:-200px;animation-duration:30s;transform:rotateX(20deg)rotateY(30deg)}
+.orb:nth-child(4){width:450px;height:450px;background:radial-gradient(circle,#a29bfe,transparent);bottom:-150px;left:-150px;animation-duration:35s;animation-delay:5s;transform:rotateX(-30deg)rotateY(-20deg)}
+.orb:nth-child(5){width:400px;height:400px;background:radial-gradient(circle,#7dd3fc,transparent);top:50%;left:50%;transform:translate(-50%,-50%)rotateX(15deg)rotateY(45deg);animation-duration:40s;animation-delay:10s}
+.orb:nth-child(6){width:300px;height:300px;background:radial-gradient(circle,#f7c948,transparent);top:15%;left:15%;animation-duration:28s;animation-delay:3s;transform:rotateX(40deg)rotateY(-30deg)}
+.orb:nth-child(7){width:350px;height:350px;background:radial-gradient(circle,#ff6b6b,transparent);bottom:15%;right:15%;animation-duration:32s;animation-delay:7s;transform:rotateX(-20deg)rotateY(50deg)}
+.orb:nth-child(8){width:250px;height:250px;background:radial-gradient(circle,#4ade80,transparent);top:60%;left:80%;animation-duration:26s;animation-delay:4s;transform:rotateX(25deg)rotateY(-35deg)}
+@keyframes flt{0%{transform:translate(0,0)scale(1)}33%{transform:translate(25px,-30px)scale(1.08)}66%{transform:translate(-20px,25px)scale(0.92)}100%{transform:translate(15px,-15px)scale(1.04)}}
+.stars{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.stars i{position:absolute;font-size:0.3rem;color:rgba(255,255,255,0.3);animation:twinkle 3s ease-in-out infinite alternate}
+.stars i:nth-child(1){top:10%;left:5%;animation-delay:0s}
+.stars i:nth-child(2){top:20%;left:15%;animation-delay:0.5s;font-size:0.5rem}
+.stars i:nth-child(3){top:30%;left:25%;animation-delay:1s}
+.stars i:nth-child(4){top:40%;left:35%;animation-delay:1.5s;font-size:0.6rem}
+.stars i:nth-child(5){top:50%;left:45%;animation-delay:2s}
+.stars i:nth-child(6){top:60%;left:55%;animation-delay:0.3s;font-size:0.4rem}
+.stars i:nth-child(7){top:70%;left:65%;animation-delay:0.8s}
+.stars i:nth-child(8){top:80%;left:75%;animation-delay:1.3s;font-size:0.5rem}
+.stars i:nth-child(9){top:90%;left:85%;animation-delay:1.8s}
+.stars i:nth-child(10){top:15%;left:95%;animation-delay:2.2s;font-size:0.4rem}
+.stars i:nth-child(11){top:45%;left:10%;animation-delay:0.2s;font-size:0.6rem}
+.stars i:nth-child(12){top:75%;left:20%;animation-delay:0.7s}
+.stars i:nth-child(13){top:25%;left:40%;animation-delay:1.2s;font-size:0.5rem}
+.stars i:nth-child(14){top:55%;left:70%;animation-delay:1.7s}
+.stars i:nth-child(15){top:85%;left:40%;animation-delay:2.5s;font-size:0.4rem}
+@keyframes twinkle{0%{opacity:0.2;transform:scale(0.8)}100%{opacity:0.8;transform:scale(1.2)}}
+.pt{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.pt i{position:absolute;font-size:1.2rem;animation:fall linear infinite;font-style:normal}
+.pt i:nth-child(1){left:5%;animation-duration:14s;animation-delay:0s;font-size:1.4rem;color:rgba(247,200,72,0.08)}
+.pt i:nth-child(2){left:15%;animation-duration:18s;animation-delay:2s;font-size:0.7rem;color:rgba(162,155,254,0.06)}
+.pt i:nth-child(3){left:25%;animation-duration:12s;animation-delay:4s;font-size:1.6rem;color:rgba(247,200,72,0.05)}
+.pt i:nth-child(4){left:35%;animation-duration:20s;animation-delay:1s;font-size:0.5rem;color:rgba(125,211,252,0.06)}
+.pt i:nth-child(5){left:45%;animation-duration:16s;animation-delay:3s;font-size:1.8rem;color:rgba(247,200,72,0.04)}
+.pt i:nth-child(6){left:55%;animation-duration:22s;animation-delay:5s;font-size:0.6rem;color:rgba(162,155,254,0.05)}
+.pt i:nth-child(7){left:65%;animation-duration:13s;animation-delay:2s;font-size:1.2rem;color:rgba(247,200,72,0.04)}
+.pt i:nth-child(8){left:75%;animation-duration:19s;animation-delay:4s;font-size:0.8rem;color:rgba(125,211,252,0.04)}
+.pt i:nth-child(9){left:85%;animation-duration:15s;animation-delay:1s;font-size:1.5rem;color:rgba(247,200,72,0.05)}
+.pt i:nth-child(10){left:95%;animation-duration:17s;animation-delay:3s;font-size:0.9rem;color:rgba(162,155,254,0.04)}
+@keyframes fall{0%{transform:translateY(-10vh)rotate(0deg)scale(0.5);opacity:0}10%{opacity:1;transform:translateY(0vh)rotate(30deg)scale(1)}90%{opacity:1}100%{transform:translateY(110vh)rotate(360deg)scale(0.5);opacity:0}}
+.cd{max-width:700px;width:100%;background:rgba(10,10,20,0.6);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);border-radius:48px;padding:38px 32px 30px;border:1px solid rgba(247,200,72,0.08);box-shadow:0 40px 80px -20px #000,inset 0 1px 0 rgba(247,200,72,0.04);position:relative;z-index:1;margin:10px 0}
+.hd{display:flex;align-items:center;gap:18px;margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid rgba(247,200,72,0.06);flex-wrap:wrap}
+.ic{width:80px;height:80px;border-radius:24px;background:linear-gradient(135deg,#f7c948,#d9a52b);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 35px rgba(247,200,72,0.2);overflow:hidden;border:2px solid rgba(247,200,72,0.1);flex-shrink:0;transition:0.3s}
+.ic:hover{transform:scale(1.05)rotate(-3deg);box-shadow:0 15px 45px rgba(247,200,72,0.3)}
+.ic img{width:100%;height:100%;object-fit:cover;border-radius:24px}
+.br{display:flex;flex-direction:column;gap:2px;flex:1}
+.br .tx{font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,#f7c948,#ffd700,#f7c948,#ffd700);background-size:300% 300%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:sh 4s ease-in-out infinite;letter-spacing:0.5px;line-height:1.2}
+@keyframes sh{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+.sb{font-size:0.75rem;color:#f7c948;font-weight:400;background:rgba(247,200,72,0.04);padding:3px 14px;border-radius:30px;border:1px solid rgba(247,200,72,0.06);display:inline-block;align-self:flex-start}
+.sb i{color:#f7c948;margin-left:6px}
+.bg-b{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,#f7c948,#d9a52b);color:#0a0a0f;font-size:0.65rem;font-weight:800;padding:5px 18px;border-radius:40px;margin-bottom:14px;border:1px solid rgba(247,200,72,0.2);box-shadow:0 0 25px rgba(247,200,72,0.1);text-transform:uppercase}
+h1{font-size:2.4rem;font-weight:900;color:#e8f0e8;display:flex;align-items:center;gap:12px;margin-bottom:4px;letter-spacing:-0.5px}
+h1 i{color:#f7c948;font-size:2rem;filter:drop-shadow(0 0 20px rgba(247,200,72,0.15))}
+.ds{font-size:0.95rem;color:#a29bfe;border-right:3px solid #f7c948;padding-right:14px;margin-bottom:24px;line-height:1.8;font-weight:400}
+.ds i{color:#f7c948;margin-left:8px}
+.stw{background:rgba(0,0,0,0.25);border-radius:20px;padding:16px 18px 14px;margin-bottom:26px;border:1px solid rgba(247,200,72,0.04)}
+.stl{display:flex;align-items:center;gap:10px;color:#f7c948;font-weight:600;font-size:0.8rem;margin-bottom:12px}
+.stl i{color:#f7c948;font-size:0.9rem}
+.stg{display:flex;gap:12px;flex-wrap:wrap;justify-content:space-around}
+.st{display:flex;align-items:center;gap:12px;padding:8px 18px 8px 22px;border-radius:50px;transition:0.3s;flex:1 1 auto;min-width:110px;justify-content:center}
+.st-c{background:rgba(247,200,72,0.04);border:1px solid rgba(247,200,72,0.06)}
+.st-c i{color:#f7c948;text-shadow:0 0 20px rgba(247,200,72,0.1)}
+.st-c .v{color:#f7c948}
+.st-g{background:rgba(162,155,254,0.04);border:1px solid rgba(162,155,254,0.06)}
+.st-g i{color:#a29bfe;text-shadow:0 0 20px rgba(162,155,254,0.1)}
+.st-g .v{color:#a29bfe}
+.st-i{background:rgba(125,211,252,0.04);border:1px solid rgba(125,211,252,0.06)}
+.st-i i{color:#7dd3fc;text-shadow:0 0 20px rgba(125,211,252,0.1)}
+.st-i .v{color:#7dd3fc}
+.st .inf{display:flex;flex-direction:column;line-height:1.2}
+.st .inf .v{font-size:1.3rem;font-weight:900;letter-spacing:0.5px}
+.st .inf .l{font-size:0.7rem;color:#8aa3d6;font-weight:400}
+.st:hover{transform:scale(1.04);background:rgba(247,200,72,0.06)}
+.bn{display:flex;align-items:center;justify-content:center;gap:14px;width:100%;background:linear-gradient(135deg,#f7c948,#d9a52b);border:none;border-radius:60px;padding:16px 22px;font-family:'Vazirmatn',sans-serif;font-size:1.3rem;font-weight:800;color:#0a0a0f;text-decoration:none;box-shadow:0 10px 35px -8px rgba(247,200,72,0.3);transition:0.3s;margin:20px 0 14px 0;border:1px solid rgba(247,200,72,0.15);cursor:pointer;letter-spacing:0.3px}
+.bn i{font-size:1.4rem;color:#0a0a0f}
+.bn:hover{transform:scale(1.02)translateY(-3px);box-shadow:0 16px 45px -8px rgba(247,200,72,0.4);background:linear-gradient(135deg,#ffd700,#f7c948)}
+.bn:active{transform:scale(0.96)}
+.mr{display:flex;justify-content:center;margin:6px 0 18px}
+.mr a{background:rgba(255,255,255,0.02);border:1px solid rgba(247,200,72,0.04);border-radius:50px;padding:10px 28px;font-family:'Vazirmatn',sans-serif;font-weight:600;color:#a29bfe;text-decoration:none;transition:0.3s;display:inline-flex;align-items:center;gap:10px;font-size:0.95rem}
+.mr a i{color:#f7c948;font-size:1rem}
+.mr a:hover{background:rgba(247,200,72,0.04);border-color:rgba(247,200,72,0.1);color:#e8f0e8;transform:scale(1.02)}
+.ft{margin-top:20px;color:#4a4a5a;font-size:0.7rem;text-align:center;border-top:1px solid rgba(247,200,72,0.04);padding-top:16px;display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
+.ft i{color:#f7c948;margin-left:5px}
+.lod{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(10,10,15,0.88);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);z-index:9999;display:none;align-items:center;justify-content:center;flex-direction:column;animation:fadeIn 0.5s cubic-bezier(0.16,1,0.3,1);padding:20px;overflow-y:auto}
+.lod.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:scale(0.95)translateY(20px)}to{opacity:1;transform:scale(1)translateY(0)}}
+.lc{text-align:center;max-width:440px;width:100%;padding:34px 28px 30px;background:rgba(15,15,30,0.6);border-radius:32px;border:1px solid rgba(247,200,72,0.04);box-shadow:0 40px 70px -20px #000,inset 0 0 60px rgba(247,200,72,0.02);backdrop-filter:blur(10px);margin:auto;position:relative;overflow:hidden}
+.lc::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:repeating-conic-gradient(rgba(247,200,72,0.02)0% 10%,transparent 10% 20%);animation:rot 20s linear infinite;pointer-events:none}
+@keyframes rot{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.sp{width:80px;height:80px;margin:0 auto 20px;position:relative;z-index:1}
+.sp .r{position:absolute;width:100%;height:100%;border-radius:50%;border:3px solid transparent}
+.sp .r:nth-child(1){border-top:3px solid #f7c948;border-right:3px solid rgba(247,200,72,0.15);animation:spin1 0.8s cubic-bezier(0.6,0,0.4,1)infinite}
+.sp .r:nth-child(2){border-bottom:3px solid #a29bfe;border-left:3px solid rgba(162,155,254,0.15);animation:spin2 1.1s cubic-bezier(0.6,0,0.4,1)infinite reverse;width:80%;height:80%;top:10%;left:10%}
+.sp .r:nth-child(3){border-right:3px solid #7dd3fc;border-bottom:3px solid rgba(125,211,252,0.15);animation:spin3 0.6s cubic-bezier(0.6,0,0.4,1)infinite;width:60%;height:60%;top:20%;left:20%}
+.sp .lm{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#f7c948,#ffd700);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:-1px;z-index:2}
+@keyframes spin1{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+@keyframes spin2{0%{transform:rotate(0deg)}100%{transform:rotate(-360deg)}}
+@keyframes spin3{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+.lt{color:#e8f0e8;font-size:1rem;font-weight:500;line-height:1.9;margin-bottom:18px;position:relative;z-index:1}
+.lt .h{color:#f7c948;font-weight:700}
+.lt .h2{color:#a29bfe;font-weight:700}
+.lb{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#f7c948,#d9a52b);color:#0a0a0f;font-family:'Vazirmatn',sans-serif;font-size:0.95rem;font-weight:700;padding:12px 32px;border-radius:60px;border:none;cursor:pointer;transition:0.3s;box-shadow:0 8px 30px rgba(247,200,72,0.15);text-decoration:none;position:relative;z-index:1}
+.lb:hover{transform:scale(1.04);box-shadow:0 12px 40px rgba(247,200,72,0.25);background:linear-gradient(135deg,#ffd700,#f7c948)}
+.lb i{font-size:1rem}
+.tm{color:#4a4a5a;font-size:0.9rem;margin-top:14px;letter-spacing:0.3px;position:relative;z-index:1}
+.tm .d{display:inline-block;font-family:'Vazirmatn',monospace;font-weight:900;font-size:2.2rem;color:#f7c948;background:rgba(247,200,72,0.04);padding:4px 18px;border-radius:12px;border:1px solid rgba(247,200,72,0.06);min-width:55px;text-shadow:0 0 30px rgba(247,200,72,0.1);transition:0.1s;letter-spacing:2px}
+.tm .d.p{animation:pulse 0.5s ease}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.15);color:#ffd700;text-shadow:0 0 40px rgba(247,200,72,0.2)}}
+.tm .u{color:#f7c948;font-weight:600;margin:0 4px}
+@media(max-width:640px){.cd{padding:22px 14px 18px;border-radius:28px}.hd{gap:12px;flex-direction:column;align-items:center;text-align:center}.ic{width:70px;height:70px;border-radius:20px}.ic img{border-radius:20px}.br .tx{font-size:1.8rem;text-align:center}.sb{align-self:center}h1{font-size:1.8rem;justify-content:center}h1 i{font-size:1.5rem}.ds{font-size:0.85rem;border-right:2px solid #f7c948;padding-right:12px;text-align:right}.stw{padding:12px 12px 10px;border-radius:16px}.stg{gap:8px;flex-direction:column;align-items:stretch}.st{padding:6px 14px 6px 18px;justify-content:flex-start;min-width:unset}.st .inf .v{font-size:1.1rem}.bn{font-size:1rem;padding:12px 14px;gap:10px}.bn i{font-size:1.1rem}.mr a{padding:8px 18px;font-size:0.85rem}.ft{font-size:0.6rem;gap:12px}.lc{padding:24px 16px 20px;border-radius:24px;margin:10px}.lt{font-size:0.9rem;line-height:1.8}.sp{width:60px;height:60px}.sp .lm{font-size:1.4rem}.lb{font-size:0.85rem;padding:10px 20px}.tm .d{font-size:1.8rem;min-width:45px;padding:2px 14px}body{padding:10px;align-items:flex-start;padding-top:16px;padding-bottom:16px}.orb{display:none}.pt i{display:none}.stars i{display:none}}
+@media(max-width:400px){.cd{padding:14px 10px 12px;border-radius:22px}.ic{width:60px;height:60px;border-radius:16px}.ic img{border-radius:16px}.br .tx{font-size:1.5rem}h1{font-size:1.4rem}h1 i{font-size:1.2rem}.st .inf .v{font-size:1rem}.bn{font-size:0.85rem;padding:10px 12px}.bn i{font-size:0.9rem}.mr a{padding:6px 12px;font-size:0.75rem}.ft{font-size:0.5rem;gap:8px}body{padding:6px;padding-top:10px;padding-bottom:10px}.tm .d{font-size:1.5rem;min-width:38px;padding:2px 10px}}
+@media(min-width:1200px){.cd{padding:44px 40px 36px}.ic{width:100px;height:100px;border-radius:28px}.ic img{border-radius:28px}.br .tx{font-size:2.8rem}h1{font-size:3rem}.bn{font-size:1.5rem;padding:18px 26px}}
+@supports(-webkit-touch-callout:none){.lod{-webkit-overflow-scrolling:touch}body{-webkit-overflow-scrolling:touch}}
+</style>
 </head>
 <body>
-
-    <!-- ===== پس‌زمینه جنگلی-یخی ===== -->
-    <div class="bg-forest-ice">
-        <div class="leaf-texture"></div>
-        <div class="leaf-texture"></div>
-        <div class="forest-orb"></div>
-        <div class="forest-orb"></div>
-        <div class="forest-orb"></div>
-    </div>
-
-    <!-- ===== ذرات ===== -->
-    <div class="particles">
-        <div class="particle">❄</div>
-        <div class="particle">🍃</div>
-        <div class="particle">❄</div>
-        <div class="particle">🍃</div>
-        <div class="particle">❄</div>
-        <div class="particle">🍃</div>
-    </div>
-
-    <!-- ===== پاپ‌آپ دیجیتالی ===== -->
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loading-content">
-            <div class="loading-spinner">
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <span class="logo-mini">TNT</span>
-            </div>
-            <div class="loading-text">
-                <span class="highlight">کاربر گرامی</span><br />
-                قبل از دانلود جهت دانلود کردن مود های بازی های دیگه<br />
-                عضو چنل ما در <span class="highlight2">روبيکا</span> شوید
-            </div>
-            <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" class="loading-btn" id="loadingBtn">
-                <i class="fab fa-telegram-plane"></i>
-                عضویت در چنل روبیکا
-            </a>
-            <div class="loading-timer">
-                <span class="digit" id="timerCountdown">10</span>
-                <span class="unit">ثانیه تا دانلود</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== CARD ===== -->
-    <div class="card">
-
-        <div class="tnt-header">
-            <div class="tnt-icon">
-                <img src="https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg" alt="TNT MOD" />
-            </div>
-            <div class="tnt-brand">
-                <span class="brand-text">TNT MOD</span>
-                <span class="tnt-sub">
-                    <i class="fas fa-gamepad"></i> مود انواع بازیها
-                </span>
-            </div>
-        </div>
-
-        <div class="badge">
-            <i class="fas fa-leaf"></i> نسخه ۲۰۲۶
-        </div>
-
-        <h1>
-            <i class="fas fa-trophy"></i> صفحه کلاچ
-        </h1>
-
-        <div class="desc">
-            <i class="fas fa-play-circle"></i>
-            مود شده با سکه و جم بینهایت — کاملاً تست شده
-        </div>
-
-        <div class="stats-wrapper">
-            <div class="stats-label">
-                <i class="fas fa-star"></i>
-                مشخصات مود
-            </div>
-            <div class="stats-grid">
-                <div class="stat-item stat-coin">
-                    <i class="fas fa-coins"></i>
-                    <div class="info">
-                        <span class="value">∞</span>
-                        <span class="label">سکه</span>
-                    </div>
-                </div>
-                <div class="stat-item stat-gem">
-                    <i class="fas fa-gem"></i>
-                    <div class="info">
-                        <span class="value">∞</span>
-                        <span class="label">جم</span>
-                    </div>
-                </div>
-                <div class="stat-item stat-infinity">
-                    <i class="fas fa-infinity"></i>
-                    <div class="info">
-                        <span class="value">بی‌نهایت</span>
-                        <span class="label">هر دو</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <button class="btn-download" id="downloadBtn">
-            <i class="fas fa-download"></i>
-            دانلود مود صفحه کلاچ
-            <i class="fas fa-arrow-left" style="font-size: 1rem;"></i>
-        </button>
-
-        <div class="more">
-            <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener noreferrer nofollow">
-                <i class="fas fa-gamepad"></i>
-                مودهای بیشتر!
-                <i class="fas fa-arrow-up-right-from-square" style="font-size: 0.65rem; opacity: 0.5;"></i>
-            </a>
-        </div>
-
-        <div class="footer">
-            <span><i class="fas fa-check-circle"></i> تست شده در ۲۰۲۶</span>
-            <span><i class="fas fa-shield-alt"></i> بدون بن</span>
-            <span><i class="fas fa-robot"></i> آپدیت خودکار</span>
-        </div>
-
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const downloadBtn = document.getElementById('downloadBtn');
-            const overlay = document.getElementById('loadingOverlay');
-            const timerSpan = document.getElementById('timerCountdown');
-            let countdown = 10;
-            let timerInterval = null;
-            let isDownloading = false;
-
-            const downloadLink = 'https://www.mediafire.com/file/bnrp8vqgt42es5f/ClutchPlate.zip/file';
-
-            downloadBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                if (isDownloading) return;
-                isDownloading = true;
-
-                overlay.classList.add('active');
-                countdown = 10;
-                timerSpan.textContent = countdown;
-                timerSpan.classList.add('pulse');
-
-                timerInterval = setInterval(function() {
-                    countdown--;
-                    timerSpan.textContent = countdown;
-                    timerSpan.classList.remove('pulse');
-                    void timerSpan.offsetWidth;
-                    timerSpan.classList.add('pulse');
-
-                    if (countdown <= 0) {
-                        clearInterval(timerInterval);
-                        overlay.classList.remove('active');
-                        window.open(downloadLink, '_blank');
-                        isDownloading = false;
-                    }
-                }, 1000);
-            });
-
-            document.getElementById('loadingBtn').addEventListener('click', function() {});
-
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) {}
-            });
-        });
-    </script>
-
+<div class="bg"><div class="g1"></div><div class="g2"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+<div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+<div class="pt"><i>✦</i><i>❄</i><i>✦</i><i>❄</i><i>✦</i><i>❄</i><i>✦</i><i>❄</i><i>✦</i><i>❄</i></div>
+<div class="lod" id="lod"><div class="lc"><div class="sp"><div class="r"></div><div class="r"></div><div class="r"></div><span class="lm">TNT</span></div><div class="lt"><span class="h">کاربر گرامی</span><br/>قبل از دانلود جهت دانلود کردن مود های بازی های دیگه<br/>عضو چنل ما در <span class="h2">روبيکا</span> شوید</div><a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" class="lb" id="lb"><i class="fab fa-telegram-plane"></i>عضویت در چنل روبیکا</a><div class="tm"><span class="d" id="tmr">10</span><span class="u">ثانیه تا دانلود</span></div></div></div>
+<div class="cd">
+<div class="hd"><div class="ic"><img src="https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg" alt="TNT MOD"/></div><div class="br"><span class="tx">TNT MOD</span><span class="sb"><i class="fas fa-gamepad"></i>مود انواع بازیها</span></div></div>
+<div class="bg-b"><i class="fas fa-star"></i>نسخه ۲۰۲۶</div>
+<h1><i class="fas fa-trophy"></i>صفحه کلاچ</h1>
+<div class="ds"><i class="fas fa-play-circle"></i>مود شده با سکه و جم بینهایت — کاملاً تست شده</div>
+<div class="stw"><div class="stl"><i class="fas fa-star"></i>مشخصات مود</div><div class="stg"><div class="st st-c"><i class="fas fa-coins"></i><div class="inf"><span class="v">∞</span><span class="l">سکه</span></div></div><div class="st st-g"><i class="fas fa-gem"></i><div class="inf"><span class="v">∞</span><span class="l">جم</span></div></div><div class="st st-i"><i class="fas fa-infinity"></i><div class="inf"><span class="v">بی‌نهایت</span><span class="l">هر دو</span></div></div></div></div>
+<button class="bn" id="dn"><i class="fas fa-download"></i>دانلود مود صفحه کلاچ<i class="fas fa-arrow-left" style="font-size:1rem"></i></button>
+<div class="mr"><a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener noreferrer nofollow"><i class="fas fa-gamepad"></i>مودهای بیشتر!<i class="fas fa-arrow-up-right-from-square" style="font-size:0.65rem;opacity:0.5"></i></a></div>
+<div class="ft"><span><i class="fas fa-check-circle"></i>تست شده در ۲۰۲۶</span><span><i class="fas fa-shield-alt"></i>بدون بن</span><span><i class="fas fa-robot"></i>آپدیت خودکار</span></div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded',function(){const d=document.getElementById('dn'),o=document.getElementById('lod'),t=document.getElementById('tmr');let c=10,i=null,s=!1;const l='https://www.mediafire.com/file/bnrp8vqgt42es5f/ClutchPlate.zip/file';d.addEventListener('click',function(e){e.preventDefault();if(s)return;s=!0;o.classList.add('active');c=10;t.textContent=c;t.classList.add('p');i=setInterval(function(){c--;t.textContent=c;t.classList.remove('p');void t.offsetWidth;t.classList.add('p');if(c<=0){clearInterval(i);o.classList.remove('active');setTimeout(function(){window.open(l,'_blank')},300);s=!1}},1000)});document.getElementById('lb').addEventListener('click',function(){});o.addEventListener('click',function(e){if(e.target===o){}})});
+</script>
 </body>
 </html>
