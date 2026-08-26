@@ -189,6 +189,7 @@ h2 i{color:#f7c948}
       <div class="version"><i class="fas fa-star"></i> نسخه ۲۰۲۶</div>
       <h2><i class="fas fa-rocket"></i> مودهای موجود</h2>
       <div class="grid">
+        <!-- Game 1 -->
         <a class="mod-card" href="https://B2n.ir/footballia2" target="_blank" rel="noopener">
           <div class="icon-box">
             <img src="https://uploadkon.ir/uploads/thumbs/5fab26_26Screenshot-2026-08-19-16-54-30-458-ir-mservices-market-edit.jpg" alt="فوتبالیا ۲" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -198,6 +199,8 @@ h2 i{color:#f7c948}
           <div class="mod-desc">سکه بینهایت</div>
           <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
         </a>
+        
+        <!-- Game 2 -->
         <a class="mod-card" href="https://B2n.ir/clutchplate1" target="_blank" rel="noopener">
           <div class="icon-box">
             <img src="https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg" alt="صفحه کلاچ" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -207,6 +210,19 @@ h2 i{color:#f7c948}
           <div class="mod-desc">سکه و جم بینهایت</div>
           <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
         </a>
+
+        <!-- Game 3 (NEW) -->
+        <a class="mod-card" href="https://B2n.ir/Mehmaneshab" target="_blank" rel="noopener">
+          <div class="icon-box">
+            <img src="https://uploadkon.ir/uploads/caef26_26IMG-20260826-153054-563.jpg" alt="مهمان نیمه شب" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div style="display:none;font-size:2.4rem">👻</div>
+          </div>
+          <div class="mod-name">مهمان نیمه شب مود</div>
+          <div class="mod-desc">سکه بینهایت</div>
+          <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
+        </a>
+
+        <!-- Coming Soon Placeholders (Reduced to 3 for perfect grid symmetry) -->
         <div class="mod-card coming">
           <div class="icon-box">🎯</div>
           <div class="mod-name">بزودی...</div>
@@ -221,12 +237,6 @@ h2 i{color:#f7c948}
         </div>
         <div class="mod-card coming">
           <div class="icon-box">🚀</div>
-          <div class="mod-name">بزودی...</div>
-          <div class="mod-desc">در حال ساخت</div>
-          <span class="badge soon">به زودی</span>
-        </div>
-        <div class="mod-card coming">
-          <div class="icon-box">⚡</div>
           <div class="mod-name">بزودی...</div>
           <div class="mod-desc">در حال ساخت</div>
           <span class="badge soon">به زودی</span>
@@ -311,14 +321,14 @@ h2 i{color:#f7c948}
 </div>
 
 <script>
-// Stars
+// Stars Generation (Fixed Template Literals)
 (function(){
   const c=document.getElementById('stars');
   for(let i=0;i<70;i++){
     const s=document.createElement('div');
     s.className='star';
     const size=Math.random()*2.2+0.4;
-    s.style.cssText=`width:\( {size}px;height: \){size}px;top:\( {Math.random()*100}%;left: \){Math.random()*100}%;--d:\( {(Math.random()*4+2).toFixed(1)}s;animation-delay: \){(Math.random()*3).toFixed(1)}s`;
+    s.style.cssText=`width:${size}px;height:${size}px;top:${Math.random()*100}%;left:${Math.random()*100}%;--d:${(Math.random()*4+2).toFixed(1)}s;animation-delay:${(Math.random()*3).toFixed(1)}s`;
     c.appendChild(s);
   }
 })();
@@ -423,7 +433,6 @@ function botMove(){
 }
 
 function bestMove(){
-  // simple minimax for hard
   let bestScore=-Infinity, move=-1;
   for(let i=0;i<9;i++){
     if(board[i]===''){
