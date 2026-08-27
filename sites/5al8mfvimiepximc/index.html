@@ -13,7 +13,7 @@ html,body{font-family:'Vazirmatn',sans-serif;min-height:100vh;background:linear-
 ::-webkit-scrollbar-track{background:rgba(255,255,255,0.02)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#f7c948,#a29bfe);border-radius:10px}
 
-/* ===== GALACTIC BACKGROUND (OPTIMIZED) ===== */
+/* ===== GALACTIC BACKGROUND (OPTIMIZED & BEAUTIFUL) ===== */
 .cosmos{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
 .nebula{position:absolute;width:150%;height:150%;top:-25%;left:-25%;background:
   radial-gradient(ellipse at 20% 25%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
@@ -65,7 +65,7 @@ h2{font-size:1.45rem;font-weight:800;margin-bottom:24px;display:flex;align-items
 h2 i{color:#f7c948}
 
 /* ===== GRID CARDS ===== */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:20px;margin-bottom:26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:20px;margin-bottom:26px}
 .mod-card{background:rgba(255,255,255,0.03);border:1px solid rgba(247,200,72,0.08);border-radius:28px;padding:26px 18px 22px;text-align:center;text-decoration:none;color:inherit;transition:all 0.35s cubic-bezier(0.16,1,0.3,1);display:block;position:relative;overflow:hidden;cursor:pointer}
 .mod-card:hover{transform:translateY(-6px);background:rgba(247,200,72,0.06);border-color:rgba(247,200,72,0.25);box-shadow:0 15px 35px -10px rgba(247,200,72,0.18)}
 .mod-card.coming{opacity:0.5;cursor:default}
@@ -73,29 +73,19 @@ h2 i{color:#f7c948}
 
 /* ===== ENHANCED ICON BOX ===== */
 .icon-box{
-  width:90px;
-  height:90px;
-  margin:0 auto 18px;
-  border-radius:26px;
-  overflow:hidden;
+  width:88px;height:88px;margin:0 auto 18px;border-radius:26px;overflow:hidden;
   background:linear-gradient(135deg,rgba(247,200,72,0.06),rgba(162,155,254,0.06));
-  border:2px solid rgba(247,200,72,0.18);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:2.7rem;
-  transition:0.35s cubic-bezier(0.16,1,0.3,1);
-  box-shadow:0 8px 25px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.08);
-  position:relative
+  border:2px solid rgba(247,200,72,0.18);display:flex;align-items:center;justify-content:center;
+  font-size:2.6rem;transition:0.35s cubic-bezier(0.16,1,0.3,1);
+  box-shadow:0 8px 25px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.08);position:relative
 }
 .mod-card:hover .icon-box{
-  transform:scale(1.1) rotate(-3deg);
-  border-color:rgba(247,200,72,0.5);
+  transform:scale(1.1) rotate(-3deg);border-color:rgba(247,200,72,0.5);
   box-shadow:0 12px 35px rgba(247,200,72,0.15),inset 0 1px 0 rgba(255,255,255,0.12);
 }
 .icon-box img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
-.mod-name{font-size:1.1rem;font-weight:800;margin-bottom:6px;color:#e8f0e8}
-.mod-desc{font-size:0.8rem;color:#8aa3d6;margin-bottom:14px;line-height:1.5}
+.mod-name{font-size:1.08rem;font-weight:800;margin-bottom:6px;color:#e8f0e8}
+.mod-desc{font-size:0.78rem;color:#8aa3d6;margin-bottom:14px;line-height:1.5}
 .badge{font-size:0.68rem;padding:5px 14px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;background:rgba(74,222,128,0.12);color:#4ade80;border:1px solid rgba(74,222,128,0.25);font-weight:600}
 .badge.soon{background:rgba(255,255,255,0.04);color:#6b7280;border-color:rgba(255,255,255,0.08)}
 
@@ -106,20 +96,11 @@ h2 i{color:#f7c948}
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:100;opacity:0;visibility:hidden;transition:all 0.3s}
 .overlay.open{opacity:1;visibility:visible}
 .side-menu{
-  position:fixed;
-  top:0;
-  right:-100%;
-  left:auto;
-  width:310px;
-  height:100%;
+  position:fixed;top:0;right:-100%;left:auto;width:310px;height:100%;
   background:linear-gradient(180deg,rgba(20,15,35,0.98),rgba(15,15,30,0.98));
-  backdrop-filter:blur(35px);
-  z-index:101;
-  padding:34px 26px;
+  backdrop-filter:blur(35px);z-index:101;padding:34px 26px;
   transition:right 0.4s cubic-bezier(0.16,1,0.3,1);
-  border-left:1px solid rgba(247,200,72,0.15);
-  display:flex;
-  flex-direction:column;
+  border-left:1px solid rgba(247,200,72,0.15);display:flex;flex-direction:column;
   box-shadow:-20px 0 50px rgba(0,0,0,0.5)
 }
 .side-menu.open{right:0}
@@ -180,7 +161,7 @@ h2 i{color:#f7c948}
   .card{padding:30px 22px 26px;border-radius:32px}
   .brand{font-size:1.8rem}
   .grid{grid-template-columns:repeat(2,1fr);gap:16px}
-  .icon-box{width:80px;height:80px;font-size:2.4rem;border-radius:22px}
+  .icon-box{width:78px;height:78px;font-size:2.3rem;border-radius:22px}
   .mod-name{font-size:1rem}
   .mod-desc{font-size:0.76rem}
   .side-menu{width:285px}
@@ -190,7 +171,7 @@ h2 i{color:#f7c948}
 @media(max-width:380px){
   .card{padding:24px 18px 22px;border-radius:26px}
   .brand{font-size:1.55rem}
-  .icon-box{width:70px;height:70px;font-size:2.1rem}
+  .icon-box{width:68px;height:68px;font-size:2rem}
   .games-grid{gap:14px}
   .game-tile{padding:24px 12px}
   .game-tile .emoji{font-size:3rem}
@@ -279,6 +260,17 @@ h2 i{color:#f7c948}
             <div style="display:none;font-size:2.5rem">👻</div>
           </div>
           <div class="mod-name">مهمان نیمه شب مود</div>
+          <div class="mod-desc">سکه بینهایت</div>
+          <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
+        </div>
+
+        <!-- Game 5: NEW -->
+        <div class="mod-card" data-link="https://B2n.ir/Diarbaqi">
+          <div class="icon-box">
+            <img src="https://uploadkon.ir/uploads/09a127_26Screenshot-2026-08-27-17-38-07-075-ir-mservices-market-edit.jpg" alt="دیار باقی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div style="display:none;font-size:2.5rem">🏰</div>
+          </div>
+          <div class="mod-name">دیار باقی مود شده</div>
           <div class="mod-desc">سکه بینهایت</div>
           <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
         </div>
@@ -377,7 +369,7 @@ h2 i{color:#f7c948}
 </div>
 
 <script>
-// Stars Generation (Reduced for performance)
+// Stars Generation (Optimized for no lag)
 (function(){
   const c=document.getElementById('stars');
   for(let i=0;i<60;i++){
@@ -411,7 +403,7 @@ document.querySelectorAll('.mod-card:not(.coming)').forEach(card => {
   });
 });
 
-// Back Button Fix (NO REFRESH)
+// Back Button Fix (NO REFRESH, just reset state)
 window.addEventListener('pageshow', function(event) {
   const app = document.getElementById('app');
   if (app && app.classList.contains('card-exit')) {
