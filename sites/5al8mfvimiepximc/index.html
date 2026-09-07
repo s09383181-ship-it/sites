@@ -2,7 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
-<!-- ===== تگ‌های ضد کش برای اطمینان از نمایش نسخه جدید برای همه کاربران ===== -->
+<!-- ===== تگ‌های ضد کش برای اطمینان از نمایش نسخه جدید ===== -->
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
@@ -10,6 +10,21 @@
 <title>TNT MOD | صفحه اصلی</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+<!-- ===== اسکریپت هوشمند ضد کش (نسخه 3) ===== -->
+<script>
+  const currentVersion = 3; 
+  const cachedVersion = localStorage.getItem('siteVersion');
+  if (cachedVersion && cachedVersion < currentVersion) {
+    localStorage.clear();
+    sessionStorage.clear();
+    localStorage.setItem('siteVersion', currentVersion);
+    window.location.reload(true);
+  } else if (!cachedVersion) {
+    localStorage.setItem('siteVersion', currentVersion);
+  }
+</script>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
 html,body{font-family:'Vazirmatn',sans-serif;min-height:100vh;background:linear-gradient(135deg,#0a0a1a 0%,#1a0a2e 50%,#0a0a1a 100%);color:#e8f0e8;direction:rtl;overflow-x:hidden;overflow-y:auto}
@@ -248,7 +263,7 @@ h2 i{color:#f7c948}
           <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
         </div>
 
-        <!-- Game 5: دیار باقی (بازگردانده شد) -->
+        <!-- Game 5: دیار باقی -->
         <div class="mod-card" data-link="https://B2n.ir/Diarbaqi">
           <div class="icon-box">
             <img src="https://uploadkon.ir/uploads/09a127_26Screenshot-2026-08-27-17-38-07-075-ir-mservices-market-edit.jpg" alt="دیار باقی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
