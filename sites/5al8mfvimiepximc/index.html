@@ -2,6 +2,10 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
+<!-- ===== تگ‌های ضد کش برای اطمینان از نمایش نسخه جدید برای همه کاربران ===== -->
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 <title>TNT MOD | صفحه اصلی</title>
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
@@ -13,39 +17,21 @@ html,body{font-family:'Vazirmatn',sans-serif;min-height:100vh;background:linear-
 ::-webkit-scrollbar-track{background:rgba(255,255,255,0.02)}
 ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#f7c948,#a29bfe);border-radius:10px}
 
-/* ===== GALACTIC BACKGROUND (OPTIMIZED & BEAUTIFUL) ===== */
+/* ===== GALACTIC BACKGROUND ===== */
 .cosmos{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none}
-.nebula{position:absolute;width:150%;height:150%;top:-25%;left:-25%;background:
-  radial-gradient(ellipse at 20% 25%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
-  radial-gradient(ellipse at 80% 75%, rgba(247, 200, 72, 0.12) 0%, transparent 55%),
-  radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 65%);
-  animation:nebulaDrift 60s ease-in-out infinite alternate}
-.nebula2{position:absolute;inset:0;background:
-  radial-gradient(ellipse at 70% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 45%),
-  radial-gradient(ellipse at 30% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 50%);
-  animation:nebulaDrift 75s ease-in-out infinite alternate-reverse;opacity:0.8}
-@keyframes nebulaDrift{
-  0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(30px,-20px) scale(1.05)}
-}
+.nebula{position:absolute;width:150%;height:150%;top:-25%;left:-25%;background:radial-gradient(ellipse at 20% 25%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),radial-gradient(ellipse at 80% 75%, rgba(247, 200, 72, 0.12) 0%, transparent 55%),radial-gradient(ellipse at 50% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 65%);animation:nebulaDrift 60s ease-in-out infinite alternate}
+.nebula2{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 45%),radial-gradient(ellipse at 30% 80%, rgba(99, 102, 241, 0.12) 0%, transparent 50%);animation:nebulaDrift 75s ease-in-out infinite alternate-reverse;opacity:0.8}
+@keyframes nebulaDrift{0%{transform:translate(0,0) scale(1)}100%{transform:translate(30px,-20px) scale(1.05)}}
 .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.18;animation:orbFloat 40s ease-in-out infinite alternate}
 .orb.o1{width:500px;height:500px;background:radial-gradient(circle,#f7c948,transparent 70%);top:-200px;right:-150px;animation-duration:45s}
 .orb.o2{width:450px;height:450px;background:radial-gradient(circle,#a29bfe,transparent 70%);bottom:-150px;left:-150px;animation-duration:50s;animation-delay:5s}
 .orb.o3{width:380px;height:380px;background:radial-gradient(circle,#ec4899,transparent 70%);top:45%;left:45%;animation-duration:55s;animation-delay:10s}
-@keyframes orbFloat{
-  0%{transform:translate(0,0) scale(1)}
-  100%{transform:translate(20px,-25px) scale(1.08)}
-}
+@keyframes orbFloat{0%{transform:translate(0,0) scale(1)}100%{transform:translate(20px,-25px) scale(1.08)}}
 .stars{position:absolute;inset:0}
 .star{position:absolute;background:#fff;border-radius:50%;animation:twinkle var(--d) ease-in-out infinite alternate}
 @keyframes twinkle{0%{opacity:0.2;transform:scale(0.7)}100%{opacity:1;transform:scale(1.3)}}
 .shooting{position:absolute;width:100px;height:1.5px;background:linear-gradient(90deg,transparent,#fff,transparent);opacity:0;animation:shoot 12s linear infinite}
-@keyframes shoot{
-  0%{transform:translateX(0) translateY(0) rotate(-35deg);opacity:0}
-  5%{opacity:0.8}
-  15%{opacity:0}
-  100%{transform:translateX(-800px) translateY(500px) rotate(-35deg);opacity:0}
-}
+@keyframes shoot{0%{transform:translateX(0) translateY(0) rotate(-35deg);opacity:0}5%{opacity:0.8}15%{opacity:0}100%{transform:translateX(-800px) translateY(500px) rotate(-35deg);opacity:0}}
 
 /* ===== LAYOUT ===== */
 .wrapper{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;padding-bottom:40px}
@@ -65,45 +51,46 @@ h2{font-size:1.45rem;font-weight:800;margin-bottom:24px;display:flex;align-items
 h2 i{color:#f7c948}
 
 /* ===== GRID CARDS ===== */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:20px;margin-bottom:26px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:20px;margin-bottom:10px}
 .mod-card{background:rgba(255,255,255,0.03);border:1px solid rgba(247,200,72,0.08);border-radius:28px;padding:26px 18px 22px;text-align:center;text-decoration:none;color:inherit;transition:all 0.35s cubic-bezier(0.16,1,0.3,1);display:block;position:relative;overflow:hidden;cursor:pointer}
 .mod-card:hover{transform:translateY(-6px);background:rgba(247,200,72,0.06);border-color:rgba(247,200,72,0.25);box-shadow:0 15px 35px -10px rgba(247,200,72,0.18)}
 .mod-card.coming{opacity:0.5;cursor:default}
 .mod-card.coming:hover{transform:translateY(-2px);background:rgba(255,255,255,0.03);border-color:rgba(255,255,255,0.06);box-shadow:none}
 
-/* ===== ENHANCED ICON BOX ===== */
-.icon-box{
-  width:88px;height:88px;margin:0 auto 18px;border-radius:26px;overflow:hidden;
-  background:linear-gradient(135deg,rgba(247,200,72,0.06),rgba(162,155,254,0.06));
-  border:2px solid rgba(247,200,72,0.18);display:flex;align-items:center;justify-content:center;
-  font-size:2.6rem;transition:0.35s cubic-bezier(0.16,1,0.3,1);
-  box-shadow:0 8px 25px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.08);position:relative
-}
-.mod-card:hover .icon-box{
-  transform:scale(1.1) rotate(-3deg);border-color:rgba(247,200,72,0.5);
-  box-shadow:0 12px 35px rgba(247,200,72,0.15),inset 0 1px 0 rgba(255,255,255,0.12);
-}
+.icon-box{width:88px;height:88px;margin:0 auto 18px;border-radius:26px;overflow:hidden;background:linear-gradient(135deg,rgba(247,200,72,0.06),rgba(162,155,254,0.06));border:2px solid rgba(247,200,72,0.18);display:flex;align-items:center;justify-content:center;font-size:2.6rem;transition:0.35s cubic-bezier(0.16,1,0.3,1);box-shadow:0 8px 25px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.08);position:relative}
+.mod-card:hover .icon-box{transform:scale(1.1) rotate(-3deg);border-color:rgba(247,200,72,0.5);box-shadow:0 12px 35px rgba(247,200,72,0.15),inset 0 1px 0 rgba(255,255,255,0.12)}
 .icon-box img{width:100%;height:100%;object-fit:cover;position:relative;z-index:1}
 .mod-name{font-size:1.08rem;font-weight:800;margin-bottom:6px;color:#e8f0e8}
 .mod-desc{font-size:0.78rem;color:#8aa3d6;margin-bottom:14px;line-height:1.5}
 .badge{font-size:0.68rem;padding:5px 14px;border-radius:20px;display:inline-flex;align-items:center;gap:5px;background:rgba(74,222,128,0.12);color:#4ade80;border:1px solid rgba(74,222,128,0.25);font-weight:600}
 .badge.soon{background:rgba(255,255,255,0.04);color:#6b7280;border-color:rgba(255,255,255,0.08)}
 
-.footer{margin-top:24px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font-size:0.72rem;color:#5a6a8a}
+/* ===== PAGINATION ===== */
+.pagination{display:flex;justify-content:center;align-items:center;gap:8px;margin:30px 0 20px;flex-wrap:wrap}
+.page-num{width:38px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);color:#8aa3d6;font-weight:700;font-size:0.9rem;cursor:default;transition:all 0.25s ease;position:relative}
+.page-num.active{background:linear-gradient(135deg,#f7c948,#d9a52b);color:#0a0a0f;border-color:transparent;box-shadow:0 4px 15px rgba(247,200,72,0.25);transform:scale(1.05)}
+.page-num:not(.active):hover{background:rgba(255,255,255,0.08);color:#e8f0e8;border-color:rgba(247,200,72,0.2)}
+.page-num.soon{cursor:not-allowed;opacity:0.6}
+.page-num.soon::after{content:'بزودی';position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.85);color:#fff;font-size:0.65rem;padding:4px 10px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:0.2s;border:1px solid rgba(255,255,255,0.1)}
+.page-num.soon:hover::after{opacity:1;bottom:120%}
+
+.footer{margin-top:10px;padding-top:22px;border-top:1px solid rgba(255,255,255,0.06);display:flex;justify-content:center;gap:24px;flex-wrap:wrap;font-size:0.72rem;color:#5a6a8a}
 .footer i{color:#f7c948;margin-left:5px}
 
-/* ===== SIDE MENU (RIGHT SIDE) ===== */
+/* ===== SIDE MENU (ZERO LAG OPTIMIZED) ===== */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:100;opacity:0;visibility:hidden;transition:all 0.3s}
 .overlay.open{opacity:1;visibility:visible}
 .side-menu{
-  position:fixed;top:0;right:-100%;left:auto;width:310px;height:100%;
+  position:fixed;top:0;right:0;left:auto;width:310px;height:100%;
   background:linear-gradient(180deg,rgba(20,15,35,0.98),rgba(15,15,30,0.98));
   backdrop-filter:blur(35px);z-index:101;padding:34px 26px;
-  transition:right 0.4s cubic-bezier(0.16,1,0.3,1);
   border-left:1px solid rgba(247,200,72,0.15);display:flex;flex-direction:column;
-  box-shadow:-20px 0 50px rgba(0,0,0,0.5)
+  box-shadow:-20px 0 50px rgba(0,0,0,0.5);
+  transform:translateX(100%);
+  transition:transform 0.35s cubic-bezier(0.16,1,0.3,1);
+  will-change:transform;
 }
-.side-menu.open{right:0}
+.side-menu.open{transform:translateX(0)}
 .side-menu .close-btn{position:absolute;top:22px;left:22px;width:42px;height:42px;border-radius:13px;background:rgba(255,255,255,0.06);border:1px solid rgba(247,200,72,0.12);color:#a0b0d0;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:0.2s}
 .side-menu .close-btn:hover{color:#f7c948;background:rgba(247,200,72,0.12);border-color:rgba(247,200,72,0.25)}
 .side-brand{font-size:1.9rem;font-weight:900;background:linear-gradient(135deg,#f7c948,#ffd700);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:34px;margin-top:12px}
@@ -127,19 +114,15 @@ h2 i{color:#f7c948}
 .game-tile .title{font-size:1.25rem;font-weight:700}
 .game-tile .sub{font-size:0.85rem;color:#8aa3d6;margin-top:6px}
 
-/* Tic-tac-toe */
 .mode-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:20px 0 24px}
 .mode-btn{background:rgba(255,255,255,0.04);border:1px solid rgba(247,200,72,0.12);border-radius:24px;padding:10px 22px;color:#e8f0e8;font-family:inherit;font-size:0.92rem;cursor:pointer;transition:all 0.25s;font-weight:600}
 .mode-btn:hover,.mode-btn.active{background:rgba(247,200,72,0.15);border-color:rgba(247,200,72,0.35);color:#f7c948}
 #board{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:290px;margin:0 auto}
 .cell{aspect-ratio:1;background:rgba(255,255,255,0.03);border:1px solid rgba(247,200,72,0.1);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:2.9rem;font-weight:800;cursor:pointer;transition:all 0.2s;color:#4a5568}
 .cell:hover:not(.filled){background:rgba(247,200,72,0.08);border-color:rgba(247,200,72,0.25)}
-.cell.x{color:#f7c948}
-.cell.o{color:#38bdf8}
+.cell.x{color:#f7c948}.cell.o{color:#38bdf8}
 .status{text-align:center;margin-top:22px;font-size:1.05rem;color:#8aa3d6;min-height:30px}
 .status.win{color:#f7c948;font-weight:700}
-
-/* Number guess */
 .guess-area{text-align:center;padding:16px 0 12px}
 .guess-area .big{font-size:3.6rem;margin-bottom:14px}
 .guess-area h3{font-size:1.25rem;margin-bottom:12px}
@@ -167,6 +150,7 @@ h2 i{color:#f7c948}
   .side-menu{width:285px}
   h2{font-size:1.3rem}
   .header{margin-bottom:24px;padding-bottom:18px}
+  .page-num{width:34px;height:34px;font-size:0.85rem}
 }
 @media(max-width:380px){
   .card{padding:24px 18px 22px;border-radius:26px}
@@ -264,7 +248,7 @@ h2 i{color:#f7c948}
           <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
         </div>
 
-        <!-- Game 5: NEW -->
+        <!-- Game 5: دیار باقی (بازگردانده شد) -->
         <div class="mod-card" data-link="https://B2n.ir/Diarbaqi">
           <div class="icon-box">
             <img src="https://uploadkon.ir/uploads/09a127_26Screenshot-2026-08-27-17-38-07-075-ir-mservices-market-edit.jpg" alt="دیار باقی" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -275,7 +259,18 @@ h2 i{color:#f7c948}
           <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
         </div>
 
-        <!-- Coming Soon -->
+        <!-- Game 6: تاکسیدو کلاه مشترک -->
+        <div class="mod-card" data-link="https://B2n.ir/Taxido">
+          <div class="icon-box">
+            <img src="https://uploadkon.ir/uploads/31ec07_26Screenshot-2026-09-07-07-15-55-734-ir-mservices-market-edit.jpg" alt="تاکسیدو کلاه مشترک" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div style="display:none;font-size:2.5rem">🎩</div>
+          </div>
+          <div class="mod-name">تاکسیدو کلاه مشترک</div>
+          <div class="mod-desc">سکه بینهایت</div>
+          <span class="badge"><i class="fas fa-check-circle"></i> موجود</span>
+        </div>
+
+        <!-- Coming Soon Placeholders -->
         <div class="mod-card coming">
           <div class="icon-box">🎯</div>
           <div class="mod-name">بزودی...</div>
@@ -288,6 +283,20 @@ h2 i{color:#f7c948}
           <div class="mod-desc">در حال ساخت</div>
           <span class="badge soon">به زودی</span>
         </div>
+      </div>
+      
+      <!-- PAGINATION -->
+      <div class="pagination">
+        <span class="page-num active">1</span>
+        <span class="page-num soon">2</span>
+        <span class="page-num soon">3</span>
+        <span class="page-num soon">4</span>
+        <span class="page-num soon">5</span>
+        <span class="page-num soon">6</span>
+        <span class="page-num soon">7</span>
+        <span class="page-num soon">8</span>
+        <span class="page-num soon">9</span>
+        <span class="page-num soon">10</span>
       </div>
       
       <div class="footer">
@@ -369,7 +378,7 @@ h2 i{color:#f7c948}
 </div>
 
 <script>
-// Stars Generation (Optimized for no lag)
+// Stars Generation
 (function(){
   const c=document.getElementById('stars');
   for(let i=0;i<60;i++){
@@ -434,126 +443,64 @@ function showPage(name){
 
 /* ========== TIC-TAC-TOE ========== */
 let board, current, over, mode, player='X', bot='O';
-
 function startDots(m){
-  mode=m;
-  board=Array(9).fill('');
-  current='X';
-  over=false;
+  mode=m; board=Array(9).fill(''); current='X'; over=false;
   document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
-  renderBoard();
+  event.target.classList.add('active'); renderBoard();
   setStatus(mode==='two' ? 'نوبت بازیکن X' : 'نوبت شما (X)');
 }
-
 function renderBoard(){
-  const el=document.getElementById('board');
-  el.innerHTML='';
+  const el=document.getElementById('board'); el.innerHTML='';
   board.forEach((v,i)=>{
     const cell=document.createElement('div');
     cell.className='cell'+(v?' filled':'')+(v==='X'?' x':v==='O'?' o':'');
-    cell.textContent=v||'';
-    cell.onclick=()=>move(i);
-    el.appendChild(cell);
+    cell.textContent=v||''; cell.onclick=()=>move(i); el.appendChild(cell);
   });
 }
-
 function move(i){
   if(over||board[i]) return;
   if(mode!=='two' && current!==player) return;
-  board[i]=current;
-  renderBoard();
+  board[i]=current; renderBoard();
   if(checkWin(current)){
-    over=true;
-    setStatus(mode==='two' ? `🎉 بازیکن ${current} برنده شد!` : (current===player?'🎉 شما برنده شدید!':'😈 ربات برنده شد'),true);
-    return;
+    over=true; setStatus(mode==='two' ? `🎉 بازیکن ${current} برنده شد!` : (current===player?'🎉 شما برنده شدید!':'😈 ربات برنده شد'),true); return;
   }
-  if(board.every(c=>c)){
-    over=true;
-    setStatus('🤝 مساوی شد!',true);
-    return;
-  }
+  if(board.every(c=>c)){ over=true; setStatus('🤝 مساوی شد!',true); return; }
   current = current==='X' ? 'O' : 'X';
-  if(mode==='two'){
-    setStatus(`نوبت بازیکن ${current}`);
-  }else{
-    setStatus('نوبت ربات...');
-    setTimeout(botMove, 400);
-  }
+  if(mode==='two'){ setStatus(`نوبت بازیکن ${current}`); }
+  else{ setStatus('نوبت ربات...'); setTimeout(botMove, 400); }
 }
-
 function botMove(){
-  if(over) return;
-  let idx;
-  if(mode==='hard'){
-    idx = bestMove();
-  }else{
-    const empty=board.map((v,i)=>v===''?i:null).filter(v=>v!==null);
-    idx=empty[Math.floor(Math.random()*empty.length)];
-  }
-  board[idx]=bot;
-  renderBoard();
-  if(checkWin(bot)){
-    over=true;
-    setStatus('😈 ربات برنده شد',true);
-    return;
-  }
-  if(board.every(c=>c)){
-    over=true;
-    setStatus('🤝 مساوی شد!',true);
-    return;
-  }
-  current=player;
-  setStatus('نوبت شما (X)');
+  if(over) return; let idx;
+  if(mode==='hard'){ idx = bestMove(); }
+  else{ const empty=board.map((v,i)=>v===''?i:null).filter(v=>v!==null); idx=empty[Math.floor(Math.random()*empty.length)]; }
+  board[idx]=bot; renderBoard();
+  if(checkWin(bot)){ over=true; setStatus('😈 ربات برنده شد',true); return; }
+  if(board.every(c=>c)){ over=true; setStatus('🤝 مساوی شد!',true); return; }
+  current=player; setStatus('نوبت شما (X)');
 }
-
 function bestMove(){
   let bestScore=-Infinity, move=-1;
   for(let i=0;i<9;i++){
-    if(board[i]===''){
-      board[i]=bot;
-      let score=minimax(false);
-      board[i]='';
-      if(score>bestScore){bestScore=score;move=i}
-    }
-  }
-  return move;
+    if(board[i]===''){ board[i]=bot; let score=minimax(false); board[i]=''; if(score>bestScore){bestScore=score;move=i} }
+  } return move;
 }
 function minimax(isMax){
-  if(checkWin(bot)) return 10;
-  if(checkWin(player)) return -10;
-  if(board.every(c=>c)) return 0;
-  if(isMax){
-    let best=-Infinity;
-    for(let i=0;i<9;i++){
-      if(board[i]===''){board[i]=bot;best=Math.max(best,minimax(false));board[i]='';}
-    }
-    return best;
-  }else{
-    let best=Infinity;
-    for(let i=0;i<9;i++){
-      if(board[i]===''){board[i]=player;best=Math.min(best,minimax(true));board[i]='';}
-    }
-    return best;
-  }
+  if(checkWin(bot)) return 10; if(checkWin(player)) return -10; if(board.every(c=>c)) return 0;
+  if(isMax){ let best=-Infinity; for(let i=0;i<9;i++){ if(board[i]===''){board[i]=bot;best=Math.max(best,minimax(false));board[i]='';} } return best; }
+  else{ let best=Infinity; for(let i=0;i<9;i++){ if(board[i]===''){board[i]=player;best=Math.min(best,minimax(true));board[i]='';} } return best; }
 }
-
 function checkWin(p){
   const lines=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
   return lines.some(([a,b,c])=>board[a]===p&&board[b]===p&&board[c]===p);
 }
 function setStatus(t,win=false){
-  const s=document.getElementById('dotsStatus');
-  s.textContent=t;
-  s.className='status'+(win?' win':'');
+  const s=document.getElementById('dotsStatus'); s.textContent=t; s.className='status'+(win?' win':'');
 }
 
-/* ========== NUMBER GUESS (CLEAR MESSAGES) ========== */
+/* ========== NUMBER GUESS ========== */
 let target, count, history;
 function resetGuess(){
-  target=Math.floor(Math.random()*100)+1;
-  count=0;
-  history=[];
+  target=Math.floor(Math.random()*100)+1; count=0; history=[];
   const input=document.getElementById('guessInput');
   if(input){input.value='';input.disabled=false;input.classList.remove('shake')}
   const h=document.getElementById('guessHint');
@@ -565,36 +512,17 @@ function checkGuess(){
   const input=document.getElementById('guessInput');
   const hint=document.getElementById('guessHint');
   const val=parseInt(input.value);
-  
   if(isNaN(val)||val<1||val>100){
-    hint.textContent='⚠️ لطفاً عددی بین ۱ تا ۱۰۰ وارد کن';
-    hint.style.color='#f87171';
-    input.classList.remove('shake');
-    void input.offsetWidth;
-    input.classList.add('shake');
-    return;
+    hint.textContent='⚠️ لطفاً عددی بین ۱ تا ۱۰۰ وارد کن'; hint.style.color='#f87171';
+    input.classList.remove('shake'); void input.offsetWidth; input.classList.add('shake'); return;
   }
-  
-  count++;
-  history.push(val);
+  count++; history.push(val);
   document.getElementById('guessCount').textContent=count;
   document.getElementById('guessHistory').textContent=history.join(' ، ');
-  
-  if(val===target){
-    hint.textContent='🎉 آفرین! درست حدس زدی! 🎉';
-    hint.style.color='#4ade80';
-    input.disabled=true;
-    return;
-  }
-  if(val<target){
-    hint.textContent=`📈 عدد مورد نظر از ${val} بزرگ‌تره`;
-    hint.style.color='#38bdf8';
-  }else{
-    hint.textContent=`📉 عدد مورد نظر از ${val} کوچک‌تره`;
-    hint.style.color='#a78bfa';
-  }
-  input.value='';
-  input.focus();
+  if(val===target){ hint.textContent='🎉 آفرین! درست حدس زدی! 🎉'; hint.style.color='#4ade80'; input.disabled=true; return; }
+  if(val<target){ hint.textContent=`📈 عدد مورد نظر از ${val} بزرگ‌تره`; hint.style.color='#38bdf8'; }
+  else{ hint.textContent=`📉 عدد مورد نظر از ${val} کوچک‌تره`; hint.style.color='#a78bfa'; }
+  input.value=''; input.focus();
 }
 </script>
 </body>
