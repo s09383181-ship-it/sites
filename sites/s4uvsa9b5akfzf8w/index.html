@@ -803,4 +803,403 @@ footer b { color: #999; }
       <div class="mod-hero-icon" id="modIcon"></div>
       <h3 id="modTitle"></h3>
     </div>
-    <ul class="f
+    <ul class="feats" id="modFeats"></ul>
+    <div class="version-box" id="modVersion"></div>
+    <button class="btn-dl" id="modDownloadBtn">
+      <i class="fas fa-download"></i>
+      <span>دانلود مود</span>
+    </button>
+    <button class="btn-speed" id="modSpeedBtn" style="display:none">
+      <i class="fas fa-bolt"></i>
+      <span>دانلود مود سرعت بی‌نهایت</span>
+    </button>
+    <a class="btn-tut" id="modTut" target="_blank" rel="noopener" style="display:none">
+      <i class="fas fa-play"></i>
+      <span>آموزش استفاده</span>
+    </a>
+    <p class="hint" id="modHint">پس از کلیک روی دانلود، ابتدا در چنل روبیکا عضو شوید.</p>
+  </div>
+</div>
+
+<!-- ================= مودال اگهی اکانت ================= -->
+<div class="modal" id="adModal">
+  <div class="modal-content">
+    <button class="close-btn" data-close>✕</button>
+    <div class="micon">📢</div>
+    <h3>اکانتت رو رایگان اگهی کن!</h3>
+    <p style="color:#bbb;font-size:13.5px;line-height:2.1;margin-top:6px">
+      عکس اکانتت رو تو گروه زیر بفرست و <b style="color:#ffb300">قیمتش رو هم بگو</b>
+      تا برات اگهی کنیم ✅
+    </p>
+    <a class="btn-join" href="https://rubika.ir/joing/BBGEGFBDI0ZUJFJZKIKAXLTAQNKCZYUQ" target="_blank" rel="noopener">
+      <i class="fas fa-paper-plane"></i>
+      <span>ورود به گروه روبیکا</span>
+    </a>
+    <button class="btn-ghost" data-close>بعداً</button>
+  </div>
+</div>
+
+<!-- ================= پاپ‌آپ طلایی (عضویت در چنل) ================= -->
+<div class="popup-overlay" id="goldPopup">
+  <div class="popup-card">
+    <button class="popup-close" onclick="closePopup('goldPopup')">✕</button>
+    <div class="progress-container">
+      <svg class="progress-svg" viewBox="0 0 140 140">
+        <circle class="progress-bg" cx="70" cy="70" r="70"></circle>
+        <circle class="progress-bar" id="goldBar" cx="70" cy="70" r="70"></circle>
+      </svg>
+      <div class="progress-inner">
+        <i class="fas fa-download progress-icon"></i>
+        <span class="progress-percent" id="goldPercent">0%</span>
+      </div>
+    </div>
+    <div class="popup-title">عضو چنل روبیکا شوید</div>
+    <div class="popup-desc">برای دریافت مود، ابتدا در چنل <strong>روبیكا</strong> عضو شوید</div>
+    <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener" class="popup-btn">
+      <i class="fas fa-paper-plane"></i>
+      <span>عضویت در چنل روبیکا</span>
+    </a>
+    <div class="popup-footer">
+      <i class="fas fa-clock"></i>
+      <span>دانلود خودکار تا <span class="timer" id="goldTimer">10</span> ثانیه دیگر</span>
+    </div>
+  </div>
+</div>
+
+<!-- ================= پاپ‌آپ سبز (مود سرعت) ================= -->
+<div class="popup-overlay" id="greenPopup">
+  <div class="popup-card green">
+    <button class="popup-close" onclick="closePopup('greenPopup')">✕</button>
+    <div class="progress-container">
+      <svg class="progress-svg" viewBox="0 0 140 140">
+        <circle class="progress-bg" cx="70" cy="70" r="70"></circle>
+        <circle class="progress-bar" id="greenBar" cx="70" cy="70" r="70"></circle>
+      </svg>
+      <div class="progress-inner">
+        <i class="fas fa-bolt progress-icon"></i>
+        <span class="progress-percent" id="greenPercent">0%</span>
+      </div>
+    </div>
+    <div class="popup-title">مود سرعت بی‌نهایت</div>
+    <div class="popup-desc">برای دریافت مود سرعت، ابتدا در چنل <strong>روبیكا</strong> عضو شوید</div>
+    <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener" class="popup-btn">
+      <i class="fas fa-paper-plane"></i>
+      <span>عضویت در چنل روبیکا</span>
+    </a>
+    <div class="popup-footer">
+      <i class="fas fa-clock"></i>
+      <span>دانلود خودکار تا <span class="timer" id="greenTimer">10</span> ثانیه دیگر</span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================= داده‌های مودها ================= */
+const MODS = {
+  morabi: {
+    title: 'مربی برتر مود',
+    emoji: '🏆',
+    image: null,
+    feats: [
+      { i: '🪙', t: 'سکه بی‌نهایت' },
+      { i: '💰', t: 'پول بی‌نهایت' },
+      { i: '⏭️', t: 'رد کردن مرحله' },
+      { i: '⚡', t: 'فول کردن انرژی' }
+    ],
+    version: 'نسخه ۲۰۲۶',
+    versionDesc: 'بهترین نسخه‌ی مود شده برای بازی مربی برتر با تمام امکانات آنلاک شده و بدون بن.',
+    download: 'https://www.mediafire.com/file/444owt6s75532pu/morabi.zip/file',
+    tutorial: 'https://rubika.ir/joinc/FGBEGGEF0MQQFRMRRIBLJEZGMMMXUYCT',
+    popup: 'gold'
+  },
+  footballia2: {
+    title: 'فوتبالیا ۲',
+    emoji: '⚽',
+    image: 'https://uploadkon.ir/uploads/thumbs/5fab26_26Screenshot-2026-08-19-16-54-30-458-ir-mservices-market-edit.jpg',
+    feats: [
+      { i: '🪙', t: 'سکه بی‌نهایت' },
+      { i: '📦', t: 'کم حجم' },
+      { i: '📱', t: 'سازگار همه دستگاه‌ها' }
+    ],
+    version: 'نسخه ۱۰۷',
+    versionDesc: 'این مود به‌طور اختصاصی برای گوشی‌های ۶۴ بیت ساخته شده است. اگر گوشی شما ۳۲ بیت است، در روبیکا پیام بدید.',
+    download: 'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHHEJGAJJCBBJAF',
+    popup: 'gold'
+  },
+  clutchplate: {
+    title: 'صفحه کلاچ',
+    emoji: '🏎️',
+    image: 'https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg',
+    feats: [
+      { i: '🪙', t: 'سکه بی‌نهایت' },
+      { i: '💎', t: 'جم بی‌نهایت' },
+      { i: '⚡', t: 'مود سرعت بی‌نهایت' }
+    ],
+    version: 'نسخه ۰.۴۵',
+    versionDesc: 'برای نسخه ۰.۴۵ بازی بهینه‌سازی، تست و تأیید شده است.',
+    download: 'https://www.mediafire.com/file/bnrp8vqgt42es5f/ClutchPlate.zip/file',
+    speed: 'https://uploadkon.ir/uploads/fcb211_26SPEED.zip',
+    popup: 'gold'
+  },
+  godfather: {
+    title: 'پدرخوانده',
+    emoji: '🎩',
+    image: 'https://uploadkon.ir/uploads/497826_26Screenshot-2026-08-27-00-28-57-068-ir-mservices-market-edit.jpg',
+    feats: [
+      { i: '👁️', t: 'قابلیت ناظر شدن' },
+      { i: '🎤', t: 'صحبت روی نوبت دیگران' },
+      { i: '🛡️', t: 'تست شده بدون بن' }
+    ],
+    version: 'نسخه ۰.۰.۶۵۰',
+    versionDesc: 'برای نسخه ۰.۰.۶۵۰ بازی بهینه‌سازی شده و از تمامی قابلیت‌های جدید پشتیبانی می‌کند.',
+    download: 'https://rubika.ir/BAZI_MOD_ZODIAC/BIHHEJGAJJCBBJAF',
+    popup: 'gold'
+  },
+  mehmaneshab: {
+    title: 'مهمان نیمه شب',
+    emoji: '👻',
+    image: 'https://uploadkon.ir/uploads/caef26_26IMG-20260826-153054-563.jpg',
+    feats: [
+      { i: '🪙', t: 'سکه بی‌نهایت' },
+      { i: '📦', t: 'کم حجم' },
+      { i: '📱', t: 'سازگار همه دستگاه‌ها' }
+    ],
+    version: 'نسخه ۱۰۷',
+    versionDesc: 'برای گوشی‌های ۶۴ بیت بهینه‌سازی شده و بدون هیچ مشکلی اجرا می‌شود.',
+    download: 'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHGHCHHABIJFJAF',
+    popup: 'gold'
+  },
+  diarbaqi: {
+    title: 'دیار باقی',
+    emoji: '🏰',
+    image: 'https://uploadkon.ir/uploads/09a127_26Screenshot-2026-08-27-17-38-07-075-ir-mservices-market-edit.jpg',
+    feats: [
+      { i: '🪙', t: 'سکه بی‌نهایت' },
+      { i: '📱', t: 'سازگار با ۳۲ بیت' },
+      { i: '💻', t: 'سازگار با ۶۴ بیت' },
+      { i: '🛡️', t: 'تست شده بدون بن' }
+    ],
+    version: 'نسخه ۱۰۷',
+    versionDesc: 'برای هر دو معماری ۳۲ و ۶۴ بیت بهینه‌سازی شده است.',
+    download: 'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIIHAJCIHHDGBJAF',
+    popup: 'gold'
+  },
+  taxido: {
+    title: 'تاکسیدو کلاه مشترک',
+    emoji: '🎭',
+    image: 'https://uploadkon.ir/uploads/31ec07_26Screenshot-2026-09-07-07-15-55-734-ir-mservices-market-edit.jpg',
+    feats: [
+      { i: '🪙', t: 'سکه بی‌نهایت' },
+      { i: '📱', t: 'سازگار با ۳۲ بیت' },
+      { i: '💻', t: 'سازگار با ۶۴ بیت' },
+      { i: '🛡️', t: 'تست شده بدون بن' }
+    ],
+    version: 'نسخه کامل',
+    versionDesc: 'برای هر دو معماری ۳۲ و ۶۴ بیت بهینه‌سازی شده و سکه بی‌نهایت دارد.',
+    download: 'https://rubika.ir/BAZI_MOD_ZODIAC/BIJFCAFHCHEFFFIE',
+    popup: 'gold'
+  }
+};
+
+/* ================= ساخت گرید مودها ================= */
+(function buildModsGrid() {
+  const grid = document.getElementById('modsGrid');
+  const keys = ['footballia2', 'clutchplate', 'godfather', 'mehmaneshab', 'diarbaqi', 'taxido'];
+  let html = '';
+  keys.forEach(function (k) {
+    const m = MODS[k];
+    const thumb = m.image
+      ? '<img src="' + m.image + '" alt="' + m.title + '" loading="lazy" onerror="this.parentElement.innerHTML=\'' + m.emoji + '\'">'
+      : m.emoji;
+    html +=
+      '<article class="card mod" onclick="openMod(\'' + k + '\')">' +
+        '<span class="badge-live">موجود</span>' +
+        '<div class="card-thumb">' + thumb + '</div>' +
+        '<h3>' + m.title + '</h3>' +
+        '<p class="desc">' + m.feats.map(f => f.t).slice(0, 2).join(' • ') + '</p>' +
+      '</article>';
+  });
+  grid.innerHTML = html;
+})();
+
+/* ================= تب‌ها ================= */
+const tabs = document.querySelectorAll('.tab');
+const panels = {
+  ads: document.getElementById('panel-ads'),
+  mods: document.getElementById('panel-mods')
+};
+const adModal = document.getElementById('adModal');
+const modModal = document.getElementById('modModal');
+
+function switchTab(name) {
+  tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  Object.keys(panels).forEach(k => panels[k].classList.toggle('active', k === name));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+tabs.forEach(t => {
+  t.addEventListener('click', () => {
+    switchTab(t.dataset.tab);
+    if (t.dataset.tab === 'ads') {
+      setTimeout(() => openModal(adModal), 250);
+    }
+  });
+});
+
+/* ================= مودال‌ها ================= */
+function openModal(el) {
+  el.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(el) {
+  el.classList.remove('show');
+  document.body.style.overflow = '';
+}
+
+document.querySelectorAll('[data-close]').forEach(btn => {
+  btn.addEventListener('click', () => closeModal(btn.closest('.modal')));
+});
+[adModal, modModal].forEach(modal => {
+  modal.addEventListener('click', e => {
+    if (e.target === modal) closeModal(modal);
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    [adModal, modModal].forEach(m => closeModal(m));
+    closePopup('goldPopup');
+    closePopup('greenPopup');
+  }
+});
+
+/* ================= مودال جزئیات مود ================= */
+let currentModKey = null;
+
+function openMod(key) {
+  const m = MODS[key];
+  if (!m) return;
+  currentModKey = key;
+
+  const iconBox = document.getElementById('modIcon');
+  if (m.image) {
+    iconBox.innerHTML = '<img src="' + m.image + '" alt="' + m.title + '" onerror="this.parentElement.innerHTML=\'' + m.emoji + '\'">';
+  } else {
+    iconBox.innerHTML = m.emoji;
+  }
+
+  document.getElementById('modTitle').textContent = m.title;
+
+  document.getElementById('modFeats').innerHTML = m.feats
+    .map(f => '<li><span class="fi">' + f.i + '</span><span>' + f.t + '</span></li>')
+    .join('');
+
+  document.getElementById('modVersion').innerHTML =
+    '<span class="vtag">' + m.version + '</span><p>' + m.versionDesc + '</p>';
+
+  // دکمه‌ها
+  const dlBtn = document.getElementById('modDownloadBtn');
+  const spBtn = document.getElementById('modSpeedBtn');
+  const tutBtn = document.getElementById('modTut');
+  const hint = document.getElementById('modHint');
+
+  dlBtn.onclick = function () { triggerDownload(m.download, m.popup || 'gold'); };
+
+  if (m.speed) {
+    spBtn.style.display = 'flex';
+    spBtn.onclick = function () { triggerDownload(m.speed, 'green'); };
+  } else {
+    spBtn.style.display = 'none';
+  }
+
+  if (m.tutorial) {
+    tutBtn.style.display = 'flex';
+    tutBtn.href = m.tutorial;
+  } else {
+    tutBtn.style.display = 'none';
+  }
+
+  hint.style.display = (m.popup === 'gold') ? 'block' : 'none';
+
+  openModal(modModal);
+}
+
+/* ================= پاپ‌آپ دانلود ================= */
+let popupTimers = {};
+
+function triggerDownload(url, popupType) {
+  closeModal(modModal);
+  if (popupType === 'gold') {
+    openPopup('goldPopup', url);
+  } else if (popupType === 'green') {
+    openPopup('greenPopup', url);
+  } else {
+    window.location.href = url;
+  }
+}
+
+function openPopup(popupId, url) {
+  const popup = document.getElementById(popupId);
+  const bar = popup.querySelector('.progress-bar');
+  const percent = popup.querySelector('.progress-percent');
+  const timer = popup.querySelector('.timer');
+  const CIRC = 2 * Math.PI * 70;
+
+  bar.style.strokeDasharray = CIRC;
+  bar.style.strokeDashoffset = CIRC;
+  percent.textContent = '0%';
+  timer.textContent = '10';
+
+  popup.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  let progress = 0;
+  let timeLeft = 10;
+
+  popupTimers[popupId + '_progress'] = setInterval(function () {
+    progress += 1;
+    bar.style.strokeDashoffset = CIRC - (progress / 100) * CIRC;
+    percent.textContent = Math.round(progress) + '%';
+    if (progress >= 100) clearInterval(popupTimers[popupId + '_progress']);
+  }, 100);
+
+  popupTimers[popupId + '_timer'] = setInterval(function () {
+    timeLeft--;
+    timer.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(popupTimers[popupId + '_timer']);
+      clearInterval(popupTimers[popupId + '_progress']);
+      popup.classList.remove('active');
+      document.body.style.overflow = '';
+      bar.style.strokeDashoffset = CIRC;
+      percent.textContent = '0%';
+      timer.textContent = '10';
+      window.location.href = url;
+    }
+  }, 1000);
+}
+
+function closePopup(popupId) {
+  const popup = document.getElementById(popupId);
+  if (!popup) return;
+  popup.classList.remove('active');
+  document.body.style.overflow = '';
+  clearInterval(popupTimers[popupId + '_progress']);
+  clearInterval(popupTimers[popupId + '_timer']);
+  const bar = popup.querySelector('.progress-bar');
+  const percent = popup.querySelector('.progress-percent');
+  const timer = popup.querySelector('.timer');
+  const CIRC = 2 * Math.PI * 70;
+  bar.style.strokeDashoffset = CIRC;
+  percent.textContent = '0%';
+  timer.textContent = '10';
+}
+
+/* بستن پاپ‌آپ با کلیک روی پس‌زمینه */
+document.querySelectorAll('.popup-overlay').forEach(function (p) {
+  p.addEventListener('click', function (e) {
+    if (e.target === p) closePopup(p.id);
+  });
+});
+</script>
+</body>
+</html>
