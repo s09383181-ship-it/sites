@@ -5,707 +5,128 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>مرکز اگهی اکانت و مود بازی</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <script>
-/* 🔄 رفرش خودکار یک بار در هر بار باز شدن صفحه */
-(function () {
-  var KEY = '__refreshed_once__';
-  var already = false;
-  try { already = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
-  if (!already) {
-    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
-    window.addEventListener('load', function () {
-      setTimeout(function () { location.reload(); }, 60);
-    });
-  }
-})();
+(function(){try{if(sessionStorage.getItem('rf1')==='1')return;sessionStorage.setItem('rf1','1');}catch(e){return;}
+window.addEventListener('load',function(){setTimeout(function(){var u=new URL(location.href);u.searchParams.set('_',Date.now());location.replace(u.toString());},80);});})();
 </script>
-
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);background-attachment:fixed;color:#fff;padding:18px;min-height:100vh;overflow-x:hidden}
+.container{max-width:900px;margin:0 auto}
+header{text-align:center;margin-bottom:22px}
+header h1{font-size:28px;font-weight:900;color:#ffb300;text-shadow:2px 2px 4px rgba(0,0,0,.5);line-height:1.5}
+header p{color:#aaa;font-size:13.5px;margin-top:8px}
+.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:20px;padding:5px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;width:fit-content;margin-inline:auto}
+.tab{font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:11px 18px;border-radius:12px;border:none;background:transparent;color:#b8b8d0;transition:.2s}
+.tab.active{background:linear-gradient(90deg,#ff5722,#ff9800);color:#fff;box-shadow:0 6px 16px rgba(255,87,34,.35)}
+.panel{display:none}.panel.active{display:block;animation:fi .3s ease}
+@keyframes fi{from{opacity:0}to{opacity:1}}
 
-body {
-  font-family: 'Vazirmatn', Tahoma, sans-serif;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  background-attachment: fixed;
-  color: #fff;
-  padding: 20px;
-  min-height: 100vh;
-  overflow-x: hidden;
-}
+/* کارت پین‌شده */
+.featured{position:relative;display:block;width:100%;padding:0;border:none;border-radius:22px;cursor:pointer;margin-bottom:20px;overflow:hidden;background:transparent;font-family:inherit;color:inherit;text-align:right;transition:transform .2s,box-shadow .2s;box-shadow:0 12px 34px -14px rgba(255,152,0,.7)}
+.featured:hover{transform:translateY(-4px);box-shadow:0 20px 50px -14px rgba(255,152,0,.9)}
+.featured:active{transform:translateY(-1px) scale(.995)}
+.featured-inner{position:relative;padding:22px;border-radius:22px;background:radial-gradient(120% 140% at 100% 0%,rgba(255,87,34,.35),transparent 60%),radial-gradient(120% 140% at 0% 100%,rgba(255,179,0,.28),transparent 60%),linear-gradient(135deg,#2a1a10,#1a0f28);border:1.5px solid rgba(255,179,0,.55);display:flex;gap:20px;align-items:center;overflow:hidden}
+.featured-thumb{flex-shrink:0;width:132px;height:132px;border-radius:20px;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.35),transparent 55%),linear-gradient(135deg,#ffc107,#ff9800 45%,#ff5722 90%);display:flex;align-items:center;justify-content:center;font-size:66px;border:2px solid rgba(255,255,255,.3);box-shadow:0 12px 28px -8px rgba(255,152,0,.9),inset 0 2px 0 rgba(255,255,255,.4);position:relative;overflow:hidden}
+.mod-tag{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:900;letter-spacing:3px;color:#fff;background:rgba(0,0,0,.6);padding:3px 12px;border-radius:20px;font-family:Tahoma,sans-serif}
+.featured-info{flex:1;min-width:0}
+.featured-info h2{font-size:21px;font-weight:900;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pin{font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;background:linear-gradient(90deg,#4caf50,#66bb6a);color:#fff}
+.featured-feats{display:flex;gap:7px;flex-wrap:wrap}
+.featured-feats span{font-size:11.5px;font-weight:700;padding:6px 11px;border-radius:10px;background:rgba(0,0,0,.32);border:1px solid rgba(255,179,0,.42);color:#ffe0a3}
+.featured-go{margin-top:12px;font-size:13.5px;font-weight:800;color:#ffb300;display:flex;align-items:center;gap:8px}
 
-.container { max-width: 900px; margin: 0 auto; }
+/* گرید */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:14px}
+.card{position:relative;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px 14px 14px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s}
+.card.mod{cursor:pointer}
+.card.mod:hover{transform:translateY(-4px);border-color:rgba(255,179,0,.55);box-shadow:0 14px 30px -14px rgba(255,152,0,.7)}
+.card.mod:active{transform:translateY(-1px) scale(.995)}
+.card-thumb{width:100%;aspect-ratio:1/1;border-radius:13px;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;margin-bottom:11px;font-size:42px}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.card.mod h3{font-size:14px;font-weight:800;color:#fff;margin-bottom:5px;line-height:1.5}
+.card.mod .desc{color:#aaa;font-size:11.5px;line-height:1.85;margin-bottom:8px}
+.badge-live{position:absolute;top:10px;right:10px;background:linear-gradient(90deg,#4caf50,#66bb6a);color:#fff;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:800;z-index:2}
+.badge-soon{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#ffb300;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:800;border:1px solid rgba(255,179,0,.4);z-index:2}
+.card.locked{cursor:default;opacity:.6;border-style:dashed}
+.card.locked .card-thumb{opacity:.55}
 
-/* ================== هدر ================== */
-header { text-align: center; margin-bottom: 26px; }
-header h1 {
-  font-size: 30px;
-  font-weight: 900;
-  color: #ffb300;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-  line-height: 1.5;
-}
-header p { color: #aaa; font-size: 14px; margin-top: 8px; }
+/* مودال */
+.modal{display:none;position:fixed;z-index:100;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;padding:16px;overflow-y:auto}
+.modal.show{display:flex;animation:fi .22s ease}
+.modal-content{background:linear-gradient(165deg,#1e1e2e,#15151f);padding:26px 22px;border-radius:22px;width:100%;max-width:440px;max-height:92vh;overflow-y:auto;border:1.5px solid #ffb300;text-align:center;position:relative;box-shadow:0 25px 60px rgba(0,0,0,.65)}
+.close-btn{position:absolute;top:12px;right:12px;background:#f44336;color:#fff;border:none;border-radius:50%;width:34px;height:34px;font-size:15px;cursor:pointer;font-weight:bold;line-height:1;z-index:5}
+.close-btn:hover{background:#c62828}
+.mod-hero{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:16px}
+.mod-hero-icon{width:96px;height:96px;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#ff9800,#ff5722);display:grid;place-items:center;font-size:48px;border:2px solid rgba(255,255,255,.18)}
+.mod-hero-icon img{width:100%;height:100%;object-fit:cover}
+.modal-content h3{color:#ffb300;font-size:19px;font-weight:900}
+.feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0 14px}
+.feats li{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;padding:10px 11px;border-radius:11px;background:rgba(46,125,50,.16);border:1px solid rgba(76,175,80,.35);color:#c8e6c9;text-align:right}
+.feats li .fi{font-size:15px;flex-shrink:0}
+.version-box{background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.3);border-radius:14px;padding:12px 14px;margin:8px 0 16px;text-align:right}
+.version-box .vtag{display:inline-block;font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:20px;color:#000;background:linear-gradient(135deg,#ffb300,#ff9800);margin-bottom:8px}
+.version-box p{color:#c8cee5;font-size:11.5px;line-height:1.9}
+.btn-dl,.btn-speed,.btn-tut,.btn-join{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:15px;border-radius:14px;border:0;cursor:pointer;font-family:inherit;font-size:15px;font-weight:900;text-decoration:none;transition:transform .15s,filter .15s}
+.btn-dl{color:#000;background:linear-gradient(135deg,#ffc107,#ff9800);box-shadow:0 12px 30px -10px rgba(255,193,7,.9);margin-top:4px}
+.btn-speed{color:#fff;background:linear-gradient(135deg,#4caf50,#2e7d32);margin-top:10px;font-size:13.5px;padding:13px}
+.btn-tut{color:#e6ebff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);margin-top:10px;font-size:13px;padding:12px}
+.btn-dl:hover,.btn-speed:hover,.btn-join:hover{filter:brightness(1.08)}
+.btn-dl:active,.btn-speed:active,.btn-join:active{transform:scale(.97)}
+.btn-tut:hover{background:rgba(255,179,0,.18);border-color:rgba(255,179,0,.6);color:#fff}
+.btn-join{margin-top:16px;color:#000;background:linear-gradient(135deg,#4caf50,#66bb6a);box-shadow:0 12px 30px -10px rgba(76,175,80,.9)}
+.btn-ghost{width:100%;margin-top:10px;padding:11px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;color:#aaa;background:transparent;border:1px solid rgba(255,255,255,.15);transition:.2s}
+.btn-ghost:hover{color:#fff;background:rgba(255,255,255,.06)}
+.micon{width:66px;height:66px;margin:0 auto 10px;border-radius:20px;display:grid;place-items:center;font-size:30px;background:linear-gradient(145deg,#ff5722,#ff9800)}
+.hint{margin-top:12px;font-size:11px;color:#888;line-height:1.85}
+.ad-text{color:#bbb;font-size:13px;line-height:2;margin-top:6px}
 
-/* ================== تب‌ها ================== */
-.tabs {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  margin-bottom: 22px;
-  padding: 6px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  width: fit-content;
-  margin-inline: auto;
-}
-.tab {
-  font-family: inherit;
-  font-size: 14.5px;
-  font-weight: 700;
-  cursor: pointer;
-  padding: 12px 20px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  background: transparent;
-  color: #b8b8d0;
-  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-  white-space: nowrap;
-}
-.tab.active {
-  background: linear-gradient(90deg, #ff5722, #ff9800);
-  color: #fff;
-  box-shadow: 0 8px 20px rgba(255,87,34,0.35);
-}
+/* پاپ‌آپ */
+.popup-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:16px}
+.popup-overlay.active{display:flex;animation:fi .22s ease}
+.popup-card{max-width:380px;width:100%;background:#1c1c2c;border:2px solid #ffb300;border-radius:24px;padding:28px 22px 22px;text-align:center;position:relative;box-shadow:0 25px 70px rgba(0,0,0,.8)}
+.popup-card.green{border-color:#4caf50}
+.popup-close{position:absolute;top:12px;right:12px;width:34px;height:34px;background:#f44336;color:#fff;border:none;border-radius:50%;font-size:15px;font-weight:bold;cursor:pointer;line-height:1}
+.popup-close:hover{background:#c62828}
+.progress-container{position:relative;width:140px;height:140px;margin:6px auto 16px}
+.progress-svg{transform:rotate(-90deg);width:100%;height:100%;display:block}
+.progress-bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:8}
+.progress-bar{fill:none;stroke:#ffb300;stroke-width:8;stroke-linecap:round;stroke-dasharray:376.99;stroke-dashoffset:376.99;transition:stroke-dashoffset .25s linear}
+.popup-card.green .progress-bar{stroke:#4caf50}
+.progress-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.progress-icon{font-size:28px;margin-bottom:4px}
+.progress-percent{font-size:21px;font-weight:900;color:#ffb300}
+.popup-card.green .progress-percent{color:#4caf50}
+.popup-title{font-size:16.5px;font-weight:900;color:#fff;margin-bottom:10px}
+.popup-desc{font-size:12.5px;color:#bbb;line-height:1.9;margin-bottom:16px}
+.popup-desc strong{color:#ffb300}
+.popup-card.green .popup-desc strong{color:#4caf50}
+.popup-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 22px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:900;text-decoration:none;color:#000;background:linear-gradient(135deg,#ffc107,#ff9800);margin-bottom:12px;transition:transform .15s,filter .15s}
+.popup-card.green .popup-btn{background:linear-gradient(135deg,#4caf50,#2e7d32);color:#fff}
+.popup-btn:hover{filter:brightness(1.08)}
+.popup-btn:active{transform:scale(.97)}
+.popup-footer{font-size:11.5px;color:#888;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.popup-footer .timer{font-weight:900;color:#ffb300;background:rgba(255,179,0,.14);padding:3px 11px;border-radius:10px;border:1px solid rgba(255,179,0,.35);min-width:38px;text-align:center}
+.popup-card.green .popup-footer .timer{color:#4caf50;background:rgba(76,175,80,.14);border-color:rgba(76,175,80,.35)}
 
-/* ================== پنل‌ها ================== */
-.panel { display: none; }
-.panel.active { display: block; animation: fadeIn 0.35s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+footer{max-width:900px;margin:36px auto 0;text-align:center;color:#666;font-size:11px;line-height:2}
+footer b{color:#999}
 
-/* ================== کارت ویژه (مربی برتر) ================== */
-.featured {
-  position: relative;
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  padding: 22px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, rgba(255,179,0,0.18), rgba(255,87,34,0.09));
-  border: 1.5px solid rgba(255,179,0,0.55);
-  box-shadow: 0 14px 40px -14px rgba(255,152,0,0.55);
-  cursor: pointer;
-  margin-bottom: 22px;
-  overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.featured:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 20px 50px -14px rgba(255,152,0,0.75);
-}
-.featured:active { transform: translateY(-1px) scale(0.995); }
-
-.featured-thumb {
-  flex-shrink: 0;
-  width: 130px;
-  height: 130px;
-  border-radius: 20px;
-  background:
-    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.25), transparent 55%),
-    linear-gradient(135deg, #ffb300, #ff5722 60%, #d32f2f);
-  display: grid;
-  place-items: center;
-  font-size: 62px;
-  border: 2px solid rgba(255,255,255,0.25);
-  box-shadow: 0 12px 30px -8px rgba(255,152,0,0.85), inset 0 2px 0 rgba(255,255,255,0.35);
-  position: relative;
-  overflow: hidden;
-}
-.featured-thumb::after {
-  content: "MOD";
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 2px;
-  color: #fff;
-  background: rgba(0,0,0,0.55);
-  padding: 3px 12px;
-  border-radius: 20px;
-}
-
-.featured-info { flex: 1; min-width: 0; }
-.featured-info h2 {
-  font-size: 22px;
-  font-weight: 900;
-  color: #fff;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.featured-info h2 .pin {
-  font-size: 11.5px;
-  font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 20px;
-  background: linear-gradient(90deg, #4caf50, #66bb6a);
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(76,175,80,0.5);
-}
-.featured-feats {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-}
-.featured-feats span {
-  font-size: 11.5px;
-  font-weight: 700;
-  padding: 6px 11px;
-  border-radius: 10px;
-  background: rgba(0,0,0,0.28);
-  border: 1px solid rgba(255,179,0,0.4);
-  color: #ffe0a3;
-}
-.featured-go {
-  margin-top: 12px;
-  font-size: 13.5px;
-  font-weight: 800;
-  color: #ffb300;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ================== گرید کارت‌ها ================== */
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 16px;
-}
-
-.card {
-  position: relative;
-  background: rgba(255,255,255,0.055);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 18px;
-  padding: 18px 16px 16px;
-  display: flex;
-  flex-direction: column;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-  overflow: hidden;
-}
-
-.card.mod { cursor: pointer; }
-.card.mod:hover {
-  transform: translateY(-4px);
-  border-color: rgba(255,179,0,0.55);
-  box-shadow: 0 14px 30px -14px rgba(255,152,0,0.7);
-}
-.card.mod:active { transform: translateY(-1px) scale(0.995); }
-
-.card-thumb {
-  width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
-  overflow: hidden;
-  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.1);
-  display: grid;
-  place-items: center;
-  margin-bottom: 12px;
-  font-size: 44px;
-}
-.card-thumb img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.card.mod h3 {
-  font-size: 14.5px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 5px;
-  line-height: 1.5;
-}
-.card.mod .desc {
-  color: #aaa;
-  font-size: 12px;
-  line-height: 1.85;
-  margin-bottom: 10px;
-}
-
-.badge-live {
-  position: absolute;
-  top: 12px;
-  inset-inline-start: 12px;
-  background: linear-gradient(90deg, #4caf50, #66bb6a);
-  color: #fff;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 10.5px;
-  font-weight: 800;
-  box-shadow: 0 4px 12px rgba(76,175,80,0.5);
-  z-index: 2;
-}
-.badge-soon {
-  position: absolute;
-  top: 12px;
-  inset-inline-start: 12px;
-  background: rgba(0,0,0,0.55);
-  color: #ffb300;
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 10.5px;
-  font-weight: 800;
-  border: 1px solid rgba(255,179,0,0.4);
-  z-index: 2;
-}
-
-.card.locked {
-  cursor: default;
-  opacity: 0.65;
-  border-style: dashed;
-}
-.card.locked .card-thumb { font-size: 40px; opacity: 0.55; }
-
-/* ================== مودال ================== */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 100;
-  inset: 0;
-  background-color: rgba(0,0,0,0.85);
-  justify-content: center;
-  align-items: center;
-  padding: 16px;
-  overflow-y: auto;
-}
-.modal.show { display: flex; animation: fadeIn 0.25s ease; }
-
-.modal-content {
-  background: linear-gradient(165deg, #1e1e2e, #15151f);
-  padding: 26px 22px;
-  border-radius: 22px;
-  width: 100%;
-  max-width: 460px;
-  max-height: 92vh;
-  overflow-y: auto;
-  border: 1.5px solid #ffb300;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.65);
-  animation: popIn 0.3s ease;
-}
-@keyframes popIn {
-  from { transform: scale(0.94) translateY(14px); opacity: 0; }
-  to { transform: none; opacity: 1; }
-}
-
-.close-btn {
-  position: absolute;
-  top: 12px;
-  inset-inline-start: 12px;
-  background: #f44336;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 36px; height: 36px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: background 0.2s;
-  z-index: 5;
-}
-.close-btn:hover { background: #c62828; }
-
-.mod-hero {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-.mod-hero-icon {
-  width: 100px;
-  height: 100px;
-  border-radius: 22px;
-  overflow: hidden;
-  background: linear-gradient(135deg, #ff9800, #ff5722);
-  display: grid;
-  place-items: center;
-  font-size: 50px;
-  border: 2px solid rgba(255,255,255,0.18);
-  box-shadow: 0 12px 28px -10px rgba(255,152,0,0.85);
-}
-.mod-hero-icon img { width: 100%; height: 100%; object-fit: cover; }
-
-.modal-content h3 {
-  color: #ffb300;
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.feats {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  margin: 18px 0 14px;
-}
-.feats li {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  padding: 10px 11px;
-  border-radius: 11px;
-  background: rgba(46,125,50,0.16);
-  border: 1px solid rgba(76,175,80,0.35);
-  color: #c8e6c9;
-  text-align: right;
-  justify-content: flex-start;
-}
-.feats li .fi { font-size: 15px; flex-shrink: 0; }
-
-.version-box {
-  background: rgba(255,179,0,0.08);
-  border: 1px solid rgba(255,179,0,0.3);
-  border-radius: 14px;
-  padding: 12px 14px;
-  margin: 8px 0 18px;
-  text-align: right;
-}
-.version-box .vtag {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 800;
-  padding: 4px 12px;
-  border-radius: 20px;
-  color: #000;
-  background: linear-gradient(135deg, #ffb300, #ff9800);
-  margin-bottom: 8px;
-}
-.version-box p {
-  color: #c8cee5;
-  font-size: 12px;
-  line-height: 1.95;
-}
-
-/* دکمه دانلود */
-.btn-dl {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 16px;
-  border-radius: 14px;
-  border: 0;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 16px;
-  font-weight: 900;
-  text-decoration: none;
-  color: #000;
-  background: linear-gradient(135deg, #ffc107, #ff9800);
-  box-shadow: 0 12px 30px -10px rgba(255,193,7,0.9), inset 0 1px 0 rgba(255,255,255,0.3);
-  transition: transform 0.15s ease, filter 0.15s ease;
-  margin-top: 4px;
-}
-.btn-dl:hover { filter: brightness(1.08); }
-.btn-dl:active { transform: scale(0.97); }
-
-.btn-speed {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 14px;
-  border-radius: 14px;
-  border: 0;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 14.5px;
-  font-weight: 900;
-  text-decoration: none;
-  color: #fff;
-  background: linear-gradient(135deg, #4caf50, #2e7d32);
-  box-shadow: 0 12px 30px -10px rgba(76,175,80,0.9), inset 0 1px 0 rgba(255,255,255,0.2);
-  transition: transform 0.15s ease, filter 0.15s ease;
-  margin-top: 10px;
-}
-.btn-speed:hover { filter: brightness(1.08); }
-.btn-speed:active { transform: scale(0.97); }
-
-.btn-tut {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  width: 100%;
-  margin-top: 10px;
-  padding: 13px;
-  border-radius: 14px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 13.5px;
-  font-weight: 800;
-  text-decoration: none;
-  color: #e6ebff;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.18);
-  transition: background 0.2s, border-color 0.2s;
-}
-.btn-tut:hover {
-  background: rgba(255,179,0,0.18);
-  border-color: rgba(255,179,0,0.6);
-  color: #fff;
-}
-
-.hint {
-  margin-top: 14px;
-  font-size: 11.5px;
-  color: #888;
-  line-height: 1.9;
-}
-
-/* دکمه ورود به گروه (مودال اگهی) */
-.btn-join {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  width: 100%;
-  margin-top: 16px;
-  padding: 15px;
-  border-radius: 14px;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 900;
-  text-decoration: none;
-  color: #000;
-  background: linear-gradient(135deg, #4caf50, #66bb6a);
-  box-shadow: 0 12px 30px -10px rgba(76,175,80,0.9);
-  transition: transform 0.15s ease;
-}
-.btn-join:active { transform: scale(0.97); }
-
-.btn-ghost {
-  width: 100%;
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 14px;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 800;
-  color: #aaa;
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.15);
-  transition: 0.2s;
-}
-.btn-ghost:hover { color: #fff; background: rgba(255,255,255,0.06); }
-
-.micon {
-  width: 68px; height: 68px;
-  margin: 0 auto 10px;
-  border-radius: 20px;
-  display: grid;
-  place-items: center;
-  font-size: 32px;
-  background: linear-gradient(145deg, #ff5722, #ff9800);
-  box-shadow: 0 12px 28px -10px rgba(255,152,0,0.8);
-}
-
-/* ================== پاپ‌آپ دانلود ================== */
-.popup-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  background: rgba(0,0,0,0.92);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-}
-.popup-overlay.active { display: flex; animation: fadeIn 0.25s ease; }
-
-.popup-card {
-  max-width: 400px;
-  width: 100%;
-  background: #1c1c2c;
-  border: 2px solid #ffb300;
-  border-radius: 24px;
-  padding: 30px 24px 24px;
-  text-align: center;
-  position: relative;
-  box-shadow: 0 25px 70px rgba(0,0,0,0.8);
-}
-.popup-card.green { border-color: #4caf50; }
-
-.popup-close {
-  position: absolute;
-  top: 12px;
-  inset-inline-start: 12px;
-  width: 38px; height: 38px;
-  background: #f44336;
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  font-size: 17px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.popup-close:hover { background: #c62828; }
-
-.progress-container {
-  position: relative;
-  width: 140px;
-  height: 140px;
-  margin: 6px auto 16px;
-}
-.progress-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-.progress-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; }
-.progress-bar {
-  fill: none;
-  stroke: #ffb300;
-  stroke-width: 9;
-  stroke-linecap: round;
-  stroke-dasharray: 439.82;
-  stroke-dashoffset: 439.82;
-  transition: stroke-dashoffset 0.25s linear;
-}
-.popup-card.green .progress-bar { stroke: #4caf50; }
-.progress-inner {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.progress-icon { font-size: 30px; color: #ffb300; margin-bottom: 4px; }
-.popup-card.green .progress-icon { color: #4caf50; }
-.progress-percent {
-  font-size: 22px;
-  font-weight: 900;
-  color: #ffb300;
-}
-.popup-card.green .progress-percent { color: #4caf50; }
-
-.popup-title {
-  font-size: 17px;
-  font-weight: 900;
-  color: #fff;
-  margin-bottom: 10px;
-}
-.popup-desc {
-  font-size: 13px;
-  color: #bbb;
-  line-height: 1.9;
-  margin-bottom: 18px;
-}
-.popup-desc strong { color: #ffb300; }
-.popup-card.green .popup-desc strong { color: #4caf50; }
-
-.popup-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-  padding: 14px 24px;
-  border-radius: 14px;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: 14.5px;
-  font-weight: 900;
-  text-decoration: none;
-  color: #000;
-  background: linear-gradient(135deg, #ffc107, #ff9800);
-  box-shadow: 0 10px 26px -8px rgba(255,193,7,0.9);
-  margin-bottom: 14px;
-  transition: transform 0.15s ease, filter 0.15s ease;
-}
-.popup-card.green .popup-btn {
-  background: linear-gradient(135deg, #4caf50, #2e7d32);
-  color: #fff;
-  box-shadow: 0 10px 26px -8px rgba(76,175,80,0.9);
-}
-.popup-btn:hover { filter: brightness(1.08); }
-.popup-btn:active { transform: scale(0.97); }
-
-.popup-footer {
-  font-size: 12px;
-  color: #888;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.popup-footer .timer {
-  font-weight: 900;
-  color: #ffb300;
-  background: rgba(255,179,0,0.14);
-  padding: 4px 12px;
-  border-radius: 10px;
-  border: 1px solid rgba(255,179,0,0.35);
-  min-width: 42px;
-  display: inline-block;
-  text-align: center;
-}
-.popup-card.green .popup-footer .timer {
-  color: #4caf50;
-  background: rgba(76,175,80,0.14);
-  border-color: rgba(76,175,80,0.35);
-}
-
-/* ================== فوتر ================== */
-footer {
-  max-width: 900px;
-  margin: 40px auto 0;
-  text-align: center;
-  color: #666;
-  font-size: 11.5px;
-  line-height: 2;
-}
-footer b { color: #999; }
-
-/* ================== ریسپانسیو ================== */
-@media (max-width: 640px) {
-  body { padding: 14px; }
-  header h1 { font-size: 22px; }
-  .featured { flex-direction: column; text-align: center; padding: 20px 16px; }
-  .featured-thumb { width: 120px; height: 120px; font-size: 56px; }
-  .featured-info h2 { justify-content: center; font-size: 18px; }
-  .featured-feats { justify-content: center; }
-  .featured-go { justify-content: center; }
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .card { padding: 14px 12px 12px; border-radius: 15px; }
-  .card.mod h3 { font-size: 12.5px; }
-  .card.mod .desc { font-size: 11px; }
-  .card-thumb { font-size: 36px; }
-  .feats { grid-template-columns: 1fr; }
-  .tab { padding: 10px 16px; font-size: 13px; }
-}
-
-@media (max-width: 380px) {
-  .featured-thumb { width: 100px; height: 100px; font-size: 48px; }
-  .featured-info h2 { font-size: 16px; }
+@media(max-width:640px){
+body{padding:14px}
+header h1{font-size:21px}
+.featured-inner{flex-direction:column;text-align:center;padding:20px 16px}
+.featured-thumb{width:118px;height:118px;font-size:58px}
+.featured-info h2{justify-content:center;font-size:17px}
+.featured-feats{justify-content:center}
+.featured-go{justify-content:center}
+.grid{grid-template-columns:repeat(2,1fr);gap:11px}
+.card{padding:13px 11px 11px;border-radius:15px}
+.card.mod h3{font-size:12.5px}
+.card.mod .desc{font-size:10.5px}
+.card-thumb{font-size:34px}
+.feats{grid-template-columns:1fr}
+.tab{padding:9px 14px;font-size:12.5px}
 }
 </style>
 </head>
@@ -717,85 +138,44 @@ footer b { color: #999; }
     <p>اینجا می‌تونی اکانتت رو رایگان اگهی کنی و مود بازی دانلود کنی ⚡</p>
   </header>
 
-  <!-- ================= تب‌ها ================= -->
   <nav class="tabs">
     <button class="tab active" data-tab="mods">🎮 مود بازی‌ها</button>
     <button class="tab" data-tab="ads">🛒 اگهی اکانت</button>
   </nav>
 
-  <!-- ================= بخش مود بازی‌ها ================= -->
   <section class="panel active" id="panel-mods">
-
-    <!-- ⭐ کارت پین‌شده‌ی مربی برتر مود -->
-    <article class="featured" onclick="openMod('morabi')">
-      <div class="featured-thumb">🏆</div>
-      <div class="featured-info">
-        <h2>مربی برتر مود <span class="pin">📌 پین شده</span></h2>
-        <div class="featured-feats">
-          <span>🪙 سکه بی‌نهایت</span>
-          <span>💰 پول بی‌نهایت</span>
-          <span>⏭️ رد کردن مرحله</span>
-          <span>⚡ فول کردن انرژی</span>
-        </div>
-        <div class="featured-go">
-          <span>مشاهده و دانلود</span>
-          <span>⬅</span>
+    <button class="featured" onclick="openMod('morabi')">
+      <div class="featured-inner">
+        <div class="featured-thumb">🏆<span class="mod-tag">MOD</span></div>
+        <div class="featured-info">
+          <h2>مربی برتر مود <span class="pin">📌 پین شده</span></h2>
+          <div class="featured-feats">
+            <span>🪙 سکه بی‌نهایت</span>
+            <span>💰 پول بی‌نهایت</span>
+            <span>⏭️ رد کردن مرحله</span>
+            <span>⚡ فول کردن انرژی</span>
+          </div>
+          <div class="featured-go"><span>مشاهده و دانلود</span><span>⬅</span></div>
         </div>
       </div>
-    </article>
-
-    <!-- گرید بقیه‌ی مودها -->
+    </button>
     <div class="grid" id="modsGrid"></div>
   </section>
 
-  <!-- ================= بخش اگهی اکانت ================= -->
   <section class="panel" id="panel-ads">
     <div class="grid">
-      <article class="card locked">
-        <span class="badge-soon">✨ بزودی</span>
-        <div class="card-thumb">🛒</div>
-        <h3>به‌زودی</h3>
-        <p class="desc">این کادر به‌زودی پر می‌شه</p>
-      </article>
-      <article class="card locked">
-        <span class="badge-soon">✨ بزودی</span>
-        <div class="card-thumb">💼</div>
-        <h3>به‌زودی</h3>
-        <p class="desc">این کادر به‌زودی پر می‌شه</p>
-      </article>
-      <article class="card locked">
-        <span class="badge-soon">✨ بزودی</span>
-        <div class="card-thumb">🔑</div>
-        <h3>به‌زودی</h3>
-        <p class="desc">این کادر به‌زودی پر می‌شه</p>
-      </article>
-      <article class="card locked">
-        <span class="badge-soon">✨ بزودی</span>
-        <div class="card-thumb">🎴</div>
-        <h3>به‌زودی</h3>
-        <p class="desc">این کادر به‌زودی پر می‌شه</p>
-      </article>
-      <article class="card locked">
-        <span class="badge-soon">✨ بزودی</span>
-        <div class="card-thumb">🎲</div>
-        <h3>به‌زودی</h3>
-        <p class="desc">این کادر به‌زودی پر می‌شه</p>
-      </article>
-      <article class="card locked">
-        <span class="badge-soon">✨ بزودی</span>
-        <div class="card-thumb">🎮</div>
-        <h3>به‌زودی</h3>
-        <p class="desc">این کادر به‌زودی پر می‌شه</p>
-      </article>
+      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🛒</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
+      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">💼</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
+      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🔑</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
+      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🎴</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
+      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🎲</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
+      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🎮</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
     </div>
   </section>
 
-  <footer>
-    ساخته شده با ❤️ | <b>صفحه به‌صورت خودکار به‌روز می‌شه</b>
-  </footer>
+  <footer>ساخته شده با ❤️ | <b>صفحه به‌صورت خودکار به‌روز می‌شه</b></footer>
 </div>
 
-<!-- ================= مودال جزئیات مود ================= -->
 <div class="modal" id="modModal">
   <div class="modal-content">
     <button class="close-btn" data-close>✕</button>
@@ -805,400 +185,185 @@ footer b { color: #999; }
     </div>
     <ul class="feats" id="modFeats"></ul>
     <div class="version-box" id="modVersion"></div>
-    <button class="btn-dl" id="modDownloadBtn">
-      <i class="fas fa-download"></i>
-      <span>دانلود مود</span>
-    </button>
-    <button class="btn-speed" id="modSpeedBtn" style="display:none">
-      <i class="fas fa-bolt"></i>
-      <span>دانلود مود سرعت بی‌نهایت</span>
-    </button>
-    <a class="btn-tut" id="modTut" target="_blank" rel="noopener" style="display:none">
-      <i class="fas fa-play"></i>
-      <span>آموزش استفاده</span>
-    </a>
+    <button class="btn-dl" id="modDownloadBtn"><span>⬇️</span><span>دانلود مود</span></button>
+    <button class="btn-speed" id="modSpeedBtn" style="display:none"><span>⚡</span><span>دانلود مود سرعت بی‌نهایت</span></button>
+    <a class="btn-tut" id="modTut" target="_blank" rel="noopener" style="display:none"><span>▶️</span><span>آموزش استفاده</span></a>
     <p class="hint" id="modHint">پس از کلیک روی دانلود، ابتدا در چنل روبیکا عضو شوید.</p>
   </div>
 </div>
 
-<!-- ================= مودال اگهی اکانت ================= -->
 <div class="modal" id="adModal">
   <div class="modal-content">
     <button class="close-btn" data-close>✕</button>
     <div class="micon">📢</div>
     <h3>اکانتت رو رایگان اگهی کن!</h3>
-    <p style="color:#bbb;font-size:13.5px;line-height:2.1;margin-top:6px">
-      عکس اکانتت رو تو گروه زیر بفرست و <b style="color:#ffb300">قیمتش رو هم بگو</b>
-      تا برات اگهی کنیم ✅
-    </p>
-    <a class="btn-join" href="https://rubika.ir/joing/BBGEGFBDI0ZUJFJZKIKAXLTAQNKCZYUQ" target="_blank" rel="noopener">
-      <i class="fas fa-paper-plane"></i>
-      <span>ورود به گروه روبیکا</span>
-    </a>
+    <p class="ad-text">عکس اکانتت رو تو گروه زیر بفرست و <b style="color:#ffb300">قیمتش رو هم بگو</b> تا برات اگهی کنیم ✅</p>
+    <a class="btn-join" href="https://rubika.ir/joing/BBGEGFBDI0ZUJFJZKIKAXLTAQNKCZYUQ" target="_blank" rel="noopener"><span>🚀</span><span>ورود به گروه روبیکا</span></a>
     <button class="btn-ghost" data-close>بعداً</button>
   </div>
 </div>
 
-<!-- ================= پاپ‌آپ طلایی (عضویت در چنل) ================= -->
 <div class="popup-overlay" id="goldPopup">
   <div class="popup-card">
     <button class="popup-close" onclick="closePopup('goldPopup')">✕</button>
     <div class="progress-container">
       <svg class="progress-svg" viewBox="0 0 140 140">
-        <circle class="progress-bg" cx="70" cy="70" r="70"></circle>
-        <circle class="progress-bar" id="goldBar" cx="70" cy="70" r="70"></circle>
+        <circle class="progress-bg" cx="70" cy="70" r="60"></circle>
+        <circle class="progress-bar" id="goldBar" cx="70" cy="70" r="60"></circle>
       </svg>
-      <div class="progress-inner">
-        <i class="fas fa-download progress-icon"></i>
-        <span class="progress-percent" id="goldPercent">0%</span>
-      </div>
+      <div class="progress-inner"><span class="progress-icon">⬇️</span><span class="progress-percent" id="goldPercent">0%</span></div>
     </div>
     <div class="popup-title">عضو چنل روبیکا شوید</div>
     <div class="popup-desc">برای دریافت مود، ابتدا در چنل <strong>روبیكا</strong> عضو شوید</div>
-    <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener" class="popup-btn">
-      <i class="fas fa-paper-plane"></i>
-      <span>عضویت در چنل روبیکا</span>
-    </a>
-    <div class="popup-footer">
-      <i class="fas fa-clock"></i>
-      <span>دانلود خودکار تا <span class="timer" id="goldTimer">10</span> ثانیه دیگر</span>
-    </div>
+    <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener" class="popup-btn"><span>📨</span><span>عضویت در چنل روبیکا</span></a>
+    <div class="popup-footer"><span>⏱️</span><span>دانلود خودکار تا <span class="timer" id="goldTimer">10</span> ثانیه دیگر</span></div>
   </div>
 </div>
 
-<!-- ================= پاپ‌آپ سبز (مود سرعت) ================= -->
 <div class="popup-overlay" id="greenPopup">
   <div class="popup-card green">
     <button class="popup-close" onclick="closePopup('greenPopup')">✕</button>
     <div class="progress-container">
       <svg class="progress-svg" viewBox="0 0 140 140">
-        <circle class="progress-bg" cx="70" cy="70" r="70"></circle>
-        <circle class="progress-bar" id="greenBar" cx="70" cy="70" r="70"></circle>
+        <circle class="progress-bg" cx="70" cy="70" r="60"></circle>
+        <circle class="progress-bar" id="greenBar" cx="70" cy="70" r="60"></circle>
       </svg>
-      <div class="progress-inner">
-        <i class="fas fa-bolt progress-icon"></i>
-        <span class="progress-percent" id="greenPercent">0%</span>
-      </div>
+      <div class="progress-inner"><span class="progress-icon">⚡</span><span class="progress-percent" id="greenPercent">0%</span></div>
     </div>
     <div class="popup-title">مود سرعت بی‌نهایت</div>
     <div class="popup-desc">برای دریافت مود سرعت، ابتدا در چنل <strong>روبیكا</strong> عضو شوید</div>
-    <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener" class="popup-btn">
-      <i class="fas fa-paper-plane"></i>
-      <span>عضویت در چنل روبیکا</span>
-    </a>
-    <div class="popup-footer">
-      <i class="fas fa-clock"></i>
-      <span>دانلود خودکار تا <span class="timer" id="greenTimer">10</span> ثانیه دیگر</span>
-    </div>
+    <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener" class="popup-btn"><span>📨</span><span>عضویت در چنل روبیکا</span></a>
+    <div class="popup-footer"><span>⏱️</span><span>دانلود خودکار تا <span class="timer" id="greenTimer">10</span> ثانیه دیگر</span></div>
   </div>
 </div>
 
 <script>
-/* ================= داده‌های مودها ================= */
-const MODS = {
-  morabi: {
-    title: 'مربی برتر مود',
-    emoji: '🏆',
-    image: null,
-    feats: [
-      { i: '🪙', t: 'سکه بی‌نهایت' },
-      { i: '💰', t: 'پول بی‌نهایت' },
-      { i: '⏭️', t: 'رد کردن مرحله' },
-      { i: '⚡', t: 'فول کردن انرژی' }
-    ],
-    version: 'نسخه ۲۰۲۶',
-    versionDesc: 'بهترین نسخه‌ی مود شده برای بازی مربی برتر با تمام امکانات آنلاک شده و بدون بن.',
-    download: 'https://www.mediafire.com/file/444owt6s75532pu/morabi.zip/file',
-    tutorial: 'https://rubika.ir/joinc/FGBEGGEF0MQQFRMRRIBLJEZGMMMXUYCT',
-    popup: 'gold'
-  },
-  footballia2: {
-    title: 'فوتبالیا ۲',
-    emoji: '⚽',
-    image: 'https://uploadkon.ir/uploads/thumbs/5fab26_26Screenshot-2026-08-19-16-54-30-458-ir-mservices-market-edit.jpg',
-    feats: [
-      { i: '🪙', t: 'سکه بی‌نهایت' },
-      { i: '📦', t: 'کم حجم' },
-      { i: '📱', t: 'سازگار همه دستگاه‌ها' }
-    ],
-    version: 'نسخه ۱۰۷',
-    versionDesc: 'این مود به‌طور اختصاصی برای گوشی‌های ۶۴ بیت ساخته شده است. اگر گوشی شما ۳۲ بیت است، در روبیکا پیام بدید.',
-    download: 'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHHEJGAJJCBBJAF',
-    popup: 'gold'
-  },
-  clutchplate: {
-    title: 'صفحه کلاچ',
-    emoji: '🏎️',
-    image: 'https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg',
-    feats: [
-      { i: '🪙', t: 'سکه بی‌نهایت' },
-      { i: '💎', t: 'جم بی‌نهایت' },
-      { i: '⚡', t: 'مود سرعت بی‌نهایت' }
-    ],
-    version: 'نسخه ۰.۴۵',
-    versionDesc: 'برای نسخه ۰.۴۵ بازی بهینه‌سازی، تست و تأیید شده است.',
-    download: 'https://www.mediafire.com/file/bnrp8vqgt42es5f/ClutchPlate.zip/file',
-    speed: 'https://uploadkon.ir/uploads/fcb211_26SPEED.zip',
-    popup: 'gold'
-  },
-  godfather: {
-    title: 'پدرخوانده',
-    emoji: '🎩',
-    image: 'https://uploadkon.ir/uploads/497826_26Screenshot-2026-08-27-00-28-57-068-ir-mservices-market-edit.jpg',
-    feats: [
-      { i: '👁️', t: 'قابلیت ناظر شدن' },
-      { i: '🎤', t: 'صحبت روی نوبت دیگران' },
-      { i: '🛡️', t: 'تست شده بدون بن' }
-    ],
-    version: 'نسخه ۰.۰.۶۵۰',
-    versionDesc: 'برای نسخه ۰.۰.۶۵۰ بازی بهینه‌سازی شده و از تمامی قابلیت‌های جدید پشتیبانی می‌کند.',
-    download: 'https://rubika.ir/BAZI_MOD_ZODIAC/BIHHEJGAJJCBBJAF',
-    popup: 'gold'
-  },
-  mehmaneshab: {
-    title: 'مهمان نیمه شب',
-    emoji: '👻',
-    image: 'https://uploadkon.ir/uploads/caef26_26IMG-20260826-153054-563.jpg',
-    feats: [
-      { i: '🪙', t: 'سکه بی‌نهایت' },
-      { i: '📦', t: 'کم حجم' },
-      { i: '📱', t: 'سازگار همه دستگاه‌ها' }
-    ],
-    version: 'نسخه ۱۰۷',
-    versionDesc: 'برای گوشی‌های ۶۴ بیت بهینه‌سازی شده و بدون هیچ مشکلی اجرا می‌شود.',
-    download: 'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHGHCHHABIJFJAF',
-    popup: 'gold'
-  },
-  diarbaqi: {
-    title: 'دیار باقی',
-    emoji: '🏰',
-    image: 'https://uploadkon.ir/uploads/09a127_26Screenshot-2026-08-27-17-38-07-075-ir-mservices-market-edit.jpg',
-    feats: [
-      { i: '🪙', t: 'سکه بی‌نهایت' },
-      { i: '📱', t: 'سازگار با ۳۲ بیت' },
-      { i: '💻', t: 'سازگار با ۶۴ بیت' },
-      { i: '🛡️', t: 'تست شده بدون بن' }
-    ],
-    version: 'نسخه ۱۰۷',
-    versionDesc: 'برای هر دو معماری ۳۲ و ۶۴ بیت بهینه‌سازی شده است.',
-    download: 'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIIHAJCIHHDGBJAF',
-    popup: 'gold'
-  },
-  taxido: {
-    title: 'تاکسیدو کلاه مشترک',
-    emoji: '🎭',
-    image: 'https://uploadkon.ir/uploads/31ec07_26Screenshot-2026-09-07-07-15-55-734-ir-mservices-market-edit.jpg',
-    feats: [
-      { i: '🪙', t: 'سکه بی‌نهایت' },
-      { i: '📱', t: 'سازگار با ۳۲ بیت' },
-      { i: '💻', t: 'سازگار با ۶۴ بیت' },
-      { i: '🛡️', t: 'تست شده بدون بن' }
-    ],
-    version: 'نسخه کامل',
-    versionDesc: 'برای هر دو معماری ۳۲ و ۶۴ بیت بهینه‌سازی شده و سکه بی‌نهایت دارد.',
-    download: 'https://rubika.ir/BAZI_MOD_ZODIAC/BIJFCAFHCHEFFFIE',
-    popup: 'gold'
-  }
+var MODS={
+morabi:{title:'مربی برتر مود',emoji:'🏆',image:null,feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'💰',t:'پول بی‌نهایت'},{i:'⏭️',t:'رد کردن مرحله'},{i:'⚡',t:'فول کردن انرژی'}],version:'نسخه ۲۰۲۶',versionDesc:'بهترین نسخه‌ی مود شده برای بازی مربی برتر با تمام امکانات آنلاک شده و بدون بن.',download:'https://www.mediafire.com/file/444owt6s75532pu/morabi.zip/file',tutorial:'https://rubika.ir/joinc/FGBEGGEF0MQQFRMRRIBLJEZGMMMXUYCT',popup:'gold'},
+footballia2:{title:'فوتبالیا ۲',emoji:'⚽',image:'https://uploadkon.ir/uploads/thumbs/5fab26_26Screenshot-2026-08-19-16-54-30-458-ir-mservices-market-edit.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'📦',t:'کم حجم'},{i:'📱',t:'سازگار همه دستگاه‌ها'}],version:'نسخه ۱۰۷',versionDesc:'مخصوص گوشی‌های ۶۴ بیت. اگر ۳۲ بیت داری در روبیکا پیام بدید.',download:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHHEJGAJJCBBJAF',popup:'gold'},
+clutchplate:{title:'صفحه کلاچ',emoji:'🏎️',image:'https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'💎',t:'جم بی‌نهایت'},{i:'⚡',t:'مود سرعت بی‌نهایت'}],version:'نسخه ۰.۴۵',versionDesc:'برای نسخه ۰.۴۵ بازی بهینه‌سازی، تست و تأیید شده است.',download:'https://www.mediafire.com/file/bnrp8vqgt42es5f/ClutchPlate.zip/file',speed:'https://uploadkon.ir/uploads/fcb211_26SPEED.zip',popup:'gold'},
+godfather:{title:'پدرخوانده',emoji:'🎩',image:'https://uploadkon.ir/uploads/497826_26Screenshot-2026-08-27-00-28-57-068-ir-mservices-market-edit.jpg',feats:[{i:'👁️',t:'قابلیت ناظر شدن'},{i:'🎤',t:'صحبت روی نوبت دیگران'},{i:'🛡️',t:'تست شده بدون بن'}],version:'نسخه ۰.۰.۶۵۰',versionDesc:'برای نسخه ۰.۰.۶۵۰ بازی بهینه‌سازی شده و از تمامی قابلیت‌های جدید پشتیبانی می‌کند.',download:'https://rubika.ir/BAZI_MOD_ZODIAC/BIHHEJGAJJCBBJAF',popup:'gold'},
+mehmaneshab:{title:'مهمان نیمه شب',emoji:'👻',image:'https://uploadkon.ir/uploads/caef26_26IMG-20260826-153054-563.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'📦',t:'کم حجم'},{i:'📱',t:'سازگار همه دستگاه‌ها'}],version:'نسخه ۱۰۷',versionDesc:'برای گوشی‌های ۶۴ بیت بهینه‌سازی شده و بدون هیچ مشکلی اجرا می‌شود.',download:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHGHCHHABIJFJAF',popup:'gold'},
+diarbaqi:{title:'دیار باقی',emoji:'🏰',image:'https://uploadkon.ir/uploads/09a127_26Screenshot-2026-08-27-17-38-07-075-ir-mservices-market-edit.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'📱',t:'سازگار با ۳۲ بیت'},{i:'💻',t:'سازگار با ۶۴ بیت'},{i:'🛡️',t:'تست شده بدون بن'}],version:'نسخه ۱۰۷',versionDesc:'برای هر دو معماری ۳۲ و ۶۴ بیت بهینه‌سازی شده است.',download:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIIHAJCIHHDGBJAF',popup:'gold'},
+taxido:{title:'تاکسیدو کلاه مشترک',emoji:'🎭',image:'https://uploadkon.ir/uploads/31ec07_26Screenshot-2026-09-07-07-15-55-734-ir-mservices-market-edit.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'📱',t:'سازگار با ۳۲ بیت'},{i:'💻',t:'سازگار با ۶۴ بیت'},{i:'🛡️',t:'تست شده بدون بن'}],version:'نسخه کامل',versionDesc:'برای هر دو معماری ۳۲ و ۶۴ بیت بهینه‌سازی شده و سکه بی‌نهایت دارد.',download:'https://rubika.ir/BAZI_MOD_ZODIAC/BIJFCAFHCHEFFFIE',popup:'gold'}
 };
 
-/* ================= ساخت گرید مودها ================= */
-(function buildModsGrid() {
-  const grid = document.getElementById('modsGrid');
-  const keys = ['footballia2', 'clutchplate', 'godfather', 'mehmaneshab', 'diarbaqi', 'taxido'];
-  let html = '';
-  keys.forEach(function (k) {
-    const m = MODS[k];
-    const thumb = m.image
-      ? '<img src="' + m.image + '" alt="' + m.title + '" loading="lazy" onerror="this.parentElement.innerHTML=\'' + m.emoji + '\'">'
-      : m.emoji;
-    html +=
-      '<article class="card mod" onclick="openMod(\'' + k + '\')">' +
-        '<span class="badge-live">موجود</span>' +
-        '<div class="card-thumb">' + thumb + '</div>' +
-        '<h3>' + m.title + '</h3>' +
-        '<p class="desc">' + m.feats.map(f => f.t).slice(0, 2).join(' • ') + '</p>' +
-      '</article>';
+/* ساخت گرید */
+(function(){
+  var grid=document.getElementById('modsGrid');
+  if(!grid)return;
+  var keys=['footballia2','clutchplate','godfather','mehmaneshab','diarbaqi','taxido'];
+  var html='';
+  keys.forEach(function(k){
+    var m=MODS[k];
+    var thumb=m.image?'<img src="'+m.image+'" alt="'+m.title+'" loading="lazy" onerror="this.parentNode.innerHTML=\''+m.emoji+'\'">':m.emoji;
+    html+='<article class="card mod" onclick="openMod(\''+k+'\')">'
+      +'<span class="badge-live">موجود</span>'
+      +'<div class="card-thumb">'+thumb+'</div>'
+      +'<h3>'+m.title+'</h3>'
+      +'<p class="desc">'+m.feats.slice(0,2).map(function(f){return f.t;}).join(' • ')+'</p>'
+      +'</article>';
   });
-  grid.innerHTML = html;
+  grid.innerHTML=html;
 })();
 
-/* ================= تب‌ها ================= */
-const tabs = document.querySelectorAll('.tab');
-const panels = {
-  ads: document.getElementById('panel-ads'),
-  mods: document.getElementById('panel-mods')
-};
-const adModal = document.getElementById('adModal');
-const modModal = document.getElementById('modModal');
+/* تب‌ها */
+var tabs=document.querySelectorAll('.tab');
+var panels={ads:document.getElementById('panel-ads'),mods:document.getElementById('panel-mods')};
+var adModal=document.getElementById('adModal');
+var modModal=document.getElementById('modModal');
 
-function switchTab(name) {
-  tabs.forEach(t => t.classList.toggle('active', t.dataset.tab === name));
-  Object.keys(panels).forEach(k => panels[k].classList.toggle('active', k === name));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+function switchTab(name){
+  tabs.forEach(function(t){t.classList.toggle('active',t.dataset.tab===name);});
+  Object.keys(panels).forEach(function(k){panels[k].classList.toggle('active',k===name);});
+  window.scrollTo({top:0,behavior:'smooth'});
 }
-
-tabs.forEach(t => {
-  t.addEventListener('click', () => {
+tabs.forEach(function(t){
+  t.addEventListener('click',function(){
     switchTab(t.dataset.tab);
-    if (t.dataset.tab === 'ads') {
-      setTimeout(() => openModal(adModal), 250);
-    }
+    if(t.dataset.tab==='ads')setTimeout(function(){openModal(adModal);},250);
   });
 });
 
-/* ================= مودال‌ها ================= */
-function openModal(el) {
-  el.classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function closeModal(el) {
-  el.classList.remove('show');
-  document.body.style.overflow = '';
-}
-
-document.querySelectorAll('[data-close]').forEach(btn => {
-  btn.addEventListener('click', () => closeModal(btn.closest('.modal')));
+/* مودال‌ها */
+function openModal(el){el.classList.add('show');document.body.style.overflow='hidden';}
+function closeModal(el){el.classList.remove('show');document.body.style.overflow='';}
+document.querySelectorAll('[data-close]').forEach(function(btn){
+  btn.addEventListener('click',function(){closeModal(btn.closest('.modal'));});
 });
-[adModal, modModal].forEach(modal => {
-  modal.addEventListener('click', e => {
-    if (e.target === modal) closeModal(modal);
-  });
+[adModal,modModal].forEach(function(modal){
+  modal.addEventListener('click',function(e){if(e.target===modal)closeModal(modal);});
 });
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') {
-    [adModal, modModal].forEach(m => closeModal(m));
-    closePopup('goldPopup');
-    closePopup('greenPopup');
-  }
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){[adModal,modModal].forEach(function(m){closeModal(m);});closePopup('goldPopup');closePopup('greenPopup');}
 });
 
-/* ================= مودال جزئیات مود ================= */
-let currentModKey = null;
-
-function openMod(key) {
-  const m = MODS[key];
-  if (!m) return;
-  currentModKey = key;
-
-  const iconBox = document.getElementById('modIcon');
-  if (m.image) {
-    iconBox.innerHTML = '<img src="' + m.image + '" alt="' + m.title + '" onerror="this.parentElement.innerHTML=\'' + m.emoji + '\'">';
-  } else {
-    iconBox.innerHTML = m.emoji;
-  }
-
-  document.getElementById('modTitle').textContent = m.title;
-
-  document.getElementById('modFeats').innerHTML = m.feats
-    .map(f => '<li><span class="fi">' + f.i + '</span><span>' + f.t + '</span></li>')
-    .join('');
-
-  document.getElementById('modVersion').innerHTML =
-    '<span class="vtag">' + m.version + '</span><p>' + m.versionDesc + '</p>';
-
-  // دکمه‌ها
-  const dlBtn = document.getElementById('modDownloadBtn');
-  const spBtn = document.getElementById('modSpeedBtn');
-  const tutBtn = document.getElementById('modTut');
-  const hint = document.getElementById('modHint');
-
-  dlBtn.onclick = function () { triggerDownload(m.download, m.popup || 'gold'); };
-
-  if (m.speed) {
-    spBtn.style.display = 'flex';
-    spBtn.onclick = function () { triggerDownload(m.speed, 'green'); };
-  } else {
-    spBtn.style.display = 'none';
-  }
-
-  if (m.tutorial) {
-    tutBtn.style.display = 'flex';
-    tutBtn.href = m.tutorial;
-  } else {
-    tutBtn.style.display = 'none';
-  }
-
-  hint.style.display = (m.popup === 'gold') ? 'block' : 'none';
-
+/* مودال جزئیات */
+function openMod(key){
+  var m=MODS[key];
+  if(!m)return;
+  var iconBox=document.getElementById('modIcon');
+  iconBox.innerHTML=m.image?'<img src="'+m.image+'" alt="'+m.title+'" onerror="this.parentNode.innerHTML=\''+m.emoji+'\'">':m.emoji;
+  document.getElementById('modTitle').textContent=m.title;
+  document.getElementById('modFeats').innerHTML=m.feats.map(function(f){return '<li><span class="fi">'+f.i+'</span><span>'+f.t+'</span></li>';}).join('');
+  document.getElementById('modVersion').innerHTML='<span class="vtag">'+m.version+'</span><p>'+m.versionDesc+'</p>';
+  var dlBtn=document.getElementById('modDownloadBtn');
+  var spBtn=document.getElementById('modSpeedBtn');
+  var tutBtn=document.getElementById('modTut');
+  dlBtn.onclick=function(){triggerDownload(m.download,m.popup||'gold');};
+  if(m.speed){spBtn.style.display='flex';spBtn.onclick=function(){triggerDownload(m.speed,'green');};}
+  else{spBtn.style.display='none';}
+  if(m.tutorial){tutBtn.style.display='flex';tutBtn.href=m.tutorial;}
+  else{tutBtn.style.display='none';}
   openModal(modModal);
 }
 
-/* ================= پاپ‌آپ دانلود ================= */
-let popupTimers = {};
-
-function triggerDownload(url, popupType) {
+/* پاپ‌آپ */
+var timers={};
+function triggerDownload(url,type){
   closeModal(modModal);
-  if (popupType === 'gold') {
-    openPopup('goldPopup', url);
-  } else if (popupType === 'green') {
-    openPopup('greenPopup', url);
-  } else {
-    window.location.href = url;
-  }
+  if(type==='gold')openPopup('goldPopup',url);
+  else if(type==='green')openPopup('greenPopup',url);
+  else window.location.href=url;
 }
-
-function openPopup(popupId, url) {
-  const popup = document.getElementById(popupId);
-  const bar = popup.querySelector('.progress-bar');
-  const percent = popup.querySelector('.progress-percent');
-  const timer = popup.querySelector('.timer');
-  const CIRC = 2 * Math.PI * 70;
-
-  bar.style.strokeDasharray = CIRC;
-  bar.style.strokeDashoffset = CIRC;
-  percent.textContent = '0%';
-  timer.textContent = '10';
-
+function openPopup(id,url){
+  var popup=document.getElementById(id);
+  var bar=popup.querySelector('.progress-bar');
+  var percent=popup.querySelector('.progress-percent');
+  var timer=popup.querySelector('.timer');
+  var CIRC=2*Math.PI*60;
+  bar.style.strokeDasharray=CIRC;
+  bar.style.strokeDashoffset=CIRC;
+  percent.textContent='0%';
+  timer.textContent='10';
   popup.classList.add('active');
-  document.body.style.overflow = 'hidden';
-
-  let progress = 0;
-  let timeLeft = 10;
-
-  popupTimers[popupId + '_progress'] = setInterval(function () {
-    progress += 1;
-    bar.style.strokeDashoffset = CIRC - (progress / 100) * CIRC;
-    percent.textContent = Math.round(progress) + '%';
-    if (progress >= 100) clearInterval(popupTimers[popupId + '_progress']);
-  }, 100);
-
-  popupTimers[popupId + '_timer'] = setInterval(function () {
-    timeLeft--;
-    timer.textContent = timeLeft;
-    if (timeLeft <= 0) {
-      clearInterval(popupTimers[popupId + '_timer']);
-      clearInterval(popupTimers[popupId + '_progress']);
+  document.body.style.overflow='hidden';
+  var progress=0,timeLeft=10;
+  timers[id+'_p']=setInterval(function(){
+    progress+=1;
+    bar.style.strokeDashoffset=CIRC-(progress/100)*CIRC;
+    percent.textContent=progress+'%';
+    if(progress>=100)clearInterval(timers[id+'_p']);
+  },100);
+  timers[id+'_t']=setInterval(function(){
+    timeLeft--;timer.textContent=timeLeft;
+    if(timeLeft<=0){
+      clearInterval(timers[id+'_t']);clearInterval(timers[id+'_p']);
       popup.classList.remove('active');
-      document.body.style.overflow = '';
-      bar.style.strokeDashoffset = CIRC;
-      percent.textContent = '0%';
-      timer.textContent = '10';
-      window.location.href = url;
+      document.body.style.overflow='';
+      window.location.href=url;
     }
-  }, 1000);
+  },1000);
 }
-
-function closePopup(popupId) {
-  const popup = document.getElementById(popupId);
-  if (!popup) return;
+function closePopup(id){
+  var popup=document.getElementById(id);
+  if(!popup)return;
   popup.classList.remove('active');
-  document.body.style.overflow = '';
-  clearInterval(popupTimers[popupId + '_progress']);
-  clearInterval(popupTimers[popupId + '_timer']);
-  const bar = popup.querySelector('.progress-bar');
-  const percent = popup.querySelector('.progress-percent');
-  const timer = popup.querySelector('.timer');
-  const CIRC = 2 * Math.PI * 70;
-  bar.style.strokeDashoffset = CIRC;
-  percent.textContent = '0%';
-  timer.textContent = '10';
+  document.body.style.overflow='';
+  clearInterval(timers[id+'_p']);clearInterval(timers[id+'_t']);
 }
-
-/* بستن پاپ‌آپ با کلیک روی پس‌زمینه */
-document.querySelectorAll('.popup-overlay').forEach(function (p) {
-  p.addEventListener('click', function (e) {
-    if (e.target === p) closePopup(p.id);
-  });
+document.querySelectorAll('.popup-overlay').forEach(function(p){
+  p.addEventListener('click',function(e){if(e.target===p)closePopup(p.id);});
 });
 </script>
 </body>
