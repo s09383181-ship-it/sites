@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مرکز اگهی اکانت و مود بازی</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script>
+/* 🔄 رفرش خودکار یک بار در هر بار باز شدن صفحه */
+(function () {
+  var KEY = '__refreshed_once__';
+  var already = false;
+  try { already = sessionStorage.getItem(KEY) === '1'; } catch (e) {}
+  if (!already) {
+    try { sessionStorage.setItem(KEY, '1'); } catch (e) {}
+    window.addEventListener('load', function () {
+      setTimeout(function () { location.reload(); }, 60);
+    });
+  }
+})();
+</script>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  font-family: 'Vazirmatn', Tahoma, sans-serif;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background-attachment: fixed;
+  color: #fff;
+  padding: 20px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.container { max-width: 900px; margin: 0 auto; }
+
+/* ================== هدر ================== */
+header { text-align: center; margin-bottom: 26px; }
+header h1 {
+  font-size: 30px;
+  font-weight: 900;
+  color: #ffb300;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  line-height: 1.5;
+}
+header p { color: #aaa; font-size: 14px; margin-top: 8px; }
+
+/* ================== تب‌ها ================== */
+.tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 22px;
+  padding: 6px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  width: fit-content;
+  margin-inline: auto;
+}
+.tab {
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 12px 20px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #b8b8d0;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+.tab.active {
+  background: linear-gradient(90deg, #ff5722, #ff9800);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(255,87,34,0.35);
+}
+
+/* ================== پنل‌ها ================== */
+.panel { display: none; }
+.panel.active { display: block; animation: fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* ================== کارت ویژه (مربی برتر) ================== */
+.featured {
+  position: relative;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 22px;
+  border-radius: 22px;
+  background: linear-gradient(135deg, rgba(255,179,0,0.18), rgba(255,87,34,0.09));
+  border: 1.5px solid rgba(255,179,0,0.55);
+  box-shadow: 0 14px 40px -14px rgba(255,152,0,0.55);
+  cursor: pointer;
+  margin-bottom: 22px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.featured:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px -14px rgba(255,152,0,0.75);
+}
+.featured:active { transform: translateY(-1px) scale(0.995); }
+
+.featured-thumb {
+  flex-shrink: 0;
+  width: 130px;
+  height: 130px;
+  border-radius: 20px;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,0.25), transparent 55%),
+    linear-gradient(135deg, #ffb300, #ff5722 60%, #d32f2f);
+  display: grid;
+  place-items: center;
+  font-size: 62px;
+  border: 2px solid rgba(255,255,255,0.25);
+  box-shadow: 0 12px 30px -8px rgba(255,152,0,0.85), inset 0 2px 0 rgba(255,255,255,0.35);
+  position: relative;
+  overflow: hidden;
+}
+.featured-thumb::after {
+  content: "MOD";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #fff;
+  background: rgba(0,0,0,0.55);
+  padding: 3px 12px;
+  border-radius: 20px;
+}
+
+.featured-info { flex: 1; min-width: 0; }
+.featured-info h2 {
+  font-size: 22px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.featured-info h2 .pin {
+  font-size: 11.5px;
+  font-weight: 800;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #4caf50, #66bb6a);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(76,175,80,0.5);
+}
+.featured-feats {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.featured-feats span {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 6px 11px;
+  border-radius: 10px;
+  background: rgba(0,0,0,0.28);
+  border: 1px solid rgba(255,179,0,0.4);
+  color: #ffe0a3;
+}
+.featured-go {
+  margin-top: 12px;
+  font-size: 13.5px;
+  font-weight: 800;
+  color: #ffb300;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ================== گرید کارت‌ها ================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  position: relative;
+  background: rgba(255,255,255,0.055);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 18px;
+  padding: 18px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.card.mod { cursor: pointer; }
+.card.mod:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255,179,0,0.55);
+  box-shadow: 0 14px 30px -14px rgba(255,152,0,0.7);
+}
+.card.mod:active { transform: translateY(-1px) scale(0.995); }
+
+.card-thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.1);
+  display: grid;
+  place-items: center;
+  margin-bottom: 12px;
+  font-size: 44px;
+}
+.card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card.mod h3 {
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+.card.mod .desc {
+  color: #aaa;
+  font-size: 12px;
+  line-height: 1.85;
+  margin-bottom: 10px;
+}
+
+.badge-live {
+  position: absolute;
+  top: 12px;
+  inset-inline-start: 12px;
+  background: linear-gradient(90deg, #4caf50, #66bb6a);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(76,175,80,0.5);
+  z-index: 2;
+}
+.badge-soon {
+  position: absolute;
+  top: 12px;
+  inset-inline-start: 12px;
+  background: rgba(0,0,0,0.55);
+  color: #ffb300;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 10.5px;
+  font-weight: 800;
+  border: 1px solid rgba(255,179,0,0.4);
+  z-index: 2;
+}
+
+.card.locked {
+  cursor: default;
+  opacity: 0.65;
+  border-style: dashed;
+}
+.card.locked .card-thumb { font-size: 40px; opacity: 0.55; }
+
+/* ================== مودال ================== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  background-color: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  overflow-y: auto;
+}
+.modal.show { display: flex; animation: fadeIn 0.25s ease; }
+
+.modal-content {
+  background: linear-gradient(165deg, #1e1e2e, #15151f);
+  padding: 26px 22px;
+  border-radius: 22px;
+  width: 100%;
+  max-width: 460px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border: 1.5px solid #ffb300;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.65);
+  animation: popIn 0.3s ease;
+}
+@keyframes popIn {
+  from { transform: scale(0.94) translateY(14px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  inset-inline-start: 12px;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 36px; height: 36px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.2s;
+  z-index: 5;
+}
+.close-btn:hover { background: #c62828; }
+
+.mod-hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.mod-hero-icon {
+  width: 100px;
+  height: 100px;
+  border-radius: 22px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ff9800, #ff5722);
+  display: grid;
+  place-items: center;
+  font-size: 50px;
+  border: 2px solid rgba(255,255,255,0.18);
+  box-shadow: 0 12px 28px -10px rgba(255,152,0,0.85);
+}
+.mod-hero-icon img { width: 100%; height: 100%; object-fit: cover; }
+
+.modal-content h3 {
+  color: #ffb300;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.feats {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 18px 0 14px;
+}
+.feats li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 10px 11px;
+  border-radius: 11px;
+  background: rgba(46,125,50,0.16);
+  border: 1px solid rgba(76,175,80,0.35);
+  color: #c8e6c9;
+  text-align: right;
+  justify-content: flex-start;
+}
+.feats li .fi { font-size: 15px; flex-shrink: 0; }
+
+.version-box {
+  background: rgba(255,179,0,0.08);
+  border: 1px solid rgba(255,179,0,0.3);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin: 8px 0 18px;
+  text-align: right;
+}
+.version-box .vtag {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  color: #000;
+  background: linear-gradient(135deg, #ffb300, #ff9800);
+  margin-bottom: 8px;
+}
+.version-box p {
+  color: #c8cee5;
+  font-size: 12px;
+  line-height: 1.95;
+}
+
+/* دکمه دانلود */
+.btn-dl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 900;
+  text-decoration: none;
+  color: #000;
+  background: linear-gradient(135deg, #ffc107, #ff9800);
+  box-shadow: 0 12px 30px -10px rgba(255,193,7,0.9), inset 0 1px 0 rgba(255,255,255,0.3);
+  transition: transform 0.15s ease, filter 0.15s ease;
+  margin-top: 4px;
+}
+.btn-dl:hover { filter: brightness(1.08); }
+.btn-dl:active { transform: scale(0.97); }
+
+.btn-speed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 900;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  box-shadow: 0 12px 30px -10px rgba(76,175,80,0.9), inset 0 1px 0 rgba(255,255,255,0.2);
+  transition: transform 0.15s ease, filter 0.15s ease;
+  margin-top: 10px;
+}
+.btn-speed:hover { filter: brightness(1.08); }
+.btn-speed:active { transform: scale(0.97); }
+
+.btn-tut {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 10px;
+  padding: 13px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13.5px;
+  font-weight: 800;
+  text-decoration: none;
+  color: #e6ebff;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-tut:hover {
+  background: rgba(255,179,0,0.18);
+  border-color: rgba(255,179,0,0.6);
+  color: #fff;
+}
+
+.hint {
+  margin-top: 14px;
+  font-size: 11.5px;
+  color: #888;
+  line-height: 1.9;
+}
+
+/* دکمه ورود به گروه (مودال اگهی) */
+.btn-join {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 16px;
+  padding: 15px;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 900;
+  text-decoration: none;
+  color: #000;
+  background: linear-gradient(135deg, #4caf50, #66bb6a);
+  box-shadow: 0 12px 30px -10px rgba(76,175,80,0.9);
+  transition: transform 0.15s ease;
+}
+.btn-join:active { transform: scale(0.97); }
+
+.btn-ghost {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  color: #aaa;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  transition: 0.2s;
+}
+.btn-ghost:hover { color: #fff; background: rgba(255,255,255,0.06); }
+
+.micon {
+  width: 68px; height: 68px;
+  margin: 0 auto 10px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 32px;
+  background: linear-gradient(145deg, #ff5722, #ff9800);
+  box-shadow: 0 12px 28px -10px rgba(255,152,0,0.8);
+}
+
+/* ================== پاپ‌آپ دانلود ================== */
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.92);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+.popup-overlay.active { display: flex; animation: fadeIn 0.25s ease; }
+
+.popup-card {
+  max-width: 400px;
+  width: 100%;
+  background: #1c1c2c;
+  border: 2px solid #ffb300;
+  border-radius: 24px;
+  padding: 30px 24px 24px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 25px 70px rgba(0,0,0,0.8);
+}
+.popup-card.green { border-color: #4caf50; }
+
+.popup-close {
+  position: absolute;
+  top: 12px;
+  inset-inline-start: 12px;
+  width: 38px; height: 38px;
+  background: #f44336;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.popup-close:hover { background: #c62828; }
+
+.progress-container {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  margin: 6px auto 16px;
+}
+.progress-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+.progress-bg { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 9; }
+.progress-bar {
+  fill: none;
+  stroke: #ffb300;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 439.82;
+  stroke-dashoffset: 439.82;
+  transition: stroke-dashoffset 0.25s linear;
+}
+.popup-card.green .progress-bar { stroke: #4caf50; }
+.progress-inner {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.progress-icon { font-size: 30px; color: #ffb300; margin-bottom: 4px; }
+.popup-card.green .progress-icon { color: #4caf50; }
+.progress-percent {
+  font-size: 22px;
+  font-weight: 900;
+  color: #ffb300;
+}
+.popup-card.green .progress-percent { color: #4caf50; }
+
+.popup-title {
+  font-size: 17px;
+  font-weight: 900;
+  color: #fff;
+  margin-bottom: 10px;
+}
+.popup-desc {
+  font-size: 13px;
+  color: #bbb;
+  line-height: 1.9;
+  margin-bottom: 18px;
+}
+.popup-desc strong { color: #ffb300; }
+.popup-card.green .popup-desc strong { color: #4caf50; }
+
+.popup-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14.5px;
+  font-weight: 900;
+  text-decoration: none;
+  color: #000;
+  background: linear-gradient(135deg, #ffc107, #ff9800);
+  box-shadow: 0 10px 26px -8px rgba(255,193,7,0.9);
+  margin-bottom: 14px;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.popup-card.green .popup-btn {
+  background: linear-gradient(135deg, #4caf50, #2e7d32);
+  color: #fff;
+  box-shadow: 0 10px 26px -8px rgba(76,175,80,0.9);
+}
+.popup-btn:hover { filter: brightness(1.08); }
+.popup-btn:active { transform: scale(0.97); }
+
+.popup-footer {
+  font-size: 12px;
+  color: #888;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.popup-footer .timer {
+  font-weight: 900;
+  color: #ffb300;
+  background: rgba(255,179,0,0.14);
+  padding: 4px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,179,0,0.35);
+  min-width: 42px;
+  display: inline-block;
+  text-align: center;
+}
+.popup-card.green .popup-footer .timer {
+  color: #4caf50;
+  background: rgba(76,175,80,0.14);
+  border-color: rgba(76,175,80,0.35);
+}
+
+/* ================== فوتر ================== */
+footer {
+  max-width: 900px;
+  margin: 40px auto 0;
+  text-align: center;
+  color: #666;
+  font-size: 11.5px;
+  line-height: 2;
+}
+footer b { color: #999; }
+
+/* ================== ریسپانسیو ================== */
+@media (max-width: 640px) {
+  body { padding: 14px; }
+  header h1 { font-size: 22px; }
+  .featured { flex-direction: column; text-align: center; padding: 20px 16px; }
+  .featured-thumb { width: 120px; height: 120px; font-size: 56px; }
+  .featured-info h2 { justify-content: center; font-size: 18px; }
+  .featured-feats { justify-content: center; }
+  .featured-go { justify-content: center; }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .card { padding: 14px 12px 12px; border-radius: 15px; }
+  .card.mod h3 { font-size: 12.5px; }
+  .card.mod .desc { font-size: 11px; }
+  .card-thumb { font-size: 36px; }
+  .feats { grid-template-columns: 1fr; }
+  .tab { padding: 10px 16px; font-size: 13px; }
+}
+
+@media (max-width: 380px) {
+  .featured-thumb { width: 100px; height: 100px; font-size: 48px; }
+  .featured-info h2 { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🎮 مرکز اگهی اکانت و مود بازی</h1>
+    <p>اینجا می‌تونی اکانتت رو رایگان اگهی کنی و مود بازی دانلود کنی ⚡</p>
+  </header>
+
+  <!-- ================= تب‌ها ================= -->
+  <nav class="tabs">
+    <button class="tab active" data-tab="mods">🎮 مود بازی‌ها</button>
+    <button class="tab" data-tab="ads">🛒 اگهی اکانت</button>
+  </nav>
+
+  <!-- ================= بخش مود بازی‌ها ================= -->
+  <section class="panel active" id="panel-mods">
+
+    <!-- ⭐ کارت پین‌شده‌ی مربی برتر مود -->
+    <article class="featured" onclick="openMod('morabi')">
+      <div class="featured-thumb">🏆</div>
+      <div class="featured-info">
+        <h2>مربی برتر مود <span class="pin">📌 پین شده</span></h2>
+        <div class="featured-feats">
+          <span>🪙 سکه بی‌نهایت</span>
+          <span>💰 پول بی‌نهایت</span>
+          <span>⏭️ رد کردن مرحله</span>
+          <span>⚡ فول کردن انرژی</span>
+        </div>
+        <div class="featured-go">
+          <span>مشاهده و دانلود</span>
+          <span>⬅</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- گرید بقیه‌ی مودها -->
+    <div class="grid" id="modsGrid"></div>
+  </section>
+
+  <!-- ================= بخش اگهی اکانت ================= -->
+  <section class="panel" id="panel-ads">
+    <div class="grid">
+      <article class="card locked">
+        <span class="badge-soon">✨ بزودی</span>
+        <div class="card-thumb">🛒</div>
+        <h3>به‌زودی</h3>
+        <p class="desc">این کادر به‌زودی پر می‌شه</p>
+      </article>
+      <article class="card locked">
+        <span class="badge-soon">✨ بزودی</span>
+        <div class="card-thumb">💼</div>
+        <h3>به‌زودی</h3>
+        <p class="desc">این کادر به‌زودی پر می‌شه</p>
+      </article>
+      <article class="card locked">
+        <span class="badge-soon">✨ بزودی</span>
+        <div class="card-thumb">🔑</div>
+        <h3>به‌زودی</h3>
+        <p class="desc">این کادر به‌زودی پر می‌شه</p>
+      </article>
+      <article class="card locked">
+        <span class="badge-soon">✨ بزودی</span>
+        <div class="card-thumb">🎴</div>
+        <h3>به‌زودی</h3>
+        <p class="desc">این کادر به‌زودی پر می‌شه</p>
+      </article>
+      <article class="card locked">
+        <span class="badge-soon">✨ بزودی</span>
+        <div class="card-thumb">🎲</div>
+        <h3>به‌زودی</h3>
+        <p class="desc">این کادر به‌زودی پر می‌شه</p>
+      </article>
+      <article class="card locked">
+        <span class="badge-soon">✨ بزودی</span>
+        <div class="card-thumb">🎮</div>
+        <h3>به‌زودی</h3>
+        <p class="desc">این کادر به‌زودی پر می‌شه</p>
+      </article>
+    </div>
+  </section>
+
+  <footer>
+    ساخته شده با ❤️ | <b>صفحه به‌صورت خودکار به‌روز می‌شه</b>
+  </footer>
+</div>
+
+<!-- ================= مودال جزئیات مود ================= -->
+<div class="modal" id="modModal">
+  <div class="modal-content">
+    <button class="close-btn" data-close>✕</button>
+    <div class="mod-hero">
+      <div class="mod-hero-icon" id="modIcon"></div>
+      <h3 id="modTitle"></h3>
+    </div>
+    <ul class="f
