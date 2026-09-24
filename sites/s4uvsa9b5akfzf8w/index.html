@@ -2,369 +2,337 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>مرکز اگهی اکانت و مود بازی</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css">
-<script>
-(function(){try{if(sessionStorage.getItem('rf1')==='1')return;sessionStorage.setItem('rf1','1');}catch(e){return;}
-window.addEventListener('load',function(){setTimeout(function(){var u=new URL(location.href);u.searchParams.set('_',Date.now());location.replace(u.toString());},80);});})();
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#070712">
+<title>TNT MOD</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-body{font-family:'Vazirmatn',Tahoma,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);background-attachment:fixed;color:#fff;padding:18px;min-height:100vh;overflow-x:hidden}
-.container{max-width:900px;margin:0 auto}
-header{text-align:center;margin-bottom:22px}
-header h1{font-size:28px;font-weight:900;color:#ffb300;text-shadow:2px 2px 4px rgba(0,0,0,.5);line-height:1.5}
-header p{color:#aaa;font-size:13.5px;margin-top:8px}
-.tabs{display:flex;gap:8px;justify-content:center;margin-bottom:20px;padding:5px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:16px;width:fit-content;margin-inline:auto}
-.tab{font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;padding:11px 18px;border-radius:12px;border:none;background:transparent;color:#b8b8d0;transition:.2s}
-.tab.active{background:linear-gradient(90deg,#ff5722,#ff9800);color:#fff;box-shadow:0 6px 16px rgba(255,87,34,.35)}
-.panel{display:none}.panel.active{display:block;animation:fi .3s ease}
-@keyframes fi{from{opacity:0}to{opacity:1}}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation}
+body{background:#070712;color:#eef0f8;min-height:100vh;overflow-x:hidden;font-weight:500;line-height:1.65;position:relative;padding-bottom:32px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;height:auto;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-weight:inherit}
+a{text-decoration:none;color:inherit}
 
-/* کارت پین‌شده */
-.featured{position:relative;display:block;width:100%;padding:0;border:none;border-radius:22px;cursor:pointer;margin-bottom:20px;overflow:hidden;background:transparent;font-family:inherit;color:inherit;text-align:right;transition:transform .2s,box-shadow .2s;box-shadow:0 12px 34px -14px rgba(255,152,0,.7)}
-.featured:hover{transform:translateY(-4px);box-shadow:0 20px 50px -14px rgba(255,152,0,.9)}
-.featured:active{transform:translateY(-1px) scale(.995)}
-.featured-inner{position:relative;padding:22px;border-radius:22px;background:radial-gradient(120% 140% at 100% 0%,rgba(255,87,34,.35),transparent 60%),radial-gradient(120% 140% at 0% 100%,rgba(255,179,0,.28),transparent 60%),linear-gradient(135deg,#2a1a10,#1a0f28);border:1.5px solid rgba(255,179,0,.55);display:flex;gap:20px;align-items:center;overflow:hidden}
-.featured-thumb{flex-shrink:0;width:132px;height:132px;border-radius:20px;background:radial-gradient(circle at 30% 25%,rgba(255,255,255,.35),transparent 55%),linear-gradient(135deg,#ffc107,#ff9800 45%,#ff5722 90%);display:flex;align-items:center;justify-content:center;font-size:66px;border:2px solid rgba(255,255,255,.3);box-shadow:0 12px 28px -8px rgba(255,152,0,.9),inset 0 2px 0 rgba(255,255,255,.4);position:relative;overflow:hidden}
-.mod-tag{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:900;letter-spacing:3px;color:#fff;background:rgba(0,0,0,.6);padding:3px 12px;border-radius:20px;font-family:Tahoma,sans-serif}
-.featured-info{flex:1;min-width:0}
-.featured-info h2{font-size:21px;font-weight:900;color:#fff;margin-bottom:10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.pin{font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;background:linear-gradient(90deg,#4caf50,#66bb6a);color:#fff}
-.featured-feats{display:flex;gap:7px;flex-wrap:wrap}
-.featured-feats span{font-size:11.5px;font-weight:700;padding:6px 11px;border-radius:10px;background:rgba(0,0,0,.32);border:1px solid rgba(255,179,0,.42);color:#ffe0a3}
-.featured-go{margin-top:12px;font-size:13.5px;font-weight:800;color:#ffb300;display:flex;align-items:center;gap:8px}
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(ellipse 110% 55% at 50% -8%,rgba(99,60,255,.45),transparent 52%),
+    radial-gradient(ellipse 55% 40% at 100% 30%,rgba(0,220,255,.22),transparent 48%),
+    radial-gradient(ellipse 50% 35% at 0% 70%,rgba(255,40,120,.16),transparent 45%),
+    radial-gradient(ellipse 40% 30% at 80% 90%,rgba(99,60,255,.12),transparent 50%),
+    linear-gradient(175deg,#0b0b1a 0%,#070712 45%,#05050e 100%)}
+.stars{position:absolute;inset:0}
+.stars span{position:absolute;background:#fff;border-radius:50%;opacity:.45;animation:tw 8s ease-in-out infinite}
+.stars span:nth-child(1){width:2px;height:2px;top:5%;left:10%}
+.stars span:nth-child(2){width:1px;height:1px;top:12%;left:75%;animation-delay:1.5s}
+.stars span:nth-child(3){width:2px;height:2px;top:25%;left:30%;animation-delay:3s}
+.stars span:nth-child(4){width:1px;height:1px;top:40%;left:90%;animation-delay:.8s}
+.stars span:nth-child(5){width:2px;height:2px;top:55%;left:18%;animation-delay:2.2s}
+.stars span:nth-child(6){width:1px;height:1px;top:65%;left:60%;animation-delay:4s}
+.stars span:nth-child(7){width:2px;height:2px;top:78%;left:40%;animation-delay:1s}
+.stars span:nth-child(8){width:1px;height:1px;top:88%;left:85%;animation-delay:2.8s}
+.stars span:nth-child(9){width:2px;height:2px;top:15%;left:50%;animation-delay:3.5s}
+.stars span:nth-child(10){width:1px;height:1px;top:48%;left:5%;animation-delay:.3s}
+.stars span:nth-child(11){width:2px;height:2px;top:70%;left:95%;animation-delay:1.8s}
+.stars span:nth-child(12){width:1px;height:1px;top:33%;left:65%;animation-delay:4.5s}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:.65}}
 
-/* گرید */
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:14px}
-.card{position:relative;background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:16px 14px 14px;display:flex;flex-direction:column;transition:transform .2s,border-color .2s,box-shadow .2s}
-.card.mod{cursor:pointer}
-.card.mod:hover{transform:translateY(-4px);border-color:rgba(255,179,0,.55);box-shadow:0 14px 30px -14px rgba(255,152,0,.7)}
-.card.mod:active{transform:translateY(-1px) scale(.995)}
-.card-thumb{width:100%;aspect-ratio:1/1;border-radius:13px;overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.08),rgba(255,255,255,.02));border:1px solid rgba(255,255,255,.1);display:grid;place-items:center;margin-bottom:11px;font-size:42px}
-.card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-.card.mod h3{font-size:14px;font-weight:800;color:#fff;margin-bottom:5px;line-height:1.5}
-.card.mod .desc{color:#aaa;font-size:11.5px;line-height:1.85;margin-bottom:8px}
-.badge-live{position:absolute;top:10px;right:10px;background:linear-gradient(90deg,#4caf50,#66bb6a);color:#fff;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:800;z-index:2}
-.badge-soon{position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#ffb300;padding:3px 9px;border-radius:20px;font-size:10px;font-weight:800;border:1px solid rgba(255,179,0,.4);z-index:2}
-.card.locked{cursor:default;opacity:.6;border-style:dashed}
-.card.locked .card-thumb{opacity:.55}
+#offline{position:fixed;inset:0;z-index:99999;background:#070712;display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:28px;text-align:center}
+#offline.show{display:flex}
+.offline-icon{width:76px;height:76px;border-radius:50%;background:rgba(255,60,100,.12);border:2px solid rgba(255,60,100,.35);display:flex;align-items:center;justify-content:center;font-size:1.9rem}
+.offline-title{font-size:1.1rem;font-weight:900;color:#fff}
+.offline-desc{font-size:.8rem;color:#8b8ba5;max-width:260px;line-height:1.8}
+.offline-btn{margin-top:8px;padding:12px 28px;border-radius:100px;font-size:.82rem;font-weight:800;color:#fff;background:linear-gradient(135deg,#00d4ff,#7b2fff)}
+.offline-btn:active{transform:scale(.97)}
+body.is-offline .bg,body.is-offline .header,body.is-offline .infobar,body.is-offline .section,body.is-offline .footer,body.is-offline .modal-bg,body.is-offline .dl-bg{display:none!important}
 
-/* مودال */
-.modal{display:none;position:fixed;z-index:100;inset:0;background:rgba(0,0,0,.85);justify-content:center;align-items:center;padding:16px;overflow-y:auto}
-.modal.show{display:flex;animation:fi .22s ease}
-.modal-content{background:linear-gradient(165deg,#1e1e2e,#15151f);padding:26px 22px;border-radius:22px;width:100%;max-width:440px;max-height:92vh;overflow-y:auto;border:1.5px solid #ffb300;text-align:center;position:relative;box-shadow:0 25px 60px rgba(0,0,0,.65)}
-.close-btn{position:absolute;top:12px;right:12px;background:#f44336;color:#fff;border:none;border-radius:50%;width:34px;height:34px;font-size:15px;cursor:pointer;font-weight:bold;line-height:1;z-index:5}
-.close-btn:hover{background:#c62828}
-.mod-hero{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:16px}
-.mod-hero-icon{width:96px;height:96px;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#ff9800,#ff5722);display:grid;place-items:center;font-size:48px;border:2px solid rgba(255,255,255,.18)}
-.mod-hero-icon img{width:100%;height:100%;object-fit:cover}
-.modal-content h3{color:#ffb300;font-size:19px;font-weight:900}
-.feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:16px 0 14px}
-.feats li{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;padding:10px 11px;border-radius:11px;background:rgba(46,125,50,.16);border:1px solid rgba(76,175,80,.35);color:#c8e6c9;text-align:right}
-.feats li .fi{font-size:15px;flex-shrink:0}
-.version-box{background:rgba(255,179,0,.08);border:1px solid rgba(255,179,0,.3);border-radius:14px;padding:12px 14px;margin:8px 0 16px;text-align:right}
-.version-box .vtag{display:inline-block;font-size:11.5px;font-weight:800;padding:4px 12px;border-radius:20px;color:#000;background:linear-gradient(135deg,#ffb300,#ff9800);margin-bottom:8px}
-.version-box p{color:#c8cee5;font-size:11.5px;line-height:1.9}
-.btn-dl,.btn-speed,.btn-tut,.btn-join{display:flex;align-items:center;justify-content:center;gap:9px;width:100%;padding:15px;border-radius:14px;border:0;cursor:pointer;font-family:inherit;font-size:15px;font-weight:900;text-decoration:none;transition:transform .15s,filter .15s}
-.btn-dl{color:#000;background:linear-gradient(135deg,#ffc107,#ff9800);box-shadow:0 12px 30px -10px rgba(255,193,7,.9);margin-top:4px}
-.btn-speed{color:#fff;background:linear-gradient(135deg,#4caf50,#2e7d32);margin-top:10px;font-size:13.5px;padding:13px}
-.btn-tut{color:#e6ebff;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);margin-top:10px;font-size:13px;padding:12px}
-.btn-dl:hover,.btn-speed:hover,.btn-join:hover{filter:brightness(1.08)}
-.btn-dl:active,.btn-speed:active,.btn-join:active{transform:scale(.97)}
-.btn-tut:hover{background:rgba(255,179,0,.18);border-color:rgba(255,179,0,.6);color:#fff}
-.btn-join{margin-top:16px;color:#000;background:linear-gradient(135deg,#4caf50,#66bb6a);box-shadow:0 12px 30px -10px rgba(76,175,80,.9)}
-.btn-ghost{width:100%;margin-top:10px;padding:11px;border-radius:14px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:800;color:#aaa;background:transparent;border:1px solid rgba(255,255,255,.15);transition:.2s}
-.btn-ghost:hover{color:#fff;background:rgba(255,255,255,.06)}
-.micon{width:66px;height:66px;margin:0 auto 10px;border-radius:20px;display:grid;place-items:center;font-size:30px;background:linear-gradient(145deg,#ff5722,#ff9800)}
-.hint{margin-top:12px;font-size:11px;color:#888;line-height:1.85}
-.ad-text{color:#bbb;font-size:13px;line-height:2;margin-top:6px}
+.header{position:relative;z-index:1;text-align:center;padding:28px 16px 2px}
+.logo{display:inline-flex;align-items:baseline;gap:2px;font-size:clamp(1.85rem,7.2vw,2.65rem);font-weight:900;letter-spacing:-1px;line-height:1.05}
+.logo b{background:linear-gradient(115deg,#00e5ff 0%,#8b5cf6 45%,#ff3d7a 100%);background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:lg 9s ease infinite}
+.logo i{font-style:normal;color:#fff;text-shadow:0 0 30px rgba(139,92,246,.4)}
+.subtitle{color:#6b6b88;font-size:clamp(.72rem,2.3vw,.84rem);margin-top:6px;font-weight:500}
+@keyframes lg{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
 
-/* پاپ‌آپ */
-.popup-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:16px}
-.popup-overlay.active{display:flex;animation:fi .22s ease}
-.popup-card{max-width:380px;width:100%;background:#1c1c2c;border:2px solid #ffb300;border-radius:24px;padding:28px 22px 22px;text-align:center;position:relative;box-shadow:0 25px 70px rgba(0,0,0,.8)}
-.popup-card.green{border-color:#4caf50}
-.popup-close{position:absolute;top:12px;right:12px;width:34px;height:34px;background:#f44336;color:#fff;border:none;border-radius:50%;font-size:15px;font-weight:bold;cursor:pointer;line-height:1}
-.popup-close:hover{background:#c62828}
-.progress-container{position:relative;width:140px;height:140px;margin:6px auto 16px}
-.progress-svg{transform:rotate(-90deg);width:100%;height:100%;display:block}
-.progress-bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:8}
-.progress-bar{fill:none;stroke:#ffb300;stroke-width:8;stroke-linecap:round;stroke-dasharray:376.99;stroke-dashoffset:376.99;transition:stroke-dashoffset .25s linear}
-.popup-card.green .progress-bar{stroke:#4caf50}
-.progress-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.progress-icon{font-size:28px;margin-bottom:4px}
-.progress-percent{font-size:21px;font-weight:900;color:#ffb300}
-.popup-card.green .progress-percent{color:#4caf50}
-.popup-title{font-size:16.5px;font-weight:900;color:#fff;margin-bottom:10px}
-.popup-desc{font-size:12.5px;color:#bbb;line-height:1.9;margin-bottom:16px}
-.popup-desc strong{color:#ffb300}
-.popup-card.green .popup-desc strong{color:#4caf50}
-.popup-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:13px 22px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:900;text-decoration:none;color:#000;background:linear-gradient(135deg,#ffc107,#ff9800);margin-bottom:12px;transition:transform .15s,filter .15s}
-.popup-card.green .popup-btn{background:linear-gradient(135deg,#4caf50,#2e7d32);color:#fff}
-.popup-btn:hover{filter:brightness(1.08)}
-.popup-btn:active{transform:scale(.97)}
-.popup-footer{font-size:11.5px;color:#888;display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
-.popup-footer .timer{font-weight:900;color:#ffb300;background:rgba(255,179,0,.14);padding:3px 11px;border-radius:10px;border:1px solid rgba(255,179,0,.35);min-width:38px;text-align:center}
-.popup-card.green .popup-footer .timer{color:#4caf50;background:rgba(76,175,80,.14);border-color:rgba(76,175,80,.35)}
+.infobar{position:relative;z-index:1;max-width:960px;margin:14px auto 0;padding:0 14px;display:flex;justify-content:center;gap:7px;flex-wrap:wrap}
+.infobar span{display:inline-flex;align-items:center;gap:4px;font-size:.66rem;font-weight:700;padding:5px 11px;border-radius:100px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:#8a8aa5;backdrop-filter:blur(8px)}
+.infobar span b{color:#00d4ff;font-weight:800}
+.infobar span.g b{color:#00ffaa}
+.infobar span.p b{color:#c4a0ff}
 
-footer{max-width:900px;margin:36px auto 0;text-align:center;color:#666;font-size:11px;line-height:2}
-footer b{color:#999}
+.section{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:18px 14px 12px}
+.section__head{display:flex;align-items:center;gap:9px;margin-bottom:14px}
+.section__head h2{font-size:.9rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:7px}
+.section__head h2::before{content:'';width:3px;height:15px;border-radius:2px;background:linear-gradient(180deg,#00d4ff,#8b5cf6)}
+.section__cnt{margin-right:auto;font-size:.64rem;font-weight:700;color:#00d4ff;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.2);padding:3px 10px;border-radius:100px}
 
-@media(max-width:640px){
-body{padding:14px}
-header h1{font-size:21px}
-.featured-inner{flex-direction:column;text-align:center;padding:20px 16px}
-.featured-thumb{width:118px;height:118px;font-size:58px}
-.featured-info h2{justify-content:center;font-size:17px}
-.featured-feats{justify-content:center}
-.featured-go{justify-content:center}
-.grid{grid-template-columns:repeat(2,1fr);gap:11px}
-.card{padding:13px 11px 11px;border-radius:15px}
-.card.mod h3{font-size:12.5px}
-.card.mod .desc{font-size:10.5px}
-.card-thumb{font-size:34px}
-.feats{grid-template-columns:1fr}
-.tab{padding:9px 14px;font-size:12.5px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media(min-width:480px){.grid{grid-template-columns:repeat(3,1fr);gap:12px}}
+@media(min-width:768px){.grid{grid-template-columns:repeat(4,1fr);gap:14px}}
+
+.card{
+  position:relative;
+  background:linear-gradient(160deg,rgba(255,255,255,.06) 0%,rgba(255,255,255,.015) 100%);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;padding:14px 9px 11px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+  cursor:pointer;
+  transition:transform .22s ease,border-color .22s,box-shadow .22s;
+  overflow:hidden;
+  -webkit-user-select:none;user-select:none;
 }
+.card::after{content:'';position:absolute;inset:0;border-radius:18px;background:linear-gradient(145deg,rgba(0,212,255,.08),transparent 50%,rgba(139,92,246,.08));opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{border-color:rgba(0,212,255,.35);box-shadow:0 12px 36px -12px rgba(0,212,255,.35),0 0 0 1px rgba(139,92,246,.15)}
+.card:hover::after{opacity:1}
+.card:active{transform:scale(.965)}
+
+.card__badge{position:absolute;top:8px;right:8px;font-size:.52rem;font-weight:900;padding:2.5px 7px;border-radius:7px;z-index:2;letter-spacing:.3px}
+.card__badge--new{background:linear-gradient(135deg,#00ffaa,#00c878);color:#002e18;box-shadow:0 2px 10px rgba(0,255,170,.35)}
+.card__badge--mod{background:linear-gradient(135deg,#00d4ff,#7b2fff);color:#fff;box-shadow:0 2px 10px rgba(0,212,255,.3)}
+
+.card__icon-wrap{position:relative;width:78px;height:78px;margin-top:4px;display:flex;align-items:center;justify-content:center}
+@media(min-width:768px){.card__icon-wrap{width:92px;height:92px}}
+.card__glow{position:absolute;inset:3px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.35),transparent 68%);filter:blur(11px);opacity:.7;pointer-events:none}
+.card__icon-ring{position:absolute;inset:0;border-radius:50%;padding:2.5px;background:linear-gradient(135deg,#00d4ff,#8b5cf6,#ff3d7a);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.card__icon{width:calc(100% - 5px);height:calc(100% - 5px);border-radius:50%;overflow:hidden;background:linear-gradient(150deg,#12122a,#0a0a14);display:flex;align-items:center;justify-content:center;font-size:2.1rem;position:relative;z-index:1;border:2px solid rgba(255,255,255,.04);line-height:1;pointer-events:none}
+.card__icon img{width:100%;height:100%;object-fit:cover}
+
+.card__title{font-size:.78rem;font-weight:800;color:#fff;line-height:1.3;pointer-events:none}
+@media(min-width:768px){.card__title{font-size:.86rem}}
+.card__feats{display:flex;flex-wrap:wrap;gap:3px;justify-content:center;min-height:2.1em;pointer-events:none}
+.pill{display:inline-flex;align-items:center;gap:2px;font-size:.53rem;font-weight:800;padding:2.5px 6px;border-radius:100px;white-space:nowrap;line-height:1}
+.pill .pi{font-size:.62rem}
+.pill--gold{background:rgba(247,186,43,.12);border:1px solid rgba(247,186,43,.28);color:#f7ba2b}
+.pill--cyan{background:rgba(0,212,255,.12);border:1px solid rgba(0,212,255,.28);color:#00d4ff}
+.pill--green{background:rgba(0,255,170,.12);border:1px solid rgba(0,255,170,.28);color:#00ffaa}
+.pill--purple{background:rgba(196,160,255,.12);border:1px solid rgba(196,160,255,.28);color:#c4a0ff}
+.pill--blue{background:rgba(126,163,255,.12);border:1px solid rgba(126,163,255,.28);color:#7ea3ff}
+
+.card__btn{margin-top:auto;width:100%;padding:9px;border-radius:100px;font-size:.66rem;font-weight:800;color:#fff;background:linear-gradient(135deg,#00d4ff,#7b2fff);box-shadow:0 3px 0 -1px #3d1580,0 6px 14px -4px rgba(0,212,255,.4);display:flex;align-items:center;justify-content:center;gap:4px;pointer-events:none}
+.card__btn svg{width:9px;height:9px;fill:#fff}
+
+/* MODAL bottom sheet soft */
+.modal-bg{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,0);opacity:0;visibility:hidden;pointer-events:none;transition:background .32s ease,opacity .32s ease,visibility .32s}
+.modal-bg.on{background:rgba(0,0,0,.7);opacity:1;visibility:visible;pointer-events:auto}
+@media(min-width:540px){.modal-bg{align-items:center;padding:16px}}
+
+.modal{width:100%;max-width:400px;max-height:92vh;overflow-y:auto;background:linear-gradient(170deg,#15152c 0%,#0c0c18 100%);border-radius:22px 22px 0 0;padding:12px 16px 26px;position:relative;transform:translateY(100%);transition:transform .38s cubic-bezier(.32,.72,0,1);box-shadow:0 -12px 48px rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.07);border-bottom:none;-webkit-overflow-scrolling:touch}
+@media(min-width:540px){.modal{border-radius:20px;border:1px solid rgba(255,255,255,.08);transform:translateY(20px) scale(.97);opacity:0;transition:transform .34s cubic-bezier(.32,.72,0,1),opacity .28s ease;max-height:88vh;padding:20px 18px}.modal-bg.on .modal{transform:translateY(0) scale(1);opacity:1}}
+.modal-bg.on .modal{transform:translateY(0)}
+.modal__handle{width:34px;height:4px;border-radius:4px;background:rgba(255,255,255,.18);margin:4px auto 12px}
+@media(min-width:540px){.modal__handle{display:none}}
+
+.modal__close{position:absolute;top:12px;left:12px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#9a9ab0;display:flex;align-items:center;justify-content:center;font-size:12px;z-index:3;cursor:pointer}
+.modal__close:active{background:rgba(255,60,100,.2);color:#ff4d7a}
+
+.modal__hero{display:flex;flex-direction:column;align-items:center;gap:7px;padding:2px 0 12px;text-align:center}
+.modal__icon-wrap{position:relative;width:82px;height:82px;display:flex;align-items:center;justify-content:center}
+.modal__glow{position:absolute;inset:3px;border-radius:50%;background:radial-gradient(circle,rgba(0,212,255,.4),transparent 68%);filter:blur(12px)}
+.modal__icon-ring{position:absolute;inset:0;border-radius:50%;padding:2.5px;background:linear-gradient(135deg,#00d4ff,#8b5cf6,#ff3d7a);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
+.modal__icon{width:calc(100% - 5px);height:calc(100% - 5px);border-radius:50%;overflow:hidden;background:#101020;display:flex;align-items:center;justify-content:center;font-size:2.2rem;border:2px solid rgba(255,255,255,.05);position:relative;z-index:1;line-height:1}
+.modal__icon img{width:100%;height:100%;object-fit:cover}
+.modal__title{font-size:1.08rem;font-weight:900;color:#fff}
+.modal__sub{font-size:.66rem;color:#6b6b88}
+
+.modal__feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:11px}
+.feat-box{display:flex;align-items:center;gap:6px;padding:9px 10px;border-radius:11px;font-size:.66rem;font-weight:800;line-height:1.3}
+.feat-box .fi{font-size:.92rem;flex-shrink:0}
+.feat-box--gold{background:rgba(247,186,43,.1);border:1px solid rgba(247,186,43,.25);color:#f7ba2b}
+.feat-box--cyan{background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.25);color:#00d4ff}
+.feat-box--green{background:rgba(0,255,170,.1);border:1px solid rgba(0,255,170,.25);color:#00ffaa}
+.feat-box--purple{background:rgba(196,160,255,.1);border:1px solid rgba(196,160,255,.25);color:#c4a0ff}
+.feat-box--blue{background:rgba(126,163,255,.1);border:1px solid rgba(126,163,255,.25);color:#7ea3ff}
+
+.modal__ver{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.18);border-radius:11px;padding:10px 12px;margin-bottom:11px}
+.modal__ver .tag{display:inline-block;background:linear-gradient(135deg,#00d4ff,#7b2fff);color:#fff;font-size:.54rem;font-weight:800;padding:2px 8px;border-radius:14px;margin-bottom:4px}
+.modal__ver p{font-size:.64rem;color:#8a8aa5;line-height:1.7}
+
+.modal__guide{background:rgba(0,255,170,.03);border:1px solid rgba(0,255,170,.1);border-radius:11px;padding:10px 12px;margin-bottom:13px}
+.modal__guide h4{color:#00ffaa;font-size:.66rem;font-weight:800;margin-bottom:4px}
+.modal__guide p{font-size:.64rem;color:#9a9ab0;line-height:1.8}
+.modal__guide strong{color:#00d4ff}
+
+.modal__actions{display:flex;flex-direction:column;gap:7px}
+.btn-main{width:100%;padding:13px;border-radius:14px;font-size:.8rem;font-weight:900;color:#fff;background:linear-gradient(135deg,#00d4ff,#7b2fff);box-shadow:0 4px 18px -4px rgba(0,212,255,.45);display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer}
+.btn-main:active{transform:scale(.98);opacity:.92}
+.btn-main svg{width:14px;height:14px;fill:#fff}
+.btn-ghost{width:100%;padding:11px;border-radius:14px;font-size:.72rem;font-weight:700;color:#b8b8cc;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer}
+.btn-ghost:active{background:rgba(255,255,255,.07)}
+.btn-ghost svg{width:12px;height:12px;fill:currentColor}
+
+.dl-bg{position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0);opacity:0;visibility:hidden;pointer-events:none;transition:background .28s ease,opacity .28s ease,visibility .28s;padding:16px}
+.dl-bg.on{background:rgba(0,0,0,.78);opacity:1;visibility:visible;pointer-events:auto}
+.dl-card{background:linear-gradient(170deg,#14142a,#0a0a14);border:1px solid rgba(0,212,255,.28);border-radius:18px;padding:22px 18px;max-width:290px;width:100%;text-align:center;position:relative;box-shadow:0 20px 50px rgba(0,0,0,.55);transform:scale(.93);opacity:0;transition:transform .32s cubic-bezier(.32,.72,0,1),opacity .28s ease}
+.dl-bg.on .dl-card{transform:scale(1);opacity:1}
+.dl-close{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:#9a9ab0;font-size:11px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.dl-close:active{background:rgba(255,60,100,.2);color:#ff4d7a}
+
+.dl-ring{position:relative;width:96px;height:96px;margin:0 auto 12px}
+.dl-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.dl-ring .bg-c{fill:none;stroke:rgba(255,255,255,.06);stroke-width:6}
+.dl-ring .bar-c{fill:none;stroke:url(#dlGrad);stroke-width:6;stroke-linecap:round;transition:stroke-dashoffset .15s linear}
+.dl-ring__in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.dl-ring__ic{font-size:17px}
+.dl-ring__pct{font-size:14px;font-weight:900;color:#00d4ff}
+.dl-title{font-size:12.5px;font-weight:900;color:#fff;margin-bottom:4px}
+.dl-desc{font-size:10.5px;color:#8a8aa5;line-height:1.7;margin-bottom:13px}
+.dl-desc strong{color:#00d4ff}
+.dl-btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;padding:12px;border-radius:12px;font-size:11.5px;font-weight:900;color:#fff;background:linear-gradient(135deg,#00d4ff,#7b2fff);margin-bottom:10px;box-shadow:0 4px 14px -4px rgba(0,212,255,.4)}
+.dl-btn:active{transform:scale(.98)}
+.dl-foot{font-size:10px;color:#666;display:flex;align-items:center;justify-content:center;gap:4px}
+.dl-foot .tm{font-weight:900;color:#00d4ff;background:rgba(0,212,255,.1);padding:2px 7px;border-radius:6px;min-width:24px}
+
+.footer{position:relative;z-index:1;text-align:center;padding:20px 14px 8px;color:#363650;font-size:.64rem;line-height:2}
+.footer__b{display:inline-flex;align-items:center;gap:5px;background:rgba(0,212,255,.04);border:1px solid rgba(0,212,255,.1);border-radius:100px;padding:6px 12px;margin-top:4px;color:#9a9ab0;font-size:.64rem;font-weight:600}
+.footer__b a{color:#00d4ff;font-weight:800}
+body.lock{overflow:hidden}
 </style>
 </head>
 <body>
+<div class="bg"><div class="stars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+<div id="offline"><div class="offline-icon">📡</div><div class="offline-title">اتصال اینترنت قطع است</div><div class="offline-desc">لطفاً اتصال اینترنت خود را بررسی کنید و دوباره تلاش کنید.</div><button class="offline-btn" id="offlineRetry">تلاش مجدد</button></div>
+<header class="header"><h1 class="logo"><b>TNT</b><i>MOD</i></h1><p class="subtitle">دانلود مود بازی‌های محبوب اندروید</p></header>
+<div class="infobar"><span>⚡ <b>دانلود سریع</b></span><span class="g">✓ <b>تست شده</b></span><span class="p">🔒 <b>بدون بن</b></span></div>
+<main class="section"><div class="section__head"><h2>مود بازی‌ها</h2><span class="section__cnt" id="cnt">۰ بازی</span></div><div class="grid" id="grid"></div></main>
 
-<div class="container">
-  <header>
-    <h1>🎮 مرکز اگهی اکانت و مود بازی</h1>
-    <p>اینجا می‌تونی اکانتت رو رایگان اگهی کنی و مود بازی دانلود کنی ⚡</p>
-  </header>
-
-  <nav class="tabs">
-    <button class="tab active" data-tab="mods">🎮 مود بازی‌ها</button>
-    <button class="tab" data-tab="ads">🛒 اگهی اکانت</button>
-  </nav>
-
-  <section class="panel active" id="panel-mods">
-    <button class="featured" onclick="openMod('morabi')">
-      <div class="featured-inner">
-        <div class="featured-thumb">🏆<span class="mod-tag">MOD</span></div>
-        <div class="featured-info">
-          <h2>مربی برتر مود <span class="pin">📌 پین شده</span></h2>
-          <div class="featured-feats">
-            <span>🪙 سکه بی‌نهایت</span>
-            <span>💰 پول بی‌نهایت</span>
-            <span>⏭️ رد کردن مرحله</span>
-            <span>⚡ فول کردن انرژی</span>
-          </div>
-          <div class="featured-go"><span>مشاهده و دانلود</span><span>⬅</span></div>
-        </div>
-      </div>
-    </button>
-    <div class="grid" id="modsGrid"></div>
-  </section>
-
-  <section class="panel" id="panel-ads">
-    <div class="grid">
-      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🛒</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
-      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">💼</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
-      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🔑</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
-      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🎴</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
-      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🎲</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
-      <article class="card locked"><span class="badge-soon">✨ بزودی</span><div class="card-thumb">🎮</div><h3>به‌زودی</h3><p class="desc">این کادر به‌زودی پر می‌شه</p></article>
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <div class="modal__handle"></div>
+    <button class="modal__close" id="modalClose">✕</button>
+    <div class="modal__hero">
+      <div class="modal__icon-wrap"><div class="modal__glow"></div><div class="modal__icon-ring"></div><div class="modal__icon" id="mIcon">🎮</div></div>
+      <h3 class="modal__title" id="mTitle">نام بازی</h3>
+      <p class="modal__sub" id="mSub">مود اختصاصی و تست شده</p>
     </div>
-  </section>
-
-  <footer>ساخته شده با ❤️ | <b>صفحه به‌صورت خودکار به‌روز می‌شه</b></footer>
-</div>
-
-<div class="modal" id="modModal">
-  <div class="modal-content">
-    <button class="close-btn" data-close>✕</button>
-    <div class="mod-hero">
-      <div class="mod-hero-icon" id="modIcon"></div>
-      <h3 id="modTitle"></h3>
+    <ul class="modal__feats" id="mFeats"></ul>
+    <div class="modal__ver" id="mVer"></div>
+    <div class="modal__guide"><h4>راهنمای نصب</h4><p>۱. ابتدا در چنل <strong>روبیکا</strong> عضو شوید.<br>۲. فایل مود را از چنل دانلود کنید.<br>۳. نسخه اصلی را حذف و مود را نصب کنید.<br>۴. در صورت مشکل با پشتیبانی تماس بگیرید.</p></div>
+    <div class="modal__actions">
+      <button class="btn-main" id="mDl"><svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>دانلود مود</button>
+      <a class="btn-ghost" href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>پشتیبانی روبیکا</a>
     </div>
-    <ul class="feats" id="modFeats"></ul>
-    <div class="version-box" id="modVersion"></div>
-    <button class="btn-dl" id="modDownloadBtn"><span>⬇️</span><span>دانلود مود</span></button>
-    <button class="btn-speed" id="modSpeedBtn" style="display:none"><span>⚡</span><span>دانلود مود سرعت بی‌نهایت</span></button>
-    <a class="btn-tut" id="modTut" target="_blank" rel="noopener" style="display:none"><span>▶️</span><span>آموزش استفاده</span></a>
-    <p class="hint" id="modHint">پس از کلیک روی دانلود، ابتدا در چنل روبیکا عضو شوید.</p>
   </div>
 </div>
 
-<div class="modal" id="adModal">
-  <div class="modal-content">
-    <button class="close-btn" data-close>✕</button>
-    <div class="micon">📢</div>
-    <h3>اکانتت رو رایگان اگهی کن!</h3>
-    <p class="ad-text">عکس اکانتت رو تو گروه زیر بفرست و <b style="color:#ffb300">قیمتش رو هم بگو</b> تا برات اگهی کنیم ✅</p>
-    <a class="btn-join" href="https://rubika.ir/joing/BBGEGFBDI0ZUJFJZKIKAXLTAQNKCZYUQ" target="_blank" rel="noopener"><span>🚀</span><span>ورود به گروه روبیکا</span></a>
-    <button class="btn-ghost" data-close>بعداً</button>
+<div class="dl-bg" id="dlp">
+  <div class="dl-card">
+    <button class="dl-close" id="dlClose">✕</button>
+    <div class="dl-ring">
+      <svg viewBox="0 0 120 120"><defs><linearGradient id="dlGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00d4ff"/><stop offset="100%" stop-color="#7b2fff"/></linearGradient></defs>
+      <circle class="bg-c" cx="60" cy="60" r="52"></circle><circle class="bar-c" id="dlBar" cx="60" cy="60" r="52"></circle></svg>
+      <div class="dl-ring__in"><span class="dl-ring__ic">⬇️</span><span class="dl-ring__pct" id="dlPct">0%</span></div>
+    </div>
+    <div class="dl-title">عضویت در چنل روبیکا</div>
+    <div class="dl-desc">برای دریافت فایل، ابتدا در چنل <strong>روبیکا</strong> عضو شوید</div>
+    <a class="dl-btn" id="dlLink" href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener">📨 عضویت در چنل</a>
+    <div class="dl-foot"><span>⏱️</span> دانلود خودکار تا <span class="tm" id="dlTm">10</span> ثانیه</div>
   </div>
 </div>
 
-<div class="popup-overlay" id="goldPopup">
-  <div class="popup-card">
-    <button class="popup-close" onclick="closePopup('goldPopup')">✕</button>
-    <div class="progress-container">
-      <svg class="progress-svg" viewBox="0 0 140 140">
-        <circle class="progress-bg" cx="70" cy="70" r="60"></circle>
-        <circle class="progress-bar" id="goldBar" cx="70" cy="70" r="60"></circle>
-      </svg>
-      <div class="progress-inner"><span class="progress-icon">⬇️</span><span class="progress-percent" id="goldPercent">0%</span></div>
-    </div>
-    <div class="popup-title">عضو چنل روبیکا شوید</div>
-    <div class="popup-desc">برای دریافت مود، ابتدا در چنل <strong>روبیكا</strong> عضو شوید</div>
-    <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener" class="popup-btn"><span>📨</span><span>عضویت در چنل روبیکا</span></a>
-    <div class="popup-footer"><span>⏱️</span><span>دانلود خودکار تا <span class="timer" id="goldTimer">10</span> ثانیه دیگر</span></div>
-  </div>
-</div>
-
-<div class="popup-overlay" id="greenPopup">
-  <div class="popup-card green">
-    <button class="popup-close" onclick="closePopup('greenPopup')">✕</button>
-    <div class="progress-container">
-      <svg class="progress-svg" viewBox="0 0 140 140">
-        <circle class="progress-bg" cx="70" cy="70" r="60"></circle>
-        <circle class="progress-bar" id="greenBar" cx="70" cy="70" r="60"></circle>
-      </svg>
-      <div class="progress-inner"><span class="progress-icon">⚡</span><span class="progress-percent" id="greenPercent">0%</span></div>
-    </div>
-    <div class="popup-title">مود سرعت بی‌نهایت</div>
-    <div class="popup-desc">برای دریافت مود سرعت، ابتدا در چنل <strong>روبیكا</strong> عضو شوید</div>
-    <a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener" class="popup-btn"><span>📨</span><span>عضویت در چنل روبیکا</span></a>
-    <div class="popup-footer"><span>⏱️</span><span>دانلود خودکار تا <span class="timer" id="greenTimer">10</span> ثانیه دیگر</span></div>
-  </div>
-</div>
+<footer class="footer"><p>© ۲۰۲۶ TNT MOD</p><div class="footer__b"><span>پشتیبانی:</span><a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener">ZODIAC_MAFIANIGHTS</a></div></footer>
 
 <script>
-var MODS={
-morabi:{title:'مربی برتر مود',emoji:'🏆',image:null,feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'💰',t:'پول بی‌نهایت'},{i:'⏭️',t:'رد کردن مرحله'},{i:'⚡',t:'فول کردن انرژی'}],version:'نسخه ۲۰۲۶',versionDesc:'بهترین نسخه‌ی مود شده برای بازی مربی برتر با تمام امکانات آنلاک شده و بدون بن.',download:'https://www.mediafire.com/file/444owt6s75532pu/morabi.zip/file',tutorial:'https://rubika.ir/joinc/FGBEGGEF0MQQFRMRRIBLJEZGMMMXUYCT',popup:'gold'},
-footballia2:{title:'فوتبالیا ۲',emoji:'⚽',image:'https://uploadkon.ir/uploads/thumbs/5fab26_26Screenshot-2026-08-19-16-54-30-458-ir-mservices-market-edit.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'📦',t:'کم حجم'},{i:'📱',t:'سازگار همه دستگاه‌ها'}],version:'نسخه ۱۰۷',versionDesc:'مخصوص گوشی‌های ۶۴ بیت. اگر ۳۲ بیت داری در روبیکا پیام بدید.',download:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHHEJGAJJCBBJAF',popup:'gold'},
-clutchplate:{title:'صفحه کلاچ',emoji:'🏎️',image:'https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'💎',t:'جم بی‌نهایت'},{i:'⚡',t:'مود سرعت بی‌نهایت'}],version:'نسخه ۰.۴۵',versionDesc:'برای نسخه ۰.۴۵ بازی بهینه‌سازی، تست و تأیید شده است.',download:'https://www.mediafire.com/file/bnrp8vqgt42es5f/ClutchPlate.zip/file',speed:'https://uploadkon.ir/uploads/fcb211_26SPEED.zip',popup:'gold'},
-godfather:{title:'پدرخوانده',emoji:'🎩',image:'https://uploadkon.ir/uploads/497826_26Screenshot-2026-08-27-00-28-57-068-ir-mservices-market-edit.jpg',feats:[{i:'👁️',t:'قابلیت ناظر شدن'},{i:'🎤',t:'صحبت روی نوبت دیگران'},{i:'🛡️',t:'تست شده بدون بن'}],version:'نسخه ۰.۰.۶۵۰',versionDesc:'برای نسخه ۰.۰.۶۵۰ بازی بهینه‌سازی شده و از تمامی قابلیت‌های جدید پشتیبانی می‌کند.',download:'https://rubika.ir/BAZI_MOD_ZODIAC/BIHHEJGAJJCBBJAF',popup:'gold'},
-mehmaneshab:{title:'مهمان نیمه شب',emoji:'👻',image:'https://uploadkon.ir/uploads/caef26_26IMG-20260826-153054-563.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'📦',t:'کم حجم'},{i:'📱',t:'سازگار همه دستگاه‌ها'}],version:'نسخه ۱۰۷',versionDesc:'برای گوشی‌های ۶۴ بیت بهینه‌سازی شده و بدون هیچ مشکلی اجرا می‌شود.',download:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHGHCHHABIJFJAF',popup:'gold'},
-diarbaqi:{title:'دیار باقی',emoji:'🏰',image:'https://uploadkon.ir/uploads/09a127_26Screenshot-2026-08-27-17-38-07-075-ir-mservices-market-edit.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'📱',t:'سازگار با ۳۲ بیت'},{i:'💻',t:'سازگار با ۶۴ بیت'},{i:'🛡️',t:'تست شده بدون بن'}],version:'نسخه ۱۰۷',versionDesc:'برای هر دو معماری ۳۲ و ۶۴ بیت بهینه‌سازی شده است.',download:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIIHAJCIHHDGBJAF',popup:'gold'},
-taxido:{title:'تاکسیدو کلاه مشترک',emoji:'🎭',image:'https://uploadkon.ir/uploads/31ec07_26Screenshot-2026-09-07-07-15-55-734-ir-mservices-market-edit.jpg',feats:[{i:'🪙',t:'سکه بی‌نهایت'},{i:'📱',t:'سازگار با ۳۲ بیت'},{i:'💻',t:'سازگار با ۶۴ بیت'},{i:'🛡️',t:'تست شده بدون بن'}],version:'نسخه کامل',versionDesc:'برای هر دو معماری ۳۲ و ۶۴ بیت بهینه‌سازی شده و سکه بی‌نهایت دارد.',download:'https://rubika.ir/BAZI_MOD_ZODIAC/BIJFCAFHCHEFFFIE',popup:'gold'}
-};
-
-/* ساخت گرید */
 (function(){
-  var grid=document.getElementById('modsGrid');
-  if(!grid)return;
-  var keys=['footballia2','clutchplate','godfather','mehmaneshab','diarbaqi','taxido'];
-  var html='';
-  keys.forEach(function(k){
-    var m=MODS[k];
-    var thumb=m.image?'<img src="'+m.image+'" alt="'+m.title+'" loading="lazy" onerror="this.parentNode.innerHTML=\''+m.emoji+'\'">':m.emoji;
-    html+='<article class="card mod" onclick="openMod(\''+k+'\')">'
-      +'<span class="badge-live">موجود</span>'
-      +'<div class="card-thumb">'+thumb+'</div>'
-      +'<h3>'+m.title+'</h3>'
-      +'<p class="desc">'+m.feats.slice(0,2).map(function(f){return f.t;}).join(' • ')+'</p>'
-      +'</article>';
-  });
+'use strict';
+var CH='https://rubika.ir/ZODIAC_MAFIANIGHTS';
+var GAMES=[
+  {id:'morabi',title:'مربی برتر',emoji:'🏆',badge:'new',badgeTxt:'جدید',feats:['سکه بی‌نهایت','پول بی‌نهایت','فول انرژی','رد کردن مرحله'],ver:'نسخه ۲۰۲۶',verDesc:'بهترین نسخه مود شده با تمام امکانات آنلاک شده و بدون بن.',img:'https://uploadkon.ir/uploads/0ca324_26b14c4bb2c69f4e18baed37c1d0b8aafb.png',dl:'https://rubika.ir/joinc/FGBEGGEF0MQQFRMRRIBLJEZGMMMXUYCT'},
+  {id:'footballia',title:'فوتبالیا ۲',emoji:'⚽',badge:'mod',badgeTxt:'MOD',feats:['سکه بی‌نهایت','کم حجم','معماری ۶۴ بیت'],ver:'نسخه ۱۰۷',verDesc:'مخصوص گوشی‌های معماری ۶۴ بیت بهینه‌سازی شده.',img:'https://uploadkon.ir/uploads/thumbs/5fab26_26Screenshot-2026-08-19-16-54-30-458-ir-mservices-market-edit.jpg',dl:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHHEJGAJJCBBJAF'},
+  {id:'clutch',title:'صفحه کلاچ',emoji:'🏎️',badge:'mod',badgeTxt:'MOD',feats:['سکه بی‌نهایت','جم بی‌نهایت','سرعت بی‌نهایت'],ver:'نسخه ۰.۴۵',verDesc:'برای نسخه ۰.۴۵ بازی تست و بهینه شده است.',img:'https://uploadkon.ir/uploads/thumbs/5e8725_26Screenshot-2026-08-25-15-32-41-592-ir-mservices-market-edit.jpg',dl:'https://www.mediafire.com/file/bnrp8vqgt42es5f/ClutchPlate.zip/file'},
+  {id:'godfather',title:'پدرخوانده',emoji:'🎩',badge:'mod',badgeTxt:'MOD',feats:['ناظر شدن','صحبت روی نوبت','بدون بن'],ver:'نسخه ۰.۰.۶۵۰',verDesc:'برای نسخه ۰.۰.۶۵۰ بهینه و از قابلیت‌های جدید پشتیبانی می‌کند.',img:'https://uploadkon.ir/uploads/497826_26Screenshot-2026-08-27-00-28-57-068-ir-mservices-market-edit.jpg',dl:'https://rubika.ir/BAZI_MOD_ZODIAC/BIHHEJGAJJCBBJAF'},
+  {id:'mehman',title:'مهمان نیمه شب',emoji:'👻',badge:'mod',badgeTxt:'MOD',feats:['سکه بی‌نهایت','کم حجم','معماری ۶۴ بیت'],ver:'نسخه ۱۰۷',verDesc:'برای گوشی‌های معماری ۶۴ بیت بهینه‌سازی شده.',img:'https://uploadkon.ir/uploads/caef26_26IMG-20260826-153054-563.jpg',dl:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIHGHCHHABIJFJAF'},
+  {id:'diarbaqi',title:'دیار باقی',emoji:'🏰',badge:'mod',badgeTxt:'MOD',feats:['سکه بی‌نهایت','معماری ۶۴ بیت'],ver:'نسخه ۱۰۷',verDesc:'برای معماری ۶۴ بیت بهینه شده است.',img:'https://uploadkon.ir/uploads/09a127_26Screenshot-2026-08-27-17-38-07-075-ir-mservices-market-edit.jpg',dl:'https://rubika.ir/ZODIAC_MAFIANIGHTS/BIIHAJCIHHDGBJAF'},
+  {id:'taxido',title:'تاکسیدو',emoji:'🎭',badge:'mod',badgeTxt:'MOD',feats:['سکه بی‌نهایت','معماری ۶۴ بیت'],ver:'نسخه کامل',verDesc:'برای معماری ۶۴ بیت بهینه‌سازی شده است.',img:'https://uploadkon.ir/uploads/31ec07_26Screenshot-2026-09-07-07-15-55-734-ir-mservices-market-edit.jpg',dl:'https://rubika.ir/BAZI_MOD_ZODIAC/BIJFCAFHCHEFFFIE'}
+];
+var currentDl=CH,modalOpen=false,dlOpen=false;
+var PD=['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+function toFa(n){return String(n).replace(/\d/g,function(d){return PD[+d]})}
+function $(id){return document.getElementById(id)}
+function featInfo(f){
+  if(/سکه|پول|جم|طلا|الماس|آیتم/.test(f))return{t:'gold',i:'💰'};
+  if(/سرعت/.test(f))return{t:'cyan',i:'⚡'};
+  if(/انرژی|فول/.test(f))return{t:'cyan',i:'🔋'};
+  if(/بدون بن|آنتی بن|امن/.test(f))return{t:'green',i:'🛡️'};
+  if(/ناظر/.test(f))return{t:'purple',i:'👁️'};
+  if(/صحبت/.test(f))return{t:'purple',i:'💬'};
+  if(/رد کردن|رد مرحله|مرحله/.test(f))return{t:'purple',i:'⏭️'};
+  if(/کم حجم/.test(f))return{t:'blue',i:'📦'};
+  if(/۶۴ بیت|64 بیت|معماری/.test(f))return{t:'blue',i:'📱'};
+  return{t:'cyan',i:'✨'};
+}
+function iconHtml(g){return g.img?'<img src="'+g.img+'" alt="'+g.title+'" loading="lazy" onerror="this.parentNode.innerHTML=\''+g.emoji+'\'">':g.emoji}
+function pillHtml(f){var i=featInfo(f);return'<span class="pill pill--'+i.t+'"><span class="pi">'+i.i+'</span>'+f+'</span>'}
+function featBoxHtml(f){var i=featInfo(f);return'<li class="feat-box feat-box--'+i.t+'"><span class="fi">'+i.i+'</span><span>'+f+'</span></li>'}
+
+function renderGames(){
+  var grid=$('grid'),html='',i,k,g,bc,pills,maxF;
+  for(i=0;i<GAMES.length;i++){
+    g=GAMES[i];bc='card__badge--'+(g.badge||'mod');pills='';maxF=Math.min(g.feats.length,3);
+    for(k=0;k<maxF;k++)pills+=pillHtml(g.feats[k]);
+    html+='<div class="card" data-id="'+g.id+'"><span class="card__badge '+bc+'">'+g.badgeTxt+'</span><div class="card__icon-wrap"><div class="card__glow"></div><div class="card__icon-ring"></div><div class="card__icon">'+iconHtml(g)+'</div></div><div class="card__title">'+g.title+'</div><div class="card__feats">'+pills+'</div><button class="card__btn"><svg viewBox="0 0 24 24"><path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/></svg>دریافت مود</button></div>';
+  }
   grid.innerHTML=html;
+  var cards=grid.querySelectorAll('.card');
+  for(i=0;i<cards.length;i++)cards[i].addEventListener('click',function(){openMod(this.getAttribute('data-id'))});
+  $('cnt').textContent=toFa(GAMES.length)+' بازی';
+}
+
+function pushHist(s){try{history.pushState(s,'')}catch(e){}}
+
+function openMod(id){
+  var g=null,i,j,fh;
+  for(i=0;i<GAMES.length;i++){if(GAMES[i].id===id){g=GAMES[i];break}}
+  if(!g)return;
+  var icon=$('mIcon');
+  if(g.img)icon.innerHTML='<img src="'+g.img+'" alt="'+g.title+'" onerror="this.parentNode.innerHTML=\''+g.emoji+'\'">';
+  else icon.innerHTML=g.emoji;
+  $('mTitle').textContent=g.title;$('mSub').textContent='مود اختصاصی و تست شده';
+  fh='';for(j=0;j<g.feats.length;j++)fh+=featBoxHtml(g.feats[j]);
+  $('mFeats').innerHTML=fh;
+  $('mVer').innerHTML='<span class="tag">'+g.ver+'</span><p>'+g.verDesc+'</p>';
+  currentDl=g.dl||CH;
+  $('modal').classList.add('on');document.body.classList.add('lock');
+  modalOpen=true;pushHist({modal:true});
+}
+function closeModal(){
+  if(!modalOpen)return;
+  $('modal').classList.remove('on');document.body.classList.remove('lock');modalOpen=false;
+}
+function openDl(){
+  var bar=$('dlBar'),pct=$('dlPct'),tm=$('dlTm'),link=currentDl||CH;
+  var CIRC=2*Math.PI*52;
+  bar.style.strokeDasharray=CIRC;bar.style.strokeDashoffset=CIRC;
+  pct.textContent='0%';tm.textContent='10';
+  $('dlLink').href=link;
+  $('dlp').classList.add('on');document.body.classList.add('lock');
+  dlOpen=true;pushHist({dl:true});
+  var p=0,t=10;
+  window._dlP=setInterval(function(){p+=1;bar.style.strokeDashoffset=CIRC-(p/100)*CIRC;pct.textContent=p+'%';if(p>=100)clearInterval(window._dlP)},100);
+  window._dlT=setInterval(function(){t-=1;tm.textContent=t;if(t<=0){closeDl();window.open(link,'_blank')}},1000);
+}
+function closeDl(){
+  if(!dlOpen)return;
+  $('dlp').classList.remove('on');
+  if(!modalOpen)document.body.classList.remove('lock');
+  dlOpen=false;
+  if(window._dlP)clearInterval(window._dlP);
+  if(window._dlT)clearInterval(window._dlT);
+}
+
+$('modalClose').addEventListener('click',function(){closeModal();if(history.state&&history.state.modal)history.back()});
+$('mDl').addEventListener('click',function(){closeModal();setTimeout(openDl,280)});
+$('modal').addEventListener('click',function(e){if(e.target===this){closeModal();if(history.state&&history.state.modal)history.back()}});
+$('dlClose').addEventListener('click',function(){closeDl();if(history.state&&history.state.dl)history.back()});
+$('dlp').addEventListener('click',function(e){if(e.target===this){closeDl();if(history.state&&history.state.dl)history.back()}});
+window.addEventListener('popstate',function(){if(dlOpen){closeDl();return}if(modalOpen){closeModal()}});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(dlOpen)closeDl();else if(modalOpen)closeModal()}});
+$('offlineRetry').addEventListener('click',function(){location.reload()});
+function setOffline(s){if(s){document.body.classList.add('is-offline');$('offline').classList.add('show')}else{document.body.classList.remove('is-offline');$('offline').classList.remove('show')}}
+window.addEventListener('online',function(){setOffline(false)});
+window.addEventListener('offline',function(){setOffline(true)});
+if(!navigator.onLine)setOffline(true);else renderGames();
 })();
-
-/* تب‌ها */
-var tabs=document.querySelectorAll('.tab');
-var panels={ads:document.getElementById('panel-ads'),mods:document.getElementById('panel-mods')};
-var adModal=document.getElementById('adModal');
-var modModal=document.getElementById('modModal');
-
-function switchTab(name){
-  tabs.forEach(function(t){t.classList.toggle('active',t.dataset.tab===name);});
-  Object.keys(panels).forEach(function(k){panels[k].classList.toggle('active',k===name);});
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-tabs.forEach(function(t){
-  t.addEventListener('click',function(){
-    switchTab(t.dataset.tab);
-    if(t.dataset.tab==='ads')setTimeout(function(){openModal(adModal);},250);
-  });
-});
-
-/* مودال‌ها */
-function openModal(el){el.classList.add('show');document.body.style.overflow='hidden';}
-function closeModal(el){el.classList.remove('show');document.body.style.overflow='';}
-document.querySelectorAll('[data-close]').forEach(function(btn){
-  btn.addEventListener('click',function(){closeModal(btn.closest('.modal'));});
-});
-[adModal,modModal].forEach(function(modal){
-  modal.addEventListener('click',function(e){if(e.target===modal)closeModal(modal);});
-});
-document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){[adModal,modModal].forEach(function(m){closeModal(m);});closePopup('goldPopup');closePopup('greenPopup');}
-});
-
-/* مودال جزئیات */
-function openMod(key){
-  var m=MODS[key];
-  if(!m)return;
-  var iconBox=document.getElementById('modIcon');
-  iconBox.innerHTML=m.image?'<img src="'+m.image+'" alt="'+m.title+'" onerror="this.parentNode.innerHTML=\''+m.emoji+'\'">':m.emoji;
-  document.getElementById('modTitle').textContent=m.title;
-  document.getElementById('modFeats').innerHTML=m.feats.map(function(f){return '<li><span class="fi">'+f.i+'</span><span>'+f.t+'</span></li>';}).join('');
-  document.getElementById('modVersion').innerHTML='<span class="vtag">'+m.version+'</span><p>'+m.versionDesc+'</p>';
-  var dlBtn=document.getElementById('modDownloadBtn');
-  var spBtn=document.getElementById('modSpeedBtn');
-  var tutBtn=document.getElementById('modTut');
-  dlBtn.onclick=function(){triggerDownload(m.download,m.popup||'gold');};
-  if(m.speed){spBtn.style.display='flex';spBtn.onclick=function(){triggerDownload(m.speed,'green');};}
-  else{spBtn.style.display='none';}
-  if(m.tutorial){tutBtn.style.display='flex';tutBtn.href=m.tutorial;}
-  else{tutBtn.style.display='none';}
-  openModal(modModal);
-}
-
-/* پاپ‌آپ */
-var timers={};
-function triggerDownload(url,type){
-  closeModal(modModal);
-  if(type==='gold')openPopup('goldPopup',url);
-  else if(type==='green')openPopup('greenPopup',url);
-  else window.location.href=url;
-}
-function openPopup(id,url){
-  var popup=document.getElementById(id);
-  var bar=popup.querySelector('.progress-bar');
-  var percent=popup.querySelector('.progress-percent');
-  var timer=popup.querySelector('.timer');
-  var CIRC=2*Math.PI*60;
-  bar.style.strokeDasharray=CIRC;
-  bar.style.strokeDashoffset=CIRC;
-  percent.textContent='0%';
-  timer.textContent='10';
-  popup.classList.add('active');
-  document.body.style.overflow='hidden';
-  var progress=0,timeLeft=10;
-  timers[id+'_p']=setInterval(function(){
-    progress+=1;
-    bar.style.strokeDashoffset=CIRC-(progress/100)*CIRC;
-    percent.textContent=progress+'%';
-    if(progress>=100)clearInterval(timers[id+'_p']);
-  },100);
-  timers[id+'_t']=setInterval(function(){
-    timeLeft--;timer.textContent=timeLeft;
-    if(timeLeft<=0){
-      clearInterval(timers[id+'_t']);clearInterval(timers[id+'_p']);
-      popup.classList.remove('active');
-      document.body.style.overflow='';
-      window.location.href=url;
-    }
-  },1000);
-}
-function closePopup(id){
-  var popup=document.getElementById(id);
-  if(!popup)return;
-  popup.classList.remove('active');
-  document.body.style.overflow='';
-  clearInterval(timers[id+'_p']);clearInterval(timers[id+'_t']);
-}
-document.querySelectorAll('.popup-overlay').forEach(function(p){
-  p.addEventListener('click',function(e){if(e.target===p)closePopup(p.id);});
-});
 </script>
 </body>
 </html>
