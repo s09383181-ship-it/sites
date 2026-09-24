@@ -2,603 +2,1293 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>TNT Chat</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="theme-color" content="#070712">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>گروه چت TNT</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js"></script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&display=swap');
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:'Vazirmatn',Tahoma,sans-serif;background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);color:#fff;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden}
-#login{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:16px;padding:20px}
-#login h1{font-size:28px;color:#ffb300}
-#login input{width:100%;max-width:280px;padding:14px;border:1px solid rgba(255,255,255,.2);border-radius:14px;background:rgba(255,255,255,.08);color:#fff;font-size:16px;outline:none}
-#login button{width:100%;max-width:280px;padding:14px;border:none;border-radius:14px;background:linear-gradient(90deg,#ff5722,#ffb300);color:#000;font-weight:700;font-size:16px;cursor:pointer}
-#app{display:none;flex-direction:column;height:100%}
-header{background:rgba(15,12,41,.92);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.1)}
-header strong{color:#ffb300;font-size:17px}
-.tabs{display:flex;background:rgba(15,12,41,.85);border-bottom:1px solid rgba(255,255,255,.1)}
-.tab{flex:1;text-align:center;padding:12px 6px;font-weight:600;color:#aaa;cursor:pointer;font-size:13px}
-.tab.active{color:#ffb300;border-bottom:3px solid #ffb300}
-#content{flex:1;overflow:hidden;display:flex;flex-direction:column}
-.panel{display:none;flex:1;flex-direction:column;overflow:hidden}
-.panel.active{display:flex}
-.messages{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
-.msg{max-width:80%;padding:10px 14px;border-radius:16px;font-size:15px;line-height:1.4;word-break:break-word}
-.msg.me{align-self:flex-start;background:linear-gradient(135deg,#ff8f00,#ff5722)}
-.msg.other{align-self:flex-end;background:rgba(255,255,255,.1)}
-.msg .meta{font-size:11px;opacity:.8;margin-bottom:3px}
-.msg img{max-width:100%;border-radius:10px;margin-top:6px;display:block}
-.msg audio{width:100%;margin-top:6px;height:36px}
-.post{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:16px;overflow:hidden;margin-bottom:8px}
-.post img{width:100%;max-height:280px;object-fit:cover;display:block;background:#1a1a2e}
-.post .body{padding:12px}
-.post .text{font-size:15px;margin-bottom:6px;white-space:pre-wrap}
-.post .meta{font-size:11px;color:#aaa}
-.channel-item,.user-item{display:flex;align-items:center;gap:12px;padding:12px;margin:6px 8px;background:rgba(255,255,255,.07);border-radius:14px;cursor:pointer;border:1px solid rgba(255,255,255,.1)}
-.channel-item img,.user-item .avatar{width:48px;height:48px;border-radius:50%;object-fit:cover;background:#1a1a2e;flex-shrink:0}
-.input-area{padding:8px 10px 12px;background:rgba(15,12,41,.95);border-top:1px solid rgba(255,255,255,.1);display:flex;flex-direction:column;gap:6px}
-.input-row{display:flex;gap:6px;align-items:center}
-.input-row input{flex:1;padding:11px 14px;border-radius:24px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:15px;outline:none;min-width:0}
-.icon-btn{width:40px;height:40px;border:none;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.send-btn{width:44px;height:44px;border:none;border-radius:50%;background:linear-gradient(135deg,#ff5722,#ffb300);color:#000;font-size:18px;font-weight:bold;cursor:pointer;flex-shrink:0}
-.emoji-bar{display:none;flex-wrap:wrap;gap:6px;padding:8px;background:rgba(0,0,0,.3);border-radius:12px;max-height:110px;overflow-y:auto}
-.emoji-bar.show{display:flex}
-.emoji-bar span{font-size:22px;cursor:pointer;padding:3px}
-#banOverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9999;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px}
-#banOverlay h2{color:#ef5350;font-size:24px}
-.empty{text-align:center;padding:40px;color:#aaa;font-size:14px}
-.status,.conn{text-align:center;padding:5px;font-size:12px;color:#aaa}
-#preview{display:none}
-#preview img{max-height:70px;border-radius:8px;margin:4px}
-.profile-box{padding:20px;text-align:center}
-.profile-box input,.profile-box textarea{width:100%;max-width:300px;padding:12px;margin:8px 0;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(0,0,0,.3);color:#fff;font-size:14px}
-.profile-box button{margin-top:12px;padding:12px 28px;border:none;border-radius:12px;background:linear-gradient(90deg,#ff5722,#ffb300);color:#000;font-weight:600;font-size:15px;cursor:pointer}
+:root{
+  --bg:#070712;--bg2:#0b0b1a;--bg3:#0f0f22;
+  --surf:rgba(255,255,255,.045);--surf2:rgba(255,255,255,.07);
+  --bd:rgba(255,255,255,.08);--bd2:rgba(255,255,255,.12);
+  --txt:#eef0f8;--dim:#8a8aa5;--mut:#5a6178;
+  --cy:#00d4ff;--pu:#7b2fff;--pk:#ff3d7a;--gr:#00ffaa;--or:#ffb74d;
+  --grad:linear-gradient(135deg,#00d4ff,#7b2fff);
+  --grad2:linear-gradient(115deg,#00e5ff,#8b5cf6,#ff3d7a);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation;overscroll-behavior:none}
+html,body{height:100%;overflow:hidden;position:fixed;width:100%}
+body{background:var(--bg);color:var(--txt);font-weight:500;line-height:1.65;-webkit-font-smoothing:antialiased;user-select:none;-webkit-user-select:none}
+input,textarea{user-select:text;-webkit-user-select:text}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-weight:inherit}
+img{max-width:100%;height:auto;display:block}
+input,textarea{outline:none;border:none;background:none;color:inherit;font-family:inherit}
+
+/* ========== BACKGROUND ========== */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(ellipse 110% 55% at 50% -8%,rgba(99,60,255,.4),transparent 52%),
+    radial-gradient(ellipse 55% 40% at 100% 30%,rgba(0,220,255,.18),transparent 48%),
+    radial-gradient(ellipse 50% 35% at 0% 70%,rgba(255,40,120,.13),transparent 45%),
+    linear-gradient(175deg,#0b0b1a 0%,#070712 45%,#05050e 100%)}
+.stars{position:absolute;inset:0}
+.stars span{position:absolute;background:#fff;border-radius:50%;opacity:.4;animation:tw 8s ease-in-out infinite}
+.stars span:nth-child(1){width:2px;height:2px;top:5%;left:10%}
+.stars span:nth-child(2){width:1px;height:1px;top:12%;left:75%;animation-delay:1.5s}
+.stars span:nth-child(3){width:2px;height:2px;top:25%;left:30%;animation-delay:3s}
+.stars span:nth-child(4){width:1px;height:1px;top:40%;left:90%;animation-delay:.8s}
+.stars span:nth-child(5){width:2px;height:2px;top:55%;left:18%;animation-delay:2.2s}
+.stars span:nth-child(6){width:1px;height:1px;top:65%;left:60%;animation-delay:4s}
+.stars span:nth-child(7){width:2px;height:2px;top:78%;left:40%;animation-delay:1s}
+.stars span:nth-child(8){width:1px;height:1px;top:88%;left:85%;animation-delay:2.8s}
+.stars span:nth-child(9){width:2px;height:2px;top:15%;left:50%;animation-delay:3.5s}
+.stars span:nth-child(10){width:1px;height:1px;top:48%;left:5%;animation-delay:.3s}
+@keyframes tw{0%,100%{opacity:.15}50%{opacity:.6}}
+
+/* ========== OFFLINE ========== */
+#offline{position:fixed;inset:0;z-index:99999;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px;text-align:center}
+#offline.show{display:flex}
+.off-icon{width:76px;height:76px;border-radius:50%;background:rgba(255,60,100,.12);border:2px solid rgba(255,60,100,.35);display:flex;align-items:center;justify-content:center;font-size:1.9rem}
+.off-title{font-size:1.1rem;font-weight:900;color:#fff}
+.off-desc{font-size:.8rem;color:var(--dim);max-width:260px;line-height:1.8}
+.off-btn{padding:12px 28px;border-radius:100px;font-size:.82rem;font-weight:800;color:#fff;background:var(--grad);margin-top:8px}
+
+/* ========== LOGIN ========== */
+#login{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.login-box{width:100%;max-width:380px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid var(--bd);border-radius:26px;padding:34px 24px 28px;backdrop-filter:blur(14px);box-shadow:0 24px 60px -20px rgba(123,47,255,.35)}
+.login-logo{width:88px;height:88px;margin:0 auto 14px;border-radius:50%;background:linear-gradient(150deg,#12122a,#0a0a14);display:flex;align-items:center;justify-content:center;font-size:2.6rem;position:relative;box-shadow:0 0 0 2px #0b0b1a,0 0 0 3px rgba(0,212,255,.35),0 0 40px rgba(123,47,255,.5)}
+.login-title{text-align:center;font-size:1.6rem;font-weight:900;margin-bottom:4px;letter-spacing:-.5px}
+.login-title b{background:var(--grad2);background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:lg 9s ease infinite}
+.login-title i{font-style:normal;color:#fff}
+@keyframes lg{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.login-sub{text-align:center;color:var(--dim);font-size:.78rem;margin-bottom:22px}
+.login-input{width:100%;padding:15px 18px;border:1px solid var(--bd);border-radius:16px;background:rgba(255,255,255,.03);color:#fff;font-size:16px;transition:.2s}
+.login-input:focus{border-color:rgba(0,212,255,.5);background:rgba(0,212,255,.05)}
+.login-btn{width:100%;padding:16px;margin-top:12px;border-radius:16px;font-size:.95rem;font-weight:900;color:#fff;background:var(--grad);box-shadow:0 8px 26px -6px rgba(0,212,255,.5);transition:.15s}
+.login-btn:active{transform:scale(.97)}
+.login-err{color:var(--pk);font-size:.75rem;text-align:center;margin-top:10px;min-height:18px}
+
+/* ========== APP ========== */
+#app{position:relative;z-index:1;display:none;flex-direction:column;height:100%}
+#app.on{display:flex}
+
+/* HEADER */
+.hdr{padding:10px 12px;background:rgba(11,11,26,.85);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:11px;flex-shrink:0;z-index:20;padding-top:calc(10px + env(safe-area-inset-top))}
+.hdr-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:1.05rem;overflow:hidden;box-shadow:0 0 0 2px #0b0b1a,0 0 0 3px rgba(0,212,255,.3);cursor:pointer}
+.hdr-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+.hdr-info{flex:1;min-width:0}
+.hdr-name{font-size:.9rem;font-weight:800;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr-desc{font-size:.66rem;color:var(--dim);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:1px}
+.hdr-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.hdr-dot{width:9px;height:9px;border-radius:50%;background:var(--pk);box-shadow:0 0 8px var(--pk);flex-shrink:0;transition:.3s;margin-left:2px}
+.hdr-dot.on{background:var(--gr);box-shadow:0 0 8px var(--gr)}
+
+/* TABS */
+.tabs{display:flex;background:rgba(11,11,26,.85);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.05);flex-shrink:0;padding:0 8px;gap:4px}
+.tab{flex:1;padding:11px 6px;background:none;border:none;color:var(--mut);font-weight:700;font-size:.8rem;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center;gap:6px;position:relative}
+.tab.active{color:var(--cy)}
+.tab.active::after{content:'';position:absolute;bottom:0;left:12%;right:12%;height:2.5px;border-radius:3px;background:var(--grad)}
+
+/* VIEWS */
+.view{flex:1;display:none;flex-direction:column;overflow:hidden;position:relative}
+.view.on{display:flex}
+
+/* NOTICE BANNER */
+#noticeBanner{display:none;margin:10px 12px 0;padding:11px 13px;border-radius:14px;background:linear-gradient(135deg,rgba(0,212,255,.1),rgba(123,47,255,.1));border:1px solid rgba(0,212,255,.22);font-size:.76rem;color:#a5f3fc;font-weight:700;flex-shrink:0;align-items:center;gap:8px}
+#noticeBanner.on{display:flex}
+#noticeBanner .ni{font-size:1rem;flex-shrink:0}
+
+/* MESSAGES */
+#messages{flex:1;overflow-y:auto;overflow-x:hidden;padding:10px 8px 8px;display:flex;flex-direction:column;gap:2px;scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+#messages::-webkit-scrollbar{width:5px}
+#messages::-webkit-scrollbar-thumb{background:rgba(123,47,255,.35);border-radius:3px}
+#messages::-webkit-scrollbar-track{background:transparent}
+
+.date-sep{align-self:center;font-size:.66rem;color:var(--dim);background:rgba(255,255,255,.05);padding:4px 12px;border-radius:100px;margin:12px 0 6px;border:1px solid rgba(255,255,255,.06);font-weight:600}
+
+/* Message row */
+.mrow{display:flex;width:100%;margin-top:3px;padding:0 4px;animation:fade .2s ease}
+.mrow.first{margin-top:12px}
+.mrow.mine{justify-content:flex-start;flex-direction:row}
+.mrow:not(.mine){justify-content:flex-end;flex-direction:row-reverse}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.m-av{width:30px;height:30px;border-radius:50%;flex-shrink:0;overflow:hidden;background:linear-gradient(135deg,#1a1a30,#12122a);display:flex;align-items:center;justify-content:center;font-size:.85rem;cursor:pointer;align-self:flex-end;margin:0 6px 4px}
+.m-av img{width:100%;height:100%;object-fit:cover}
+.m-av.hidden{visibility:hidden}
+
+.m-body{max-width:78%;position:relative;display:flex;flex-direction:column;align-items:flex-start}
+.mrow.mine .m-body{align-items:flex-start}
+.mrow:not(.mine) .m-body{align-items:flex-end}
+
+.m-name{font-size:.7rem;font-weight:800;color:var(--cy);margin:0 4px 3px;padding:0 2px}
+.mrow.mine .m-name{color:#a78bfa}
+
+.m-bubble{padding:7px 11px 5px;border-radius:16px;font-size:.86rem;line-height:1.55;word-break:break-word;position:relative;box-shadow:0 2px 8px rgba(0,0,0,.28);min-width:70px}
+.mrow:not(.mine) .m-bubble{background:linear-gradient(160deg,#1a1a30,#14142a);border:1px solid rgba(255,255,255,.05);color:#e8eaf0;border-bottom-left-radius:5px}
+.mrow.mine .m-bubble{background:linear-gradient(135deg,#7b2fff,#a855f7);color:#fff;border-bottom-right-radius:5px;box-shadow:0 4px 14px -4px rgba(123,47,255,.5)}
+
+.m-quote{display:flex;flex-direction:column;gap:2px;padding:6px 10px 5px;margin:-2px -4px 6px;background:rgba(0,0,0,.25);border-radius:10px;border-right:3px solid var(--cy);cursor:pointer;transition:.15s;max-width:100%}
+.m-quote:hover{background:rgba(0,0,0,.35)}
+.mrow.mine .m-quote{background:rgba(0,0,0,.2);border-right-color:#fff}
+.m-quote .qn{font-size:.66rem;font-weight:800;color:var(--cy)}
+.mrow.mine .m-quote .qn{color:#fff}
+.m-quote .qt{font-size:.72rem;color:#b8b8cc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:220px}
+.mrow.mine .m-quote .qt{color:rgba(255,255,255,.85)}
+
+.m-t{font-size:.6rem;color:rgba(255,255,255,.55);margin-top:3px;display:flex;align-items:center;gap:4px;justify-content:flex-end}
+.mrow:not(.mine) .m-t{color:var(--mut)}
+.m-t .tick{color:var(--gr);font-size:.7rem}
+
+.m-bubble img.m-img{max-width:100%;max-height:300px;border-radius:10px;margin-top:4px;display:block;cursor:pointer;object-fit:cover;background:#0a0a14}
+.m-bubble .m-sticker{font-size:3rem;line-height:1;text-align:center;padding:4px 6px;letter-spacing:2px}
+
+.mrow.highlight .m-bubble{animation:hl 1.5s ease}
+@keyframes hl{0%,100%{box-shadow:0 2px 8px rgba(0,0,0,.28)}50%{box-shadow:0 0 0 3px rgba(0,212,255,.5),0 2px 8px rgba(0,0,0,.28)}}
+
+/* EMPTY */
+.empty{text-align:center;color:#4a5170;padding:60px 20px;font-size:.82rem;flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.empty .big{font-size:3.2rem;opacity:.35}
+
+/* NOTICES */
+.notice{margin:8px 12px;padding:10px;border-radius:12px;text-align:center;font-size:.74rem;font-weight:700;flex-shrink:0}
+.notice.lock{background:rgba(255,152,0,.1);color:var(--or);border:1px solid rgba(255,152,0,.22)}
+.notice.ban{background:rgba(255,60,100,.1);color:var(--pk);border:1px solid rgba(255,60,100,.28)}
+
+/* ========== COMPOSER ========== */
+.composer{padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:rgba(11,11,26,.94);backdrop-filter:blur(18px);border-top:1px solid rgba(255,255,255,.05);flex-shrink:0;position:relative}
+
+.reply-bar{display:none;align-items:center;gap:10px;padding:8px 12px;background:linear-gradient(135deg,rgba(0,212,255,.08),rgba(123,47,255,.08));border-right:3px solid var(--cy);border-radius:10px;margin-bottom:6px}
+.reply-bar.on{display:flex}
+.reply-bar .rb-info{flex:1;min-width:0}
+.reply-bar .rb-n{font-size:.68rem;font-weight:800;color:var(--cy);margin-bottom:1px}
+.reply-bar .rb-t{font-size:.72rem;color:#b8b8cc;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.reply-bar .rb-x{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.06);color:var(--dim);font-size:.78rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;cursor:pointer}
+
+.img-prev{display:none;position:relative;margin-bottom:6px;padding:6px;background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.22);border-radius:12px;gap:10px;align-items:center}
+.img-prev.on{display:flex}
+.img-prev img{width:56px;height:56px;border-radius:10px;object-fit:cover;display:block}
+.img-prev .ip-i{flex:1;font-size:.7rem;color:var(--dim);line-height:1.5}
+.img-prev .ip-i b{display:block;color:var(--cy);font-size:.74rem;font-weight:800;margin-bottom:2px}
+.img-prev .ip-x{width:28px;height:28px;border-radius:50%;background:rgba(255,60,100,.2);color:var(--pk);font-size:.8rem;display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0}
+
+.comp-row{display:flex;align-items:flex-end;gap:6px}
+.c-btn{width:40px;height:40px;border-radius:50%;flex-shrink:0;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.07);color:#c8cee0;display:flex;align-items:center;justify-content:center;font-size:1.05rem;cursor:pointer;transition:.15s}
+.c-btn:active{transform:scale(.9);background:rgba(255,255,255,.1)}
+
+.c-field{flex:1;min-width:0;display:flex;align-items:flex-end;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:4px;transition:.2s}
+.c-field.focused{border-color:rgba(0,212,255,.35);background:rgba(0,212,255,.04)}
+.c-input{flex:1;min-height:32px;max-height:120px;padding:7px 10px;font-size:16px;line-height:1.4;color:#fff;resize:none;overflow-y:auto;background:transparent;border:none}
+.c-input::placeholder{color:var(--mut)}
+.c-emoji{width:34px;height:34px;border-radius:50%;background:transparent;color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:1.2rem;cursor:pointer;flex-shrink:0;transition:.15s}
+.c-emoji:active{background:rgba(255,255,255,.08);color:#fff}
+
+.c-send{width:44px;height:44px;border-radius:50%;flex-shrink:0;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;transition:.15s;background:var(--grad);box-shadow:0 4px 14px -3px rgba(0,212,255,.55)}
+.c-send:active{transform:scale(.9)}
+.c-send[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+
+/* ========== CHANNEL ========== */
+#posts{flex:1;overflow-y:auto;padding:12px}
+#posts::-webkit-scrollbar{width:5px}
+#posts::-webkit-scrollbar-thumb{background:rgba(123,47,255,.35);border-radius:3px}
+.post{background:linear-gradient(160deg,rgba(255,255,255,.055),rgba(255,255,255,.015));border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:14px;margin-bottom:11px;animation:fade .25s;box-shadow:0 4px 18px -8px rgba(0,0,0,.4)}
+.post img{width:100%;border-radius:12px;margin-top:10px;display:block;cursor:pointer;background:#0a0a14}
+.post .p-t{font-size:.86rem;line-height:1.75;color:#e8eaf0}
+.post .p-meta{font-size:.66rem;color:var(--mut);margin-top:10px;display:flex;align-items:center;gap:6px;padding-top:8px;border-top:1px solid rgba(255,255,255,.04)}
+
+/* ========== MODAL ========== */
+.modal{position:fixed;inset:0;z-index:500;display:flex;align-items:flex-end;justify-content:center;background:rgba(0,0,0,0);opacity:0;visibility:hidden;transition:.3s}
+.modal.on{background:rgba(0,0,0,.75);opacity:1;visibility:visible}
+@media(min-width:520px){.modal{align-items:center;padding:16px}}
+.modal-box{width:100%;max-width:420px;max-height:88vh;overflow-y:auto;background:linear-gradient(170deg,#15152c,#0c0c18);border-radius:24px 24px 0 0;padding:18px 18px calc(24px + env(safe-area-inset-bottom));transform:translateY(100%);transition:.34s cubic-bezier(.32,.72,0,1);border:1px solid rgba(255,255,255,.08);border-bottom:none;position:relative;-webkit-overflow-scrolling:touch}
+@media(min-width:520px){.modal-box{border-radius:22px;transform:translateY(20px) scale(.96);border-bottom:1px solid rgba(255,255,255,.08)}}
+.modal.on .modal-box{transform:translateY(0) scale(1)}
+.modal-box::-webkit-scrollbar{width:5px}
+.modal-box::-webkit-scrollbar-thumb{background:rgba(123,47,255,.35);border-radius:3px}
+.mb-handle{width:36px;height:4px;border-radius:4px;background:rgba(255,255,255,.15);margin:0 auto 14px}
+@media(min-width:520px){.mb-handle{display:none}}
+.mb-close{position:absolute;top:14px;left:14px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:.8rem;cursor:pointer}
+
+.mb-title{font-size:1.02rem;font-weight:900;color:#fff;margin-bottom:4px;text-align:center}
+.mb-sub{font-size:.7rem;color:var(--dim);text-align:center;margin-bottom:16px}
+
+.pm-preview{display:flex;justify-content:center;margin-bottom:16px}
+.pm-preview img{width:110px;height:110px;border-radius:50%;object-fit:cover;background:#0a0a14;box-shadow:0 0 0 2px #0b0b1a,0 0 0 3px rgba(0,212,255,.35),0 0 40px rgba(123,47,255,.35)}
+
+.pm-sec{margin-bottom:14px}
+.pm-sec h4{font-size:.72rem;font-weight:800;color:var(--cy);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.pm-sec h4::before{content:'';width:3px;height:12px;border-radius:2px;background:var(--grad)}
+.pm-upload{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.14);color:#b8b8cc;font-size:.8rem;font-weight:700;cursor:pointer;transition:.15s}
+.pm-upload:active{background:rgba(0,212,255,.06);border-color:rgba(0,212,255,.35)}
+.pm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.pm-item{aspect-ratio:1;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:.18s;padding:0;background:transparent}
+.pm-item:active{transform:scale(.9)}
+.pm-item.on{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,212,255,.2)}
+.pm-item img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
+
+.pm-save{width:100%;padding:14px;border-radius:14px;font-size:.86rem;font-weight:900;color:#fff;background:var(--grad);box-shadow:0 6px 20px -5px rgba(0,212,255,.5);margin-top:8px}
+.pm-save:active{transform:scale(.98)}
+
+.act-box{max-width:340px;padding:8px}
+@media(min-width:520px){.act-box{border-radius:20px}}
+.act-item{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--txt);transition:.12s}
+.act-item:active{background:rgba(255,255,255,.06)}
+.act-item .ai{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;background:rgba(255,255,255,.05)}
+.act-item.danger{color:var(--pk)}
+.act-item.danger .ai{background:rgba(255,60,100,.14)}
+
+/* ========== EMOJI PANEL ========== */
+#emojiPanel{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(15,15,30,.98);backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.08);border-radius:20px 20px 0 0;padding:12px 12px calc(12px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);max-height:55vh;display:flex;flex-direction:column}
+#emojiPanel.on{transform:translateY(0)}
+.ep-tabs{display:flex;gap:4px;margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(255,255,255,.06);overflow-x:auto;scrollbar-width:none}
+.ep-tabs::-webkit-scrollbar{display:none}
+.ep-tab{padding:6px 11px;border-radius:100px;font-size:1.1rem;background:rgba(255,255,255,.04);border:1px solid transparent;cursor:pointer;flex-shrink:0;transition:.15s;font-family:inherit}
+.ep-tab.active{background:rgba(0,212,255,.12);border-color:rgba(0,212,255,.35)}
+.ep-body{flex:1;overflow-y:auto;padding:4px}
+.ep-body::-webkit-scrollbar{width:4px}
+.ep-body::-webkit-scrollbar-thumb{background:rgba(123,47,255,.4);border-radius:2px}
+.ep-cat{display:none}
+.ep-cat.on{display:grid;grid-template-columns:repeat(8,1fr);gap:3px}
+@media(min-width:520px){.ep-cat.on{grid-template-columns:repeat(11,1fr)}}
+.ep-item{aspect-ratio:1;border-radius:10px;background:transparent;border:none;font-size:1.5rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.12s;font-family:inherit}
+.ep-item:active{background:rgba(255,255,255,.08);transform:scale(.9)}
+.ep-sticker-item{aspect-ratio:1;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);font-size:2.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.12s;font-family:inherit}
+.ep-sticker-item:active{background:rgba(123,47,255,.15);transform:scale(.93)}
+
+/* ========== ATTACH MENU ========== */
+#attachMenu{position:fixed;z-index:100;left:12px;bottom:calc(72px + env(safe-area-inset-bottom));background:rgba(20,20,42,.98);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:8px;min-width:180px;box-shadow:0 16px 40px rgba(0,0,0,.6);transform-origin:bottom left;transform:scale(.85);opacity:0;visibility:hidden;pointer-events:none;transition:.2s}
+#attachMenu.on{transform:scale(1);opacity:1;visibility:visible;pointer-events:auto}
+.am-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;cursor:pointer;font-size:.82rem;font-weight:600;color:var(--txt);transition:.12s}
+.am-item:active{background:rgba(255,255,255,.06)}
+.am-item .ami{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.am-item .ami.i1{background:rgba(0,212,255,.15)}
+.am-item .ami.i2{background:rgba(255,200,60,.15)}
+.am-item .ami.i3{background:rgba(123,47,255,.15)}
+
+/* ========== LIGHTBOX ========== */
+#lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:9999;align-items:center;justify-content:center;padding:16px}
+#lightbox.on{display:flex}
+#lightbox img{max-width:100%;max-height:90vh;border-radius:14px;object-fit:contain}
+#lightbox .lb-x{position:absolute;top:calc(14px + env(safe-area-inset-top));left:14px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.1);color:#fff;font-size:1.1rem;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center}
+
+#panelOv{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;opacity:0;visibility:hidden;transition:.2s}
+#panelOv.on{opacity:1;visibility:visible}
+
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);z-index:9998;background:rgba(30,30,55,.96);border:1px solid rgba(0,212,255,.25);color:#fff;padding:10px 18px;border-radius:100px;font-size:.78rem;font-weight:700;opacity:0;transition:.25s;pointer-events:none;box-shadow:0 10px 30px rgba(0,0,0,.5);max-width:80%;text-align:center}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
-<div id="banOverlay">
-  <h2>شما مسدود شده‌اید</h2>
-  <p style="color:#ccc;margin-top:12px">تا رفع مسدودیت نمی‌توانید استفاده کنید.</p>
+
+<div class="bg"><div class="stars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+
+<div id="offline">
+  <div class="off-icon">📡</div>
+  <div class="off-title">اتصال اینترنت قطع است</div>
+  <div class="off-desc">لطفاً اتصال خود را بررسی کنید و دوباره تلاش کنید.</div>
+  <button class="off-btn" onclick="location.reload()">تلاش مجدد</button>
 </div>
 
+<!-- LOGIN -->
 <div id="login">
-  <h1>TNT Chat</h1>
-  <input type="text" id="username" placeholder="نام کاربری" maxlength="18" autocomplete="username">
-  <button onclick="doLogin()">ورود</button>
-  <div class="conn" id="loginHint"></div>
+  <div class="login-box">
+    <div class="login-logo">💬</div>
+    <div class="login-title"><b>TNT</b> <i>Chat</i></div>
+    <div class="login-sub">نام خود را وارد کنید و به گروه بپیوندید</div>
+    <input class="login-input" id="nameInput" placeholder="نام شما…" maxlength="20" autocomplete="off">
+    <button class="login-btn" onclick="join()">ورود به گروه</button>
+    <div class="login-err" id="loginErr"></div>
+  </div>
 </div>
 
+<!-- APP -->
 <div id="app">
-  <header>
-    <strong>TNT Chat</strong>
-    <span id="userLabel" style="font-size:13px;color:#aaa"></span>
-  </header>
-  <div class="tabs">
-    <div class="tab active" data-tab="group" onclick="switchTab('group')">گروه</div>
-    <div class="tab" data-tab="channels" onclick="switchTab('channels')">کانال</div>
-    <div class="tab" data-tab="users" onclick="switchTab('users')">کاربران</div>
-    <div class="tab" data-tab="profile" onclick="switchTab('profile')">پروفایل</div>
+  <div class="hdr">
+    <div class="hdr-av" id="hdrAv" onclick="openProfileViewer()">T</div>
+    <div class="hdr-info">
+      <div class="hdr-name" id="hdrName">گروه</div>
+      <div class="hdr-desc" id="hdrDesc">در حال اتصال…</div>
+    </div>
+    <div class="hdr-actions">
+      <div class="hdr-dot" id="dot"></div>
+    </div>
   </div>
-  <div class="conn" id="connStatus">در حال اتصال...</div>
-  <div id="content">
 
-    <!-- گروه -->
-    <div class="panel active" id="panel-group">
-      <div class="status" id="gStatus">گروه باز است</div>
-      <div class="messages" id="gMsgs"><div class="empty">در حال بارگذاری...</div></div>
-      <div class="input-area">
-        <div id="preview"></div>
-        <div class="emoji-bar" id="emojiBar"></div>
-        <div class="input-row">
-          <button class="icon-btn" onclick="toggleEmoji()">😀</button>
-          <button class="icon-btn" onclick="document.getElementById('fileInput').click()">📷</button>
-          <button class="icon-btn" id="voiceBtn" onclick="toggleVoice()">🎤</button>
-          <input type="text" id="gText" placeholder="پیام..." onkeydown="if(event.key==='Enter')sendGroup()">
-          <button class="send-btn" onclick="sendGroup()">➤</button>
+  <div class="tabs">
+    <button class="tab active" data-tab="group">💬 گروه</button>
+    <button class="tab" data-tab="channel">📢 کانال</button>
+  </div>
+
+  <div class="view on" id="groupView">
+    <div id="noticeBanner"><span class="ni">📣</span><span id="noticeText"></span></div>
+    <div id="messages"></div>
+    <div class="notice lock" id="lockNotice" style="display:none">🔒 گروه توسط مدیر بسته شده است</div>
+    <div class="notice ban" id="banNotice" style="display:none">🚫 شما توسط مدیر بن شده‌اید</div>
+
+    <div class="composer" id="composer">
+      <div class="reply-bar" id="replyBar">
+        <div class="rb-info">
+          <div class="rb-n" id="rbName">نام</div>
+          <div class="rb-t" id="rbText">متن…</div>
         </div>
-        <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFile(this)">
+        <button class="rb-x" onclick="cancelReply()">✕</button>
+      </div>
+
+      <div class="img-prev" id="imgPrev">
+        <img id="imgPrevThumb">
+        <div class="ip-i"><b>عکس آماده ارسال</b>دکمه ارسال را بزنید</div>
+        <button class="ip-x" onclick="cancelImage()">✕</button>
+      </div>
+
+      <div class="comp-row">
+        <button class="c-btn" onclick="toggleAttach(event)">📎</button>
+        <div class="c-field" id="cField">
+          <textarea class="c-input" id="msgInput" placeholder="پیام…" rows="1" maxlength="1000"></textarea>
+          <button class="c-emoji" onclick="toggleEmoji(event)">😊</button>
+        </div>
+        <button class="c-send" id="sendBtn" onclick="sendMessage()" disabled>➤</button>
       </div>
     </div>
+  </div>
 
-    <!-- کانال -->
-    <div class="panel" id="panel-channels">
-      <div id="chList" style="flex:1;overflow-y:auto;padding-top:8px"></div>
-      <div id="chView" style="display:none;flex-direction:column;height:100%">
-        <div style="padding:12px;background:rgba(15,12,41,.9);display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.1)">
-          <button onclick="closeChannel()" style="background:none;border:none;color:#ffb300;font-size:22px;cursor:pointer">→</button>
-          <img id="chAvatar" style="width:42px;height:42px;border-radius:50%;object-fit:cover;background:#1a1a2e;display:none">
-          <div>
-            <div id="chTitle" style="font-weight:600;font-size:15px"></div>
-            <div id="chDesc" style="font-size:12px;color:#aaa"></div>
-          </div>
-        </div>
-        <div class="messages" id="chMsgs"></div>
-      </div>
-    </div>
-
-    <!-- کاربران -->
-    <div class="panel" id="panel-users">
-      <div id="userList" class="messages" style="padding:8px"><div class="empty">در حال بارگذاری کاربران...</div></div>
-      <div id="pvView" style="display:none;flex-direction:column;height:100%">
-        <div style="padding:12px;background:rgba(15,12,41,.9);display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.1)">
-          <button onclick="closePv()" style="background:none;border:none;color:#ffb300;font-size:22px;cursor:pointer">→</button>
-          <span id="pvTitle" style="font-weight:600"></span>
-        </div>
-        <div class="messages" id="pvMsgs"></div>
-        <div class="input-area">
-          <div class="input-row">
-            <input type="text" id="pvText" placeholder="پیام خصوصی..." onkeydown="if(event.key==='Enter')sendPv()">
-            <button class="send-btn" onclick="sendPv()">➤</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- پروفایل -->
-    <div class="panel" id="panel-profile">
-      <div class="profile-box">
-        <h3 style="color:#ffb300;margin-bottom:16px">پروفایل من</h3>
-        <input type="text" id="myName" placeholder="نام نمایشی">
-        <textarea id="myBio" placeholder="بیو..." rows="3"></textarea>
-        <button onclick="saveProfile()">ذخیره پروفایل</button>
-      </div>
-    </div>
-
+  <div class="view" id="channelView">
+    <div id="posts"><div class="empty"><div class="big">📢</div>هنوز پستی منتشر نشده</div></div>
   </div>
 </div>
+
+<!-- ATTACH MENU -->
+<div id="attachMenu">
+  <div class="am-item" onclick="pickImage()"><div class="ami i1">🖼️</div><span>ارسال عکس</span></div>
+  <div class="am-item" onclick="openStickers()"><div class="ami i2">⭐</div><span>استیکر</span></div>
+  <div class="am-item" onclick="openStickers()"><div class="ami i3">😊</div><span>ایموجی</span></div>
+</div>
+
+<!-- EMOJI PANEL -->
+<div id="emojiPanel">
+  <div class="ep-tabs" id="epTabs"></div>
+  <div class="ep-body" id="epBody"></div>
+</div>
+
+<div id="panelOv" onclick="closePanels()"></div>
+
+<!-- HIDDEN INPUTS -->
+<input type="file" id="imgFile" accept="image/*" style="display:none">
+<input type="file" id="profileImgFile" accept="image/*" style="display:none">
+
+<!-- LIGHTBOX -->
+<div id="lightbox" onclick="closeLightbox()">
+  <button class="lb-x">✕</button>
+  <img id="lightboxImg">
+</div>
+
+<!-- PROFILE MODAL -->
+<div class="modal" id="profileModal">
+  <div class="modal-box">
+    <div class="mb-handle"></div>
+    <button class="mb-close" onclick="closeModal('profileModal')">✕</button>
+    <div class="mb-title">پروفایل شما</div>
+    <div class="mb-sub">یک تصویر انتخاب کنید</div>
+    <div class="pm-preview"><img id="pmPreview" src=""></div>
+
+    <div class="pm-sec">
+      <h4>از گالری</h4>
+      <button class="pm-upload" onclick="pickProfileImage()">📷 انتخاب عکس از گالری</button>
+    </div>
+
+    <div class="pm-sec">
+      <h4>پروفایل‌های پیشنهادی</h4>
+      <div class="pm-grid" id="pmGrid"></div>
+    </div>
+
+    <div class="pm-sec">
+      <h4>نام نمایشی</h4>
+      <input class="login-input" id="pmName" maxlength="20" placeholder="نام شما…" style="font-size:15px">
+    </div>
+
+    <button class="pm-save" onclick="saveProfile()">ذخیره پروفایل</button>
+  </div>
+</div>
+
+<!-- VIEW USER PROFILE -->
+<div class="modal" id="userModal">
+  <div class="modal-box" style="max-width:340px">
+    <div class="mb-handle"></div>
+    <button class="mb-close" onclick="closeModal('userModal')">✕</button>
+    <div class="pm-preview"><img id="umAvatar" src=""></div>
+    <div class="mb-title" id="umName">کاربر</div>
+    <div class="mb-sub" id="umJoined">عضو گروه</div>
+  </div>
+</div>
+
+<!-- ACTION MENU -->
+<div class="modal" id="actionModal">
+  <div class="modal-box act-box" style="padding:8px">
+    <button class="mb-close" onclick="closeModal('actionModal')">✕</button>
+    <div class="act-item" onclick="doReply()"><div class="ai">↩️</div><span>پاسخ دادن</span></div>
+    <div class="act-item" onclick="doCopy()"><div class="ai">📋</div><span>کپی متن</span></div>
+    <div class="act-item danger" id="actDelete" onclick="doDelete()" style="display:none"><div class="ai">🗑️</div><span>حذف پیام</span></div>
+  </div>
+</div>
+
+<div id="toast"></div>
 
 <script>
-const BROKER = 'wss://broker.emqx.io:8084/mqtt';
-const TG_LIVE = 'tnt/v8/group/live';
-const TG_MSG  = 'tnt/v8/group/msg/';
-const TC_LIVE = 'tnt/v8/ch/live/';
-const TC_POST = 'tnt/v8/ch/post/';
-const TK      = 'tnt/v8/ctrl';
-const T_PROFILE = 'tnt/v8/profile/main';
-const T_USER = 'tnt/v8/user/';
-const T_PV = 'tnt/v8/pv/';
+(function(){
+'use strict';
 
-const EMOJIS = ['😀','😂','🤣','😍','🥰','😎','🤩','😭','😡','👍','👎','❤️','🔥','✨','🎉','🙏','👏','💪','🤔','😴','🥳','😇','🤗','😋','😜','💀','🌸','⭐','💯','✅','⚡','🎯','🚀','🎵','🎮','🍕','☕'];
+/* ================== تنظیمات ================== */
+var BROKER = 'wss://broker.emqx.io:8084/mqtt';
+var NS     = 'tnt/v9';
+var T_MSG  = NS + '/msg/';
+var T_CTRL = NS + '/ctrl';
+var T_BAN  = NS + '/ban/';
+var T_POST = NS + '/ch/';
+var T_GINFO= NS + '/group';
+var T_CINFO= NS + '/channel';
+var T_NOTICE = NS + '/notice';
+var T_USER = NS + '/user/';
 
-let client, username = '', myId = '', banned = false, groupOpen = true;
-let currentCh = null, currentPv = null;
-let gHistory = [], chHistory = {}, channels = {}, users = {}, pvHistory = {}, seen = new Set();
-let myProfile = { name: '', bio: '' };
-let mediaRecorder, audioChunks = [], isRecording = false;
+var MAX_IMG_BYTES = 250000;
 
-function sanitize(n) {
-  return String(n || '').replace(/[\u200B-\u200D\uFEFF\u2060]/g, '').trim().slice(0, 18);
+/* ================== Preset Avatars ================== */
+var PRESETS = [
+  {e:'🐱',c:['#ff6b9d','#c2185b']},{e:'🐶',c:['#00d4ff','#7b2fff']},
+  {e:'🦊',c:['#ffb74d','#ff5722']},{e:'🐼',c:['#00ffaa','#00a86b']},
+  {e:'🐸',c:['#4ade80','#15803d']},{e:'🦁',c:['#fbbf24','#d97706']},
+  {e:'🐯',c:['#fb923c','#ea580c']},{e:'🐨',c:['#94a3b8','#334155']},
+  {e:'🦄',c:['#c084fc','#7c3aed']},{e:'🐧',c:['#38bdf8','#0369a1']},
+  {e:'🐻',c:['#a16207','#78350f']},{e:'🐰',c:['#fda4af','#e11d48']},
+  {e:'🦋',c:['#22d3ee','#0891b2']},{e:'🌟',c:['#fde047','#eab308']},
+  {e:'🔥',c:['#f97316','#dc2626']},{e:'💎',c:['#67e8f9','#0891b2']}
+];
+function makeAvatarSvg(emoji, colors){
+  var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'+
+    '<defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">'+
+    '<stop offset="0%" stop-color="'+colors[0]+'"/>'+
+    '<stop offset="100%" stop-color="'+colors[1]+'"/>'+
+    '</linearGradient></defs>'+
+    '<rect width="100" height="100" rx="50" fill="url(#g)"/>'+
+    '<text x="50" y="50" font-size="52" text-anchor="middle" dominant-baseline="central">'+emoji+'</text>'+
+    '</svg>';
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
 
-function save() {
-  try {
-    localStorage.setItem('t8g', JSON.stringify(gHistory.slice(-150)));
-    localStorage.setItem('t8h', JSON.stringify(chHistory));
-    localStorage.setItem('t8c', JSON.stringify(channels));
-    localStorage.setItem('t8u', username);
-    localStorage.setItem('t8p', JSON.stringify(myProfile));
-  } catch(e) {}
-}
+/* ================== وضعیت ================== */
+var client = null;
+var myName = '';
+var myAvatar = '';
+var groupLocked = false;
+var amIBanned = false;
+var messages = new Map();
+var posts = new Map();
+var userProfiles = new Map();
+var pendingImage = null;
+var pendingReply = null;
+var actionTarget = null;
+var emojiPanelOpen = false;
+var attachMenuOpen = false;
 
-function load() {
-  try {
-    const g = localStorage.getItem('t8g');
-    const h = localStorage.getItem('t8h');
-    const c = localStorage.getItem('t8c');
-    const p = localStorage.getItem('t8p');
-    if (g) gHistory = JSON.parse(g) || [];
-    if (h) chHistory = JSON.parse(h) || {};
-    if (c) channels = JSON.parse(c) || {};
-    if (p) myProfile = JSON.parse(p) || { name: '', bio: '' };
-  } catch(e) {}
-  if (!channels.main) {
-    channels.main = { id: 'main', name: 'کانال اصلی', desc: 'کانال رسمی', avatar: null, official: true };
-  }
-}
-
-function doLogin() {
-  const u = sanitize(document.getElementById('username').value);
-  if (u.length < 2) return alert('نام کاربری حداقل ۲ حرف باشد');
-  username = u;
-  localStorage.setItem('t8u', username);
+/* ================== ورود ================== */
+window.join = function(){
+  var n = document.getElementById('nameInput').value.trim();
+  if(n.length < 2){ document.getElementById('loginErr').textContent = 'نام باید حداقل ۲ حرف باشد'; return; }
+  if(n.length > 20){ document.getElementById('loginErr').textContent = 'نام حداکثر ۲۰ حرف'; return; }
+  myName = n;
+  try { localStorage.setItem('tnt_name_v9', n); } catch(e){}
+  var stored = null;
+  try { stored = localStorage.getItem('tnt_avatar_v9_' + n); } catch(e){}
+  myAvatar = stored || makeAvatarSvg(PRESETS[0].e, PRESETS[0].c);
   document.getElementById('login').style.display = 'none';
-  document.getElementById('app').style.display = 'flex';
-  document.getElementById('userLabel').textContent = username;
-  load();
-  gHistory.forEach(m => seen.add(m.id));
-  (chHistory.main || []).forEach(m => seen.add(m.id));
-  document.getElementById('myName').value = myProfile.name || username;
-  document.getElementById('myBio').value = myProfile.bio || '';
-  document.getElementById('emojiBar').innerHTML = EMOJIS.map(e => `<span onclick="insertEmoji('${e}')">${e}</span>`).join('');
-  renderChannels();
-  renderGroup();
+  document.getElementById('app').classList.add('on');
   connect();
-}
+};
 
-function connect() {
-  myId = 'u_' + username + '_' + Math.random().toString(16).slice(2, 8);
-  client = mqtt.connect(BROKER, {
-    clientId: myId,
-    clean: true,
-    reconnectPeriod: 2000,
-    connectTimeout: 12000
+window.addEventListener('load', function(){
+  try {
+    var n = localStorage.getItem('tnt_name_v9');
+    if(n) document.getElementById('nameInput').value = n;
+  } catch(e){}
+  document.getElementById('nameInput').addEventListener('keydown', function(e){
+    if(e.key === 'Enter') join();
   });
+});
 
-  client.on('connect', () => {
-    document.getElementById('connStatus').textContent = 'متصل ✓';
-    document.getElementById('connStatus').style.color = '#81c784';
+/* ================== اتصال MQTT ================== */
+function connect(){
+  client = mqtt.connect(BROKER, {
+    clientId: 'u_' + Math.random().toString(16).slice(2,10),
+    clean: true, reconnectPeriod: 2000, keepalive: 30, connectTimeout: 10000
+  });
+  client.on('connect', function(){
+    setDot(true);
+    document.getElementById('hdrDesc').textContent = 'آنلاین';
     client.subscribe([
-      TG_LIVE, TG_MSG + '#',
-      TC_LIVE + 'main', TC_POST + '#',
-      TK, T_PROFILE, T_USER + '#'
+      T_MSG + '+',
+      T_CTRL,
+      T_BAN + encodeURIComponent(myName),
+      T_POST + '+',
+      T_GINFO,
+      T_CINFO,
+      T_NOTICE,
+      T_USER + '+'
     ], { qos: 1 });
-    // اعلام حضور و پروفایل
     publishMyProfile();
   });
+  client.on('reconnect', function(){ setDot(false); });
+  client.on('close',     function(){ setDot(false); });
+  client.on('error',     function(){ setDot(false); });
+  client.on('message',   onMessage);
+}
+function setDot(on){
+  document.getElementById('dot').className = 'hdr-dot' + (on ? ' on' : '');
+  if(!on) document.getElementById('hdrDesc').textContent = 'اتصال مجدد…';
+}
 
-  client.on('message', (topic, payload) => {
+function publishMyProfile(){
+  if(!client || !client.connected) return;
+  var p = { name: myName, avatar: myAvatar, joined: Date.now() };
+  client.publish(T_USER + encodeURIComponent(myName), JSON.stringify(p), { qos:1, retain:true });
+  userProfiles.set(myName, p);
+  renderHeaderAvatar();
+}
+
+function renderHeaderAvatar(){
+  var el = document.getElementById('hdrAv');
+  if(myAvatar) el.innerHTML = '<img src="' + myAvatar + '">';
+  else el.textContent = (myName || 'T').charAt(0).toUpperCase();
+}
+
+/* ================== دریافت پیام ================== */
+function onMessage(topic, payload){
+  var raw = payload.toString();
+
+  if(topic.indexOf(T_MSG) === 0){
+    var id = topic.slice(T_MSG.length);
+    if(!raw) messages.delete(id);
+    else { try { messages.set(id, JSON.parse(raw)); } catch(e){} }
+    renderMessages();
+    return;
+  }
+  if(topic.indexOf(T_POST) === 0){
+    var pid = topic.slice(T_POST.length);
+    if(!raw) posts.delete(pid);
+    else { try { posts.set(pid, JSON.parse(raw)); } catch(e){} }
+    renderPosts();
+    return;
+  }
+  if(topic.indexOf(T_USER) === 0){
+    var uname = decodeURIComponent(topic.slice(T_USER.length));
+    if(!raw){ userProfiles.delete(uname); }
+    else { try { var p = JSON.parse(raw); userProfiles.set(uname, p); } catch(e){} }
+    renderMessages();
+    return;
+  }
+  if(topic === T_GINFO){
     try {
-      const d = JSON.parse(payload.toString());
-      if (topic === TG_LIVE || topic.startsWith(TG_MSG)) onGroup(d);
-      else if (topic.startsWith(TC_LIVE) || topic.startsWith(TC_POST)) onChannelPost(d);
-      else if (topic === TK) onCtrl(d);
-      else if (topic === T_PROFILE && d.info) {
-        channels.main = d.info;
-        save();
-        renderChannels();
-        if (currentCh === 'main') updateChannelHeader();
+      var g = JSON.parse(raw);
+      var hdrName = document.getElementById('hdrName');
+      var hdrDesc = document.getElementById('hdrDesc');
+      if(g.name) hdrName.dataset.gname = g.name;
+      if(g.desc) hdrDesc.dataset.gdesc = g.desc;
+      var activeTab = document.querySelector('.tab.active');
+      if(activeTab && activeTab.dataset.tab === 'group'){
+        if(g.name) hdrName.textContent = g.name;
+        if(g.desc && !groupLocked) hdrDesc.textContent = g.desc;
+        if(g.avatar) document.getElementById('hdrAv').innerHTML = '<img src="' + g.avatar + '">';
       }
-      else if (topic.startsWith(T_USER) && d.user && d.user !== username) {
-        users[d.user] = d;
-        if (document.getElementById('panel-users').classList.contains('active')) renderUsers();
+    } catch(e){}
+    return;
+  }
+  if(topic === T_CINFO){
+    try {
+      var c = JSON.parse(raw);
+      var hdrName2 = document.getElementById('hdrName');
+      var hdrDesc2 = document.getElementById('hdrDesc');
+      if(c.name) hdrName2.dataset.cname = c.name;
+      if(c.desc) hdrDesc2.dataset.cdesc = c.desc;
+      var activeTab2 = document.querySelector('.tab.active');
+      if(activeTab2 && activeTab2.dataset.tab === 'channel'){
+        if(c.name) hdrName2.textContent = c.name;
+        if(c.desc) hdrDesc2.textContent = c.desc;
+        if(c.avatar) document.getElementById('hdrAv').innerHTML = '<img src="' + c.avatar + '">';
       }
-      else if (topic.startsWith(T_PV)) onPrivate(d);
-    } catch(e) {}
-  });
-}
-
-function publishMyProfile() {
-  if (!client || !client.connected) return;
-  const data = {
-    user: username,
-    name: myProfile.name || username,
-    bio: myProfile.bio || '',
-    ts: Date.now()
-  };
-  client.publish(T_USER + username, JSON.stringify(data), { qos: 1, retain: true });
-}
-
-function onGroup(d) {
-  if (banned || !d || !d.id || seen.has(d.id)) return;
-  // فیلتر پیام‌های خراب
-  if (!d.user || (!d.text && !d.data && d.type !== 'voice' && d.type !== 'image')) return;
-  seen.add(d.id);
-  gHistory.push(d);
-  gHistory.sort((a, b) => a.ts - b.ts);
-  if (gHistory.length > 150) gHistory = gHistory.slice(-150);
-  save();
-  addGroupBubble(d);
-}
-
-function onChannelPost(d) {
-  if (banned || !d || !d.id || seen.has(d.id)) return;
-  // فقط پست‌های معتبر
-  if (!d.text && !d.img) return;
-  seen.add(d.id);
-  if (!chHistory.main) chHistory.main = [];
-  chHistory.main.push(d);
-  chHistory.main.sort((a, b) => a.ts - b.ts);
-  if (chHistory.main.length > 60) chHistory.main = chHistory.main.slice(-60);
-  save();
-  if (currentCh === 'main') renderChannelPosts();
-}
-
-function onCtrl(d) {
-  if (d.t === 'ban' && Array.isArray(d.users) && d.users.includes(username)) {
-    banned = true;
-    document.getElementById('banOverlay').style.display = 'flex';
-    document.getElementById('app').style.display = 'none';
-    try { client.end(true); } catch(e) {}
+    } catch(e){}
     return;
   }
-  if (d.t === 'gs') {
-    groupOpen = !!d.open;
-    document.getElementById('gStatus').textContent = groupOpen ? 'گروه باز است' : 'گروه بسته است';
-  }
-  if (d.t === 'ci' && d.info) {
-    channels[d.info.id] = d.info;
-    save();
-    renderChannels();
-  }
-}
-
-function onPrivate(d) {
-  if (!d || !d.id || !d.from || !d.to) return;
-  const other = d.from === username ? d.to : d.from;
-  if (!pvHistory[other]) pvHistory[other] = [];
-  if (pvHistory[other].some(m => m.id === d.id)) return;
-  pvHistory[other].push(d);
-  if (currentPv === other) renderPvMessages(other);
-}
-
-function renderGroup() {
-  const box = document.getElementById('gMsgs');
-  box.innerHTML = '';
-  if (!gHistory.length) {
-    box.innerHTML = '<div class="empty">هنوز پیامی نیست</div>';
+  if(topic === T_NOTICE){
+    var banner = document.getElementById('noticeBanner');
+    var txt = document.getElementById('noticeText');
+    if(!raw){ banner.classList.remove('on'); txt.textContent = ''; }
+    else { banner.classList.add('on'); txt.textContent = raw; }
     return;
   }
-  gHistory.forEach(m => addGroupBubble(m, true));
+  if(topic === T_CTRL){
+    try {
+      var c2 = JSON.parse(raw);
+      if(c2.t === 'gs'){
+        groupLocked = c2.open === false;
+        updateGroupState();
+      }
+    } catch(e){}
+    return;
+  }
+  if(topic === T_BAN + encodeURIComponent(myName)){
+    amIBanned = (raw === '1');
+    updateGroupState();
+  }
 }
 
-function addGroupBubble(d, silent) {
-  const box = document.getElementById('gMsgs');
-  if (document.getElementById('g-' + d.id)) return;
-  const empty = box.querySelector('.empty');
-  if (empty) empty.remove();
-  const div = document.createElement('div');
-  div.className = 'msg ' + (d.user === username ? 'me' : 'other');
-  div.id = 'g-' + d.id;
-  let html = `<div class="meta">${esc(d.user)} · ${new Date(d.ts).toLocaleTimeString('fa-IR')}</div>`;
-  if (d.type === 'image' && d.data) {
-    html += `<div>${esc(d.text || '')}</div><img src="${d.data}" alt="تصویر">`;
-  } else if (d.type === 'voice' && d.data) {
-    html += `<div>پیام صوتی</div><audio controls src="${d.data}"></audio>`;
+function updateGroupState(){
+  document.getElementById('lockNotice').style.display = (groupLocked && !amIBanned) ? 'block' : 'none';
+  document.getElementById('banNotice').style.display = amIBanned ? 'block' : 'none';
+  document.getElementById('composer').style.display = (groupLocked || amIBanned) ? 'none' : 'block';
+}
+
+/* ================== رندر پیام‌ها ================== */
+function renderMessages(){
+  var box = document.getElementById('messages');
+  if(!messages.size){
+    box.innerHTML = '<div class="empty"><div class="big">💬</div>هنوز پیامی نیامده… اولین نفر باش!</div>';
+    return;
+  }
+  var wasBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 150;
+  var sorted = [...messages.values()].sort(function(a,b){ return (a.ts||0) - (b.ts||0); });
+
+  var html = '';
+  var lastDate = '';
+  var lastUser = '';
+  var lastTs = 0;
+
+  for(var i = 0; i < sorted.length; i++){
+    var m = sorted[i];
+    // skip voice messages from old data
+    if(m.type === 'voice') continue;
+    var d = new Date(m.ts || Date.now());
+    var dk = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    if(dk !== lastDate){
+      html += '<div class="date-sep">' + formatDay(d) + '</div>';
+      lastDate = dk;
+      lastUser = '';
+    }
+    var mine = m.user === myName;
+    var isFirst = (lastUser !== m.user) || ((m.ts - lastTs) > 5 * 60 * 1000);
+    html += msgHTML(m, mine, isFirst);
+    lastUser = m.user;
+    lastTs = m.ts || 0;
+  }
+  box.innerHTML = html;
+  if(wasBottom || messages.size <= 1) box.scrollTop = box.scrollHeight;
+}
+
+function msgHTML(m, mine, showHeader){
+  var cls = 'mrow' + (mine ? ' mine' : '') + (showHeader ? ' first' : '');
+  var time = fmtTime(m.ts);
+  var tick = mine ? ' <span class="tick">✓✓</span>' : '';
+  var avatar = getAvatar(m.user);
+  var avHTML = showHeader
+    ? '<div class="m-av" data-user="' + esc(m.user) + '"><img src="' + avatar + '"></div>'
+    : '<div class="m-av hidden"></div>';
+
+  var quoteHTML = '';
+  if(m.reply){
+    var rp = m.reply;
+    quoteHTML = '<div class="m-quote" data-jump="' + esc(rp.id) + '">' +
+      '<div class="qn">' + esc(rp.user) + '</div>' +
+      '<div class="qt">' + esc(rp.preview || 'پیام') + '</div>' +
+    '</div>';
+  }
+
+  var body = '';
+  if(m.type === 'sticker' && m.text){
+    body = '<div class="m-sticker">' + esc(m.text) + '</div>';
+  } else if(m.type === 'image' && m.img){
+    body = (m.text ? '<div>' + esc(m.text).replace(/\n/g,'<br>') + '</div>' : '') +
+           '<img class="m-img" data-lb="' + m.id + '" src="' + m.img + '">';
   } else {
-    html += `<div>${esc(d.text || '')}</div>`;
+    body = esc(String(m.text||'')).replace(/\n/g,'<br>');
+    if(m.img) body += '<img class="m-img" data-lb="' + m.id + '" src="' + m.img + '">';
   }
-  div.innerHTML = html;
-  box.appendChild(div);
-  if (!silent) box.scrollTop = box.scrollHeight;
+
+  var nameHTML = (!mine && showHeader) ? '<div class="m-name">' + esc(m.user) + '</div>' : '';
+
+  return '<div class="' + cls + '" data-msgid="' + esc(m.id) + '" data-user="' + esc(m.user) + '">' +
+    avHTML +
+    '<div class="m-body">' +
+      nameHTML +
+      '<div class="m-bubble">' +
+        quoteHTML + body +
+        '<div class="m-t">' + time + tick + '</div>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
 }
 
-function renderChannels() {
-  const list = document.getElementById('chList');
-  list.innerHTML = '';
-  Object.values(channels).forEach(ch => {
-    const div = document.createElement('div');
-    div.className = 'channel-item';
-    div.onclick = () => openChannel(ch.id);
-    const av = ch.avatar
-      ? `<img src="${ch.avatar}" alt="avatar">`
-      : `<div style="width:48px;height:48px;border-radius:50%;background:#1a1a2e;border:2px solid #ffb300;display:flex;align-items:center;justify-content:center;font-size:18px">✓</div>`;
-    div.innerHTML = `${av}<div><div style="font-weight:600">${esc(ch.name || 'کانال')} ${ch.official ? '✓' : ''}</div><div style="font-size:12px;color:#aaa">${esc(ch.desc || '')}</div></div>`;
-    list.appendChild(div);
-  });
+function getAvatar(user){
+  var p = userProfiles.get(user);
+  if(p && p.avatar) return p.avatar;
+  var idx = 0;
+  for(var i = 0; i < (user||'').length; i++) idx = (idx * 31 + user.charCodeAt(i)) >>> 0;
+  idx = idx % PRESETS.length;
+  return makeAvatarSvg(PRESETS[idx].e, PRESETS[idx].c);
 }
 
-function openChannel(id) {
-  currentCh = id;
-  document.getElementById('chList').style.display = 'none';
-  document.getElementById('chView').style.display = 'flex';
-  updateChannelHeader();
-  renderChannelPosts();
-}
-
-function updateChannelHeader() {
-  const ch = channels[currentCh] || { name: 'کانال', desc: '', avatar: null };
-  document.getElementById('chTitle').textContent = (ch.name || 'کانال') + (ch.official ? ' ✓' : '');
-  document.getElementById('chDesc').textContent = ch.desc || '';
-  const img = document.getElementById('chAvatar');
-  if (ch.avatar) {
-    img.src = ch.avatar;
-    img.style.display = 'block';
-  } else {
-    img.style.display = 'none';
+/* ================== کلیک روی پیام‌ها ================== */
+document.getElementById('messages').addEventListener('click', function(e){
+  var lb = e.target.closest('.m-img');
+  if(lb){
+    var mid = lb.getAttribute('data-lb');
+    var m = messages.get(mid);
+    if(m && m.img){ openLightbox(m.img); return; }
   }
-}
-
-function closeChannel() {
-  currentCh = null;
-  document.getElementById('chView').style.display = 'none';
-  document.getElementById('chList').style.display = 'block';
-  renderChannels();
-}
-
-function renderChannelPosts() {
-  const box = document.getElementById('chMsgs');
-  box.innerHTML = '';
-  const posts = (chHistory.main || []).filter(p => p && (p.text || p.img));
-  if (!posts.length) {
-    box.innerHTML = '<div class="empty">هنوز پستی نیست</div>';
+  var quote = e.target.closest('.m-quote');
+  if(quote){
+    e.stopPropagation();
+    var jid = quote.getAttribute('data-jump');
+    jumpToMessage(jid);
     return;
   }
-  posts.forEach(p => {
-    if (document.getElementById('cp-' + p.id)) return;
-    const div = document.createElement('div');
-    div.className = 'post';
-    div.id = 'cp-' + p.id;
-    let html = '';
-    if (p.img) html += `<img src="${p.img}" alt="پست">`;
-    html += `<div class="body">`;
-    if (p.text) html += `<div class="text">${esc(p.text)}</div>`;
-    html += `<div class="meta">${new Date(p.ts).toLocaleString('fa-IR')}</div></div>`;
-    div.innerHTML = html;
-    box.appendChild(div);
-  });
-  box.scrollTop = box.scrollHeight;
-}
-
-function renderUsers() {
-  const box = document.getElementById('userList');
-  const list = Object.values(users);
-  if (!list.length) {
-    box.innerHTML = '<div class="empty">هنوز کاربر دیگری آنلاین نیست</div>';
+  var av = e.target.closest('.m-av[data-user]');
+  if(av){
+    e.stopPropagation();
+    showUserProfile(av.getAttribute('data-user'));
     return;
   }
-  box.innerHTML = list.map(u => `
-    <div class="user-item" onclick="openPv('${u.user}')">
-      <div class="avatar" style="width:48px;height:48px;border-radius:50%;background:#1a1a2e;display:flex;align-items:center;justify-content:center;font-size:18px;border:2px solid rgba(255,179,0,.4)">${(u.name || u.user || '?')[0]}</div>
-      <div>
-        <div style="font-weight:600">${esc(u.name || u.user)}</div>
-        <div style="font-size:12px;color:#aaa">${esc(u.bio || 'بدون بیو')}</div>
-      </div>
-    </div>
-  `).join('');
+});
+
+function jumpToMessage(id){
+  var el = document.querySelector('[data-msgid="' + id + '"]');
+  if(!el){ showToast('پیام اصلی یافت نشد'); return; }
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  el.classList.add('highlight');
+  setTimeout(function(){ el.classList.remove('highlight'); }, 1600);
 }
 
-function openPv(other) {
-  currentPv = other;
-  document.getElementById('userList').style.display = 'none';
-  document.getElementById('pvView').style.display = 'flex';
-  document.getElementById('pvTitle').textContent = 'پیوی با ' + other;
-  const topic1 = T_PV + [username, other].sort().join('/') + '/#';
-  client.subscribe(topic1, { qos: 1 });
-  renderPvMessages(other);
+/* ================== Long-press for actions ================== */
+var lpT = null, lpStart = null, lpMoved = false;
+document.getElementById('messages').addEventListener('pointerdown', function(e){
+  var row = e.target.closest('.mrow');
+  if(!row) return;
+  if(e.target.closest('.m-img') || e.target.closest('.m-quote') || e.target.closest('.m-av')) return;
+  lpStart = { x: e.clientX, y: e.clientY };
+  lpMoved = false;
+  lpT = setTimeout(function(){
+    if(!lpMoved) openActionMenu(row.getAttribute('data-msgid'));
+  }, 500);
+});
+document.getElementById('messages').addEventListener('pointerup', function(){ clearTimeout(lpT); lpT = null; });
+document.getElementById('messages').addEventListener('pointercancel', function(){ clearTimeout(lpT); lpT = null; });
+document.getElementById('messages').addEventListener('pointermove', function(e){
+  if(!lpStart) return;
+  if(Math.abs(e.clientX - lpStart.x) > 8 || Math.abs(e.clientY - lpStart.y) > 8){ lpMoved = true; clearTimeout(lpT); }
+});
+document.getElementById('messages').addEventListener('contextmenu', function(e){
+  var row = e.target.closest('.mrow');
+  if(!row) return;
+  e.preventDefault();
+  openActionMenu(row.getAttribute('data-msgid'));
+});
+
+/* ================== Action Menu ================== */
+function openActionMenu(id){
+  var m = messages.get(id);
+  if(!m) return;
+  actionTarget = id;
+  var isMine = m.user === myName;
+  document.getElementById('actDelete').style.display = isMine ? 'flex' : 'none';
+  openModal('actionModal');
 }
 
-function closePv() {
-  currentPv = null;
-  document.getElementById('pvView').style.display = 'none';
-  document.getElementById('userList').style.display = 'block';
-  renderUsers();
-}
-
-function renderPvMessages(other) {
-  const box = document.getElementById('pvMsgs');
-  box.innerHTML = '';
-  const list = pvHistory[other] || [];
-  if (!list.length) {
-    box.innerHTML = '<div class="empty">هنوز پیامی رد و بدل نشده</div>';
-    return;
-  }
-  list.forEach(m => {
-    const div = document.createElement('div');
-    div.className = 'msg ' + (m.from === username ? 'me' : 'other');
-    div.innerHTML = `<div class="meta">${m.from === username ? 'شما' : esc(m.from)}</div><div>${esc(m.text)}</div>`;
-    box.appendChild(div);
-  });
-  box.scrollTop = box.scrollHeight;
-}
-
-function sendPv() {
-  if (!currentPv || !client) return;
-  const text = document.getElementById('pvText').value.trim();
-  if (!text) return;
-  const msg = {
-    id: Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-    from: username,
-    to: currentPv,
-    text: text,
-    ts: Date.now()
-  };
-  const topic = T_PV + [username, currentPv].sort().join('/') + '/msg';
-  client.publish(topic, JSON.stringify(msg), { qos: 1 });
-  if (!pvHistory[currentPv]) pvHistory[currentPv] = [];
-  pvHistory[currentPv].push(msg);
-  renderPvMessages(currentPv);
-  document.getElementById('pvText').value = '';
-}
-
-function saveProfile() {
-  myProfile = {
-    name: document.getElementById('myName').value.trim() || username,
-    bio: document.getElementById('myBio').value.trim()
-  };
-  save();
-  publishMyProfile();
-  alert('پروفایل ذخیره شد');
-}
-
-function sendGroup() {
-  if (banned || !groupOpen || !client || !client.connected) return;
-  const text = document.getElementById('gText').value.trim();
-  const prev = document.getElementById('preview');
-  const img = prev.querySelector('img');
-  let msg;
-  if (img) {
-    msg = { id: Date.now() + '_' + Math.random().toString(36).slice(2, 6), user: username, type: 'image', text: text, data: img.src, ts: Date.now() };
-    prev.innerHTML = '';
-    prev.style.display = 'none';
-  } else if (text) {
-    msg = { id: Date.now() + '_' + Math.random().toString(36).slice(2, 6), user: username, type: 'text', text: text, ts: Date.now() };
-  } else return;
-
-  client.publish(TG_LIVE, JSON.stringify(msg), { qos: 1 });
-  client.publish(TG_MSG + msg.id, JSON.stringify(msg), { qos: 1, retain: true });
-  document.getElementById('gText').value = '';
-  document.getElementById('emojiBar').classList.remove('show');
-}
-
-function handleFile(input) {
-  const file = input.files[0];
-  if (!file || !file.type.startsWith('image/')) return;
-  if (file.size > 400000) return alert('عکس حداکثر ۴۰۰KB باشد');
-  const reader = new FileReader();
-  reader.onload = e => {
-    const p = document.getElementById('preview');
-    p.innerHTML = `<img src="${e.target.result}">`;
-    p.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
-  input.value = '';
-}
-
-function toggleEmoji() {
-  document.getElementById('emojiBar').classList.toggle('show');
-}
-
-function insertEmoji(e) {
-  const input = document.getElementById('gText');
-  input.value += e;
-  input.focus();
-}
-
-function toggleVoice() {
-  if (isRecording) {
-    mediaRecorder.stop();
-    isRecording = false;
-    document.getElementById('voiceBtn').textContent = '🎤';
-    return;
-  }
-  navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
-    mediaRecorder = new MediaRecorder(stream);
-    audioChunks = [];
-    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-    mediaRecorder.onstop = () => {
-      const blob = new Blob(audioChunks, { type: 'audio/webm' });
-      if (blob.size > 350000) return alert('ویس خیلی طولانی است');
-      const reader = new FileReader();
-      reader.onload = () => {
-        const msg = {
-          id: Date.now() + '_' + Math.random().toString(36).slice(2, 6),
-          user: username,
-          type: 'voice',
-          data: reader.result,
-          ts: Date.now()
-        };
-        client.publish(TG_LIVE, JSON.stringify(msg), { qos: 1 });
-        client.publish(TG_MSG + msg.id, JSON.stringify(msg), { qos: 1, retain: true });
-      };
-      reader.readAsDataURL(blob);
-      stream.getTracks().forEach(t => t.stop());
-    };
-    mediaRecorder.start();
-    isRecording = true;
-    document.getElementById('voiceBtn').textContent = '⏹';
-  }).catch(() => alert('دسترسی به میکروفون لازم است'));
-}
-
-function switchTab(tab) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
-  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'panel-' + tab));
-  if (tab === 'users') renderUsers();
-  if (tab === 'channels') closeChannel();
-}
-
-function esc(str) {
-  return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
-// ورود خودکار
-window.onload = function() {
-  const saved = localStorage.getItem('t8u');
-  if (saved && saved.length >= 2) {
-    document.getElementById('username').value = saved;
-    document.getElementById('loginHint').textContent = 'ورود خودکار...';
-    setTimeout(doLogin, 300);
-  }
+window.doReply = function(){
+  var m = messages.get(actionTarget);
+  if(!m){ closeModal('actionModal'); return; }
+  var preview = m.text || (m.img ? '🖼️ عکس' : 'پیام');
+  pendingReply = { id: m.id, user: m.user, preview: preview.slice(0, 60) };
+  document.getElementById('rbName').textContent = m.user;
+  document.getElementById('rbText').textContent = preview;
+  document.getElementById('replyBar').classList.add('on');
+  closeModal('actionModal');
+  document.getElementById('msgInput').focus();
 };
+
+/* Copy via execCommand (no permission prompt, no clipboard dialog) */
+window.doCopy = function(){
+  var m = messages.get(actionTarget);
+  if(!m){ closeModal('actionModal'); return; }
+  var txt = m.text || (m.img ? '[عکس]' : '');
+  if(!txt){ closeModal('actionModal'); showToast('متنی برای کپی نیست'); return; }
+  try {
+    var ta = document.createElement('textarea');
+    ta.value = txt;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    ta.style.left = '-9999px';
+    ta.setAttribute('readonly', '');
+    document.body.appendChild(ta);
+    ta.select();
+    ta.setSelectionRange(0, txt.length);
+    var ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast(ok ? 'کپی شد ✓' : 'کپی ناموفق');
+  } catch(e){
+    showToast('کپی ناموفق');
+  }
+  closeModal('actionModal');
+};
+
+window.doDelete = function(){
+  var m = messages.get(actionTarget);
+  if(!m || m.user !== myName){ closeModal('actionModal'); return; }
+  if(!confirm('این پیام برای همه حذف شود؟')){ closeModal('actionModal'); return; }
+  client.publish(T_MSG + m.id, '', { qos:1, retain:true });
+  messages.delete(m.id);
+  renderMessages();
+  closeModal('actionModal');
+  showToast('حذف شد');
+};
+
+window.cancelReply = function(){
+  pendingReply = null;
+  document.getElementById('replyBar').classList.remove('on');
+};
+
+/* ================== ارسال پیام ================== */
+var msgInput = document.getElementById('msgInput');
+var sendBtn = document.getElementById('sendBtn');
+var cField = document.getElementById('cField');
+
+function updateSendBtn(){
+  var hasText = msgInput.value.trim().length > 0;
+  var hasImg = !!pendingImage;
+  sendBtn.disabled = !(hasText || hasImg);
+}
+
+msgInput.addEventListener('input', function(){
+  this.style.height = 'auto';
+  this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+  updateSendBtn();
+});
+msgInput.addEventListener('focus', function(){ cField.classList.add('focused'); });
+msgInput.addEventListener('blur', function(){ cField.classList.remove('focused'); });
+msgInput.addEventListener('keydown', function(e){
+  if(e.key === 'Enter' && !e.shiftKey){ e.preventDefault(); sendMessage(); }
+});
+
+window.sendMessage = function(){
+  if(amIBanned || groupLocked) return;
+  var text = msgInput.value.trim();
+  var img = pendingImage;
+  if(!text && !img) return;
+  if(!client || !client.connected) return showToast('اتصال برقرار نیست');
+
+  var isSticker = false;
+  if(!img && text){
+    var cleanText = text.replace(/[\s\u200d\uFE0F]/g, '');
+    try {
+      var emojiCount = [...cleanText].length;
+      var isOnlyEmoji = /^[\p{Emoji}\p{Extended_Pictographic}\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]+$/u.test(cleanText);
+      if(isOnlyEmoji && emojiCount <= 4) isSticker = true;
+    } catch(e){}
+  }
+
+  var type = img ? 'image' : (isSticker ? 'sticker' : 'text');
+  var msg = {
+    id: 'm_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
+    user: myName,
+    text: text,
+    img: img || null,
+    type: type,
+    ts: Date.now()
+  };
+  if(pendingReply) msg.reply = pendingReply;
+
+  client.publish(T_MSG + msg.id, JSON.stringify(msg), { qos:1, retain:true });
+  msgInput.value = '';
+  msgInput.style.height = 'auto';
+  cancelImage();
+  cancelReply();
+  updateSendBtn();
+};
+
+/* ================== عکس ================== */
+window.pickImage = function(){
+  closePanels();
+  document.getElementById('imgFile').click();
+};
+
+document.getElementById('imgFile').addEventListener('change', function(){
+  var f = this.files[0];
+  this.value = '';
+  if(!f) return;
+  if(!f.type.startsWith('image/')) return showToast('فقط عکس مجاز است');
+  compressImage(f, 900, 0.75, MAX_IMG_BYTES, function(out){
+    pendingImage = out;
+    document.getElementById('imgPrevThumb').src = out;
+    document.getElementById('imgPrev').classList.add('on');
+    updateSendBtn();
+  });
+});
+
+window.cancelImage = function(){
+  pendingImage = null;
+  document.getElementById('imgPrev').classList.remove('on');
+  document.getElementById('imgPrevThumb').src = '';
+  updateSendBtn();
+};
+
+function compressImage(file, maxW, quality, maxBytes, cb){
+  var r = new FileReader();
+  r.onload = function(e){
+    var img = new Image();
+    img.onload = function(){
+      var w = img.width, h = img.height;
+      if(w > maxW){ h = Math.round(h * maxW / w); w = maxW; }
+      var c = document.createElement('canvas');
+      c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h);
+      var q = quality;
+      var out = c.toDataURL('image/jpeg', q);
+      while(out.length * 0.75 > maxBytes && q > 0.35){
+        q -= 0.08;
+        out = c.toDataURL('image/jpeg', q);
+      }
+      if(out.length * 0.75 > maxBytes){ showToast('عکس خیلی بزرگ است'); return; }
+      cb(out);
+    };
+    img.src = e.target.result;
+  };
+  r.readAsDataURL(file);
+}
+
+/* ================== EMOJI / STICKER ================== */
+var EMOJI_CATS = [
+  { icon:'😊', items:['😀','😃','😄','😁','😆','😅','🤣','😂','🙂','🙃','😉','😊','😇','🥰','😍','🤩','😘','😗','😚','😙','🥲','😋','😛','😜','🤪','😝','🤗','🤭','🤫','🤔','🤐','🤨','😐','😑','😶','😏','😒','🙄','😬','🤥','😌','😔','😪','🤤','😴','😷','🤒','🤕','🤢','🤮','🥵','🥶','😵','🤯','🤠','🥳','😎','🤓','🧐','😕','😟','🙁','😮','😯','😲','😳','🥺','😦','😧','😨','😰','😥','😢','😭','😱','😖','😣','😞','😓','😩','😫','🥱','😤','😡','😠','🤬','😈','👿','💀','💩','🤡','👹','👺','👻','👽','👾','🤖']},
+  { icon:'👋', items:['👋','🤚','🖐','✋','🖖','👌','🤌','🤏','✌️','🤞','🤟','🤘','🤙','👈','👉','👆','👇','☝️','👍','👎','✊','👊','🤛','🤜','👏','🙌','👐','🤲','🤝','🙏','✍️','💅','🤳','💪','🦾','🦵','🦶','👂','🦻','👃','🧠','👀','👁','👅','👄','💋']},
+  { icon:'❤️', items:['❤️','🧡','💛','💚','💙','💜','🖤','🤍','🤎','💔','❣️','💕','💞','💓','💗','💖','💘','💝','💟','💌','💋','🔥','✨','⭐','🌟','💫','⚡','💥','💢','💦','💨','💣','💬','💭','💤']},
+  { icon:'🎉', items:['🎉','🎊','🎈','🎁','🎀','🎂','🍰','🧁','🍾','🥂','🍻','🥳','🎭','🎨','🎬','🎤','🎧','🎼','🎵','🎶','🎷','🎸','🎹','🎺','🎻','🥁','🎮','🕹','🎯','🎲','🧩','🏆','🥇','🥈','🥉','🏅','🎖','🏵','🎗']},
+  { icon:'🌸', items:['🌸','💮','🌹','🥀','🌺','🌻','🌼','🌷','🌱','🌲','🌳','🌴','🌵','🌾','🌿','☘️','🍀','🍁','🍂','🍃','🍇','🍈','🍉','🍊','🍋','🍌','🍍','🥭','🍎','🍏','🍐','🍑','🍒','🍓','🥝','🍅','🥥','🥑','🍄','🌰','🌶','🌽','🥕','🥔','🍠','🥐','🍞','🥖','🧀','🥚','🍳','🥞','🥓','🍔','🍟','🍕','🌭','🥪','🌮','🌯','🍜','🍝','🍣','🍱','🍛','🍚','🍤','🍦','🍩','🍪','🍫','🍬','🍭','🍮','🍯','🍼','☕','🍵','🍶','🍷','🍸','🍹','🍺','🥤']},
+  { icon:'⚽', items:['⚽','🏀','🏈','⚾','🥎','🎾','🏐','🏉','🥏','🎱','🏓','🏸','🏒','🏑','🥍','🏏','🥅','⛳','🪁','🏹','🎣','🤿','🥊','🥋','🎽','🛹','🛼','🛷','⛸','🥌','🎿','⛷','🏂','🪂','🏋️','🤼','🤸','⛹️','🤺','🤾','🏌️','🏇','🧘','🏄','🏊','🤽','🚣','🧗','🚵','🚴']},
+  { icon:'🔥', items:['🔥','💧','🌊','🌈','☀️','🌙','⭐','🌟','💫','⚡','❄️','☃️','⛄','☄️','🌪','🌫','🌬','🌀','☔','✳️','✴️','❇️','©️','®️','™️','💠','🔱','⚜️','🔰','♻️','✅','❌','❓','❗','‼️','⁉️','💯','🔴','🟠','🟡','🟢','🔵','🟣','⚫','⚪','🟤','🔺','🔻','🔸','🔹','🔶','🔷','🔳','🔲','▪️','▫️','◾','◽','◼️','◻️','🟥','🟧','🟨','🟩','🟦','🟪','⬛','⬜','🟫']}
+];
+var STICKERS = ['😂','🥰','😎','🤔','😭','😱','🤩','🥳','😴','🤯','🤗','😇','🤡','👻','👽','🤖','💀','🐱','🐶','🐼','🦊','🦁','🐸','🦄','🐧','🦋','🌸','🌺','🌹','🍀','⭐','🌟','💫','✨','❤️','💕','💖','💯','🔥','⚡','🎉','🎊','🎁','🏆','⚽','🎯','🍕','🍔','🍰','☕'];
+
+window.toggleEmoji = function(e){
+  if(e) e.stopPropagation();
+  if(emojiPanelOpen){ closePanels(); return; }
+  closePanels();
+  buildEmojiPanel();
+  emojiPanelOpen = true;
+  document.getElementById('emojiPanel').classList.add('on');
+  document.getElementById('panelOv').classList.add('on');
+};
+
+window.openStickers = function(){
+  closePanels();
+  buildEmojiPanel();
+  setTimeout(function(){
+    var tabs = document.querySelectorAll('.ep-tab');
+    if(tabs.length) tabs[tabs.length - 1].click();
+  }, 10);
+  emojiPanelOpen = true;
+  document.getElementById('emojiPanel').classList.add('on');
+  document.getElementById('panelOv').classList.add('on');
+};
+
+function buildEmojiPanel(){
+  var tabsEl = document.getElementById('epTabs');
+  var bodyEl = document.getElementById('epBody');
+  if(tabsEl.dataset.built === '1') return;
+  tabsEl.dataset.built = '1';
+
+  var tabs = '', cats = '';
+  EMOJI_CATS.forEach(function(cat, idx){
+    tabs += '<button class="ep-tab' + (idx === 0 ? ' active' : '') + '" data-idx="' + idx + '">' + cat.icon + '</button>';
+    var items = cat.items.map(function(em){
+      return '<button class="ep-item" data-em="' + em + '">' + em + '</button>';
+    }).join('');
+    cats += '<div class="ep-cat' + (idx === 0 ? ' on' : '') + '" data-cat="' + idx + '">' + items + '</div>';
+  });
+  tabs += '<button class="ep-tab" data-idx="sticker">⭐</button>';
+  var stickerItems = STICKERS.map(function(em){
+    return '<button class="ep-sticker-item" data-em="' + em + '" data-sticker="1">' + em + '</button>';
+  }).join('');
+  cats += '<div class="ep-cat" data-cat="sticker" style="grid-template-columns:repeat(5,1fr);gap:8px">' + stickerItems + '</div>';
+
+  tabsEl.innerHTML = tabs;
+  bodyEl.innerHTML = cats;
+
+  tabsEl.addEventListener('click', function(e){
+    var t = e.target.closest('.ep-tab');
+    if(!t) return;
+    var idx = t.dataset.idx;
+    tabsEl.querySelectorAll('.ep-tab').forEach(function(x){ x.classList.remove('active'); });
+    t.classList.add('active');
+    bodyEl.querySelectorAll('.ep-cat').forEach(function(x){
+      x.classList.toggle('on', x.dataset.cat === idx);
+    });
+  });
+
+  bodyEl.addEventListener('click', function(e){
+    var b = e.target.closest('button[data-em]');
+    if(!b) return;
+    var em = b.dataset.em;
+    if(b.dataset.sticker === '1'){ sendSticker(em); closePanels(); }
+    else { insertAtCursor(msgInput, em); updateSendBtn(); }
+  });
+}
+
+function insertAtCursor(el, text){
+  var start = el.selectionStart || 0;
+  var end = el.selectionEnd || 0;
+  var val = el.value;
+  el.value = val.slice(0, start) + text + val.slice(end);
+  el.selectionStart = el.selectionEnd = start + text.length;
+  el.focus();
+  el.dispatchEvent(new Event('input'));
+}
+
+function sendSticker(emoji){
+  if(amIBanned || groupLocked) return;
+  if(!client || !client.connected) return;
+  var msg = {
+    id: 'm_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
+    user: myName, text: emoji, type: 'sticker', ts: Date.now()
+  };
+  if(pendingReply) msg.reply = pendingReply;
+  client.publish(T_MSG + msg.id, JSON.stringify(msg), { qos:1, retain:true });
+  cancelReply();
+}
+
+/* ================== ATTACH MENU ================== */
+window.toggleAttach = function(e){
+  if(e) e.stopPropagation();
+  if(attachMenuOpen){ closePanels(); return; }
+  closePanels();
+  attachMenuOpen = true;
+  document.getElementById('attachMenu').classList.add('on');
+  document.getElementById('panelOv').classList.add('on');
+};
+
+window.closePanels = function(){
+  emojiPanelOpen = false;
+  attachMenuOpen = false;
+  document.getElementById('emojiPanel').classList.remove('on');
+  document.getElementById('attachMenu').classList.remove('on');
+  document.getElementById('panelOv').classList.remove('on');
+};
+
+/* ================== PROFILE ================== */
+window.openProfileViewer = function(){
+  var box = document.getElementById('pmGrid');
+  if(box.dataset.built !== '1'){
+    box.dataset.built = '1';
+    box.innerHTML = PRESETS.map(function(p, i){
+      var svg = makeAvatarSvg(p.e, p.c);
+      return '<button class="pm-item" data-p="' + i + '"><img src="' + svg + '"></button>';
+    }).join('');
+    box.addEventListener('click', function(e){
+      var b = e.target.closest('.pm-item');
+      if(!b) return;
+      box.querySelectorAll('.pm-item').forEach(function(x){ x.classList.remove('on'); });
+      b.classList.add('on');
+      var i = +b.dataset.p;
+      var svg = makeAvatarSvg(PRESETS[i].e, PRESETS[i].c);
+      document.getElementById('pmPreview').src = svg;
+      document.getElementById('pmPreview').dataset.chosen = svg;
+    });
+  }
+  document.getElementById('pmPreview').src = myAvatar;
+  document.getElementById('pmPreview').dataset.chosen = myAvatar;
+  document.getElementById('pmName').value = myName;
+  openModal('profileModal');
+};
+
+window.pickProfileImage = function(){
+  document.getElementById('profileImgFile').click();
+};
+
+document.getElementById('profileImgFile').addEventListener('change', function(){
+  var f = this.files[0];
+  this.value = '';
+  if(!f) return;
+  if(!f.type.startsWith('image/')) return showToast('فقط عکس مجاز است');
+  compressImage(f, 400, 0.82, 100000, function(out){
+    document.getElementById('pmPreview').src = out;
+    document.getElementById('pmPreview').dataset.chosen = out;
+    document.querySelectorAll('#pmGrid .pm-item').forEach(function(x){ x.classList.remove('on'); });
+  });
+});
+
+window.saveProfile = function(){
+  var newName = document.getElementById('pmName').value.trim();
+  var newAvatar = document.getElementById('pmPreview').dataset.chosen || myAvatar;
+  if(newName.length < 2){ showToast('نام حداقل ۲ حرف'); return; }
+  if(newName.length > 20){ showToast('نام حداکثر ۲۰ حرف'); return; }
+
+  var nameChanged = newName !== myName;
+  if(nameChanged && client){
+    try { client.unsubscribe(T_BAN + encodeURIComponent(myName)); } catch(e){}
+    client.subscribe(T_BAN + encodeURIComponent(newName), { qos: 1 });
+  }
+
+  myName = newName;
+  myAvatar = newAvatar;
+  try { localStorage.setItem('tnt_name_v9', myName); } catch(e){}
+  try { localStorage.setItem('tnt_avatar_v9_' + myName, myAvatar); } catch(e){}
+
+  publishMyProfile();
+  renderHeaderAvatar();
+  renderMessages();
+  closeModal('profileModal');
+  showToast('پروفایل ذخیره شد ✓');
+};
+
+function showUserProfile(name){
+  if(name === myName){ openProfileViewer(); return; }
+  var p = userProfiles.get(name);
+  var av = p && p.avatar ? p.avatar : getAvatar(name);
+  document.getElementById('umAvatar').src = av;
+  document.getElementById('umName').textContent = name;
+  var joinedTxt = 'عضو گروه';
+  if(p && p.joined){
+    try { joinedTxt = 'عضو از ' + new Date(p.joined).toLocaleDateString('fa-IR'); } catch(e){}
+  }
+  document.getElementById('umJoined').textContent = joinedTxt;
+  openModal('userModal');
+}
+
+/* ================== MODAL helpers ================== */
+window.openModal = function(id){
+  document.getElementById(id).classList.add('on');
+  document.body.style.overflow = 'hidden';
+};
+window.closeModal = function(id){
+  document.getElementById(id).classList.remove('on');
+  document.body.style.overflow = '';
+};
+document.querySelectorAll('.modal').forEach(function(m){
+  m.addEventListener('click', function(e){
+    if(e.target === this) closeModal(this.id);
+  });
+});
+
+/* ================== LIGHTBOX ================== */
+window.openLightbox = function(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('on');
+};
+window.closeLightbox = function(){
+  document.getElementById('lightbox').classList.remove('on');
+};
+
+/* ================== TABS ================== */
+document.querySelectorAll('.tab').forEach(function(t){
+  t.addEventListener('click', function(){
+    document.querySelectorAll('.tab').forEach(function(x){ x.classList.remove('active'); });
+    t.classList.add('active');
+    var tab = t.dataset.tab;
+    document.getElementById('groupView').classList.toggle('on', tab === 'group');
+    document.getElementById('channelView').classList.toggle('on', tab === 'channel');
+    closePanels();
+    var hdrName = document.getElementById('hdrName');
+    var hdrDesc = document.getElementById('hdrDesc');
+    if(tab === 'group'){
+      hdrName.textContent = hdrName.dataset.gname || 'گروه';
+      hdrDesc.textContent = groupLocked ? 'گروه بسته است' : (hdrDesc.dataset.gdesc || 'آنلاین');
+    } else {
+      hdrName.textContent = hdrName.dataset.cname || 'کانال';
+      hdrDesc.textContent = hdrDesc.dataset.cdesc || '';
+    }
+  });
+});
+
+/* ================== ابزار ================== */
+function esc(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function fmtTime(ts){
+  if(!ts) return '';
+  return new Date(ts).toLocaleTimeString('fa-IR', { hour:'2-digit', minute:'2-digit' });
+}
+function formatDay(d){
+  var now = new Date();
+  var today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var that = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  var diff = (today - that) / 86400000;
+  if(diff === 0) return 'امروز';
+  if(diff === 1) return 'دیروز';
+  try { return d.toLocaleDateString('fa-IR', { year:'numeric', month:'long', day:'numeric' }); }
+  catch(e){ return d.toLocaleDateString(); }
+}
+var toastT = null;
+function showToast(msg){
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('on');
+  clearTimeout(toastT);
+  toastT = setTimeout(function(){ el.classList.remove('on'); }, 2000);
+}
+
+/* ================== رندر پست‌ها ================== */
+function renderPosts(){
+  var box = document.getElementById('posts');
+  if(!posts.size){
+    box.innerHTML = '<div class="empty"><div class="big">📢</div>هنوز پستی منتشر نشده</div>';
+    return;
+  }
+  var sorted = [...posts.values()].sort(function(a,b){ return (b.ts||0) - (a.ts||0); });
+  box.innerHTML = sorted.map(function(p){
+    return '<div class="post">' +
+      (p.text ? '<div class="p-t">' + esc(p.text).replace(/\n/g,'<br>') + '</div>' : '') +
+      (p.img ? '<img data-lbpost="' + p.id + '" src="' + p.img + '">' : '') +
+      '<div class="p-meta"><span class="pi">📢</span>' + new Date(p.ts||Date.now()).toLocaleString('fa-IR') + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+document.getElementById('posts').addEventListener('click', function(e){
+  var lb = e.target.closest('[data-lbpost]');
+  if(lb){
+    var pid = lb.getAttribute('data-lbpost');
+    var p = posts.get(pid);
+    if(p && p.img) openLightbox(p.img);
+  }
+});
+
+/* ================== OFFLINE ================== */
+function setOffline(s){
+  document.getElementById('offline').classList.toggle('show', s);
+}
+window.addEventListener('online', function(){ setOffline(false); });
+window.addEventListener('offline', function(){ setOffline(true); });
+if(!navigator.onLine) setOffline(true);
+
+/* ================== Close panels on outside click ================== */
+document.addEventListener('click', function(e){
+  if(emojiPanelOpen || attachMenuOpen){
+    if(!e.target.closest('#emojiPanel') && !e.target.closest('#attachMenu') &&
+       !e.target.closest('.c-emoji') && !e.target.closest('.c-btn')){
+      closePanels();
+    }
+  }
+});
+
+/* Prevent double-tap zoom + pinch */
+var lastTouch = 0;
+document.addEventListener('touchend', function(e){
+  var now = Date.now();
+  if(now - lastTouch < 300){ e.preventDefault(); }
+  lastTouch = now;
+}, { passive: false });
+document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
+document.addEventListener('dblclick', function(e){ e.preventDefault(); }, { passive: false });
+
+})();
 </script>
 </body>
 </html>
