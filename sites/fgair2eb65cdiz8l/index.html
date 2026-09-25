@@ -11,8 +11,7 @@
 <script src="https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js"></script>
 <style>
 :root{
-  --bg:#070712;--bg2:#0b0b1a;
-  --bd:rgba(255,255,255,.08);
+  --bg:#070712;--bd:rgba(255,255,255,.08);
   --txt:#eef0f8;--dim:#8a8aa5;--mut:#5a6178;
   --cy:#00d4ff;--pu:#7b2fff;--pk:#ff3d7a;--gr:#00ffaa;--or:#ffb74d;
   --grad:linear-gradient(135deg,#00d4ff,#7b2fff);
@@ -26,7 +25,6 @@ input,textarea{user-select:text;-webkit-user-select:text;outline:none;border:non
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-weight:inherit}
 img{max-width:100%;height:auto;display:block}
 
-/* BACKGROUND */
 .bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
   background:
     radial-gradient(ellipse 110% 55% at 50% -8%,rgba(99,60,255,.4),transparent 52%),
@@ -45,7 +43,6 @@ img{max-width:100%;height:auto;display:block}
 .stars span:nth-child(8){width:1px;height:1px;top:88%;left:85%;animation-delay:2.8s}
 @keyframes tw{0%,100%{opacity:.15}50%{opacity:.6}}
 
-/* OFFLINE */
 #offline{position:fixed;inset:0;z-index:99999;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:28px;text-align:center}
 #offline.show{display:flex}
 .off-icon{width:76px;height:76px;border-radius:50%;background:rgba(255,60,100,.12);border:2px solid rgba(255,60,100,.35);display:flex;align-items:center;justify-content:center;font-size:1.9rem}
@@ -53,43 +50,46 @@ img{max-width:100%;height:auto;display:block}
 .off-desc{font-size:.8rem;color:var(--dim);max-width:260px;line-height:1.8}
 .off-btn{padding:12px 28px;border-radius:100px;font-size:.82rem;font-weight:800;color:#fff;background:var(--grad);margin-top:8px}
 
-/* LOGIN */
-#login{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
-.login-box{width:100%;max-width:390px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid var(--bd);border-radius:26px;padding:32px 22px 26px;backdrop-filter:blur(14px);box-shadow:0 24px 60px -20px rgba(123,47,255,.35)}
+#booting{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center}
+.boot-spin{width:64px;height:64px;border-radius:50%;border:3px solid rgba(123,47,255,.2);border-top-color:var(--cy);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.boot-t{font-size:.95rem;color:#fff;font-weight:800}
+.boot-s{font-size:.76rem;color:var(--dim);max-width:280px;line-height:1.7}
+
+#login{position:relative;z-index:1;height:100%;display:none;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+.login-box{width:100%;max-width:400px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.015));border:1px solid var(--bd);border-radius:26px;padding:32px 22px 26px;backdrop-filter:blur(14px);box-shadow:0 24px 60px -20px rgba(123,47,255,.35)}
 .login-logo{width:84px;height:84px;margin:0 auto 12px;border-radius:50%;background:linear-gradient(150deg,#12122a,#0a0a14);display:flex;align-items:center;justify-content:center;font-size:2.5rem;position:relative;box-shadow:0 0 0 2px #0b0b1a,0 0 0 3px rgba(0,212,255,.35),0 0 40px rgba(123,47,255,.5)}
 .login-title{text-align:center;font-size:1.5rem;font-weight:900;margin-bottom:6px;letter-spacing:-.5px}
 .login-title b{background:var(--grad2);background-size:200% 200%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:lg 9s ease infinite}
 .login-title i{font-style:normal;color:#fff}
 @keyframes lg{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-.login-sub{text-align:center;color:var(--dim);font-size:.78rem;margin-bottom:20px;min-height:20px}
+.login-sub{text-align:center;color:var(--dim);font-size:.78rem;margin-bottom:18px;min-height:22px;line-height:1.5}
 .login-input{width:100%;padding:14px 16px;border:1px solid var(--bd);border-radius:14px;background:rgba(255,255,255,.03);color:#fff;font-size:16px;transition:.2s;margin-bottom:10px}
 .login-input:focus{border-color:rgba(0,212,255,.5);background:rgba(0,212,255,.05)}
-.login-btn{width:100%;padding:15px;margin-top:4px;border-radius:14px;font-size:.95rem;font-weight:900;color:#fff;background:var(--grad);box-shadow:0 8px 26px -6px rgba(0,212,255,.5);transition:.15s}
+.login-input.hidden{display:none}
+.login-btn{width:100%;padding:15px;margin-top:4px;border-radius:14px;font-size:.95rem;font-weight:900;color:#fff;background:var(--grad);box-shadow:0 8px 26px -6px rgba(0,212,255,.5);transition:.15s;display:flex;align-items:center;justify-content:center;gap:8px}
 .login-btn:active{transform:scale(.97)}
-.login-btn:disabled{opacity:.55;cursor:not-allowed}
+.login-btn:disabled{opacity:.65;cursor:not-allowed}
+.login-btn .btnspin{width:16px;height:16px;border-radius:50%;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;animation:spin .8s linear infinite;display:none}
+.login-btn.loading .btnspin{display:inline-block}
+.login-btn.loading .btntxt{opacity:.7}
 .login-link{width:100%;padding:10px;margin-top:6px;font-size:.76rem;color:var(--dim);text-align:center;cursor:pointer;background:none;font-weight:600}
 .login-link:active{color:#fff}
-.login-err{color:var(--pk);font-size:.74rem;text-align:center;margin-top:8px;min-height:18px;font-weight:600}
+.login-link.hidden{display:none}
+.login-err{color:var(--pk);font-size:.74rem;text-align:center;margin-top:10px;min-height:20px;font-weight:600;line-height:1.55}
+.login-err.warn{color:var(--or)}
+.login-err.ok{color:var(--gr)}
 
-/* Account card preview during login */
 .acc-card{display:flex;align-items:center;gap:12px;padding:10px 12px;background:linear-gradient(135deg,rgba(0,212,255,.06),rgba(123,47,255,.06));border:1px solid rgba(0,212,255,.2);border-radius:14px;margin-bottom:12px}
+.acc-card.hidden{display:none}
 .acc-av{width:48px;height:48px;border-radius:50%;flex-shrink:0;background:#0a0a14;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:1.4rem;color:var(--pu);border:2px solid rgba(0,212,255,.3)}
 .acc-av img{width:100%;height:100%;object-fit:cover}
 .acc-info{flex:1;min-width:0}
 .acc-name{font-weight:800;color:#fff;font-size:.9rem}
 .acc-hint{font-size:.68rem;color:var(--dim);margin-top:2px;line-height:1.5}
 
-/* Auto-login overlay */
-#autoLogin{position:fixed;inset:0;z-index:60;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px}
-#autoLogin.on{display:flex}
-.al-spin{width:60px;height:60px;border-radius:50%;border:3px solid rgba(123,47,255,.2);border-top-color:var(--cy);animation:spin 1s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.al-txt{font-size:.86rem;color:var(--dim);font-weight:600}
-
-/* APP */
 #app{position:relative;z-index:1;display:none;flex-direction:column;height:100%}
 #app.on{display:flex}
-
 .hdr{padding:10px 12px;background:rgba(11,11,26,.85);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;gap:11px;flex-shrink:0;z-index:20;padding-top:calc(10px + env(safe-area-inset-top))}
 .hdr-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:1.05rem;overflow:hidden;box-shadow:0 0 0 2px #0b0b1a,0 0 0 3px rgba(0,212,255,.3);cursor:pointer}
 .hdr-av img{width:100%;height:100%;object-fit:cover;border-radius:50%}
@@ -139,7 +139,6 @@ img{max-width:100%;height:auto;display:block}
 .mrow.mine .m-bubble{background:linear-gradient(135deg,#7b2fff,#a855f7);color:#fff;border-bottom-right-radius:5px;box-shadow:0 4px 14px -4px rgba(123,47,255,.5)}
 
 .m-quote{display:flex;flex-direction:column;gap:2px;padding:6px 10px 5px;margin:-2px -4px 6px;background:rgba(0,0,0,.25);border-radius:10px;border-right:3px solid var(--cy);cursor:pointer;transition:.15s;max-width:100%}
-.m-quote:hover{background:rgba(0,0,0,.35)}
 .mrow.mine .m-quote{background:rgba(0,0,0,.2);border-right-color:#fff}
 .m-quote .qn{font-size:.66rem;font-weight:800;color:var(--cy)}
 .mrow.mine .m-quote .qn{color:#fff}
@@ -213,31 +212,21 @@ img{max-width:100%;height:auto;display:block}
 .mb-handle{width:36px;height:4px;border-radius:4px;background:rgba(255,255,255,.15);margin:0 auto 14px}
 @media(min-width:520px){.mb-handle{display:none}}
 .mb-close{position:absolute;top:14px;left:14px;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--dim);display:flex;align-items:center;justify-content:center;font-size:.8rem;cursor:pointer}
-
 .mb-title{font-size:1.02rem;font-weight:900;color:#fff;margin-bottom:4px;text-align:center}
 .mb-sub{font-size:.7rem;color:var(--dim);text-align:center;margin-bottom:16px}
-
 .pm-preview{display:flex;justify-content:center;margin-bottom:16px}
 .pm-preview img{width:110px;height:110px;border-radius:50%;object-fit:cover;background:#0a0a14;box-shadow:0 0 0 2px #0b0b1a,0 0 0 3px rgba(0,212,255,.35),0 0 40px rgba(123,47,255,.35)}
-
 .pm-sec{margin-bottom:14px}
 .pm-sec h4{font-size:.72rem;font-weight:800;color:var(--cy);margin-bottom:8px;display:flex;align-items:center;gap:6px}
 .pm-sec h4::before{content:'';width:3px;height:12px;border-radius:2px;background:var(--grad)}
-.pm-upload{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.14);color:#b8b8cc;font-size:.8rem;font-weight:700;cursor:pointer;transition:.15s}
-.pm-upload:active{background:rgba(0,212,255,.06);border-color:rgba(0,212,255,.35)}
+.pm-upload{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:12px;border-radius:14px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.14);color:#b8b8cc;font-size:.8rem;font-weight:700;cursor:pointer}
 .pm-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .pm-item{aspect-ratio:1;border-radius:50%;overflow:hidden;cursor:pointer;border:2px solid transparent;transition:.18s;padding:0;background:transparent}
-.pm-item:active{transform:scale(.9)}
 .pm-item.on{border-color:var(--cy);box-shadow:0 0 0 3px rgba(0,212,255,.2)}
 .pm-item img{width:100%;height:100%;object-fit:cover;border-radius:50%;display:block}
-
 .pm-save{width:100%;padding:14px;border-radius:14px;font-size:.86rem;font-weight:900;color:#fff;background:var(--grad);box-shadow:0 6px 20px -5px rgba(0,212,255,.5);margin-top:8px}
-.pm-save:active{transform:scale(.98)}
 .pm-logout{width:100%;padding:12px;border-radius:14px;font-size:.8rem;font-weight:800;color:var(--pk);background:rgba(255,60,100,.1);border:1px solid rgba(255,60,100,.25);margin-top:8px}
-.pm-logout:active{background:rgba(255,60,100,.2)}
-
 .act-box{max-width:340px;padding:8px}
-@media(min-width:520px){.act-box{border-radius:20px}}
 .act-item{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;cursor:pointer;font-size:.85rem;font-weight:600;color:var(--txt);transition:.12s}
 .act-item:active{background:rgba(255,255,255,.06)}
 .act-item .ai{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;background:rgba(255,255,255,.05)}
@@ -293,43 +282,40 @@ img{max-width:100%;height:auto;display:block}
   <button class="off-btn" onclick="location.reload()">تلاش مجدد</button>
 </div>
 
-<!-- AUTO LOGIN OVERLAY -->
-<div id="autoLogin">
-  <div class="al-spin"></div>
-  <div class="al-txt" id="alTxt">در حال ورود خودکار…</div>
+<div id="booting">
+  <div class="boot-spin"></div>
+  <div class="boot-t" id="bootT">در حال اتصال به سرور…</div>
+  <div class="boot-s" id="bootS">لطفاً چند لحظه صبر کنید</div>
 </div>
 
-<!-- LOGIN -->
-<div id="login" style="display:none">
+<div id="login">
   <div class="login-box">
     <div class="login-logo">💬</div>
     <div class="login-title"><b>TNT</b> <i>Chat</i></div>
     <div class="login-sub" id="loginSub">نام کاربری خود را وارد کنید</div>
 
-    <div id="nameStep">
-      <input class="login-input" id="nameInput" placeholder="نام کاربری…" maxlength="20" autocomplete="off">
-    </div>
-
-    <div id="pwStep" style="display:none">
-      <div class="acc-card" id="accCard" style="display:none">
-        <div class="acc-av" id="accAv"></div>
-        <div class="acc-info">
-          <div class="acc-name" id="accName">—</div>
-          <div class="acc-hint" id="accHint">—</div>
-        </div>
+    <div class="acc-card hidden" id="accCard">
+      <div class="acc-av" id="accAv"></div>
+      <div class="acc-info">
+        <div class="acc-name" id="accName">—</div>
+        <div class="acc-hint" id="accHint">—</div>
       </div>
-      <input class="login-input" id="pwInput" placeholder="رمز عبور…" type="password" maxlength="60" autocomplete="current-password">
-      <input class="login-input" id="pwConfirm" placeholder="تکرار رمز عبور…" type="password" maxlength="60" style="display:none" autocomplete="new-password">
     </div>
 
-    <button class="login-btn" id="loginBtn" onclick="onLoginClick()">ادامه</button>
-    <button class="login-link" id="backBtn" onclick="backToName()" style="display:none">← بازگشت</button>
+    <input class="login-input" id="nameInput" placeholder="نام کاربری…" maxlength="20" autocomplete="off">
+    <input class="login-input hidden" id="pwInput" placeholder="رمز عبور…" type="password" maxlength="60" autocomplete="current-password">
+    <input class="login-input hidden" id="pwConfirm" placeholder="تکرار رمز عبور…" type="password" maxlength="60" autocomplete="new-password">
+
+    <button class="login-btn" id="loginBtn" onclick="onLoginClick()">
+      <span class="btnspin"></span>
+      <span class="btntxt" id="btnTxt">ادامه</span>
+    </button>
+    <button class="login-link hidden" id="backBtn" onclick="backToName()">← بازگشت</button>
 
     <div class="login-err" id="loginErr"></div>
   </div>
 </div>
 
-<!-- APP -->
 <div id="app">
   <div class="hdr">
     <div class="hdr-av" id="hdrAv" onclick="openProfileViewer()">T</div>
@@ -339,18 +325,15 @@ img{max-width:100%;height:auto;display:block}
     </div>
     <div class="hdr-dot" id="dot"></div>
   </div>
-
   <div class="tabs">
     <button class="tab active" data-tab="group">💬 گروه</button>
     <button class="tab" data-tab="channel">📢 کانال</button>
   </div>
-
   <div class="view on" id="groupView">
     <div id="noticeBanner"><span class="ni">📣</span><span id="noticeText"></span></div>
     <div id="messages"></div>
     <div class="notice lock" id="lockNotice" style="display:none">🔒 گروه توسط مدیر بسته شده است</div>
     <div class="notice ban" id="banNotice" style="display:none">🚫 شما توسط مدیر بن شده‌اید</div>
-
     <div class="composer" id="composer">
       <div class="reply-bar" id="replyBar">
         <div class="rb-info">
@@ -359,13 +342,11 @@ img{max-width:100%;height:auto;display:block}
         </div>
         <button class="rb-x" onclick="cancelReply()">✕</button>
       </div>
-
       <div class="img-prev" id="imgPrev">
         <img id="imgPrevThumb">
         <div class="ip-i"><b>عکس آماده ارسال</b>دکمه ارسال را بزنید</div>
         <button class="ip-x" onclick="cancelImage()">✕</button>
       </div>
-
       <div class="comp-row">
         <button class="c-btn" onclick="toggleAttach(event)">📎</button>
         <div class="c-field" id="cField">
@@ -376,7 +357,6 @@ img{max-width:100%;height:auto;display:block}
       </div>
     </div>
   </div>
-
   <div class="view" id="channelView">
     <div id="posts"><div class="empty"><div class="big">📢</div>هنوز پستی منتشر نشده</div></div>
   </div>
@@ -388,20 +368,13 @@ img{max-width:100%;height:auto;display:block}
   <div class="am-item" onclick="openStickers()"><div class="ami i3">😊</div><span>ایموجی</span></div>
 </div>
 
-<div id="emojiPanel">
-  <div class="ep-tabs" id="epTabs"></div>
-  <div class="ep-body" id="epBody"></div>
-</div>
-
+<div id="emojiPanel"><div class="ep-tabs" id="epTabs"></div><div class="ep-body" id="epBody"></div></div>
 <div id="panelOv" onclick="closePanels()"></div>
 
 <input type="file" id="imgFile" accept="image/*" style="display:none">
 <input type="file" id="profileImgFile" accept="image/*" style="display:none">
 
-<div id="lightbox" onclick="closeLightbox()">
-  <button class="lb-x">✕</button>
-  <img id="lightboxImg">
-</div>
+<div id="lightbox" onclick="closeLightbox()"><button class="lb-x">✕</button><img id="lightboxImg"></div>
 
 <div class="modal" id="profileModal">
   <div class="modal-box">
@@ -410,22 +383,9 @@ img{max-width:100%;height:auto;display:block}
     <div class="mb-title">پروفایل شما</div>
     <div class="mb-sub" id="pmSub">حساب شما محافظت شده است</div>
     <div class="pm-preview"><img id="pmPreview" src=""></div>
-
-    <div class="pm-sec">
-      <h4>از گالری</h4>
-      <button class="pm-upload" onclick="pickProfileImage()">📷 انتخاب عکس از گالری</button>
-    </div>
-
-    <div class="pm-sec">
-      <h4>پروفایل‌های پیشنهادی</h4>
-      <div class="pm-grid" id="pmGrid"></div>
-    </div>
-
-    <div class="pm-sec">
-      <h4>نام نمایشی</h4>
-      <input class="login-input" id="pmName" maxlength="20" placeholder="نام شما…" style="font-size:15px;margin:0">
-    </div>
-
+    <div class="pm-sec"><h4>از گالری</h4><button class="pm-upload" onclick="pickProfileImage()">📷 انتخاب عکس از گالری</button></div>
+    <div class="pm-sec"><h4>پروفایل‌های پیشنهادی</h4><div class="pm-grid" id="pmGrid"></div></div>
+    <div class="pm-sec"><h4>نام نمایشی</h4><input class="login-input" id="pmName" maxlength="20" placeholder="نام شما…" style="font-size:15px;margin:0"></div>
     <button class="pm-save" onclick="saveProfile()">ذخیره پروفایل</button>
     <button class="pm-logout" onclick="logoutConfirm()">🚪 خروج از حساب</button>
   </div>
@@ -456,23 +416,37 @@ img{max-width:100%;height:auto;display:block}
 (function(){
 'use strict';
 
-/* ================== تنظیمات ================== */
+/* ============================================================
+   تنظیمات — توجه: تاپیک‌های کاربر/پیام به زیرمسیرهای جدید منتقل شدند
+   تا اکانت‌ها و پیام‌های قدیمی ناپدید شوند.
+   ولی گروه/کانال/پست‌های کانال دست‌نخورده باقی مانده‌اند.
+============================================================ */
 var BROKER = 'wss://broker.emqx.io:8084/mqtt';
 var NS     = 'tnt/v9';
-var T_MSG  = NS + '/msg/';
-var T_CTRL = NS + '/ctrl';
-var T_BAN  = NS + '/ban/';
-var T_POST = NS + '/ch/';
-var T_GINFO= NS + '/group';
-var T_CINFO= NS + '/channel';
+
+/* --- جدید (خالی و پاک) --- */
+var T_USER = NS + '/account/';   /* پروفایل کاربران + هش رمز */
+var T_MSG  = NS + '/chat/';      /* پیام‌های چت گروه */
+
+/* --- حفظ شده (دست‌نخورده) --- */
+var T_CTRL   = NS + '/ctrl';
+var T_BAN    = NS + '/ban/';
+var T_POST   = NS + '/ch/';        /* پست‌های کانال */
+var T_GINFO  = NS + '/group';      /* پروفایل گروه */
+var T_CINFO  = NS + '/channel';    /* پروفایل کانال */
 var T_NOTICE = NS + '/notice';
-var T_USER = NS + '/user/';
 
 var SALT = 'tnt_v9_secure_salt::';
-var SESSION_KEY = 'tnt_session_v9';
+var SESSION_KEY = 'tnt_session_v10';   /* کلید جدید تا session قدیمی بی‌اعتبار شود */
 var MAX_IMG_BYTES = 250000;
 
-/* ================== Avatars ================== */
+/* زمان‌های امنیتی */
+var BOOT_MIN_WAIT   = 2500;
+var VERIFY_WAIT     = 2200;
+var FINAL_RECHECK   = 1200;
+var NEW_ACC_EXTRA   = 2500;
+
+/* ============ Avatars ============ */
 var PRESETS = [
   {e:'🐱',c:['#ff6b9d','#c2185b']},{e:'🐶',c:['#00d4ff','#7b2fff']},
   {e:'🦊',c:['#ffb74d','#ff5722']},{e:'🐼',c:['#00ffaa','#00a86b']},
@@ -483,19 +457,21 @@ var PRESETS = [
   {e:'🦋',c:['#22d3ee','#0891b2']},{e:'🌟',c:['#fde047','#eab308']},
   {e:'🔥',c:['#f97316','#dc2626']},{e:'💎',c:['#67e8f9','#0891b2']}
 ];
-function makeAvatarSvg(emoji, colors){
+function makeAvatarSvg(e, c){
   var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">'+
     '<defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">'+
-    '<stop offset="0%" stop-color="'+colors[0]+'"/>'+
-    '<stop offset="100%" stop-color="'+colors[1]+'"/>'+
+    '<stop offset="0%" stop-color="'+c[0]+'"/><stop offset="100%" stop-color="'+c[1]+'"/>'+
     '</linearGradient></defs>'+
     '<rect width="100" height="100" rx="50" fill="url(#g)"/>'+
-    '<text x="50" y="50" font-size="52" text-anchor="middle" dominant-baseline="central">'+emoji+'</text>'+
-    '</svg>';
+    '<text x="50" y="50" font-size="52" text-anchor="middle" dominant-baseline="central">'+e+'</text></svg>';
   return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
 }
+function makeRandomAvatar(){
+  var p = PRESETS[Math.floor(Math.random() * PRESETS.length)];
+  return makeAvatarSvg(p.e, p.c);
+}
 
-/* ================== Hashing ================== */
+/* ============ Hashing ============ */
 async function sha256(str){
   if(window.crypto && crypto.subtle){
     try {
@@ -504,19 +480,14 @@ async function sha256(str){
       return Array.from(new Uint8Array(hash)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
     } catch(e){}
   }
-  // fallback (older browsers / no SubtleCrypto)
   var h = 5381;
-  for(var i = 0; i < str.length; i++){
-    h = ((h << 5) + h) + str.charCodeAt(i);
-    h = h & 0xffffffff;
-  }
+  for(var i = 0; i < str.length; i++){ h = ((h << 5) + h) + str.charCodeAt(i); h = h & 0xffffffff; }
   return 'fb' + Math.abs(h).toString(16) + '_' + str.length.toString(16);
 }
-async function hashPw(name, pw){
-  return await sha256(SALT + name + '::' + pw);
-}
+function hashPw(name, pw){ return sha256(SALT + name + '::' + pw); }
+function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
 
-/* ================== وضعیت ================== */
+/* ============ وضعیت ============ */
 var client = null;
 var myName = '';
 var myAvatar = '';
@@ -531,34 +502,326 @@ var pendingReply = null;
 var actionTarget = null;
 var emojiPanelOpen = false;
 var attachMenuOpen = false;
-var loginMode = null; // 'return' | 'migrate' | 'new'
-var loginName = '';
 var profilesLoaded = false;
 var appStarted = false;
+var loginStage = 'name';
+var pendingName = '';
+var pendingProfile = null;
+var busy = false;
 
-/* ================== شروع ================== */
-window.addEventListener('load', function(){
-  connect();
-  // بعد از اتصال، منتظر دریافت پیام‌های retained می‌مانیم
-  setTimeout(tryAutoLogin, 1800);
-});
+/* ============ راه‌اندازی ============ */
+window.addEventListener('load', function(){ connect(); });
 
-/* ================== اتصال ================== */
 function connect(){
+  setBoot('در حال اتصال به سرور…', 'اتصال امن به بروکر MQTT');
   client = mqtt.connect(BROKER, {
     clientId: 'u_' + Math.random().toString(16).slice(2,10),
     clean: true, reconnectPeriod: 2000, keepalive: 30, connectTimeout: 10000
   });
   client.on('connect', function(){
-    setDot(true);
-    // برای لاگین، فقط پروفایل کاربران را می‌خوانیم
-    client.subscribe([T_USER + '+', T_GINFO, T_CINFO, T_NOTICE], { qos: 1 });
-    profilesLoaded = true;
+    setBoot('اتصال برقرار شد ✓', 'در حال دریافت اطلاعات حساب‌ها…');
+    client.subscribe([T_USER + '+', T_GINFO, T_CINFO, T_NOTICE], { qos: 1 }, function(){
+      setTimeout(function(){
+        profilesLoaded = true;
+        decideBootScreen();
+      }, BOOT_MIN_WAIT);
+    });
   });
-  client.on('reconnect', function(){ setDot(false); });
-  client.on('close',     function(){ setDot(false); });
-  client.on('error',     function(){ setDot(false); });
-  client.on('message',   onMessage);
+  client.on('reconnect', function(){
+    var d = document.getElementById('hdrDesc');
+    if(d && appStarted) d.textContent = 'اتصال مجدد…';
+  });
+  client.on('close', function(){
+    var dot = document.getElementById('dot');
+    if(dot) dot.className = 'hdr-dot';
+  });
+  client.on('error', function(){});
+  client.on('message', onMessage);
+}
+
+function setBoot(t, s){
+  var e1 = document.getElementById('bootT');
+  var e2 = document.getElementById('bootS');
+  if(e1 && t) e1.textContent = t;
+  if(e2 && s) e2.textContent = s;
+}
+
+function decideBootScreen(){
+  var stored = null;
+  try { stored = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch(e){}
+  if(stored && stored.name && stored.pwHash){
+    attemptAutoLogin(stored);
+  } else {
+    showLoginForm();
+  }
+}
+
+/* ============ Auto Login ============ */
+async function attemptAutoLogin(stored){
+  setBoot('در حال بررسی حساب…', 'خوش آمدی ' + stored.name);
+  await sleep(700);
+
+  var p = userProfiles.get(stored.name);
+  if(!p){
+    await sleep(1500);
+    p = userProfiles.get(stored.name);
+  }
+
+  if(p && p.pwHash && p.pwHash === stored.pwHash){
+    myName = stored.name;
+    myPwHash = p.pwHash;
+    myAvatar = p.avatar || stored.avatar || makeRandomAvatar();
+    document.getElementById('booting').style.display = 'none';
+    enterChat();
+    return;
+  }
+
+  if(p && p.pwHash && p.pwHash !== stored.pwHash){
+    try { localStorage.removeItem(SESSION_KEY); } catch(e){}
+    showLoginForm('اطلاعات ورود شما تغییر کرده. لطفاً دوباره وارد شوید.', 'warn');
+    return;
+  }
+
+  /* اگر پروفایل نبود یا بدون رمز بود، session را معتبر نمی‌دانیم */
+  try { localStorage.removeItem(SESSION_KEY); } catch(e){}
+  showLoginForm();
+}
+
+function showLoginForm(msg, type){
+  document.getElementById('booting').style.display = 'none';
+  document.getElementById('login').style.display = 'flex';
+  resetLoginUI();
+  if(msg){
+    var err = document.getElementById('loginErr');
+    err.textContent = msg;
+    err.className = 'login-err ' + (type || 'warn');
+  }
+  setTimeout(function(){ document.getElementById('nameInput').focus(); }, 100);
+}
+
+function resetLoginUI(){
+  loginStage = 'name';
+  pendingName = '';
+  pendingProfile = null;
+  busy = false;
+
+  document.getElementById('nameInput').value = '';
+  document.getElementById('pwInput').value = '';
+  document.getElementById('pwConfirm').value = '';
+  document.getElementById('nameInput').classList.remove('hidden');
+  document.getElementById('nameInput').disabled = false;
+  document.getElementById('pwInput').classList.add('hidden');
+  document.getElementById('pwConfirm').classList.add('hidden');
+  document.getElementById('accCard').classList.add('hidden');
+  document.getElementById('backBtn').classList.add('hidden');
+  document.getElementById('loginBtn').classList.remove('loading');
+  document.getElementById('loginBtn').disabled = false;
+  document.getElementById('btnTxt').textContent = 'ادامه';
+  document.getElementById('loginSub').textContent = 'نام کاربری خود را وارد کنید';
+  var err = document.getElementById('loginErr');
+  err.textContent = '';
+  err.className = 'login-err';
+}
+
+function setErr(msg, type){
+  var err = document.getElementById('loginErr');
+  err.textContent = msg || '';
+  err.className = 'login-err ' + (type || '');
+}
+
+function setBtnLoading(on, txt){
+  var btn = document.getElementById('loginBtn');
+  var bt = document.getElementById('btnTxt');
+  if(on){
+    btn.classList.add('loading');
+    btn.disabled = true;
+    if(txt) bt.textContent = txt;
+  } else {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+    if(txt) bt.textContent = txt;
+  }
+}
+
+/* ============ کلیک ورود ============ */
+window.onLoginClick = async function(){
+  if(busy) return;
+  busy = true;
+  try {
+    if(loginStage === 'name') await handleNameStage();
+    else if(loginStage === 'pw') await handlePwStage();
+  } catch(e){
+    setBtnLoading(false);
+    setErr('خطای غیرمنتظره. دوباره تلاش کنید.');
+  }
+  busy = false;
+};
+
+async function handleNameStage(){
+  var name = document.getElementById('nameInput').value.trim();
+  setErr('');
+
+  if(name.length < 2){ setErr('نام باید حداقل ۲ حرف باشد'); return; }
+  if(name.length > 20){ setErr('نام حداکثر ۲۰ حرف'); return; }
+  if(!/^[\u0600-\u06FFa-zA-Z0-9_\u200c ]+$/.test(name)){ setErr('فقط حروف، اعداد، خط تیره و فاصله'); return; }
+
+  setBtnLoading(true, 'در حال بررسی…');
+  document.getElementById('loginSub').textContent = 'لطفاً چند لحظه صبر کنید…';
+
+  await sleep(VERIFY_WAIT);
+
+  pendingName = name;
+  pendingProfile = userProfiles.get(name) || null;
+
+  /* حالت ۱: نام گرفته شده با رمز → ورود */
+  if(pendingProfile && pendingProfile.pwHash){
+    loginStage = 'pw';
+    document.getElementById('nameInput').classList.add('hidden');
+    document.getElementById('nameInput').disabled = true;
+    document.getElementById('pwInput').classList.remove('hidden');
+    document.getElementById('pwConfirm').classList.add('hidden');
+    document.getElementById('accCard').classList.remove('hidden');
+    document.getElementById('accAv').innerHTML = pendingProfile.avatar ? '<img src="' + pendingProfile.avatar + '">' : '👤';
+    document.getElementById('accName').textContent = name;
+    document.getElementById('accHint').textContent = '🔒 این حساب با رمز محافظت می‌شود';
+    document.getElementById('backBtn').classList.remove('hidden');
+    document.getElementById('loginSub').textContent = 'خوش آمدی ' + name + '!';
+    setBtnLoading(false, 'ورود');
+    setErr('رمز عبور خود را وارد کنید');
+    setTimeout(function(){ document.getElementById('pwInput').focus(); }, 100);
+    return;
+  }
+
+  /* حالت ۲: نام گرفته شده بدون رمز → مسدود (فقط ادمین می‌تواند آزاد کند) */
+  if(pendingProfile && !pendingProfile.pwHash){
+    setBtnLoading(false, 'ادامه');
+    setErr('🚫 این نام قبلاً استفاده شده ولی رمز ندارد. برای بازپس‌گیری با ادمین تماس بگیرید تا رمز موقت برایتان تعیین شود.', '');
+    document.getElementById('loginSub').textContent = 'این نام قفل شده است';
+    setTimeout(resetLoginUI, 6000);
+    return;
+  }
+
+  /* حالت ۳: نام جدید (شاید هنوز نرسیده) */
+  document.getElementById('loginSub').textContent = 'در حال بررسی بیشتر…';
+  setBtnLoading(true, 'در حال بررسی…');
+  await sleep(NEW_ACC_EXTRA);
+
+  pendingProfile = userProfiles.get(name) || null;
+
+  if(pendingProfile){
+    setBtnLoading(false, 'ادامه');
+    setErr('اطلاعات این حساب دریافت شد. لطفاً دوباره کلیک کنید.', 'warn');
+    document.getElementById('loginSub').textContent = 'دوباره تلاش کنید';
+    loginStage = 'name';
+    return;
+  }
+
+  /* نام واقعاً آزاد است */
+  loginStage = 'pw';
+  document.getElementById('nameInput').classList.add('hidden');
+  document.getElementById('nameInput').disabled = true;
+  document.getElementById('pwInput').classList.remove('hidden');
+  document.getElementById('pwConfirm').classList.remove('hidden');
+  document.getElementById('accCard').classList.add('hidden');
+  document.getElementById('backBtn').classList.remove('hidden');
+  document.getElementById('loginSub').textContent = 'این نام آزاد است — رمز بسازید';
+  setBtnLoading(false, 'ساخت حساب');
+  setErr('حداقل ۴ کاراکتر — رمز و تکرار یکسان باشد', 'ok');
+  setTimeout(function(){ document.getElementById('pwInput').focus(); }, 100);
+}
+
+async function handlePwStage(){
+  var name = pendingName;
+  var pw = document.getElementById('pwInput').value;
+  var pw2 = document.getElementById('pwConfirm').value;
+  setErr('');
+
+  if(!pw || pw.length < 4){ setErr('رمز باید حداقل ۴ کاراکتر باشد'); return; }
+  if(pw.length > 60){ setErr('رمز خیلی بلند است'); return; }
+
+  var hash = await hashPw(name, pw);
+
+  /* ورود به حساب موجود */
+  if(pendingProfile && pendingProfile.pwHash){
+    if(hash !== pendingProfile.pwHash){
+      setErr('رمز عبور اشتباه است');
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+      return;
+    }
+    myName = name;
+    myPwHash = hash;
+    myAvatar = pendingProfile.avatar || makeRandomAvatar();
+    saveSession();
+    enterChat();
+    return;
+  }
+
+  /* ساخت حساب جدید */
+  if(pw !== pw2){ setErr('رمز و تکرار آن یکسان نیستند'); return; }
+
+  setBtnLoading(true, 'در حال ثبت…');
+  document.getElementById('loginSub').textContent = 'لطفاً صبر کنید…';
+  await sleep(FINAL_RECHECK);
+
+  var latest = userProfiles.get(name) || null;
+
+  if(latest){
+    setBtnLoading(false);
+    setErr('این نام هم‌اکنون توسط شخص دیگری ثبت شد. لطفاً نام دیگری انتخاب کنید.', '');
+    setTimeout(resetLoginUI, 2600);
+    return;
+  }
+
+  var avatar = makeRandomAvatar();
+  var profile = {
+    name: name,
+    avatar: avatar,
+    joined: Date.now(),
+    pwHash: hash,
+    secured: Date.now()
+  };
+  client.publish(T_USER + encodeURIComponent(name), JSON.stringify(profile), { qos:1, retain:true });
+
+  myName = name;
+  myPwHash = hash;
+  myAvatar = avatar;
+  saveSession();
+  enterChat();
+}
+
+window.backToName = function(){
+  if(busy) return;
+  resetLoginUI();
+  setTimeout(function(){ document.getElementById('nameInput').focus(); }, 100);
+};
+
+function saveSession(){
+  try {
+    localStorage.setItem(SESSION_KEY, JSON.stringify({
+      name: myName, pwHash: myPwHash, avatar: myAvatar
+    }));
+  } catch(e){}
+}
+
+window.logoutConfirm = function(){
+  if(!confirm('از حساب خود خارج شوید؟ برای ورود مجدد به رمز نیاز دارید.')) return;
+  try { localStorage.removeItem(SESSION_KEY); } catch(e){}
+  location.reload();
+};
+
+/* ============ ورود به چت ============ */
+function enterChat(){
+  if(appStarted) return;
+  appStarted = true;
+
+  document.getElementById('booting').style.display = 'none';
+  document.getElementById('login').style.display = 'none';
+  document.getElementById('app').classList.add('on');
+
+  subscribeChat();
+  publishMyProfile();
+  renderHeaderAvatar();
 }
 
 function subscribeChat(){
@@ -570,244 +833,11 @@ function subscribeChat(){
   ], { qos: 1 });
 }
 
-function setDot(on){
-  var dot = document.getElementById('dot');
-  if(dot) dot.className = 'hdr-dot' + (on ? ' on' : '');
-  var desc = document.getElementById('hdrDesc');
-  if(desc && !on) desc.textContent = 'اتصال مجدد…';
-}
-
-/* ================== Auto Login ================== */
-async function tryAutoLogin(){
-  document.getElementById('autoLogin').classList.add('on');
-  document.getElementById('alTxt').textContent = 'در حال بررسی حساب…';
-
-  var stored = null;
-  try { stored = JSON.parse(localStorage.getItem(SESSION_KEY) || 'null'); } catch(e){}
-
-  if(!stored || !stored.name || !stored.pwHash){
-    // no stored session
-    setTimeout(showLoginForm, 400);
-    return;
-  }
-
-  // Wait for profile to be loaded (retained)
-  var waitCount = 0;
-  while(!profilesLoaded && waitCount < 30){
-    await new Promise(function(r){ setTimeout(r, 100); });
-    waitCount++;
-  }
-
-  // give extra time for retention
-  await new Promise(function(r){ setTimeout(r, 800); });
-
-  var p = userProfiles.get(stored.name);
-  if(p && p.pwHash && p.pwHash === stored.pwHash){
-    // ✅ valid session - auto login
-    myName = stored.name;
-    myAvatar = stored.avatar || p.avatar || '';
-    myPwHash = p.pwHash;
-    document.getElementById('alTxt').textContent = 'خوش آمدی ' + myName + ' ✓';
-    setTimeout(function(){
-      document.getElementById('autoLogin').classList.remove('on');
-      enterChat();
-    }, 500);
-  } else {
-    // invalid session
-    try { localStorage.removeItem(SESSION_KEY); } catch(e){}
-    setTimeout(showLoginForm, 400);
-  }
-}
-
-function showLoginForm(){
-  document.getElementById('autoLogin').classList.remove('on');
-  document.getElementById('login').style.display = 'flex';
-  document.getElementById('nameInput').focus();
-}
-
-/* ================== Login Flow ================== */
-window.onLoginClick = async function(){
-  var err = document.getElementById('loginErr');
-  err.textContent = '';
-
-  if(!loginMode){
-    // step 1: name
-    var n = document.getElementById('nameInput').value.trim();
-    if(n.length < 2){ err.textContent = 'نام باید حداقل ۲ حرف باشد'; return; }
-    if(n.length > 20){ err.textContent = 'نام حداکثر ۲۰ حرف'; return; }
-    if(!/^[\u0600-\u06FFa-zA-Z0-9_\u200c ]+$/.test(n)){ err.textContent = 'کاراکترهای غیرمجاز'; return; }
-
-    // wait for profile load
-    var waitCount = 0;
-    while(!profilesLoaded && waitCount < 30){
-      await new Promise(function(r){ setTimeout(r, 100); });
-      waitCount++;
-    }
-    await new Promise(function(r){ setTimeout(r, 300); });
-
-    var p = userProfiles.get(n);
-
-    if(p && p.pwHash){
-      // returning user
-      loginMode = 'return';
-      loginName = n;
-      document.getElementById('loginSub').textContent = 'خوش آمدی ' + n + '!';
-      document.getElementById('accCard').style.display = 'flex';
-      document.getElementById('accAv').innerHTML = p.avatar ? '<img src="' + p.avatar + '">' : '👤';
-      document.getElementById('accName').textContent = n;
-      document.getElementById('accHint').textContent = 'رمز عبور خود را وارد کنید';
-      document.getElementById('nameStep').style.display = 'none';
-      document.getElementById('pwStep').style.display = 'block';
-      document.getElementById('pwInput').style.display = 'block';
-      document.getElementById('pwConfirm').style.display = 'none';
-      document.getElementById('loginBtn').textContent = 'ورود';
-      document.getElementById('backBtn').style.display = 'block';
-      document.getElementById('pwInput').value = '';
-      document.getElementById('pwInput').focus();
-    } else if(p){
-      // existing profile without pw → migrate
-      loginMode = 'migrate';
-      loginName = n;
-      document.getElementById('loginSub').textContent = 'برای امن کردن حساب، رمز تعیین کنید';
-      document.getElementById('accCard').style.display = 'flex';
-      document.getElementById('accAv').innerHTML = p.avatar ? '<img src="' + p.avatar + '">' : '👤';
-      document.getElementById('accName').textContent = n;
-      document.getElementById('accHint').textContent = 'این حساب از قبل وجود دارد. اگر شما صاحب آن هستید، رمز جدید تعیین کنید.';
-      document.getElementById('nameStep').style.display = 'none';
-      document.getElementById('pwStep').style.display = 'block';
-      document.getElementById('pwInput').style.display = 'block';
-      document.getElementById('pwConfirm').style.display = 'block';
-      document.getElementById('loginBtn').textContent = 'ثبت رمز و ورود';
-      document.getElementById('backBtn').style.display = 'block';
-      document.getElementById('pwInput').value = '';
-      document.getElementById('pwConfirm').value = '';
-      document.getElementById('pwInput').focus();
-    } else {
-      // new account
-      loginMode = 'new';
-      loginName = n;
-      document.getElementById('loginSub').textContent = 'برای ' + n + ' رمز بسازید';
-      document.getElementById('accCard').style.display = 'none';
-      document.getElementById('nameStep').style.display = 'none';
-      document.getElementById('pwStep').style.display = 'block';
-      document.getElementById('pwInput').style.display = 'block';
-      document.getElementById('pwConfirm').style.display = 'block';
-      document.getElementById('loginBtn').textContent = 'ساخت حساب';
-      document.getElementById('backBtn').style.display = 'block';
-      document.getElementById('pwInput').value = '';
-      document.getElementById('pwConfirm').value = '';
-      document.getElementById('pwInput').focus();
-    }
-    return;
-  }
-
-  // step 2: password
-  var pw = document.getElementById('pwInput').value;
-  if(!pw || pw.length < 4){ err.textContent = 'رمز باید حداقل ۴ کاراکتر باشد'; return; }
-
-  var hash = await hashPw(loginName, pw);
-
-  if(loginMode === 'return'){
-    var p2 = userProfiles.get(loginName);
-    if(!p2 || p2.pwHash !== hash){
-      err.textContent = 'رمز عبور اشتباه است';
-      document.getElementById('pwInput').value = '';
-      return;
-    }
-    // success
-    myName = loginName;
-    myPwHash = hash;
-    myAvatar = p2.avatar || makeAvatarSvg(PRESETS[0].e, PRESETS[0].c);
-    saveSession();
-    enterChat();
-    return;
-  }
-
-  if(loginMode === 'migrate' || loginMode === 'new'){
-    var pw2 = document.getElementById('pwConfirm').value;
-    if(pw !== pw2){ err.textContent = 'رمز و تکرار آن یکسان نیستند'; return; }
-    if(pw.length > 60){ err.textContent = 'رمز خیلی بلند است'; return; }
-
-    // create/update profile
-    var existing = userProfiles.get(loginName) || {};
-    var avatar = existing.avatar || makeAvatarSvg(
-      PRESETS[Math.floor(Math.random()*PRESETS.length)].e,
-      PRESETS[Math.floor(Math.random()*PRESETS.length)].c
-    );
-
-    myName = loginName;
-    myPwHash = hash;
-    myAvatar = avatar;
-
-    // publish profile with hash
-    if(client && client.connected){
-      var profile = {
-        name: myName,
-        avatar: myAvatar,
-        joined: existing.joined || Date.now(),
-        pwHash: myPwHash,
-        secured: Date.now()
-      };
-      client.publish(T_USER + encodeURIComponent(myName), JSON.stringify(profile), { qos:1, retain:true });
-    }
-
-    saveSession();
-    enterChat();
-    return;
-  }
-};
-
-function saveSession(){
-  try {
-    localStorage.setItem(SESSION_KEY, JSON.stringify({
-      name: myName,
-      pwHash: myPwHash,
-      avatar: myAvatar
-    }));
-  } catch(e){}
-}
-
-window.backToName = function(){
-  loginMode = null;
-  loginName = '';
-  document.getElementById('nameStep').style.display = 'block';
-  document.getElementById('pwStep').style.display = 'none';
-  document.getElementById('accCard').style.display = 'none';
-  document.getElementById('loginSub').textContent = 'نام کاربری خود را وارد کنید';
-  document.getElementById('loginBtn').textContent = 'ادامه';
-  document.getElementById('backBtn').style.display = 'none';
-  document.getElementById('loginErr').textContent = '';
-  document.getElementById('pwInput').value = '';
-  document.getElementById('pwConfirm').value = '';
-  document.getElementById('nameInput').focus();
-};
-
-window.logoutConfirm = function(){
-  if(!confirm('از حساب خود خارج شوید؟ برای ورود مجدد به رمز نیاز دارید.')) return;
-  try { localStorage.removeItem(SESSION_KEY); } catch(e){}
-  location.reload();
-};
-
-/* ================== ورود به چت ================== */
-function enterChat(){
-  if(appStarted) return;
-  appStarted = true;
-
-  document.getElementById('login').style.display = 'none';
-  document.getElementById('app').classList.add('on');
-  document.getElementById('autoLogin').classList.remove('on');
-
-  subscribeChat();
-  publishMyProfile();
-  renderHeaderAvatar();
-}
-
 function publishMyProfile(){
   if(!client || !client.connected) return;
   var existing = userProfiles.get(myName) || {};
   var p = {
-    name: myName,
-    avatar: myAvatar,
+    name: myName, avatar: myAvatar,
     joined: existing.joined || Date.now(),
     pwHash: myPwHash
   };
@@ -823,20 +853,14 @@ function renderHeaderAvatar(){
   else el.textContent = (myName || 'T').charAt(0).toUpperCase();
 }
 
-/* ================== دریافت پیام ================== */
+/* ============ دریافت پیام ============ */
 function onMessage(topic, payload){
   var raw = payload.toString();
 
   if(topic.indexOf(T_MSG) === 0){
     var id = topic.slice(T_MSG.length);
     if(!raw) messages.delete(id);
-    else {
-      try {
-        var m = JSON.parse(raw);
-        if(m.type === 'voice') return; // skip old
-        messages.set(id, m);
-      } catch(e){}
-    }
+    else { try { var m = JSON.parse(raw); if(m.type !== 'voice') messages.set(id, m); } catch(e){} }
     if(appStarted) renderMessages();
     return;
   }
@@ -848,8 +872,8 @@ function onMessage(topic, payload){
     return;
   }
   if(topic.indexOf(T_USER) === 0){
-    var uname = decodeURIComponent(topic.slice(T_USER.length));
-    if(!raw){ userProfiles.delete(uname); }
+    var uname = safeDecode(topic.slice(T_USER.length));
+    if(!raw) userProfiles.delete(uname);
     else { try { userProfiles.set(uname, JSON.parse(raw)); } catch(e){} }
     if(appStarted) renderMessages();
     return;
@@ -857,14 +881,14 @@ function onMessage(topic, payload){
   if(topic === T_GINFO){
     try {
       var g = JSON.parse(raw);
-      var hdrName = document.getElementById('hdrName');
-      var hdrDesc = document.getElementById('hdrDesc');
-      if(g.name) hdrName.dataset.gname = g.name;
-      if(g.desc) hdrDesc.dataset.gdesc = g.desc;
-      var activeTab = document.querySelector('.tab.active');
-      if(activeTab && activeTab.dataset.tab === 'group'){
-        if(g.name) hdrName.textContent = g.name;
-        if(g.desc && !groupLocked) hdrDesc.textContent = g.desc;
+      var hn = document.getElementById('hdrName');
+      var hd = document.getElementById('hdrDesc');
+      if(g.name) hn.dataset.gname = g.name;
+      if(g.desc) hd.dataset.gdesc = g.desc;
+      var at = document.querySelector('.tab.active');
+      if(at && at.dataset.tab === 'group'){
+        if(g.name) hn.textContent = g.name;
+        if(g.desc && !groupLocked) hd.textContent = g.desc;
         if(g.avatar) document.getElementById('hdrAv').innerHTML = '<img src="' + g.avatar + '">';
       }
     } catch(e){}
@@ -873,24 +897,24 @@ function onMessage(topic, payload){
   if(topic === T_CINFO){
     try {
       var c = JSON.parse(raw);
-      var hdrName2 = document.getElementById('hdrName');
-      var hdrDesc2 = document.getElementById('hdrDesc');
-      if(c.name) hdrName2.dataset.cname = c.name;
-      if(c.desc) hdrDesc2.dataset.cdesc = c.desc;
-      var activeTab2 = document.querySelector('.tab.active');
-      if(activeTab2 && activeTab2.dataset.tab === 'channel'){
-        if(c.name) hdrName2.textContent = c.name;
-        if(c.desc) hdrDesc2.textContent = c.desc;
+      var hn2 = document.getElementById('hdrName');
+      var hd2 = document.getElementById('hdrDesc');
+      if(c.name) hn2.dataset.cname = c.name;
+      if(c.desc) hd2.dataset.cdesc = c.desc;
+      var at2 = document.querySelector('.tab.active');
+      if(at2 && at2.dataset.tab === 'channel'){
+        if(c.name) hn2.textContent = c.name;
+        if(c.desc) hd2.textContent = c.desc;
         if(c.avatar) document.getElementById('hdrAv').innerHTML = '<img src="' + c.avatar + '">';
       }
     } catch(e){}
     return;
   }
   if(topic === T_NOTICE){
-    var banner = document.getElementById('noticeBanner');
-    var txt = document.getElementById('noticeText');
-    if(!raw){ banner.classList.remove('on'); txt.textContent = ''; }
-    else { banner.classList.add('on'); txt.textContent = raw; }
+    var bn = document.getElementById('noticeBanner');
+    var tx = document.getElementById('noticeText');
+    if(!raw){ bn.classList.remove('on'); tx.textContent = ''; }
+    else { bn.classList.add('on'); tx.textContent = raw; }
     return;
   }
   if(topic === T_CTRL){
@@ -916,7 +940,7 @@ function updateGroupState(){
   cp.style.display = (groupLocked || amIBanned) ? 'none' : 'block';
 }
 
-/* ================== رندر پیام‌ها ================== */
+/* ============ رندر پیام‌ها ============ */
 function renderMessages(){
   var box = document.getElementById('messages');
   if(!messages.size){
@@ -925,10 +949,7 @@ function renderMessages(){
   }
   var wasBottom = box.scrollHeight - box.scrollTop - box.clientHeight < 150;
   var sorted = [...messages.values()].sort(function(a,b){ return (a.ts||0) - (b.ts||0); });
-
-  var html = '';
-  var lastDate = '', lastUser = '', lastTs = 0;
-
+  var html = '', lastDate = '', lastUser = '', lastTs = 0;
   for(var i = 0; i < sorted.length; i++){
     var m = sorted[i];
     if(m.type === 'voice') continue;
@@ -958,17 +979,14 @@ function msgHTML(m, mine, showHeader){
 
   var quoteHTML = '';
   if(m.reply){
-    var rp = m.reply;
-    quoteHTML = '<div class="m-quote" data-jump="' + esc(rp.id) + '">' +
-      '<div class="qn">' + esc(rp.user) + '</div>' +
-      '<div class="qt">' + esc(rp.preview || 'پیام') + '</div>' +
-    '</div>';
+    quoteHTML = '<div class="m-quote" data-jump="' + esc(m.reply.id) + '">' +
+      '<div class="qn">' + esc(m.reply.user) + '</div>' +
+      '<div class="qt">' + esc(m.reply.preview || 'پیام') + '</div></div>';
   }
 
   var body = '';
-  if(m.type === 'sticker' && m.text){
-    body = '<div class="m-sticker">' + esc(m.text) + '</div>';
-  } else if(m.type === 'image' && m.img){
+  if(m.type === 'sticker' && m.text) body = '<div class="m-sticker">' + esc(m.text) + '</div>';
+  else if(m.type === 'image' && m.img){
     body = (m.text ? '<div>' + esc(m.text).replace(/\n/g,'<br>') + '</div>' : '') +
            '<img class="m-img" data-lb="' + m.id + '" src="' + m.img + '">';
   } else {
@@ -979,13 +997,10 @@ function msgHTML(m, mine, showHeader){
   var nameHTML = (!mine && showHeader) ? '<div class="m-name">' + esc(m.user) + '</div>' : '';
 
   return '<div class="' + cls + '" data-msgid="' + esc(m.id) + '" data-user="' + esc(m.user) + '">' +
-    avHTML +
-    '<div class="m-body">' + nameHTML +
+    avHTML + '<div class="m-body">' + nameHTML +
       '<div class="m-bubble">' + quoteHTML + body +
         '<div class="m-t">' + time + tick + '</div>' +
-      '</div>' +
-    '</div>' +
-  '</div>';
+      '</div></div></div>';
 }
 
 function getAvatar(user){
@@ -999,13 +1014,9 @@ function getAvatar(user){
 
 document.getElementById('messages').addEventListener('click', function(e){
   var lb = e.target.closest('.m-img');
-  if(lb){
-    var mid = lb.getAttribute('data-lb');
-    var m = messages.get(mid);
-    if(m && m.img){ openLightbox(m.img); return; }
-  }
-  var quote = e.target.closest('.m-quote');
-  if(quote){ e.stopPropagation(); jumpToMessage(quote.getAttribute('data-jump')); return; }
+  if(lb){ var m = messages.get(lb.getAttribute('data-lb')); if(m && m.img){ openLightbox(m.img); return; } }
+  var q = e.target.closest('.m-quote');
+  if(q){ e.stopPropagation(); jumpToMessage(q.getAttribute('data-jump')); return; }
   var av = e.target.closest('.m-av[data-user]');
   if(av){ e.stopPropagation(); showUserProfile(av.getAttribute('data-user')); return; }
 });
@@ -1018,7 +1029,6 @@ function jumpToMessage(id){
   setTimeout(function(){ el.classList.remove('highlight'); }, 1600);
 }
 
-/* Long press */
 var lpT = null, lpStart = null, lpMoved = false;
 document.getElementById('messages').addEventListener('pointerdown', function(e){
   var row = e.target.closest('.mrow');
@@ -1044,8 +1054,7 @@ function openActionMenu(id){
   var m = messages.get(id);
   if(!m) return;
   actionTarget = id;
-  var isMine = m.user === myName;
-  document.getElementById('actDelete').style.display = isMine ? 'flex' : 'none';
+  document.getElementById('actDelete').style.display = (m.user === myName) ? 'flex' : 'none';
   openModal('actionModal');
 }
 
@@ -1069,13 +1078,10 @@ window.doCopy = function(){
   try {
     var ta = document.createElement('textarea');
     ta.value = txt;
-    ta.style.position = 'fixed';
-    ta.style.opacity = '0';
-    ta.style.left = '-9999px';
-    ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;opacity:0;left:-9999px';
+    ta.setAttribute('readonly','');
     document.body.appendChild(ta);
-    ta.select();
-    ta.setSelectionRange(0, txt.length);
+    ta.select(); ta.setSelectionRange(0, txt.length);
     var ok = document.execCommand('copy');
     document.body.removeChild(ta);
     showToast(ok ? 'کپی شد ✓' : 'کپی ناموفق');
@@ -1099,17 +1105,14 @@ window.cancelReply = function(){
   document.getElementById('replyBar').classList.remove('on');
 };
 
-/* ================== ارسال پیام ================== */
+/* ============ ارسال پیام ============ */
 var msgInput = document.getElementById('msgInput');
 var sendBtn = document.getElementById('sendBtn');
 var cField = document.getElementById('cField');
 
 function updateSendBtn(){
-  var hasText = msgInput.value.trim().length > 0;
-  var hasImg = !!pendingImage;
-  sendBtn.disabled = !(hasText || hasImg);
+  sendBtn.disabled = !(msgInput.value.trim() || pendingImage);
 }
-
 msgInput.addEventListener('input', function(){
   this.style.height = 'auto';
   this.style.height = Math.min(this.scrollHeight, 120) + 'px';
@@ -1130,19 +1133,14 @@ window.sendMessage = function(){
 
   var isSticker = false;
   if(!img && text){
-    var cleanText = text.replace(/[\s\u200d\uFE0F]/g, '');
+    var ct = text.replace(/[\s\u200d\uFE0F]/g, '');
     try {
-      var emojiCount = [...cleanText].length;
-      var isOnlyEmoji = /^[\p{Emoji}\p{Extended_Pictographic}\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]+$/u.test(cleanText);
-      if(isOnlyEmoji && emojiCount <= 4) isSticker = true;
+      var isOnlyEmoji = /^[\p{Emoji}\p{Extended_Pictographic}\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]+$/u.test(ct);
+      if(isOnlyEmoji && [...ct].length <= 4) isSticker = true;
     } catch(e){}
   }
-
   var type = img ? 'image' : (isSticker ? 'sticker' : 'text');
-  var msg = {
-    id: 'm_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
-    user: myName, text: text, img: img || null, type: type, ts: Date.now()
-  };
+  var msg = { id:'m_'+Date.now()+'_'+Math.random().toString(36).slice(2,6), user:myName, text:text, img:img||null, type:type, ts:Date.now() };
   if(pendingReply) msg.reply = pendingReply;
 
   client.publish(T_MSG + msg.id, JSON.stringify(msg), { qos:1, retain:true });
@@ -1153,15 +1151,10 @@ window.sendMessage = function(){
   updateSendBtn();
 };
 
-/* ================== عکس ================== */
-window.pickImage = function(){
-  closePanels();
-  document.getElementById('imgFile').click();
-};
-
+/* ============ عکس ============ */
+window.pickImage = function(){ closePanels(); document.getElementById('imgFile').click(); };
 document.getElementById('imgFile').addEventListener('change', function(){
-  var f = this.files[0];
-  this.value = '';
+  var f = this.files[0]; this.value = '';
   if(!f) return;
   if(!f.type.startsWith('image/')) return showToast('فقط عکس مجاز است');
   compressImage(f, 900, 0.75, MAX_IMG_BYTES, function(out){
@@ -1171,14 +1164,12 @@ document.getElementById('imgFile').addEventListener('change', function(){
     updateSendBtn();
   });
 });
-
 window.cancelImage = function(){
   pendingImage = null;
   document.getElementById('imgPrev').classList.remove('on');
   document.getElementById('imgPrevThumb').src = '';
   updateSendBtn();
 };
-
 function compressImage(file, maxW, quality, maxBytes, cb){
   var r = new FileReader();
   r.onload = function(e){
@@ -1189,12 +1180,8 @@ function compressImage(file, maxW, quality, maxBytes, cb){
       var c = document.createElement('canvas');
       c.width = w; c.height = h;
       c.getContext('2d').drawImage(img, 0, 0, w, h);
-      var q = quality;
-      var out = c.toDataURL('image/jpeg', q);
-      while(out.length * 0.75 > maxBytes && q > 0.35){
-        q -= 0.08;
-        out = c.toDataURL('image/jpeg', q);
-      }
+      var q = quality, out = c.toDataURL('image/jpeg', q);
+      while(out.length * 0.75 > maxBytes && q > 0.35){ q -= 0.08; out = c.toDataURL('image/jpeg', q); }
       if(out.length * 0.75 > maxBytes){ showToast('عکس خیلی بزرگ است'); return; }
       cb(out);
     };
@@ -1203,7 +1190,7 @@ function compressImage(file, maxW, quality, maxBytes, cb){
   r.readAsDataURL(file);
 }
 
-/* ================== EMOJI / STICKER ================== */
+/* ============ EMOJI ============ */
 var EMOJI_CATS = [
   { icon:'😊', items:['😀','😃','😄','😁','😆','😅','🤣','😂','🙂','🙃','😉','😊','😇','🥰','😍','🤩','😘','😗','😚','😙','🥲','😋','😛','😜','🤪','😝','🤗','🤭','🤫','🤔','🤐','🤨','😐','😑','😶','😏','😒','🙄','😬','🤥','😌','😔','😪','🤤','😴','😷','🤒','🤕','🤢','🤮','🥵','🥶','😵','🤯','🤠','🥳','😎','🤓','🧐','😕','😟','🙁','😮','😯','😲','😳','🥺','😦','😧','😨','😰','😥','😢','😭','😱','😖','😣','😞','😓','😩','😫','🥱','😤','😡','😠','🤬','😈','👿','💀','💩','🤡','👹','👺','👻','👽','👾','🤖']},
   { icon:'👋', items:['👋','🤚','🖐','✋','🖖','👌','🤌','🤏','✌️','🤞','🤟','🤘','🤙','👈','👉','👆','👇','☝️','👍','👎','✊','👊','🤛','🤜','👏','🙌','👐','🤲','🤝','🙏','✍️','💅','🤳','💪','🦾','🦵','🦶','👂','🦻','👃','🧠','👀','👁','👅','👄','💋']},
@@ -1224,84 +1211,59 @@ window.toggleEmoji = function(e){
   document.getElementById('emojiPanel').classList.add('on');
   document.getElementById('panelOv').classList.add('on');
 };
-
 window.openStickers = function(){
   closePanels();
   buildEmojiPanel();
-  setTimeout(function(){
-    var tabs = document.querySelectorAll('.ep-tab');
-    if(tabs.length) tabs[tabs.length - 1].click();
-  }, 10);
+  setTimeout(function(){ var t = document.querySelectorAll('.ep-tab'); if(t.length) t[t.length-1].click(); }, 10);
   emojiPanelOpen = true;
   document.getElementById('emojiPanel').classList.add('on');
   document.getElementById('panelOv').classList.add('on');
 };
-
 function buildEmojiPanel(){
   var tabsEl = document.getElementById('epTabs');
   var bodyEl = document.getElementById('epBody');
   if(tabsEl.dataset.built === '1') return;
   tabsEl.dataset.built = '1';
-
   var tabs = '', cats = '';
   EMOJI_CATS.forEach(function(cat, idx){
     tabs += '<button class="ep-tab' + (idx === 0 ? ' active' : '') + '" data-idx="' + idx + '">' + cat.icon + '</button>';
-    var items = cat.items.map(function(em){
-      return '<button class="ep-item" data-em="' + em + '">' + em + '</button>';
-    }).join('');
+    var items = cat.items.map(function(em){ return '<button class="ep-item" data-em="' + em + '">' + em + '</button>'; }).join('');
     cats += '<div class="ep-cat' + (idx === 0 ? ' on' : '') + '" data-cat="' + idx + '">' + items + '</div>';
   });
   tabs += '<button class="ep-tab" data-idx="sticker">⭐</button>';
-  var stickerItems = STICKERS.map(function(em){
-    return '<button class="ep-sticker-item" data-em="' + em + '" data-sticker="1">' + em + '</button>';
-  }).join('');
-  cats += '<div class="ep-cat" data-cat="sticker" style="grid-template-columns:repeat(5,1fr);gap:8px">' + stickerItems + '</div>';
-
+  var si = STICKERS.map(function(em){ return '<button class="ep-sticker-item" data-em="' + em + '" data-sticker="1">' + em + '</button>'; }).join('');
+  cats += '<div class="ep-cat" data-cat="sticker" style="grid-template-columns:repeat(5,1fr);gap:8px">' + si + '</div>';
   tabsEl.innerHTML = tabs;
   bodyEl.innerHTML = cats;
-
   tabsEl.addEventListener('click', function(e){
-    var t = e.target.closest('.ep-tab');
-    if(!t) return;
+    var t = e.target.closest('.ep-tab'); if(!t) return;
     var idx = t.dataset.idx;
     tabsEl.querySelectorAll('.ep-tab').forEach(function(x){ x.classList.remove('active'); });
     t.classList.add('active');
-    bodyEl.querySelectorAll('.ep-cat').forEach(function(x){
-      x.classList.toggle('on', x.dataset.cat === idx);
-    });
+    bodyEl.querySelectorAll('.ep-cat').forEach(function(x){ x.classList.toggle('on', x.dataset.cat === idx); });
   });
-
   bodyEl.addEventListener('click', function(e){
-    var b = e.target.closest('button[data-em]');
-    if(!b) return;
+    var b = e.target.closest('button[data-em]'); if(!b) return;
     var em = b.dataset.em;
     if(b.dataset.sticker === '1'){ sendSticker(em); closePanels(); }
     else { insertAtCursor(msgInput, em); updateSendBtn(); }
   });
 }
-
 function insertAtCursor(el, text){
-  var start = el.selectionStart || 0;
-  var end = el.selectionEnd || 0;
-  var val = el.value;
-  el.value = val.slice(0, start) + text + val.slice(end);
-  el.selectionStart = el.selectionEnd = start + text.length;
+  var s = el.selectionStart || 0, e = el.selectionEnd || 0, v = el.value;
+  el.value = v.slice(0, s) + text + v.slice(e);
+  el.selectionStart = el.selectionEnd = s + text.length;
   el.focus();
   el.dispatchEvent(new Event('input'));
 }
-
 function sendSticker(emoji){
   if(amIBanned || groupLocked) return;
   if(!client || !client.connected) return;
-  var msg = {
-    id: 'm_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
-    user: myName, text: emoji, type: 'sticker', ts: Date.now()
-  };
+  var msg = { id:'m_'+Date.now()+'_'+Math.random().toString(36).slice(2,6), user:myName, text:emoji, type:'sticker', ts:Date.now() };
   if(pendingReply) msg.reply = pendingReply;
   client.publish(T_MSG + msg.id, JSON.stringify(msg), { qos:1, retain:true });
   cancelReply();
 }
-
 window.toggleAttach = function(e){
   if(e) e.stopPropagation();
   if(attachMenuOpen){ closePanels(); return; }
@@ -1310,16 +1272,14 @@ window.toggleAttach = function(e){
   document.getElementById('attachMenu').classList.add('on');
   document.getElementById('panelOv').classList.add('on');
 };
-
 window.closePanels = function(){
-  emojiPanelOpen = false;
-  attachMenuOpen = false;
+  emojiPanelOpen = false; attachMenuOpen = false;
   document.getElementById('emojiPanel').classList.remove('on');
   document.getElementById('attachMenu').classList.remove('on');
   document.getElementById('panelOv').classList.remove('on');
 };
 
-/* ================== PROFILE ================== */
+/* ============ PROFILE ============ */
 window.openProfileViewer = function(){
   var box = document.getElementById('pmGrid');
   if(box.dataset.built !== '1'){
@@ -1329,8 +1289,7 @@ window.openProfileViewer = function(){
       return '<button class="pm-item" data-p="' + i + '"><img src="' + svg + '"></button>';
     }).join('');
     box.addEventListener('click', function(e){
-      var b = e.target.closest('.pm-item');
-      if(!b) return;
+      var b = e.target.closest('.pm-item'); if(!b) return;
       box.querySelectorAll('.pm-item').forEach(function(x){ x.classList.remove('on'); });
       b.classList.add('on');
       var i = +b.dataset.p;
@@ -1344,14 +1303,9 @@ window.openProfileViewer = function(){
   document.getElementById('pmName').value = myName;
   openModal('profileModal');
 };
-
-window.pickProfileImage = function(){
-  document.getElementById('profileImgFile').click();
-};
-
+window.pickProfileImage = function(){ document.getElementById('profileImgFile').click(); };
 document.getElementById('profileImgFile').addEventListener('change', function(){
-  var f = this.files[0];
-  this.value = '';
+  var f = this.files[0]; this.value = '';
   if(!f) return;
   if(!f.type.startsWith('image/')) return showToast('فقط عکس مجاز است');
   compressImage(f, 400, 0.82, 100000, function(out){
@@ -1360,8 +1314,7 @@ document.getElementById('profileImgFile').addEventListener('change', function(){
     document.querySelectorAll('#pmGrid .pm-item').forEach(function(x){ x.classList.remove('on'); });
   });
 });
-
-window.saveProfile = async function(){
+window.saveProfile = function(){
   var newName = document.getElementById('pmName').value.trim();
   var newAvatar = document.getElementById('pmPreview').dataset.chosen || myAvatar;
   if(newName.length < 2){ showToast('نام حداقل ۲ حرف'); return; }
@@ -1369,14 +1322,12 @@ window.saveProfile = async function(){
 
   if(newName !== myName){
     var other = userProfiles.get(newName);
-    if(other && other.pwHash){ showToast('این نام قبلاً گرفته شده'); return; }
+    if(other){ showToast('این نام قبلاً گرفته شده'); return; }
   }
 
-  var nameChanged = newName !== myName;
-  if(nameChanged && client){
+  if(newName !== myName && client){
     try { client.unsubscribe(T_BAN + encodeURIComponent(myName)); } catch(e){}
     client.subscribe(T_BAN + encodeURIComponent(newName), { qos: 1 });
-    // remove old profile
     client.publish(T_USER + encodeURIComponent(myName), '', { qos:1, retain:true });
   }
 
@@ -1396,22 +1347,14 @@ function showUserProfile(name){
   var av = p && p.avatar ? p.avatar : getAvatar(name);
   document.getElementById('umAvatar').src = av;
   document.getElementById('umName').textContent = name;
-  var joinedTxt = 'عضو گروه';
-  if(p && p.joined){
-    try { joinedTxt = 'عضو از ' + new Date(p.joined).toLocaleDateString('fa-IR'); } catch(e){}
-  }
-  document.getElementById('umJoined').textContent = joinedTxt;
+  var j = 'عضو گروه';
+  if(p && p.joined){ try { j = 'عضو از ' + new Date(p.joined).toLocaleDateString('fa-IR'); } catch(e){} }
+  document.getElementById('umJoined').textContent = j;
   openModal('userModal');
 }
 
-window.openModal = function(id){
-  document.getElementById(id).classList.add('on');
-  document.body.style.overflow = 'hidden';
-};
-window.closeModal = function(id){
-  document.getElementById(id).classList.remove('on');
-  document.body.style.overflow = '';
-};
+window.openModal = function(id){ document.getElementById(id).classList.add('on'); document.body.style.overflow = 'hidden'; };
+window.closeModal = function(id){ document.getElementById(id).classList.remove('on'); document.body.style.overflow = ''; };
 document.querySelectorAll('.modal').forEach(function(m){
   m.addEventListener('click', function(e){ if(e.target === this) closeModal(this.id); });
 });
@@ -1432,22 +1375,84 @@ document.querySelectorAll('.tab').forEach(function(t){
     document.getElementById('groupView').classList.toggle('on', tab === 'group');
     document.getElementById('channelView').classList.toggle('on', tab === 'channel');
     closePanels();
-    var hdrName = document.getElementById('hdrName');
-    var hdrDesc = document.getElementById('hdrDesc');
+    var hn = document.getElementById('hdrName');
+    var hd = document.getElementById('hdrDesc');
     if(tab === 'group'){
-      hdrName.textContent = hdrName.dataset.gname || 'گروه';
-      hdrDesc.textContent = groupLocked ? 'گروه بسته است' : (hdrDesc.dataset.gdesc || 'آنلاین');
+      hn.textContent = hn.dataset.gname || 'گروه';
+      hd.textContent = groupLocked ? 'گروه بسته است' : (hd.dataset.gdesc || 'آنلاین');
     } else {
-      hdrName.textContent = hdrName.dataset.cname || 'کانال';
-      hdrDesc.textContent = hdrDesc.dataset.cdesc || '';
+      hn.textContent = hn.dataset.cname || 'کانال';
+      hd.textContent = hd.dataset.cdesc || '';
     }
   });
 });
 
-/* ================== ابزار ================== */
+/* ============ پست کانال ============ */
+function renderPosts(){
+  var box = document.getElementById('posts');
+  if(!posts.size){
+    box.innerHTML = '<div class="empty"><div class="big">📢</div>هنوز پستی منتشر نشده</div>';
+    return;
+  }
+  var sorted = [...posts.values()].sort(function(a,b){ return (b.ts||0) - (a.ts||0); });
+  box.innerHTML = sorted.map(function(p){
+    return '<div class="post">' +
+      (p.text ? '<div class="p-t">' + esc(p.text).replace(/\n/g,'<br>') + '</div>' : '') +
+      (p.img ? '<img data-lbpost="' + p.id + '" src="' + p.img + '">' : '') +
+      '<div class="p-meta"><span class="pi">📢</span>' + new Date(p.ts||Date.now()).toLocaleString('fa-IR') + '</div>' +
+    '</div>';
+  }).join('');
+}
+document.getElementById('posts').addEventListener('click', function(e){
+  var lb = e.target.closest('[data-lbpost]');
+  if(lb){
+    var p = posts.get(lb.getAttribute('data-lbpost'));
+    if(p && p.img) openLightbox(p.img);
+  }
+});
+
+/* ============ Offline ============ */
+function setOffline(s){ document.getElementById('offline').classList.toggle('show', s); }
+window.addEventListener('online', function(){ setOffline(false); });
+window.addEventListener('offline', function(){ setOffline(true); });
+if(!navigator.onLine) setOffline(true);
+
+document.addEventListener('click', function(e){
+  if(emojiPanelOpen || attachMenuOpen){
+    if(!e.target.closest('#emojiPanel') && !e.target.closest('#attachMenu') &&
+       !e.target.closest('.c-emoji') && !e.target.closest('.c-btn')){
+      closePanels();
+    }
+  }
+});
+
+document.getElementById('nameInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') window.onLoginClick();
+});
+document.getElementById('pwInput').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') window.onLoginClick();
+});
+document.getElementById('pwConfirm').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') window.onLoginClick();
+});
+
+/* Prevent zoom */
+var lastTouch = 0;
+document.addEventListener('touchend', function(e){
+  var now = Date.now();
+  if(now - lastTouch < 300){ e.preventDefault(); }
+  lastTouch = now;
+}, { passive: false });
+document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
+document.addEventListener('dblclick', function(e){ e.preventDefault(); }, { passive: false });
+
+/* ============ ابزار ============ */
 function esc(s){
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function safeDecode(s){
+  try { return decodeURIComponent(s); } catch(e){ return s; }
 }
 function fmtTime(ts){
   if(!ts) return '';
@@ -1471,67 +1476,6 @@ function showToast(msg){
   clearTimeout(toastT);
   toastT = setTimeout(function(){ el.classList.remove('on'); }, 2200);
 }
-
-function renderPosts(){
-  var box = document.getElementById('posts');
-  if(!posts.size){
-    box.innerHTML = '<div class="empty"><div class="big">📢</div>هنوز پستی منتشر نشده</div>';
-    return;
-  }
-  var sorted = [...posts.values()].sort(function(a,b){ return (b.ts||0) - (a.ts||0); });
-  box.innerHTML = sorted.map(function(p){
-    return '<div class="post">' +
-      (p.text ? '<div class="p-t">' + esc(p.text).replace(/\n/g,'<br>') + '</div>' : '') +
-      (p.img ? '<img data-lbpost="' + p.id + '" src="' + p.img + '">' : '') +
-      '<div class="p-meta"><span class="pi">📢</span>' + new Date(p.ts||Date.now()).toLocaleString('fa-IR') + '</div>' +
-    '</div>';
-  }).join('');
-}
-
-document.getElementById('posts').addEventListener('click', function(e){
-  var lb = e.target.closest('[data-lbpost]');
-  if(lb){
-    var pid = lb.getAttribute('data-lbpost');
-    var p = posts.get(pid);
-    if(p && p.img) openLightbox(p.img);
-  }
-});
-
-/* ================== Offline ================== */
-function setOffline(s){ document.getElementById('offline').classList.toggle('show', s); }
-window.addEventListener('online', function(){ setOffline(false); });
-window.addEventListener('offline', function(){ setOffline(true); });
-if(!navigator.onLine) setOffline(true);
-
-document.addEventListener('click', function(e){
-  if(emojiPanelOpen || attachMenuOpen){
-    if(!e.target.closest('#emojiPanel') && !e.target.closest('#attachMenu') &&
-       !e.target.closest('.c-emoji') && !e.target.closest('.c-btn')){
-      closePanels();
-    }
-  }
-});
-
-/* Enter key on login inputs */
-document.getElementById('nameInput').addEventListener('keydown', function(e){
-  if(e.key === 'Enter') onLoginClick();
-});
-document.getElementById('pwInput').addEventListener('keydown', function(e){
-  if(e.key === 'Enter') onLoginClick();
-});
-document.getElementById('pwConfirm').addEventListener('keydown', function(e){
-  if(e.key === 'Enter') onLoginClick();
-});
-
-/* Prevent zoom */
-var lastTouch = 0;
-document.addEventListener('touchend', function(e){
-  var now = Date.now();
-  if(now - lastTouch < 300){ e.preventDefault(); }
-  lastTouch = now;
-}, { passive: false });
-document.addEventListener('gesturestart', function(e){ e.preventDefault(); });
-document.addEventListener('dblclick', function(e){ e.preventDefault(); }, { passive: false });
 
 })();
 </script>
