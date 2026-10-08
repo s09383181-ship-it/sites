@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0b0d12">
+<title>جهان سه پادشاه — دروازهٔ چهارم</title>
+<style>
+  /* ========== فونت شبنم بولد ========== */
+  @font-face {
+    font-family: 'Shabnam';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam-Bold.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam-Bold.woff') format('woff');
+    font-weight: 700;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Shabnam';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam.woff') format('woff');
+    font-weight: 400;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Shabnam';
+    src: url('https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam-Medium.woff2') format('woff2'),
+         url('https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/Shabnam-Medium.woff') format('woff');
+    font-weight: 500;
+    font-display: swap;
+  }
+
+  *{margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent;}
+
+  :root{
+    --bg: #0b0d12;
+    --bg-2: #10131a;
+    --surface: #161a24;
+    --surface-2: #1e2331;
+    --gold: #d4b483;
+    --gold-bright: #eacb98;
+    --gold-deep: #a8865a;
+    --text: #e8e3d6;
+    --text-2: #a8a195;
+    --text-3: #6a6459;
+    --border: rgba(212,180,131,0.14);
+    --border-soft: rgba(255,255,255,0.05);
+  }
+
+  html,body{
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Shabnam', 'Vazirmatn', 'Vazir', 'IRANSans', Tahoma, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 2;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ========== پس‌زمینه ظریف ========== */
+  body {
+    background:
+      radial-gradient(ellipse 900px 700px at 50% -20%, rgba(60,45,90,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 700px 500px at 100% 60%, rgba(45,35,70,0.4) 0%, transparent 70%),
+      radial-gradient(ellipse 700px 500px at 0% 30%, rgba(35,40,65,0.4) 0%, transparent 70%),
+      linear-gradient(180deg, #0b0d12 0%, #10131e 50%, #0b0d12 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 12% 22%, rgba(255,255,255,0.7), transparent),
+      radial-gradient(1px 1px at 38% 12%, rgba(220,220,240,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 68% 32%, rgba(255,235,200,0.7), transparent),
+      radial-gradient(1px 1px at 85% 62%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.2px 1.2px at 22% 78%, rgba(200,210,230,0.5), transparent),
+      radial-gradient(1px 1px at 52% 92%, rgba(255,255,255,0.4), transparent),
+      radial-gradient(1.3px 1.3px at 78% 18%, rgba(255,240,210,0.6), transparent),
+      radial-gradient(0.8px 0.8px at 8% 55%, rgba(255,255,255,0.35), transparent),
+      radial-gradient(1px 1px at 62% 72%, rgba(220,225,240,0.45), transparent);
+    background-size: 800px 800px, 600px 600px, 900px 900px, 700px 700px, 850px 850px, 750px 750px, 950px 950px, 650px 650px, 1000px 1000px;
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ========== نوار پیشرفت ========== */
+  #progress {
+    position: fixed;
+    top: 0; right: 0;
+    height: 2px;
+    width: 0%;
+    background: linear-gradient(90deg, var(--gold-deep), var(--gold-bright));
+    box-shadow: 0 0 10px rgba(212,180,131,0.5);
+    z-index: 100;
+    transition: width 0.4s ease;
+  }
+
+  /* ========== دکمه‌های بالای صفحه ========== */
+  .top-btn {
+    position: fixed;
+    top: 14px;
+    z-index: 50;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: rgba(22,26,36,0.85);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    font-size: 19px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    transition: all 0.2s ease;
+  }
+  .top-btn:active {
+    background: rgba(30,35,49,0.95);
+    transform: scale(0.94);
+  }
+  #tocBtn { left: 14px; }
+  #audioBtn { right: 14px; font-size: 17px; }
+  #audioBtn.playing {
+    background: rgba(212,180,131,0.2);
+    border-color: var(--gold);
+    color: var(--gold-bright);
+  }
+
+  /* ========== فهرست ========== */
+  #toc {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    background: rgba(6,7,11,0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: none;
+    padding: 24px 16px;
+    overflow-y: auto;
+  }
+  #toc.open { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+  .toc-inner {
+    max-width: 600px;
+    margin: 30px auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px 20px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+  }
+  .toc-inner h3 {
+    text-align: center;
+    color: var(--gold-bright);
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+  }
+  .toc-item {
+    display: block;
+    width: 100%;
+    text-align: right;
+    background: var(--bg-2);
+    border: 1px solid var(--border-soft);
+    color: var(--text-2);
+    padding: 13px 18px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.6;
+    transition: all 0.18s ease;
+  }
+  .toc-item:hover { background: var(--surface-2); color: var(--text); }
+  .toc-item.active {
+    background: rgba(212,180,131,0.12);
+    border-color: var(--gold);
+    color: var(--gold-bright);
+    font-weight: 700;
+  }
+  #tocClose {
+    display: block;
+    margin: 18px auto 0;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-3);
+    padding: 10px 32px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  #tocClose:hover { color: var(--gold); border-color: var(--gold); }
+
+  /* ========== محتوای کتاب ========== */
+  #book {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 72px 20px 130px;
+    position: relative;
+    z-index: 1;
+  }
+  .page { display: none; }
+  .page.active { display: block; animation: pageIn 0.5s ease; }
+  @keyframes pageIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== جلد ========== */
+  .cover {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px 0;
+  }
+  .cover .crown {
+    font-size: 56px;
+    margin-bottom: 24px;
+    filter: drop-shadow(0 0 24px rgba(212,180,131,0.55));
+    animation: float 5s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .cover .label {
+    color: var(--gold);
+    font-size: 12px;
+    letter-spacing: 5px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    opacity: 0.9;
+  }
+  .cover h1 {
+    color: var(--gold-bright);
+    font-family: 'Shabnam', sans-serif;
+    font-size: 40px;
+    line-height: 1.35;
+    font-weight: 700;
+    margin-bottom: 14px;
+    text-shadow: 0 0 30px rgba(212,180,131,0.3);
+    letter-spacing: 0.5px;
+  }
+  .cover .subtitle {
+    color: var(--text-2);
+    font-size: 17px;
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+  .cover .sep {
+    width: 90px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 32px;
+    position: relative;
+  }
+  .cover .sep::after {
+    content: "✦";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%);
+    color: var(--gold);
+    font-size: 10px;
+    background: var(--bg);
+    padding: 0 10px;
+  }
+  .cover .quote {
+    color: var(--text-2);
+    font-size: 16px;
+    line-height: 2.15;
+    max-width: 400px;
+    font-weight: 500;
+    font-style: italic;
+  }
+  .cover .quote b {
+    color: var(--gold-bright);
+    font-weight: 700;
+    font-style: normal;
+  }
+  .start-btn {
+    margin-top: 40px;
+    padding: 16px 48px;
+    background: var(--gold);
+    color: #14100a;
+    border: none;
+    border-radius: 14px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    box-shadow: 0 8px 24px rgba(212,180,131,0.28);
+    transition: all 0.22s ease;
+  }
+  .start-btn:hover {
+    background: var(--gold-bright);
+    box-shadow: 0 10px 30px rgba(212,180,131,0.4);
+  }
+  .start-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 4px 14px rgba(212,180,131,0.28);
+  }
+
+  /* ========== سر فصل ========== */
+  .chapter-head {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 28px;
+    position: relative;
+  }
+  .chapter-head::after {
+    content: "";
+    position: absolute;
+    bottom: 0; right: 50%;
+    transform: translateX(50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .chapter-head .num {
+    display: inline-block;
+    color: var(--gold);
+    font-size: 11px;
+    background: rgba(212,180,131,0.08);
+    border: 1px solid rgba(212,180,131,0.25);
+    padding: 6px 22px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    font-weight: 700;
+    letter-spacing: 3px;
+  }
+  .chapter-head h2 {
+    color: var(--gold-bright);
+    font-family: 'Shabnam', sans-serif;
+    font-size: 26px;
+    line-height: 1.5;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    text-shadow: 0 0 24px rgba(212,180,131,0.25);
+  }
+
+  /* ========== متن ========== */
+  .page p {
+    color: var(--text);
+    font-family: 'Shabnam', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 2.05;
+    margin-bottom: 20px;
+    text-align: right;
+    letter-spacing: 0;
+  }
+  .page p.dialog {
+    color: #f5f0e3;
+    font-weight: 500;
+    padding-right: 16px;
+    border-right: 2px solid var(--gold);
+  }
+  .page p.whisper {
+    color: var(--gold-bright);
+    text-align: center;
+    font-size: 17px;
+    font-weight: 500;
+    line-height: 2.1;
+    margin: 30px 0;
+    padding: 14px 22px;
+    background: linear-gradient(90deg, transparent, rgba(212,180,131,0.07), transparent);
+    border-radius: 14px;
+    font-style: italic;
+  }
+  .scene-break {
+    text-align: center;
+    color: var(--gold);
+    letter-spacing: 12px;
+    margin: 40px 0;
+    font-size: 12px;
+    opacity: 0.5;
+  }
+
+  /* ========== پایان ========== */
+  .the-end {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 40px;
+    position: relative;
+  }
+  .the-end::before {
+    content: "";
+    position: absolute;
+    top: 0; right: 50%;
+    transform: translateX(50%);
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .the-end .big {
+    color: var(--gold-bright);
+    font-family: 'Shabnam', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 0 24px rgba(212,180,131,0.3);
+  }
+  .the-end .small {
+    color: var(--text-2);
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 2.1;
+  }
+  .the-end .small b {
+    color: var(--gold-bright);
+    font-weight: 700;
+  }
+
+  /* ========== نوار ناوبری پایین ========== */
+  #nav {
+    position: fixed;
+    bottom: 0; right: 0; left: 0;
+    height: 78px;
+    padding: 0 14px env(safe-area-inset-bottom, 0);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: linear-gradient(180deg, rgba(11,13,18,0) 0%, rgba(11,13,18,0.95) 35%, #0b0d12 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--border-soft);
+    z-index: 50;
+  }
+  .nav-btn {
+    font-family: 'Shabnam', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(212,180,131,0.06);
+    color: var(--gold-bright);
+    cursor: pointer;
+    min-width: 100px;
+    letter-spacing: 0.3px;
+    transition: all 0.2s ease;
+  }
+  .nav-btn:hover:not(:disabled) {
+    background: rgba(212,180,131,0.14);
+    border-color: rgba(212,180,131,0.4);
+  }
+  .nav-btn:active:not(:disabled) {
+    transform: scale(0.96);
+  }
+  .nav-btn:disabled {
+    opacity: 0.22;
+    cursor: not-allowed;
+  }
+  #counter {
+    flex: 1;
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-3);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  #counter b {
+    color: var(--gold-bright);
+    font-weight: 700;
+  }
+
+  /* ========== پنل صوتی ========== */
+  #audioPanel {
+    position: fixed;
+    top: 68px;
+    right: 14px;
+    width: 288px;
+    max-width: calc(100vw - 28px);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px 16px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: none;
+    z-index: 60;
+  }
+  #audioPanel.open { display: block; animation: fadeIn 0.2s ease; }
+  #audioPanel h4 {
+    color: var(--gold-bright);
+    font-family: 'Shabnam', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+  }
+  .audio-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
+  .audio-ctrl {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: var(--bg-2);
+    border: 1px solid var(--border-soft);
+    color: var(--gold);
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: inherit;
+    transition: all 0.18s ease;
+  }
+  .audio-ctrl:hover {
+    background: var(--surface-2);
+    border-color: var(--border);
+  }
+  .audio-ctrl:active {
+    transform: scale(0.94);
+  }
+  .audio-ctrl.active {
+    background: rgba(212,180,131,0.18);
+    border-color: var(--gold);
+    color: var(--gold-bright);
+  }
+  .audio-field {
+    margin-bottom: 14px;
+  }
+  .audio-field label {
+    display: block;
+    font-size: 11px;
+    color: var(--text-3);
+    margin-bottom: 6px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .audio-field select,
+  .audio-field input[type=range] {
+    width: 100%;
+    padding: 10px 12px;
+    background: var(--bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 10px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .audio-field input[type=range] {
+    padding: 0;
+    height: 6px;
+    accent-color: var(--gold);
+  }
+  .audio-field .val {
+    color: var(--gold-bright);
+    font-weight: 700;
+    font-size: 12px;
+    float: left;
+  }
+  #voiceHint {
+    font-size: 11px;
+    color: var(--text-3);
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.6;
+    margin-top: 8px;
+    min-height: 18px;
+  }
+
+  /* ========== ریسپانسیو ========== */
+  @media (min-width: 600px) {
+    html, body { font-size: 17px; }
+    .page p { font-size: 17px; line-height: 2.1; margin-bottom: 22px; }
+    .cover h1 { font-size: 48px; }
+    .cover .subtitle { font-size: 19px; }
+    .chapter-head h2 { font-size: 30px; }
+    #book { padding: 84px 28px 140px; }
+  }
+  @media (max-width: 360px) {
+    html, body { font-size: 15px; }
+    .page p { font-size: 15px; }
+    .cover h1 { font-size: 32px; }
+    .chapter-head h2 { font-size: 22px; }
+    .nav-btn { padding: 11px 14px; font-size: 13px; min-width: 84px; }
+    #counter { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="progress"></div>
+
+<button class="top-btn" id="tocBtn" aria-label="فهرست">☰</button>
+<button class="top-btn" id="audioBtn" aria-label="صدا">🔊</button>
+
+<div id="audioPanel">
+  <h4>خواندن صوتی</h4>
+  <div class="audio-row">
+    <button class="audio-ctrl" id="playBtn" aria-label="پخش">▶</button>
+    <button class="audio-ctrl" id="pauseBtn" aria-label="توقف">⏸</button>
+    <button class="audio-ctrl" id="stopBtn" aria-label="توقف کامل">⏹</button>
+  </div>
+  <div class="audio-field">
+    <label>انتخاب صدا</label>
+    <select id="voiceSelect"></select>
+  </div>
+  <div class="audio-field">
+    <label>سرعت <span class="val" id="rateVal">1.0×</span></label>
+    <input type="range" id="rateRange" min="0.6" max="1.6" step="0.1" value="1">
+  </div>
+  <div id="voiceHint">در حال بارگذاری صداها…</div>
+</div>
+
+<div id="toc">
+  <div class="toc-inner">
+    <h3>فهرست فصل‌ها</h3>
+    <div id="tocList"></div>
+    <button id="tocClose">بستن</button>
+  </div>
+</div>
+
+<div id="book">
+
+  <section class="page active" data-title="جلد کتاب">
+    <div class="cover">
+      <div class="crown">👑</div>
+      <div class="label">رمان حماسی</div>
+      <h1>جهان سه پادشاه</h1>
+      <div class="subtitle">جلد اول — دروازهٔ چهارم</div>
+      <div class="sep"></div>
+      <p class="quote">
+        «اگر روزی سه تاج در یک آسمان دیدی،<br>
+        از آسمان فرار نکن.<br>
+        <b>به زیر زمین برو.</b>»
+      </p>
+      <button class="start-btn" onclick="goTo(1)">شروع خواندن</button>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل یکم — شبی که ستاره سقوط کرد">
+    <div class="chapter-head">
+      <div class="num">فصل یکم</div>
+      <h2>شبی که ستاره سقوط کرد</h2>
+    </div>
+    <div class="speakable">
+      <p>هیچ‌کس در آن شب نمی‌دانست که جهان، تا ابد، تغییر خواهد کرد.</p>
+      <p>آسمان صاف بود. ماه کامل، آرام بالای بیابان می‌درخشید و نور نقره‌ای‌اش روی تپه‌های شنی می‌لغزید. باد گرمی از میان خرابه‌های شهری باستانی می‌گذشت و شن‌ها را با خشم روی سنگ‌های فرسوده می‌کوبید.</p>
+      <p>در میان خرابه‌ها، مرد جوانی زانو زده بود. چراغ کوچکی در دست داشت و نور را روی سنگی حکاکی‌شده می‌انداخت.</p>
+      <p>نامش آریا بود.</p>
+      <p>بیست‌وچند سال بیشتر نداشت. و برخلاف همهٔ آن‌هایی که شبانه به این ویرانه می‌آمدند، دنبال طلا نبود. دنبال اشیای باستانی نبود. دنبال هیچ‌چیز نبود.</p>
+      <p class="whisper">او دنبال پاسخ بود.</p>
+      <p>پدرش سال‌ها پیش، در جریان حفاری‌های همین منطقه، ناپدید شده بود. بی‌رد. بی‌نشان. انگار زمین او را بلعیده باشد. تنها چیزی که از او مانده بود، یک دفترچهٔ چرمی کهنه و جمله‌ای عجیب روی صفحهٔ آخر:</p>
+      <p class="whisper">«اگر روزی سه تاج در یک آسمان دیدی، از آسمان فرار نکن... به زیر زمین برو.»</p>
+      <p>آریا سال‌ها فکر می‌کرد این فقط یادداشت مردی دیوانه است. مردی که شن‌ها عقلش را برده‌اند. تا امشب.</p>
+      <p>چراغ را نزدیک‌تر برد.</p>
+      <p>روی سنگ، سه تصویر حک شده بود. و آریا با هر ضربان قلب، مطمئن‌تر می‌شد که پدرش دیوانه نبوده.</p>
+      <p>تصویر نخست: پادشاهی که پشت سرش لشکری از مردگان ایستاده بود. استخوان‌ها، شمشیرها، و چشمانی که می‌سوختند.</p>
+      <p>تصویر دوم: موجودی عظیم با تاجی از مرجان. امواج تا آسمان بالا رفته بودند، و در دلشان، چیزی که به انسان شبیه نبود فرمان می‌راند.</p>
+      <p>و تصویر سوم... مردی با تاجی باستانی. شمشیری در دست. سپاهی بزرگ پشت سرش، و نوری که از خودش می‌تابید، نه از خورشید.</p>
+      <p>زیر سه تصویر، جمله‌ای حک شده بود. آریا انگشتش را روی حروف کشید. خط بسیار قدیمی بود. خطی که هیچ انسانی نباید می‌فهمید.</p>
+      <p>اما او می‌فهمید.</p>
+      <p>با صدای آهسته خواند:</p>
+      <p class="whisper">«سه پادشاه... سه قلمرو... یک دروازه.»</p>
+      <p>ناگهان زمین لرزید.</p>
+      <p>آریا تعادلش را از دست داد و روی شن‌ها افتاد. سنگ زیر دستش شکاف برداشت. و صدایی از زیر زمین بالا آمد. نه صدای یک نفر. صدای هزاران. مثل غرش لشکری که از خواب بیدار می‌شود.</p>
+      <p>آریا عقب خزید.</p>
+      <p>در میان خرابه‌ها، خطوط نورانی روی زمین ظاهر شدند. یک دایره. دایرهٔ دوم. و در مرکزشان، علامتی عجیب: سه تاج، در هم تنیده.</p>
+      <p>آریا به آسمان نگاه کرد.</p>
+      <p>ستاره‌ای در آسمان حرکت می‌کرد. اما ستاره نبود. نوری سفید و آبی، با سرعتی غیرطبیعی، سینهٔ آسمان را می‌شکافت.</p>
+      <p>چند ثانیه بعد، چیزی در دوردست منفجر شد. صدای انفجار با تأخیر به خرابه‌ها رسید. زمین دوباره لرزید.</p>
+      <p>آریا دفترچهٔ پدرش را از جیب بیرون آورد. آخرین صفحه‌ای که سال‌ها هر شب می‌خواند، حالا فرق می‌کرد. جمله‌ای رویش ظاهر شده بود که پیش‌تر نبود:</p>
+      <p class="whisper">«دروازهٔ نخست، باز شد.»</p>
+      <p>آریا زمزمه کرد: «دروازهٔ نخست؟»</p>
+      <p class="dialog">صدایی از پشت سرش آمد. «بله.»</p>
+      <p>آریا وحشت‌زده برگشت. هیچ‌کس نبود. فقط سایه‌ها، و ستون‌های شکسته.</p>
+      <p>صدا دوباره آمد. این بار از زیر زمین، از عمق. از جایی که نور هم جرئت نمی‌کرد برود:</p>
+      <p class="whisper">«و اگر می‌خواهی پدرت را پیدا کنی، باید پیش از باز شدن دروازهٔ سوم آنجا باشی.»</p>
+      <p>زمین زیر پای آریا فرو ریخت.</p>
+      <p>و او در تاریکی سقوط کرد.</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل دوم — شهری زیر شن">
+    <div class="chapter-head">
+      <div class="num">فصل دوم</div>
+      <h2>شهری زیر شن</h2>
+    </div>
+    <div class="speakable">
+      <p>آریا با شدت روی زمین کوبیده شد. چند لحظه هیچ صدایی نشنید. نه باد، نه شن، نه قلب خودش.</p>
+      <p>چراغش هنوز روشن بود. آن را بالا آورد.</p>
+      <p>دیوارهایی عظیم، اطرافش قد کشیده بودند. اما این دیگر خرابه‌های سطح زمین نبود.</p>
+      <p>شهری کامل زیر زمین وجود داشت. خیابان‌هایی سنگی. مجسمه‌هایی که سرشان از سقف غار می‌گذشت. برج‌هایی که آسمان سنگ را شکافته بودند، مثل نیزه‌هایی از عصر فراموش‌شده.</p>
+      <p>و در مرکز شهر... یک معبد.</p>
+      <p>آریا آرام جلو رفت. روی دیوارها همان سه پادشاه دیده می‌شدند. اما این بار جزئیات بیشتری داشتند.</p>
+      <p>پادشاه نخست در میان دریایی از شن ایستاده بود. تاجش از استخوان بود.</p>
+      <p>پادشاه دوم درون اقیانوسی عظیم. نیزه‌اش سه‌شاخه بود.</p>
+      <p>و پادشاه سوم در میان انسان‌ها. شمشیری در دست. و نوری که از خودش می‌تابید.</p>
+      <p>آریا زیر لب گفت: «این‌ها... کی هستند؟»</p>
+      <p>صدایی از پشت سرش پاسخ داد:</p>
+      <p class="dialog">«آن‌ها کسانی هستند که جهان را سه بار نجات داده‌اند. و جهان، نامشان را فراموش کرده.»</p>
+      <p>آریا برگشت.</p>
+      <p>موجودی کوچک پشت سرش ایستاده بود. پوستش خاکستری، مثل سنگِ باران‌خورده. چشمانش آبی می‌درخشیدند، بی‌مردمک.</p>
+      <p>آریا دستش را بالا آورد. «تو... چی هستی؟»</p>
+      <p>موجود گفت: «نام من نیرا است.»</p>
+      <p>«انسانی؟»</p>
+      <p>نیرا خندید. خنده‌ای که در غار پیچید و سرد بود. «نه.»</p>
+      <p>«پس چی؟»</p>
+      <p>«آخرین نگهبان.»</p>
+      <p>آریا به اطراف نگاه کرد. «نگهبان چه؟»</p>
+      <p>نیرا به معبد اشاره کرد. «نگهبان چیزی که نباید بیدار شود.»</p>
+      <p>صدای عمیقی از داخل معبد آمد. هر دو ساکت شدند.</p>
+      <p>نیرا رنگش پرید. «خیلی دیر شده.»</p>
+      <p>دروازه‌های معبد به‌آرامی باز شدند. از داخل، شن سیاهی مثل خون بیرون ریخت.</p>
+      <p>آریا عقب رفت.</p>
+      <p>یک دست از میان شن بیرون آمد. بعد دست دوم. سپس یک جنگجوی عظیم، از دل تاریکی، سر بلند کرد. زره‌اش شکسته بود. جایش، استخوان بود. شمشیری سیاه در دستش، که نور را می‌خورد.</p>
+      <p>نیرا زمزمه کرد: «سپاه مردگان...»</p>
+      <p>جنگجو به آریا حمله کرد. آریا به کنار پرید. شمشیر، سنگ را دو نیم کرد. آریا سنگی برداشت و به صورت استخوانی‌اش کوبید. هیچ اثری نداشت.</p>
+      <p>جنگجو دوباره حمله کرد.</p>
+      <p>ناگهان شن‌های اطراف او بالا رفتند. مثل دست‌هایی از خاک. تمام بدن جنگجو در شن فرو رفت. جیغی از زیر شن آمد که از این جهان نبود.</p>
+      <p>و صدایی در معبد پیچید:</p>
+      <p class="whisper">«چه کسی جرئت کرده وارد قلمرو من شود؟»</p>
+      <p>شن‌ها کنار رفتند. مردی با ردایی سیاه و تاجی طلایی از تاریکی بیرون آمد. چشمانش مثل دو کورهٔ آتش می‌سوختند. سپاه مردگان، پشت سرش، همگی زانو زدند.</p>
+      <p>نیرا روی زمین افتاد. «فرعون...»</p>
+      <p>فرعون به آریا نگاه کرد. چند ثانیه سکوت. کوتاه، اما سنگین مثل هزار سال.</p>
+      <p>سپس گفت:</p>
+      <p class="dialog">«تو انسان هستی.»</p>
+      <p>آریا چیزی نگفت.</p>
+      <p>فرعون جلو آمد. با هر قدم، زمین زیر پایش می‌لرزید.</p>
+      <p class="dialog">«اما چرا بوی دنیای من را می‌دهی؟»</p>
+      <p>آریا عقب رفت. فرعون دستش را بلند کرد. شن‌ها دور بدن آریا پیچیدند. مثل ماری که خون می‌خواهد.</p>
+      <p>اما درست پیش از آنکه او را بگیرند، علامت روی دست آریا روشن شد.</p>
+      <p>نوری طلایی. سه تاج، در هم تنیده.</p>
+      <p>فرعون ناگهان ایستاد. چشمانش بازتر شدند. «این نشان...»</p>
+      <p>نیرا زمزمه کرد: «غیرممکن است.»</p>
+      <p>فرعون به آریا خیره شد. آتش چشمانش، آرام گرفت.</p>
+      <p class="dialog">«چه کسی تو را انتخاب کرده؟»</p>
+      <p>آریا با ترس پرسید: «منظورتان چیست؟»</p>
+      <p>فرعون پاسخ نداد. به آسمان سنگی غار نگاه کرد. برای نخستین بار در هزاران سال، پادشاه مردگان لبخند زد.</p>
+      <p class="whisper">«پس... بالاخره شروع شد.»</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل سوم — پادشاه مردگان">
+    <div class="chapter-head">
+      <div class="num">فصل سوم</div>
+      <h2>پادشاه مردگان</h2>
+    </div>
+    <div class="speakable">
+      <p>فرعون در میان شهر زیرزمینی قدم می‌زد. آریا و نیرا چند قدم پشت سرش. سپاه مردگان، در دو سوی خیابان، مثل دیوارهایی از استخوان صف کشیده بودند.</p>
+      <p>آریا بالاخره پرسید: «چرا من را نکشتی؟»</p>
+      <p>فرعون ایستاد. برنگشت.</p>
+      <p class="dialog">«چون هنوز نمی‌دانم تو دشمن من هستی... یا کلید پیروزی من.»</p>
+      <p>«پیروزی در برابر چه کسی؟»</p>
+      <p>فرعون سرش را بالا آورد. به سقف سنگی، انگار که از پشت آن، آسمانی را می‌بیند که هیچ‌کس نمی‌بیند.</p>
+      <p class="dialog">«چیزی که حتی مرگ هم از آن می‌ترسد.»</p>
+      <p>آریا سکوت کرد. سخنی برای گفتن نبود.</p>
+      <p>فرعون ادامه داد: «هزاران سال است که بر دنیای مردگان حکومت می‌کنم. آنجا زمان معنایی ندارد. پادشاهان می‌آیند. می‌میرند. به سرزمین من می‌رسند. و همه یک چیز را می‌خواهند: بازگشت.»</p>
+      <p>دستش را بالا آورد. شن‌های سیاه از زمین بلند شدند و شکل سرباز گرفتند. صدها سرباز. تمامشان بی‌چهره، بی‌نام.</p>
+      <p class="dialog">«من بر مرگ فرمان می‌رانم.»</p>
+      <p>شن‌ها دوباره فرو ریختند.</p>
+      <p class="dialog">«اما چند شب است که مردگان خواب می‌بینند.»</p>
+      <p>آریا پرسید: «مردگان... خواب می‌بینند؟»</p>
+      <p>فرعون آرام گفت: «بله.»</p>
+      <p>«چه خوابی؟»</p>
+      <p>فرعون برگشت. و برای نخستین بار، آریا در چشمان آتشین او چیزی دید که فکر نمی‌کرد ممکن باشد:</p>
+      <p class="whisper">ترس.</p>
+      <p>فرعون گفت: «یک چشم.»</p>
+      <div class="scene-break">✦ ✦ ✦</div>
+      <p>در همان زمان، هزاران کیلومتر دورتر، در عمیق‌ترین بخش اقیانوس، شهری عظیم زیر آب می‌درخشید.</p>
+      <p>نام آن آتلانور بود. اما هیچ نقشهٔ انسانی آن را نشان نمی‌داد.</p>
+      <p>برج‌های شهر از سنگ‌های آبی و فلزاتی ساخته شده بودند که انسان نامشان را نمی‌دانست. موجودات دریایی غول‌پیکر میان ساختمان‌ها می‌لغزیدند، مثل پرندگان در آسمانی از آب.</p>
+      <p>در مرکز شهر، قصری قرار داشت. درون قصر، ارباب دریا روی تخت خود نشسته بود.</p>
+      <p>او هیولایی بی‌عقل نبود. برخلاف تصور انسان‌ها، چهره‌ای جدی و سلطنتی داشت. زره‌ای از فلز آبی تیره بر بدنش بود. تاجی از استخوان و مرجان روی سرش. و در دستش نیزه‌ای سه‌شاخه، که رگه‌هایی از نور در آن جریان داشتند.</p>
+      <p>در برابرش، فرماندهان اعماق ایستاده بودند. سکوت سنگینی بر تالار حاکم بود.</p>
+      <p>یکی از آن‌ها گفت: «ارباب. هفده شهر ساحلی، ارتباط خود را با ما از دست داده‌اند.»</p>
+      <p>ارباب دریا پرسید: «چرا؟»</p>
+      <p>«موجوداتشان فرار کرده‌اند.»</p>
+      <p>«به کجا؟»</p>
+      <p>فرمانده مکث کرد. «خشکی.»</p>
+      <p>ارباب دریا از تخت بلند شد. آب تالار لرزید.</p>
+      <p class="dialog">«موجودات اعماق از هیچ‌چیز فرار نمی‌کنند.»</p>
+      <p>فرمانده سرش را پایین انداخت. «این یکی فرق دارد، ارباب.»</p>
+      <p>ناگهان آب داخل تالار شروع به چرخیدن کرد. گردابی عظیم، مثل چشمی که باز می‌شود. در مرکزش، تصویری ظاهر شد.</p>
+      <p>یک سیاره.</p>
+      <p>ارباب دریا به آن خیره شد. «این چیست؟»</p>
+      <p>دانشمندی پیر گفت: «ما نمی‌دانیم.»</p>
+      <p>ارباب دریا دستش را جلو برد. تصویر تغییر کرد. سیاره‌ای دیگر. سپس دیگری. سپس صدها. سپس هزاران.</p>
+      <p>دانشمند گفت: «این‌ها... در حال نزدیک شدن هستند.»</p>
+      <p>ارباب دریا با خونسردی گفت: «سیاره‌ها حرکت نمی‌کنند.»</p>
+      <p>دانشمند جواب داد: «این‌ها سیاره نیستند.»</p>
+      <p>تصویر بزرگ شد. چیزی میان ستاره‌ها حرکت می‌کرد. چیزی عظیم. چیزی که اندازه‌اش از یک سیاره بزرگ‌تر بود.</p>
+      <p>ارباب دریا برای نخستین بار در هزاران سال، سکوت کرد. سپس گفت:</p>
+      <p class="whisper">«تمام شهرها را تخلیه کنید.»</p>
+      <p>فرمانده متعجب شد. «ارباب؟»</p>
+      <p class="dialog">«همین حالا.»</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل چهارم — مردی که هزاران سال منتظر بود">
+    <div class="chapter-head">
+      <div class="num">فصل چهارم</div>
+      <h2>مردی که هزاران سال منتظر بود</h2>
+    </div>
+    <div class="speakable">
+      <p>در جایی، بیرون از جهان زندگان، بیرون از زمان.</p>
+      <p>تالار پادشاهان در سکوت فرو رفته بود. هزاران تخت خالی. هزاران تاج شکسته. و در انتهای تالار، یک تخت طلایی.</p>
+      <p>مردی در برابرش ایستاده بود.</p>
+      <p>کوروش.</p>
+      <p>زره‌ای باستانی بر تن داشت. شمشیری در دست. تاجی ساده، اما باشکوه، بر سر. و در چشمانش، آرامشی که فقط از هزاران سال انتظار می‌آید.</p>
+      <p>موجودی نورانی در برابرش ایستاده بود. صدایش مثل زنگ دور دستی بود:</p>
+      <p class="dialog">«زمانش رسیده.»</p>
+      <p>کوروش پرسید: «چند سال گذشته؟»</p>
+      <p>«برای تو؟ هزاران سال.»</p>
+      <p>کوروش لبخند زد.</p>
+      <p class="dialog">«برای من، فقط یک شب بود.»</p>
+      <p>موجود گفت: «جهان تغییر کرده.»</p>
+      <p>«طبیعی است.»</p>
+      <p>«پادشاهی‌ها سقوط کرده‌اند.»</p>
+      <p>کوروش سرش را پایین انداخت. «همیشه همین‌طور بوده.»</p>
+      <p>«نام تو نیز... تقریباً فراموش شده.»</p>
+      <p>کوروش به شمشیرش نگاه کرد. تیغه، در نور تالار، سرد و صاف.</p>
+      <p class="dialog">«پس میراثم را امتحان می‌کنیم.»</p>
+      <p>موجود گفت: «تو می‌توانی برگردی.»</p>
+      <p>کوروش به سمت دروازه رفت. اما پیش از ورود، ایستاد.</p>
+      <p>«فرعون؟»</p>
+      <p class="dialog">«بیدار شده.»</p>
+      <p>«ارباب دریا؟»</p>
+      <p class="dialog">«او نیز آماده است.»</p>
+      <p>کوروش پرسید: «و دشمن؟»</p>
+      <p>موجود، برای نخستین بار، سکوت کرد.</p>
+      <p>کوروش برگشت. چشمانش باریک شد.</p>
+      <p class="dialog">«چه چیزی را از من پنهان می‌کنی؟»</p>
+      <p>موجود گفت: «دشمن هنوز وارد جهان نشده.»</p>
+      <p>کوروش اخم کرد. «پس چرا من را برگرداندید؟»</p>
+      <p>موجود پاسخ داد. و این جمله، مثل سنگی بود که در چاه می‌افتد:</p>
+      <p class="whisper">«چون کسی که دشمن را می‌شناسد، از پیش وارد جهان شده است.»</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل پنجم — حمله">
+    <div class="chapter-head">
+      <div class="num">فصل پنجم</div>
+      <h2>حمله</h2>
+    </div>
+    <div class="speakable">
+      <p>در همان لحظه، آسمان زمین شکافت.</p>
+      <p>ابرها کنار رفتند. ستاره‌ها محو شدند. ماه، مثل چراغی که خاموشش کنند، بی‌رنگ شد.</p>
+      <p>چیزی از میان شکاف پایین آمد. سفینه نبود. یک موجود بود.</p>
+      <p>بدنی عظیم داشت. چهار دست. زره‌ای سیاه که نور را می‌بلعید. و پشت سرش، ده‌ها موجود پرنده، با بال‌هایی از دود.</p>
+      <p>به سمت شهری ساحلی رفتند.</p>
+      <p>مردم فرار کردند. آسمان تاریک شد. صدای فریاد، صدای موج، صدای چیزی که از آن سوی ستاره‌ها می‌آمد.</p>
+      <p>نخستین موجود روی زمین فرود آمد. زمین زیر پایش ترک برداشت. دستش را بالا برد. انرژی سیاه در کف دستش جمع شد. مثل قلبی که می‌تپد، مثل جهنمی که نفس می‌کشد.</p>
+      <p>اما پیش از آنکه شلیک کند...</p>
+      <p>آب از زمین فوران کرد. موجی عظیم، تمام موجودات را به هوا پرتاب کرد.</p>
+      <p>ارباب دریا از میان آب بیرون آمد. نیزه‌اش را چرخاند. صاعقه‌ای آبی از آسمان فرود آمد. موجود سیاه چند متر عقب رفت.</p>
+      <p>ارباب دریا گفت:</p>
+      <p class="dialog">«این قلمرو متعلق به من نیست.»</p>
+      <p>نیزه را به زمین کوبید. زمین لرزید.</p>
+      <p class="whisper">«اما هیچ‌کس، بدون اجازهٔ من، در آن نابودی به وجود نمی‌آورد.»</p>
+      <p>موجود خندید. خنده‌ای که مثل فلز روی فلز بود.</p>
+      <p class="dialog">«تو نمی‌دانی با چه چیزی روبه‌رو شده‌ای.»</p>
+      <p>ارباب دریا گفت: «پس به من نشان بده.»</p>
+      <p>نبرد آغاز شد.</p>
+      <p>موجود سیاه با سرعتی غیرقابل تصور حمله کرد. ارباب دریا نیزه‌اش را بالا برد. ضربه برخورد کرد. انفجاری عظیم. موجی چند کیلومتری از ساحل گذشت.</p>
+      <p>ارباب دریا به هوا پرتاب شد. اما پیش از سقوط، تمام آب اطراف شهر را فرمان داد. هزاران نیزهٔ آبی در هوا شکل گرفتند. با حرکت دستش، همه شلیک شدند.</p>
+      <p>موجود سیاه سپری از انرژی ساخت. نیزه‌ها یکی پس از دیگری کوبیدند. اما آخرین نیزه، از سپر گذشت.</p>
+      <p>موجود زخمی شد.</p>
+      <p>برای نخستین بار، خون سیاه از بدنش جاری شد. او به زخم نگاه کرد. سپس به ارباب دریا. و لبخند زد.</p>
+      <p class="dialog">«جالب.»</p>
+      <p>دستش را روی زمین گذاشت. زمین لرزید. ناگهان موجودات بیشتری از آسمان پایین آمدند. ده. صد. هزار.</p>
+      <p>ارباب دریا فهمید که تنها نمی‌تواند بجنگد.</p>
+      <p>دستش را بالا برد. تمام اقیانوس پشت سرش بلند شد. دیواری از آب، به ارتفاع یک کوه. پشت آن، موجوداتی که انسان هرگز ندیده بود، آمادهٔ جنگ.</p>
+      <p>اما در همان لحظه...</p>
+      <p>شن سیاه از زمین بیرون زد. آب متوقف شد.</p>
+      <p>فرعون، در میان شن‌ها، ظاهر شد.</p>
+      <p>ارباب دریا به او نگاه کرد. «تو.»</p>
+      <p>فرعون گفت:</p>
+      <p class="dialog">«به نظر می‌رسد دشمن مشترکی پیدا کرده‌ایم.»</p>
+      <p>ارباب دریا گفت: «من به تو نیاز ندارم.»</p>
+      <p>فرعون لبخند زد. «من هم به تو.»</p>
+      <p>موجودات بیگانه از هر دو سو حمله کردند.</p>
+      <p>فرعون دستش را بالا برد. صدها سرباز مرده از زیر زمین بیرون آمدند.</p>
+      <p>ارباب دریا دستش را پایین آورد. هیولاهای اعماق از اقیانوس بیرون ریختند.</p>
+      <p>و برای نخستین بار در تاریخ جهان...</p>
+      <p class="whisper">سپاه مردگان و سپاه اعماق، در یک میدان جنگ، کنار هم ایستادند.</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل ششم — سومین پادشاه">
+    <div class="chapter-head">
+      <div class="num">فصل ششم</div>
+      <h2>سومین پادشاه</h2>
+    </div>
+    <div class="speakable">
+      <p>نبرد به اوج رسیده بود.</p>
+      <p>فرعون یک دستش را بالا نگه داشته بود. شن‌ها مثل طوفانی از خشم، اطراف میدان می‌چرخیدند. ارباب دریا با نیزه‌اش موجودات دشمن را عقب می‌راند.</p>
+      <p>اما تعداد دشمنان، تمامی نداشت. هر بار یکی نابود می‌شد، دو موجود دیگر از شکاف آسمان پایین می‌آمدند.</p>
+      <p>فرعون فریاد زد: «این‌ها از کجا می‌آیند؟!»</p>
+      <p>ارباب دریا گفت: «از جایی که تو نمی‌توانی بروی.»</p>
+      <p>فرعون پاسخ داد: «پس باید در را ببندیم.»</p>
+      <p>ناگهان، صدای قدم‌هایی شنیده شد.</p>
+      <p>هر دو برگشتند.</p>
+      <p>مردی از میان دود و گردوغبار می‌آمد. تاجی ساده بر سر. شمشیری در دست. و نوری که از خودش می‌تابید، نه از آتش، نه از ماه.</p>
+      <p>کوروش.</p>
+      <p>فرعون او را شناخت. ارباب دریا نیز ساکت شد.</p>
+      <p>کوروش به آسمان نگاه کرد. سپس به دو پادشاه.</p>
+      <p class="dialog">«هنوز هم با هم مشکل دارید؟»</p>
+      <p>فرعون گفت: «این جنگ به تو مربوط نیست.»</p>
+      <p>کوروش گفت:</p>
+      <p class="dialog">«از لحظه‌ای که آن موجودات وارد جهان من شدند، مربوط به من است.»</p>
+      <p>ارباب دریا گفت: «تو کی هستی که برای ما تصمیم می‌گیری؟»</p>
+      <p>کوروش به او نگاه کرد. نگاهش، نه با خشم بود، نه با غرور.</p>
+      <p class="dialog">«کسی که قرار نیست برای شما تصمیم بگیرد.»</p>
+      <p>شمشیرش را از غلاف کشید. صدای فلز، در میان غرش جنگ، مثل نغمه‌ای بود.</p>
+      <p class="dialog">«قرار است به شما یادآوری کنم که دشمن واقعی کجاست.»</p>
+      <p>یکی از موجودات عظیم به سمت کوروش حمله کرد.</p>
+      <p>کوروش حتی حرکت نکرد.</p>
+      <p>موجود شمشیر خود را بالا برد. سایه‌اش روی زمین افتاد.</p>
+      <p>کوروش گفت: «ایست.»</p>
+      <p>موجود در هوا متوقف شد.</p>
+      <p>فرعون به او خیره شد. ارباب دریا نیز برای لحظه‌ای، چیزی نگفت.</p>
+      <p>کوروش جلو رفت. شمشیرش را روی زره موجود گذاشت. زره، مثل شیشه، شکافت. موجود روی زمین افتاد.</p>
+      <p>کوروش به دو پادشاه نگاه کرد.</p>
+      <p class="dialog">«اگر هنوز می‌خواهید با یکدیگر بجنگید، بعداً وقت دارید.»</p>
+      <p>به آسمان اشاره کرد. «فعلاً باید زنده بمانیم.»</p>
+      <div class="scene-break">✦ ✦ ✦</div>
+      <p>فرعون به سمت دشمن حمله کرد. دستش را بالا برد. زمین شکافت. صدها جنگجوی مرده بیرون آمدند، با چشمانی که از قرن‌ها انتظار می‌سوختند.</p>
+      <p>فرعون فریاد زد:</p>
+      <p class="whisper">«سپاه مرگ!»</p>
+      <p>تمام مردگان به سمت دشمن هجوم بردند.</p>
+      <p>ارباب دریا نیزه‌اش را به آسمان گرفت. ابرهای سیاه تشکیل شدند. رعد و برق در میانشان پیچید، مثل مارهایی از نور.</p>
+      <p class="whisper">«تاج طوفان.»</p>
+      <p>رعدی عظیم به زمین کوبید. موجودات بیگانه برای چند ثانیه فلج شدند.</p>
+      <p>کوروش شمشیرش را در زمین فرو کرد. نوری طلایی از بدنش بیرون زد. صدایش در تمام میدان پیچید:</p>
+      <p class="whisper">«فرمان پادشاهی!»</p>
+      <p>و ناگهان، تمام انسان‌های اطراف میدان، توانستند ترس خود را کنترل کنند. به جای فرار، به سمت ساختمان‌ها دویدند. یکدیگر را نجات دادند. کودکانی که گریه می‌کردند، ساکت شدند.</p>
+      <p>کوروش لبخند زد. قدرت او از ترس تغذیه نمی‌کرد. از ارادهٔ انسان‌ها نیرو می‌گرفت.</p>
+      <p>سه قدرت، برای نخستین بار، هم‌زمان فعال شدند. مرگ. دریا. پادشاهی.</p>
+      <p>و دشمن، برای نخستین بار، عقب نشست.</p>
+      <p>اما ناگهان...</p>
+      <p>تمام موجودات مهاجم، متوقف شدند. همه به آسمان نگاه کردند. مثل سربازانی که فرمانده‌ای دورتر را می‌بینند.</p>
+      <p>فرعون گفت: «چرا متوقف شدند؟»</p>
+      <p>ارباب دریا: «نمی‌دانم.»</p>
+      <p>کوروش آرام گفت: «چون چیزی بزرگ‌تر از آن‌ها رسیده.»</p>
+      <p>آسمان تاریک شد. ماه ناپدید شد. ستاره‌ها یکی پس از دیگری خاموش شدند.</p>
+      <p>سپس... یک چشم عظیم در آسمان باز شد. نه چشم یک موجود معمولی. چیزی به اندازهٔ یک قاره. مردمکش از سیاهی ساخته شده بود و اطرافش، نوری از هفت رنگ که هیچ‌کدام را انسان نمی‌شناخت.</p>
+      <p>تمام جهان آن را دید.</p>
+      <p>فرعون، برای نخستین بار، عقب رفت. ارباب دریا نیزه‌اش را پایین آورد.</p>
+      <p>کوروش فقط به آسمان نگاه کرد.</p>
+      <p>صدایی از آن سوی آسمان آمد. صدایی که در استخوان‌ها می‌پیچید:</p>
+      <p class="whisper">«سه پادشاه...»</p>
+      <p>زمین لرزید.</p>
+      <p class="whisper">«سه کلید...»</p>
+      <p>اقیانوس‌ها متلاطم شدند.</p>
+      <p class="whisper">«یک دروازه.»</p>
+      <p>چشم بسته شد. و همه‌چیز، دوباره عادی شد.</p>
+      <p>اما دیگر هیچ‌چیز مثل قبل نبود.</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل هفتم — پیمان">
+    <div class="chapter-head">
+      <div class="num">فصل هفتم</div>
+      <h2>پیمان</h2>
+    </div>
+    <div class="speakable">
+      <p>سه پادشاه، در خرابه‌های شهر ساحلی ایستاده بودند. دود هنوز از ویرانه‌ها بلند می‌شد. صدای موج، در سکوت شب، مثل نفسی سنگین بود.</p>
+      <p>فرعون گفت: «آن موجود، ما را می‌شناسد.»</p>
+      <p>ارباب دریا گفت: «و ما را کلید نامید.»</p>
+      <p>کوروش پاسخ داد: «پس باید بفهمیم کلید چه چیزی هستیم.»</p>
+      <p>آریا که تا آن لحظه ساکت بود، جلو آمد.</p>
+      <p class="dialog">«من می‌دانم.»</p>
+      <p>هر سه به او نگاه کردند.</p>
+      <p>آریا دفترچهٔ پدرش را باز کرد. صفحه‌ای که رویش نوشته بود: سه تاج، سه قلمرو، یک دروازه.</p>
+      <p>او ادامه داد: «پدرم سال‌ها دربارهٔ این موضوع تحقیق کرده بود. در آخرین صفحهٔ دفترچه، نقشه‌ای هست. و روی نقشه، جایی که هیچ انسانی ندیده.»</p>
+      <p>فرعون گفت: «پدرت؟»</p>
+      <p>«بله.»</p>
+      <p>«کجاست؟»</p>
+      <p>آریا مکث کرد. «نمی‌دانم.»</p>
+      <p>نیرا آرام گفت:</p>
+      <p class="dialog">«من می‌دانم.»</p>
+      <p>آریا به او نگاه کرد.</p>
+      <p>نیرا گفت: «پدرت زنده است.»</p>
+      <p>آریا خشکش زد. قلبش، برای یک لحظه، ایستاد.</p>
+      <p>«چی؟»</p>
+      <p>نیرا ادامه داد: «اما روی زمین نیست.»</p>
+      <p>«پس کجاست؟»</p>
+      <p>نیرا به آسمان اشاره کرد.</p>
+      <p class="whisper">«در یکی از سیارات.»</p>
+      <p>آریا به آسمان خیره شد. به ستاره‌ها. به تاریکی. به جایی که پدرش، بعد از این همه سال، در آن منتظر او بود.</p>
+      <p>ارباب دریا گفت: «کدام سیاره؟»</p>
+      <p>نیرا جواب داد:</p>
+      <p class="dialog">«آرکانا.»</p>
+      <p>فرعون پرسید: «و چرا آنجاست؟»</p>
+      <p>نیرا گفت: «چون او نخستین کسی بود که فهمید دروازهٔ چهارم در حال باز شدن است.»</p>
+      <p>کوروش به آریا نگاه کرد. «پس هدف نخست ما مشخص شد.»</p>
+      <p>آریا پرسید: «هدف؟»</p>
+      <p>کوروش گفت:</p>
+      <p class="dialog">«پدرت را پیدا می‌کنیم.»</p>
+      <p>فرعون گفت: «و اگر آن مرد، کلید دروازه باشد؟»</p>
+      <p>کوروش جواب داد: «پس کلید را پیدا می‌کنیم.»</p>
+      <p>ارباب دریا پرسید: «و اگر دشمن، منتظر ما باشد؟»</p>
+      <p>کوروش شمشیرش را در غلاف گذاشت.</p>
+      <p class="dialog">«پس باید پیش از او به آنجا برسیم.»</p>
+      <p>فرعون گفت: «من با انسان‌ها سفر نمی‌کنم.»</p>
+      <p>ارباب دریا گفت: «و من هم از فرمان یک انسان پیروی نمی‌کنم.»</p>
+      <p>کوروش لبخند زد. «خوب است. پس هیچ‌کس فرمان نمی‌دهد.»</p>
+      <p>سه پادشاه به یکدیگر نگاه کردند. سه جهانی که هیچ‌کدام، دیگری را نمی‌شناخت. سه دشمن دیرینه.</p>
+      <p>کوروش دستش را جلو آورد.</p>
+      <p class="dialog">«فقط یک پیمان.»</p>
+      <p>فرعون چند لحظه سکوت کرد. سپس دستش را روی دست کوروش گذاشت. ارباب دریا نیز، پس از لحظه‌ای تردید، دستش را اضافه کرد.</p>
+      <p>سه قدرت، به هم متصل شدند.</p>
+      <p>در همان لحظه... نشان سه تاج روی زمین ظاهر شد. و دروازه‌ای در آسمان باز شد.</p>
+      <p>درون آن... ستارگان دیده می‌شدند. و جهانی که هیچ انسانی ندیده بود.</p>
+      <p class="whisper">سفری که هیچ انسانی تا آن روز انجام نداده بود، آغاز شد.</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل هشتم — کشتی آسمانی">
+    <div class="chapter-head">
+      <div class="num">فصل هشتم</div>
+      <h2>کشتی آسمانی</h2>
+    </div>
+    <div class="speakable">
+      <p>ارباب دریا از اعماق اقیانوس، چیزی را بیرون کشید.</p>
+      <p>یک کشتی عظیم. اما این کشتی از چوب نبود. از فلز سیاه و سنگ‌های آبی ساخته شده بود. بال‌های بزرگی در دو سویش باز شدند، مثل بال‌های پرنده‌ای که هرگز پرواز نکرده.</p>
+      <p>فرعون گفت: «این چیست؟»</p>
+      <p>ارباب دریا گفت: «کشتی پادشاهان اعماق.»</p>
+      <p>کوروش وارد آن شد. آریا و نیرا نیز سوار شدند. فرعون، در آخرین لحظه، وارد شد.</p>
+      <p>کشتی از سطح اقیانوس جدا شد. بال‌ها باز شدند. آب در اطرافش، به شکل حلقه‌ای عظیم، چرخید.</p>
+      <p>سپس... کشتی به آسمان شلیک شد.</p>
+      <p>ابرها را شکافت. از جو زمین گذشت. و وارد تاریکی کیهان شد.</p>
+      <p>آریا از پنجره به زمین نگاه کرد. زمین کوچک‌تر و کوچک‌تر شد. برای نخستین بار، خانه‌اش را از فضا دید. یک گوی آبی، تنها، در میان سیاهی.</p>
+      <p>کوروش کنار او ایستاده بود.</p>
+      <p>آریا گفت: «تو قبلاً اینجا بودی؟»</p>
+      <p>کوروش گفت: «نه.»</p>
+      <p>«پس نمی‌ترسی؟»</p>
+      <p>کوروش لبخند زد. «من از چیزی که نمی‌شناسم می‌ترسم.»</p>
+      <p>آریا تعجب کرد. «واقعاً؟»</p>
+      <p>«بله.»</p>
+      <p>«پس چرا این‌قدر آرامی؟»</p>
+      <p>کوروش به زمین نگاه کرد. «چون ترسیدن، با فرار کردن فرق دارد.»</p>
+      <p>پشت سرشان، فرعون به پنجره خیره شده بود. ارباب دریا نیز به سیارات دور. هر یک، در فکر جهانی که پشت سر گذاشته بود.</p>
+      <p>ناگهان، سیستم کشتی هشدار داد.</p>
+      <p>نیرا گفت: «مشکل داریم.»</p>
+      <p>ارباب دریا برگشت. «چه مشکلی؟»</p>
+      <p>نیرا به صفحه نگاه کرد. «سه جسم، در حال نزدیک شدن هستند.»</p>
+      <p>کوروش گفت: «چه هستند؟»</p>
+      <p>نیرا پاسخ داد: «کشتی.»</p>
+      <p>فرعون گفت: «چندتا؟»</p>
+      <p>نیرا به صفحه نگاه کرد. رنگش پرید. «سه تا.»</p>
+      <p>ارباب دریا گفت: «پس دشمن ماست.»</p>
+      <p>نیرا سرش را تکان داد. «نه.»</p>
+      <p>کوروش پرسید: «پس چه؟»</p>
+      <p>نیرا گفت: «این‌ها کشتی‌های خود آرکانا هستند.»</p>
+      <p>همه ساکت شدند.</p>
+      <p>آریا پرسید: «پس چرا به سمت ما شلیک می‌کنند؟»</p>
+      <p>نیرا به صفحه نگاه کرد. «چون...»</p>
+      <p>ناگهان سه نور عظیم از دوردست شلیک شد. کشتی تکان خورد. انفجار بزرگی در کنارش رخ داد.</p>
+      <p>نیرا جمله‌اش را کامل کرد:</p>
+      <p class="whisper">«چون آن‌ها فکر می‌کنند ما دشمن هستیم.»</p>
+      <p>کوروش شمشیرش را بیرون کشید. فرعون شن‌های سیاه را احضار کرد. ارباب دریا نیزه‌اش را در دست گرفت.</p>
+      <p>سه پادشاه، آمادهٔ نبرد شدند.</p>
+      <p>و در فاصله‌ای دور... سه کشتی بیگانه به سمتشان می‌آمدند.</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل نهم — نبرد در میان ستارگان">
+    <div class="chapter-head">
+      <div class="num">فصل نهم</div>
+      <h2>نبرد در میان ستارگان</h2>
+    </div>
+    <div class="speakable">
+      <p>کشتی‌های آرکانا به سرعت نزدیک شدند. بدنه‌هایشان سیاه و عظیم بود. روی هر کدام، صدها جنگجو ایستاده بودند.</p>
+      <p>ارباب دریا فرمان داد: «سپرها!»</p>
+      <p>دیوار آبی‌رنگی اطراف کشتی شکل گرفت. نخستین شلیک برخورد کرد. کشتی لرزید.</p>
+      <p>فرعون دستش را بالا برد. شن‌های سیاه از کف کشتی بلند شدند و در فضا، به شکل نیزه درآمدند. او دستش را جلو برد. صدها نیزه به سمت کشتی دشمن پرتاب شدند. برخوردها، انفجارهای پی‌درپی ساختند.</p>
+      <p>اما دشمنان، هنوز نزدیک‌تر می‌شدند.</p>
+      <p>آریا گفت: «چطور در فضا می‌جنگیم؟»</p>
+      <p>کوروش گفت: «مثل هر جای دیگر.»</p>
+      <p>«یعنی؟»</p>
+      <p>کوروش شمشیرش را بیرون کشید.</p>
+      <p class="dialog">«با کسی که می‌خواهد ما را بکشد، روبه‌رو می‌شویم.»</p>
+      <p>دروازه‌ای کوچک در کنار کشتی باز شد. کوروش بیرون پرید.</p>
+      <p>آریا فریاد زد: «کوروش!»</p>
+      <p>اما او، در خلأ، شناور بود. زرهش نوری طلایی ایجاد کرد. در میان ستاره‌ها، مثل خدایی از دوران فراموش‌شده.</p>
+      <p>چند جنگجوی آرکانا به سمتش آمدند.</p>
+      <p>نخستین نفر حمله کرد. کوروش ضربه را دفع کرد. دومی از پشت حمله کرد. کوروش چرخید. شمشیرش زره او را شکافت. سومی و چهارمی هم‌زمان حمله کردند.</p>
+      <p>کوروش دستش را بالا آورد. «ایست.»</p>
+      <p>هر دو، در هوا، متوقف شدند. کوروش از کنارشان گذشت.</p>
+      <p>اما ناگهان، موجودی عظیم از پشت یکی از کشتی‌ها ظاهر شد. قدش چندین برابر کوروش بود. زره سنگینی بر بدنش. در دستش، سلاحی عظیم که از نور ساخته شده بود.</p>
+      <p>کوروش به آن نگاه کرد. موجود حمله کرد.</p>
+      <p>کوروش شمشیرش را بالا برد. ضربه چنان شدید بود که کوروش، صدها متر به عقب پرتاب شد.</p>
+      <p>او تعادلش را حفظ کرد.</p>
+      <p>موجود دوباره حمله کرد. کوروش لبخند زد. «خوب.»</p>
+      <p>شمشیرش شروع به درخشیدن کرد.</p>
+      <p class="dialog">«پس تو، فرمان نمی‌پذیری.»</p>
+      <p>با سرعت به سمت موجود رفت. ضربهٔ نخست. دوم. سوم. چهارم. موجود عقب رفت.</p>
+      <p>اما کوروش، ناگهان، متوجه چیزی شد. روی زره موجود... نشان یک تاج حک شده بود.</p>
+      <p>کوروش ایستاد. «صبر کن.»</p>
+      <p>موجود حمله کرد. کوروش ضربه را دفع کرد.</p>
+      <p class="dialog">«این نشان را از کجا آوردی؟»</p>
+      <p>موجود پاسخ نداد.</p>
+      <p>کوروش شمشیرش را پایین آورد. موجود نیز، برای لحظه‌ای، متوقف شد.</p>
+      <p>در همین لحظه، صدایی از کشتی آرکانا پخش شد:</p>
+      <p class="whisper">«پادشاه... خودت را نشان دادی.»</p>
+      <p>کوروش به آسمان خیره شد. صدایی آشنا. بسیار قدیمی. صدایی که هزاران سال بود نشنیده بود.</p>
+      <p>چشمان کوروش تغییر کرد. «تو...»</p>
+      <p>صدا گفت: «بالاخره برگشتی.»</p>
+      <p>کوروش آرام گفت: «تو هنوز زنده‌ای.»</p>
+      <p>صدا خندید. «نه، کوروش.»</p>
+      <p>کشتی بزرگ آرکانا باز شد. چیزی عظیم از درون آن بیرون آمد.</p>
+      <p class="whisper">«من دیگر زنده نیستم.»</p>
+      <p>سکوت.</p>
+      <p class="whisper">«من چیزی فراتر از زندگی شده‌ام.»</p>
+      <p>و ناگهان، تمام کشتی‌های آرکانا، عقب رفتند.</p>
+      <p>در میان ستارگان... یک موجود عظیم ظاهر شد. نه یک موجود معمولی. چیزی که بخشی از بدنش شبیه انسان بود و بخش دیگرش، شبیه انرژی خالص.</p>
+      <p>کوروش به او خیره شد. فرعون و ارباب دریا نیز، از دور، آن را دیدند.</p>
+      <p>موجود گفت: «من منتظر سه پادشاه بودم.»</p>
+      <p>فرعون گفت: «تو کیستی؟»</p>
+      <p>موجود جواب داد: «کسی که نخستین بار، دروازهٔ چهارم را باز کرد.»</p>
+      <p>ارباب دریا نیزه‌اش را بالا برد. «پس تو دشمنی.»</p>
+      <p>موجود لبخند زد. «نه.»</p>
+      <p>دستش را بالا آورد. تمام ستاره‌های اطراف، برای لحظه‌ای، خاموش شدند.</p>
+      <p class="whisper">«من دلیل وجود دشمن هستم.»</p>
+    </div>
+  </section>
+
+  <section class="page" data-title="فصل دهم — راز کوروش">
+    <div class="chapter-head">
+      <div class="num">فصل دهم</div>
+      <h2>راز کوروش</h2>
+    </div>
+    <div class="speakable">
+      <p>کوروش به موجود نگاه می‌کرد. نگاهی که هزاران سال در آن جمع شده بود.</p>
+      <p class="dialog">«تو را می‌شناسم.»</p>
+      <p>موجود گفت: «البته.»</p>
+      <p>«تو در گذشته به زمین آمدی.»</p>
+      <p>«بله.»</p>
+      <p>«و من تو را شکست دادم.»</p>
+      <p>موجود خندید. خنده‌ای که در خلأ پیچید.</p>
+      <p class="dialog">«نه.»</p>
+      <p>کوروش ساکت شد.</p>
+      <p>موجود ادامه داد: «تو مرا شکست ندادی.»</p>
+      <p>به فرعون نگاه کرد. «فرعون مرا زندانی کرد.»</p>
+      <p>به ارباب دریا نگاه کرد. «ارباب دریا دروازه را به اعماق کشید.»</p>
+      <p>و دوباره به کوروش نگاه کرد. «و تو...»</p>
+      <p>مکث کرد.</p>
+      <p class="whisper">«تو تمام سه قلمرو را از هم جدا کردی.»</p>
+      <p>فرعون با ناباوری گفت: «پس این ماجرا، پیش‌تر هم اتفاق افتاده؟»</p>
+      <p>موجود پاسخ داد: «هزاران سال پیش.»</p>
+      <p>ارباب دریا گفت: «پس چرا برگشتی؟»</p>
+      <p>موجود گفت: «چون زندان من، در حال شکستن است.»</p>
+      <p>کوروش آرام گفت: «دروازهٔ چهارم.»</p>
+      <p>موجود لبخند زد. «بالاخره فهمیدی.»</p>
+      <p>کوروش به آریا نگاه کرد. سپس به نیرا. «پدرت کجاست؟»</p>
+      <p>موجود پاسخ داد: «دروازهٔ چهارم.»</p>
+      <p>آریا جلو آمد. صدایش می‌لرزید. «پدر من زنده است؟»</p>
+      <p>موجود نگاهش کرد. «بله.»</p>
+      <p>آریا نفسی عمیق کشید. «پس آزادش کن.»</p>
+      <p>موجود خندید. اما این بار، خنده‌اش تلخ بود.</p>
+      <p class="dialog">«اگر می‌توانستم، اینجا با شما صحبت نمی‌کردم.»</p>
+      <p>کوروش پرسید: «پس چرا او را نگه داشته‌ای؟»</p>
+      <p>موجود گفت:</p>
+      <p class="dialog">«چون پدرت، تنها انسانی است که می‌داند دروازهٔ چهارم، واقعاً به کجا باز می‌شود.»</p>
+      <p>کوروش به فرعون و ارباب دریا نگاه کرد. سپس به سیارهٔ دوردست آرکانا. سپس به ستاره‌ها. سپس به تاریکی.</p>
+      <p class="dialog">«پس مقصد بعدی ما، مشخص است.»</p>
+      <p>فرعون گفت: «آرکانا.»</p>
+      <p>ارباب دریا: «و بعد؟»</p>
+      <p>کوروش گفت: «دروازهٔ چهارم.»</p>
+      <p>کشتی به سمت سیاره حرکت کرد.</p>
+      <p>اما هیچ‌کدام نمی‌دانستند که پشت آرکانا... چیزی بسیار بزرگ‌تر منتظر آن‌هاست. چیزی که حتی آن موجود نیز از آن می‌ترسید.</p>
+      <p>و در اعماق تاریک کیهان... چشم دیگری باز شد.</p>
+      <p>این بار... دو چشم. سپس چهار. سپس هزاران چشم.</p>
+      <p>و صدایی در تاریکی گفت:</p>
+      <p class="whisper">«سه پادشاه برگشته‌اند.»</p>
+      <p>موجود ناشناخته‌ای پاسخ داد: «پس جنگ را آغاز کنید.»</p>
+      <p>و میلیون‌ها ستاره در دوردست روشن شدند. ناوگانی عظیم، از دل تاریکی بیرون آمد.</p>
+      <p>نه یک ارتش. نه یک امپراتوری.</p>
+      <p>بلکه...</p>
+      <p class="whisper">یک کهکشان کامل، در حال حرکت بود.</p>
+      <div class="the-end">
+        <div class="big">پایان جلد نخست</div>
+        <div class="small">
+          جلد دوم: <b>دروازهٔ چهارم</b><br>
+          به‌زودی…
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<nav id="nav">
+  <button class="nav-btn" id="prevBtn">قبلی ←</button>
+  <div id="counter"></div>
+  <button class="nav-btn" id="nextBtn">→ بعدی</button>
+</nav>
+
+<script>
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
+  var prevBtn = document.getElementById('prevBtn');
+  var nextBtn = document.getElementById('nextBtn');
+  var counter = document.getElementById('counter');
+  var progress = document.getElementById('progress');
+  var toc = document.getElementById('toc');
+  var tocList = document.getElementById('tocList');
+  var current = 0;
+
+  pages.forEach(function(p, i) {
+    var b = document.createElement('button');
+    b.className = 'toc-item';
+    b.textContent = p.getAttribute('data-title') || ('صفحه ' + (i + 1));
+    b.onclick = function() { goTo(i); closeToc(); };
+    tocList.appendChild(b);
+  });
+  var tocItems = Array.prototype.slice.call(document.querySelectorAll('.toc-item'));
+
+  function render() {
+    pages.forEach(function(p, i) { p.classList.toggle('active', i === current); });
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === pages.length - 1;
+    if (current === 0) {
+      counter.innerHTML = '<b>جلد نخست</b><br>دروازهٔ چهارم';
+    } else {
+      counter.innerHTML = 'فصل <b>' + current + '</b> از <b>' + (pages.length - 1) + '</b>';
+    }
+    progress.style.width = (current / (pages.length - 1) * 100) + '%';
+    tocItems.forEach(function(it, i) { it.classList.toggle('active', i === current); });
+  }
+
+  function goTo(i) {
+    if (i < 0 || i >= pages.length || i === current) return;
+    stopSpeech();
+    current = i;
+    render();
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  }
+
+  prevBtn.onclick = function() { goTo(current - 1); };
+  nextBtn.onclick = function() { goTo(current + 1); };
+
+  document.addEventListener('keydown', function(e) {
+    if (toc.classList.contains('open')) {
+      if (e.key === 'Escape') closeToc();
+      return;
+    }
+    if (e.key === 'ArrowLeft' || e.key === 'PageDown') goTo(current + 1);
+    if (e.key === 'ArrowRight' || e.key === 'PageUp') goTo(current - 1);
+  });
+
+  function openToc() { toc.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeToc() { toc.classList.remove('open'); document.body.style.overflow = ''; }
+  document.getElementById('tocBtn').onclick = openToc;
+  document.getElementById('tocClose').onclick = closeToc;
+  toc.onclick = function(e) { if (e.target === toc) closeToc(); };
+
+  // کشیدن انگشت
+  var touchX = 0, touchY = 0, tracking = false;
+  document.addEventListener('touchstart', function(e) {
+    if (e.touches.length !== 1) return;
+    touchX = e.touches[0].clientX;
+    touchY = e.touches[0].clientY;
+    tracking = true;
+  }, { passive: true });
+  document.addEventListener('touchend', function(e) {
+    if (!tracking) return;
+    tracking = false;
+    var dx = e.changedTouches[0].clientX - touchX;
+    var dy = e.changedTouches[0].clientY - touchY;
+    if (Math.abs(dx) > 70 && Math.abs(dx) > Math.abs(dy) * 1.6) {
+      if (dx > 0) goTo(current - 1);
+      else goTo(current + 1);
+    }
+  }, { passive: true });
+
+  // ========== پخش صوتی ==========
+  var audioBtn = document.getElementById('audioBtn');
+  var audioPanel = document.getElementById('audioPanel');
+  var playBtn = document.getElementById('playBtn');
+  var pauseBtn = document.getElementById('pauseBtn');
+  var stopBtn = document.getElementById('stopBtn');
+  var voiceSelect = document.getElementById('voiceSelect');
+  var rateRange = document.getElementById('rateRange');
+  var rateVal = document.getElementById('rateVal');
+  var voiceHint = document.getElementById('voiceHint');
+
+  var utterance = null;
+  var isPlaying = false;
+  var isPaused = false;
+  var bestVoice = null;
+  var currentList = [];
+  var speechSupported = (typeof speechSynthesis !== 'undefined' && typeof SpeechSynthesisUtterance !== 'undefined');
+
+  if (!speechSupported) {
+    voiceHint.textContent = 'مرورگر شما پخش صوتی را پشتیبانی نمی‌کند. از Chrome استفاده کنید.';
+    audioBtn.style.opacity = '.4';
+  }
+
+  audioBtn.onclick = function(e) {
+    e.stopPropagation();
+    if (!speechSupported) return;
+    audioPanel.classList.toggle('open');
+    if (audioPanel.classList.contains('open')) {
+      loadVoices();
+    }
+  };
+
+  document.addEventListener('click', function(e) {
+    if (!audioPanel.contains(e.target) && e.target !== audioBtn) {
+      audioPanel.classList.remove('open');
+    }
+  });
+  audioPanel.addEventListener('click', function(e) { e.stopPropagation(); });
+
+  function loadVoices() {
+    if (!speechSupported) return false;
+    var voices = speechSynthesis.getVoices();
+    if (!voices || voices.length === 0) return false;
+
+    var faVoices = voices.filter(function(v) {
+      return v.lang && v.lang.toLowerCase().indexOf('fa') === 0;
+    });
+
+    faVoices.sort(function(a, b) {
+      var aG = a.name.toLowerCase().indexOf('google') !== -1 ? 0 : 1;
+      var bG = b.name.toLowerCase().indexOf('google') !== -1 ? 0 : 1;
+      return aG - bG;
+    });
+
+    currentList = faVoices.length ? faVoices : voices;
+    voiceSelect.innerHTML = '';
+    currentList.forEach(function(v, i) {
+      var opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = v.name + ' (' + v.lang + ')';
+      voiceSelect.appendChild(opt);
+    });
+
+    bestVoice = currentList[0];
+
+    if (faVoices.length && bestVoice.name.toLowerCase().indexOf('google') !== -1) {
+      voiceHint.textContent = '✓ صدای Google فارسی';
+    } else if (faVoices.length) {
+      voiceHint.textContent = 'صدای انتخابی: ' + bestVoice.name;
+    } else {
+      voiceHint.textContent = 'صدای فارسی یافت نشد. صدای پیش‌فرض.';
+    }
+
+    voiceSelect.onchange = function() {
+      bestVoice = currentList[parseInt(voiceSelect.value, 10)];
+    };
+
+    return true;
+  }
+
+  if (speechSupported) {
+    if (typeof speechSynthesis.onvoiceschanged !== 'undefined') {
+      speechSynthesis.onvoiceschanged = loadVoices;
+    }
+    // تلاش مکرر برای بارگذاری صداها
+    var attempts = 0;
+    function tryLoad() {
+      if (loadVoices()) return;
+      attempts++;
+      if (attempts < 20) setTimeout(tryLoad, 250);
+    }
+    tryLoad();
+    // با اولین لمس کاربر، دوباره تلاش کن
+    document.addEventListener('click', function once() {
+      loadVoices();
+    }, { once: true });
+    document.addEventListener('touchstart', function once() {
+      loadVoices();
+    }, { once: true, passive: true });
+  }
+
+  function getText() {
+    var activePage = pages[current];
+    var sp = activePage.querySelector('.speakable');
+    if (!sp) return '';
+    var text = sp.innerText || sp.textContent || '';
+    return text.replace(/✦+/g, ' ').replace(/\s+/g, ' ').trim();
+  }
+
+  function startSpeech() {
+    if (!speechSupported) return;
+    // اگه صداها لود نشدن، اول تلاش کن
+    if (!bestVoice) loadVoices();
+
+    var text = getText();
+    if (!text) return;
+
+    speechSynthesis.cancel();
+    utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'fa-IR';
+    if (bestVoice) utterance.voice = bestVoice;
+    utterance.rate = parseFloat(rateRange.value);
+    utterance.pitch = 1;
+    utterance.volume = 1;
+
+    utterance.onstart = function() {
+      isPlaying = true; isPaused = false;
+      audioBtn.classList.add('playing');
+      playBtn.classList.add('active');
+      pauseBtn.classList.remove('active');
+    };
+    utterance.onend = function() {
+      isPlaying = false; isPaused = false;
+      audioBtn.classList.remove('playing');
+      playBtn.classList.remove('active');
+      pauseBtn.classList.remove('active');
+    };
+    utterance.onerror = function() {
+      isPlaying = false; isPaused = false;
+      audioBtn.classList.remove('playing');
+      playBtn.classList.remove('active');
+      pauseBtn.classList.remove('active');
+    };
+
+    speechSynthesis.speak(utterance);
+  }
+
+  function stopSpeech() {
+    if (!speechSupported) return;
+    speechSynthesis.cancel();
+    isPlaying = false; isPaused = false;
+    audioBtn.classList.remove('playing');
+    playBtn.classList.remove('active');
+    pauseBtn.classList.remove('active');
+  }
+
+  playBtn.onclick = function() {
+    if (!speechSupported) return;
+    if (isPaused) {
+      speechSynthesis.resume();
+      isPaused = false;
+      audioBtn.classList.add('playing');
+      playBtn.classList.add('active');
+      pauseBtn.classList.remove('active');
+    } else {
+      startSpeech();
+    }
+  };
+
+  pauseBtn.onclick = function() {
+    if (!speechSupported) return;
+    if (isPlaying && !isPaused) {
+      speechSynthesis.pause();
+      isPaused = true;
+      audioBtn.classList.remove('playing');
+      pauseBtn.classList.add('active');
+      playBtn.classList.remove('active');
+    }
+  };
+
+  stopBtn.onclick = stopSpeech;
+
+  rateRange.oninput = function() {
+    rateVal.textContent = parseFloat(rateRange.value).toFixed(1) + '×';
+    if (utterance) utterance.rate = parseFloat(rateRange.value);
+  };
+
+  window.addEventListener('beforeunload', function() {
+    if (speechSupported) speechSynthesis.cancel();
+  });
+
+  render();
+</script>
+
+</body>
+</html>
