@@ -2,1031 +2,245 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<meta name="theme-color" content="#0f1220">
-<title>TNT MOD</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>موقتاً در دسترس نیست</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;font-family:'Vazirmatn',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
-html{-webkit-text-size-adjust:100%;text-size-adjust:100%;touch-action:manipulation}
-body{background:#0f1220;color:#e8ebf5;min-height:100vh;overflow-x:hidden;font-weight:500;line-height:1.6;position:relative;padding-bottom:28px;-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;font-weight:inherit}
-a{text-decoration:none;color:inherit}
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#a78bfa,#ec4899);border-radius:10px}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-/* ============================================================
-   BACKGROUND — روشن، شاد، پرانرژی
-   ============================================================ */
-.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:#0f1220}
-.bg::before{content:'';position:absolute;inset:0;background:
-  radial-gradient(circle 620px at 8% 5%,rgba(139,92,246,.42),transparent 65%),
-  radial-gradient(circle 520px at 92% 8%,rgba(236,72,153,.34),transparent 65%),
-  radial-gradient(circle 580px at 50% 108%,rgba(34,211,238,.26),transparent 65%),
-  radial-gradient(circle 460px at -5% 55%,rgba(251,146,60,.22),transparent 65%),
-  radial-gradient(circle 420px at 105% 62%,rgba(52,211,153,.2),transparent 65%)}
+  html, body {
+    height: 100%;
+    font-family: 'Vazirmatn', Tahoma, sans-serif;
+  }
 
-/* Orb های رنگی شناور (سبک) */
-.orb{position:absolute;border-radius:50%;pointer-events:none;will-change:transform}
-.orb--1{width:340px;height:340px;top:-120px;left:-120px;
-  background:radial-gradient(circle,rgba(167,139,250,.55),transparent 70%);
-  animation:float1 22s ease-in-out infinite}
-.orb--2{width:300px;height:300px;bottom:-90px;right:-90px;
-  background:radial-gradient(circle,rgba(236,72,153,.45),transparent 70%);
-  animation:float2 26s ease-in-out infinite}
-.orb--3{width:260px;height:260px;top:45%;right:-100px;
-  background:radial-gradient(circle,rgba(34,211,238,.35),transparent 70%);
-  animation:float3 30s ease-in-out infinite}
-@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,70px)}}
-@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-70px,-50px)}}
-@keyframes float3{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,60px)}}
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 20px;
+    background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+    position: relative;
+    overflow: hidden;
+  }
 
-.mesh{position:absolute;inset:0;opacity:.5;
-  background-image:linear-gradient(rgba(167,139,250,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(167,139,250,.09) 1px,transparent 1px);
-  background-size:48px 48px;
-  -webkit-mask-image:radial-gradient(ellipse 85% 65% at 50% 30%,#000 0%,transparent 80%);
-  mask-image:radial-gradient(ellipse 85% 65% at 50% 30%,#000 0%,transparent 80%)}
+  /* حباب‌های تزئینی پس‌زمینه */
+  body::before,
+  body::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.5;
+    z-index: 0;
+  }
 
-.mesh-dots{position:absolute;inset:0;opacity:.6;
-  background-image:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1px);
-  background-size:28px 28px;
-  -webkit-mask-image:radial-gradient(ellipse 70% 55% at 50% 45%,#000 0%,transparent 75%);
-  mask-image:radial-gradient(ellipse 70% 55% at 50% 45%,#000 0%,transparent 75%)}
+  body::before {
+    width: 400px;
+    height: 400px;
+    background: #ff2d95;
+    top: -100px;
+    right: -100px;
+    animation: float 8s ease-in-out infinite;
+  }
 
-.topline{position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(167,139,250,.6),rgba(236,72,153,.5),transparent)}
+  body::after {
+    width: 500px;
+    height: 500px;
+    background: #00c6ff;
+    bottom: -150px;
+    left: -150px;
+    animation: float 10s ease-in-out infinite reverse;
+  }
 
-#offline{position:fixed;inset:0;z-index:99999;background:#0f1220;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center}
-#offline.show{display:flex}
-.offline-icon{width:72px;height:72px;border-radius:16px;background:rgba(239,68,68,.12);border:2px solid rgba(239,68,68,.35);display:flex;align-items:center;justify-content:center;font-size:1.8rem}
-.offline-title{font-size:1.05rem;font-weight:900;color:#fff}
-.offline-desc{font-size:.78rem;color:#94a3b8;max-width:270px;line-height:1.75}
-.offline-btn{margin-top:6px;padding:12px 28px;border-radius:12px;font-size:.8rem;font-weight:800;color:#fff;background:#8b5cf6}
-.offline-btn:active{transform:scale(.96)}
-body.is-offline .bg,body.is-offline .header,body.is-offline .section,body.is-offline .videos-section,body.is-offline .footer,body.is-offline .modal-bg,body.is-offline .dl-bg,body.is-offline .vid-bg,body.is-offline .player-bg,body.is-offline .notice-bg{display:none!important}
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+  }
 
-/* Header */
-.header{position:relative;z-index:2;padding:30px 18px 8px;max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.brand{display:flex;align-items:center;gap:12px}
-.brand-mark{width:50px;height:50px;border-radius:14px;background:linear-gradient(135deg,#a78bfa,#ec4899);display:flex;align-items:center;justify-content:center;font-size:1.45rem;box-shadow:0 10px 24px -8px rgba(167,139,250,.8);flex-shrink:0}
-.brand-text h1{font-size:clamp(1.4rem,5.2vw,1.85rem);font-weight:900;line-height:1}
-.brand-text h1 b{background:linear-gradient(110deg,#c4b5fd,#a78bfa 45%,#f472b6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.brand-text h1 i{font-style:normal;color:#fff}
-.brand-text p{font-size:.63rem;color:#94a3b8;margin-top:3px}
-@keyframes blink{0%,100%{opacity:.35}50%{opacity:1}}
+  .card {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 560px;
+    padding: 48px 36px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 28px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.45),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    text-align: center;
+    color: #fff;
+    animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
 
-/* Section */
-.section{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:24px 18px 8px}
-.section__head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.section__head h2{font-size:.95rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px}
-.section__head h2::before{content:'';width:3.5px;height:16px;border-radius:3px;background:linear-gradient(180deg,#a78bfa,#ec4899)}
-.section__cnt{margin-right:auto;font-size:.6rem;font-weight:800;color:#c4b5fd;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.32);padding:4px 11px;border-radius:8px}
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-.grid{display:grid;grid-template-columns:1fr;gap:12px}
-@media(min-width:620px){.grid{grid-template-columns:repeat(2,1fr);gap:14px}}
-@media(min-width:960px){.grid{grid-template-columns:repeat(3,1fr);gap:16px}}
+  .icon-wrap {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff2d95, #7b2ff7);
+    box-shadow: 0 15px 35px rgba(255, 45, 149, 0.4);
+    animation: pulse 2.5s ease-in-out infinite;
+  }
 
-/* Card */
-.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:border-color .2s,background .2s}
-.card:active{border-color:rgba(139,92,246,.5)}
-@media(hover:hover){.card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}}
-.card__top{display:flex;gap:12px;padding:13px;cursor:pointer;align-items:center}
-.card__thumb{width:78px;height:78px;border-radius:14px;overflow:hidden;flex-shrink:0;background:#1a1735;border:1px solid rgba(255,255,255,.1)}
-.card__thumb img{width:100%;height:100%;object-fit:cover}
-.card__thumb .em{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.2rem;background:#1a1735}
-.card__info{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
-.card__row{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
-.card__title{font-size:.86rem;font-weight:800;color:#fff}
-.card__badges{display:inline-flex;gap:4px}
-.card__badge{font-size:.5rem;font-weight:900;padding:2px 7px;border-radius:5px}
-.card__badge--new{background:#f43f5e;color:#fff}
-.card__badge--mod{background:#8b5cf6;color:#fff}
-.card__feats{display:flex;flex-wrap:wrap;gap:4px}
-.pill{display:inline-flex;align-items:center;gap:3px;font-size:.52rem;font-weight:800;padding:2px 7px;border-radius:6px}
-.pill--gold{background:rgba(245,158,11,.14);border:1px solid rgba(245,158,11,.3);color:#fbbf24}
-.pill--cyan{background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.3);color:#c4b5fd}
-.pill--green{background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.3);color:#6ee7b7}
-.pill--purple{background:rgba(244,63,94,.14);border:1px solid rgba(244,63,94,.3);color:#fda4af}
-.pill--blue{background:rgba(59,130,246,.14);border:1px solid rgba(59,130,246,.3);color:#93c5fd}
-.card__cta{padding:0 13px 13px}
-.card__btn{width:100%;padding:11px;border-radius:12px;font-size:.72rem;font-weight:800;color:#fff;background:#8b5cf6;box-shadow:0 6px 18px -8px rgba(139,92,246,.7);display:flex;align-items:center;justify-content:center;gap:6px;transition:transform .1s}
-.card__btn:active{transform:scale(.97)}
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 15px 35px rgba(255, 45, 149, 0.4); }
+    50% { box-shadow: 0 15px 50px rgba(255, 45, 149, 0.75); }
+  }
 
-/* Videos */
-.videos-section{position:relative;z-index:2;max-width:1000px;margin:0 auto;padding:10px 18px}
-.videos-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.videos-head h2{font-size:.95rem;font-weight:800;color:#fff;display:flex;align-items:center;gap:8px}
-.videos-head h2 .rec{width:7px;height:7px;border-radius:50%;background:#f43f5e;animation:blink 1.6s ease-in-out infinite}
-.videos-head h2::before{content:'';width:3.5px;height:16px;border-radius:3px;background:linear-gradient(180deg,#f43f5e,#a78bfa)}
-.videos-head .count{margin-right:auto;font-size:.6rem;font-weight:800;color:#fda4af;background:rgba(244,63,94,.12);border:1px solid rgba(244,63,94,.3);padding:4px 11px;border-radius:8px}
-.videos-scroll{display:flex;gap:10px;overflow-x:auto;padding:4px 0 10px;scroll-snap-type:x mandatory;scrollbar-width:none}
-.videos-scroll::-webkit-scrollbar{display:none}
-.vid-card{flex:0 0 220px;scroll-snap-align:start;border-radius:14px;overflow:hidden;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);cursor:pointer;transition:border-color .2s,background .2s}
-.vid-card:active{border-color:rgba(244,63,94,.5)}
-@media(hover:hover){.vid-card:hover{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}}
-.vid-card__thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#1a1735}
-.vid-card__thumb img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
-.vid-card__thumb img.loaded{opacity:1}
-.vid-card__thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(15,18,32,.85))}
-.vid-card__skel{position:absolute;inset:0;background:linear-gradient(110deg,#1a1735 8%,#342860 18%,#1a1735 33%);background-size:200% 100%;animation:shimmer 1.4s linear infinite}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-.vid-card__play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2}
-.vid-card__play span{width:40px;height:40px;border-radius:50%;background:#f43f5e;display:flex;align-items:center;justify-content:center}
-.vid-card__play svg{width:14px;height:14px;fill:#fff;margin-right:-2px}
-.vid-card__dur{position:absolute;bottom:7px;left:7px;font-size:.55rem;font-weight:800;color:#fff;background:#8b5cf6;padding:2px 7px;border-radius:5px;z-index:3}
-.vid-card__body{padding:9px 11px 11px}
-.vid-card__t{font-size:.72rem;font-weight:800;color:#fff;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-bottom:4px}
-.vid-card__meta{font-size:.55rem;color:#94a3b8}
+  .icon-wrap svg {
+    width: 48px;
+    height: 48px;
+    stroke: #fff;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 
-/* ============================================================
-   MODAL
-   ============================================================ */
-.modal-bg{position:fixed;inset:0;z-index:1000;display:flex;align-items:flex-end;justify-content:center;background:transparent;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s,visibility .28s}
-.modal-bg.on{background:rgba(8,5,20,.8);opacity:1;visibility:visible;pointer-events:auto}
-@media(min-width:560px){.modal-bg{align-items:center;padding:16px}}
+  h1 {
+    font-size: clamp(1.4rem, 4.5vw, 1.85rem);
+    font-weight: 900;
+    margin-bottom: 16px;
+    line-height: 1.5;
+    background: linear-gradient(135deg, #fff 0%, #b8b0ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-.modal{width:100%;max-width:420px;max-height:92vh;overflow-y:auto;position:relative;
-  background:linear-gradient(180deg,#211c40 0%,#171331 50%,#0f0c22 100%);
-  border-radius:28px 28px 0 0;
-  transform:translateY(100%);
-  transition:transform .4s cubic-bezier(.32,.72,0,1);
-  border:1px solid rgba(167,139,250,.32);border-bottom:none;
-  box-shadow:0 -20px 60px -15px rgba(139,92,246,.5),0 -1px 0 rgba(255,255,255,.06) inset}
-@media(min-width:560px){.modal{border-radius:24px;border-bottom:1px solid rgba(167,139,250,.32);
-  transform:translateY(20px) scale(.94);opacity:0;
-  transition:transform .4s cubic-bezier(.32,.72,0,1),opacity .3s}
-  .modal-bg.on .modal{transform:translateY(0) scale(1);opacity:1}}
-.modal-bg.on .modal{transform:translateY(0)}
-.modal::before{content:'';position:absolute;top:0;left:24px;right:24px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(196,181,253,.8),rgba(244,114,182,.6),transparent);
-  pointer-events:none;border-radius:99px}
+  p {
+    font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+    line-height: 1.9;
+    color: rgba(255, 255, 255, 0.82);
+    margin-bottom: 28px;
+    font-weight: 500;
+  }
 
-.modal__handle{width:44px;height:4px;border-radius:99px;background:rgba(255,255,255,.2);margin:12px auto 0}
-@media(min-width:560px){.modal__handle{display:none}}
+  .link-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    font-family: inherit;
+    font-size: clamp(0.95rem, 3.5vw, 1.05rem);
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+    background: linear-gradient(135deg, #ff2d95 0%, #7b2ff7 100%);
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(123, 47, 247, 0.5);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, letter-spacing 0.25s ease;
+    direction: ltr;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+  }
 
-.modal__media{position:relative;width:100%;height:200px;overflow:hidden;display:flex;align-items:center;justify-content:center;
-  background:
-    radial-gradient(circle 180px at 50% 45%,rgba(139,92,246,.4),transparent 70%),
-    radial-gradient(circle 120px at 50% 60%,rgba(236,72,153,.3),transparent 70%),
-    #100c24}
-.modal__media::before{content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(167,139,250,.1) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(167,139,250,.1) 1px,transparent 1px);
-  background-size:24px 24px;
-  -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 0%,transparent 60%);
-  mask-image:radial-gradient(circle at 50% 50%,#000 0%,transparent 60%)}
-.modal__media::after{content:'';position:absolute;left:0;right:0;bottom:0;height:80px;
-  background:linear-gradient(180deg,transparent,rgba(15,12,34,.95));pointer-events:none;z-index:3}
+  .link-btn:hover,
+  .link-btn:focus {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(255, 45, 149, 0.65);
+    letter-spacing: 1px;
+  }
 
-.modal__media-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(40px) brightness(.4) saturate(1.4);transform:scale(1.3);opacity:0;transition:opacity .6s}
-.modal__media-bg.loaded{opacity:1}
+  .link-btn:active {
+    transform: translateY(-1px) scale(1);
+  }
 
-.modal__media-ring{position:absolute;width:150px;height:150px;border-radius:50%;
-  border:1px dashed rgba(196,181,253,.3);
-  animation:rotateSlow 20s linear infinite;pointer-events:none;z-index:1}
-.modal__media-ring::before{content:'';position:absolute;top:-3px;left:50%;width:6px;height:6px;border-radius:50%;background:#c4b5fd;box-shadow:0 0 14px #c4b5fd;transform:translateX(-50%)}
-@keyframes rotateSlow{to{transform:rotate(360deg)}}
+  .link-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: #fff;
+    stroke-width: 2.2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex-shrink: 0;
+  }
 
-.modal__media img{position:relative;z-index:2;width:110px;height:110px;object-fit:cover;border-radius:24px;
-  box-shadow:0 20px 40px rgba(0,0,0,.7),
-             0 0 0 4px rgba(15,12,34,.9),
-             0 0 0 5px rgba(167,139,250,.4),
-             0 0 55px -5px rgba(167,139,250,.7);
-  opacity:0;transform:scale(.9);transition:opacity .5s,transform .5s cubic-bezier(.34,1.56,.64,1)}
-.modal__media img.loaded{opacity:1;transform:scale(1)}
+  .footer-note {
+    margin-top: 28px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-weight: 500;
+  }
 
-.modal__media-em{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4.2rem;z-index:2;
-  filter:drop-shadow(0 10px 25px rgba(167,139,250,.7));transition:opacity .3s}
-.modal__media-em.hide{opacity:0}
-
-.modal__close{position:absolute;top:14px;left:14px;width:38px;height:38px;border-radius:50%;
-  background:rgba(15,12,34,.8);border:1px solid rgba(255,255,255,.14);color:#e8ebf5;
-  display:flex;align-items:center;justify-content:center;font-size:14px;z-index:10;
-  transition:background .2s,transform .15s}
-.modal__close:active{background:rgba(244,63,94,.6);transform:scale(.92)}
-
-.modal__head{padding:4px 22px 0;text-align:center;position:relative;z-index:4}
-.modal__badges{display:inline-flex;gap:6px;margin-bottom:10px}
-.modal__badge{font-size:.54rem;font-weight:900;padding:4px 12px;border-radius:99px;letter-spacing:.4px}
-.modal__badge--new{background:linear-gradient(135deg,#f43f5e,#be123c);color:#fff;box-shadow:0 4px 14px -3px rgba(244,63,94,.7)}
-.modal__badge--mod{background:linear-gradient(135deg,#a78bfa,#8b5cf6);color:#fff;box-shadow:0 4px 14px -3px rgba(139,92,246,.7)}
-.modal__title{font-size:1.35rem;font-weight:900;color:#fff;letter-spacing:-.4px;
-  background:linear-gradient(180deg,#fff,#c4b5fd);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.modal__sub{font-size:.68rem;color:#94a3b8;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px}
-.modal__sub::before,.modal__sub::after{content:'';width:20px;height:1px;background:linear-gradient(90deg,transparent,rgba(196,181,253,.6),transparent)}
-
-.modal__body{padding:18px 22px 24px;position:relative;z-index:4}
-
-.modal__feats{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
-.feat-box{display:flex;align-items:center;gap:9px;padding:11px 12px;border-radius:13px;font-size:.64rem;font-weight:800;
-  background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);
-  transition:transform .15s,background .2s}
-.feat-box:active{transform:scale(.97)}
-@media(hover:hover){.feat-box:hover{background:rgba(255,255,255,.07)}}
-.feat-box .fi{font-size:1.1rem;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:7px;flex-shrink:0}
-.feat-box--gold{color:#fbbf24;border-color:rgba(245,158,11,.25);background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(245,158,11,.03))}
-.feat-box--gold .fi{background:rgba(245,158,11,.18)}
-.feat-box--cyan{color:#c4b5fd;border-color:rgba(139,92,246,.25);background:linear-gradient(135deg,rgba(139,92,246,.12),rgba(139,92,246,.03))}
-.feat-box--cyan .fi{background:rgba(139,92,246,.18)}
-.feat-box--green{color:#6ee7b7;border-color:rgba(52,211,153,.25);background:linear-gradient(135deg,rgba(52,211,153,.12),rgba(52,211,153,.03))}
-.feat-box--green .fi{background:rgba(52,211,153,.18)}
-.feat-box--purple{color:#fda4af;border-color:rgba(244,63,94,.25);background:linear-gradient(135deg,rgba(244,63,94,.12),rgba(244,63,94,.03))}
-.feat-box--purple .fi{background:rgba(244,63,94,.18)}
-.feat-box--blue{color:#93c5fd;border-color:rgba(59,130,246,.25);background:linear-gradient(135deg,rgba(59,130,246,.12),rgba(59,130,246,.03))}
-.feat-box--blue .fi{background:rgba(59,130,246,.18)}
-
-.modal__ver{position:relative;background:linear-gradient(135deg,rgba(139,92,246,.14),rgba(236,72,153,.07));
-  border:1px solid rgba(167,139,250,.3);border-radius:14px;padding:14px 15px;margin-bottom:12px;overflow:hidden}
-.modal__ver::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,#c4b5fd,#f472b6);border-radius:0 3px 3px 0}
-.modal__ver .tag{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(135deg,#8b5cf6,#ec4899);color:#fff;
-  font-size:.54rem;font-weight:900;padding:3px 11px;border-radius:99px;margin-bottom:8px;letter-spacing:.4px;
-  box-shadow:0 4px 12px -3px rgba(139,92,246,.7)}
-.modal__ver .tag::before{content:'✦';font-size:.65rem}
-.modal__ver p{font-size:.64rem;color:#c0c5d6;line-height:1.85;white-space:pre-line}
-
-.modal__guide{background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.18);border-radius:14px;padding:14px 15px;margin-bottom:16px;position:relative}
-.modal__guide h4{color:#fbbf24;font-size:.68rem;font-weight:800;margin-bottom:7px;display:flex;align-items:center;gap:6px}
-.modal__guide h4::before{content:'';width:3px;height:12px;background:#fbbf24;border-radius:3px}
-.modal__guide p{font-size:.63rem;color:#a3adc2;line-height:1.9;padding-right:9px}
-.modal__guide strong{color:#c4b5fd;font-weight:800}
-
-.modal__actions{display:flex;flex-direction:column;gap:9px}
-.btn-main{width:100%;padding:15px;border-radius:14px;font-size:.85rem;font-weight:900;color:#fff;background:#8b5cf6;
-  box-shadow:0 10px 26px -10px rgba(139,92,246,.9);
-  display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .1s}
-.btn-main:active{transform:scale(.98)}
-.btn-ghost{width:100%;padding:13px;border-radius:14px;font-size:.72rem;font-weight:700;color:#b8bdd0;
-  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
-  display:flex;align-items:center;justify-content:center;gap:7px;transition:background .2s}
-.btn-ghost:active{background:rgba(139,92,246,.18)}
-
-.modal__related{margin-top:18px;padding-top:18px;border-top:1px solid rgba(255,255,255,.08)}
-.modal__related h4{font-size:.72rem;font-weight:800;color:#fda4af;margin-bottom:11px;display:flex;align-items:center;gap:7px}
-.modal__related h4 .rec{width:7px;height:7px;border-radius:50%;background:#f43f5e;box-shadow:0 0 10px #f43f5e;animation:blink 1.6s ease-in-out infinite}
-.modal__rel-card{border-radius:13px;overflow:hidden;background:linear-gradient(135deg,rgba(244,63,94,.1),rgba(244,63,94,.03));border:1px solid rgba(244,63,94,.3);cursor:pointer;transition:border-color .2s}
-.modal__rel-card:active{border-color:rgba(244,63,94,.6)}
-.modal__rel-thumb{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#1a1735}
-.modal__rel-thumb img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .3s}
-.modal__rel-thumb img.loaded{opacity:1}
-.modal__rel-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(15,18,32,.85))}
-.modal__rel-info{padding:11px 13px}
-.modal__rel-t{font-size:.74rem;font-weight:800;color:#fff;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-
-/* ============================================================
-   DOWNLOAD MODAL
-   ============================================================ */
-.dl-bg{position:fixed;inset:0;z-index:1100;display:flex;align-items:center;justify-content:center;background:transparent;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s,visibility .28s;padding:18px}
-.dl-bg.on{background:rgba(8,5,20,.88);opacity:1;visibility:visible;pointer-events:auto}
-
-.dl-card{position:relative;background:linear-gradient(180deg,#211c40 0%,#0f0c22 100%);
-  border:1px solid rgba(167,139,250,.4);border-radius:28px;
-  padding:36px 26px 26px;max-width:320px;width:100%;text-align:center;
-  transform:scale(.9) translateY(20px);opacity:0;
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;
-  box-shadow:0 30px 70px -20px rgba(139,92,246,.7),
-             0 0 0 1px rgba(255,255,255,.05) inset}
-.dl-bg.on .dl-card{transform:scale(1) translateY(0);opacity:1}
-.dl-card::before{content:'';position:absolute;top:0;left:30px;right:30px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(196,181,253,.9),transparent);pointer-events:none}
-.dl-card.done{border-color:rgba(52,211,153,.55);
-  box-shadow:0 30px 70px -20px rgba(52,211,153,.6),0 0 0 1px rgba(255,255,255,.05) inset}
-
-.dl-close{position:absolute;top:14px;left:14px;width:34px;height:34px;border-radius:50%;
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;
-  font-size:12px;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.dl-close:active{background:rgba(244,63,94,.45);color:#fff}
-
-.orbit{width:130px;height:130px;position:relative;margin:0 auto 22px}
-.orbit__glow{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.5),transparent 65%)}
-.orbit__ring{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(167,139,250,.2)}
-.orbit__ring--spin{position:absolute;inset:0;border-radius:50%;border:2.5px solid transparent;border-top-color:#c4b5fd;border-right-color:#f472b6;animation:spin 1.2s linear infinite;filter:drop-shadow(0 0 8px rgba(196,181,253,.7))}
-@keyframes spin{to{transform:rotate(360deg)}}
-.dl-card.done .orbit__ring--spin{animation:none;border-color:#34d399;filter:drop-shadow(0 0 8px rgba(52,211,153,.7))}
-
-.orbit__core{position:absolute;inset:24px;border-radius:50%;
-  background:linear-gradient(135deg,#211c40,#0f0c22);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
-  border:1px solid rgba(167,139,250,.35);
-  box-shadow:inset 0 0 28px rgba(139,92,246,.28)}
-.dl-card.done .orbit__core{background:linear-gradient(135deg,rgba(52,211,153,.18),#0f0c22);border-color:rgba(52,211,153,.4)}
-
-.orbit__ic{font-size:20px;color:#c4b5fd;transition:all .3s}
-.dl-card.done .orbit__ic{color:#6ee7b7;font-size:26px}
-.orbit__pct{font-size:20px;font-weight:900;color:#fff;letter-spacing:-.5px}
-.orbit__dot{position:absolute;width:8px;height:8px;border-radius:50%;background:#f472b6;
-  box-shadow:0 0 14px #f472b6,0 0 28px rgba(244,114,182,.7);
-  top:-4px;left:calc(50% - 4px);transform-origin:4px 69px;animation:spin 1.2s linear infinite}
-.dl-card.done .orbit__dot{opacity:0}
-
-.dl-title{font-size:16px;font-weight:900;color:#fff;margin-bottom:8px;letter-spacing:-.3px}
-.dl-desc{font-size:12px;color:#a3adc2;line-height:1.75;margin-bottom:18px;min-height:38px}
-.dl-desc strong{color:#c4b5fd}
-
-.dl-btn{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;padding:14px;border-radius:14px;
-  font-size:13px;font-weight:900;color:#fff;background:#8b5cf6;margin-bottom:12px;
-  box-shadow:0 10px 26px -10px rgba(139,92,246,.9);transition:transform .1s}
-.dl-btn:active{transform:scale(.97)}
-
-.dl-foot{font-size:10.5px;color:#94a3b8;display:flex;align-items:center;justify-content:center;gap:6px}
-.dl-pulse{width:6px;height:6px;border-radius:50%;background:#c4b5fd;box-shadow:0 0 8px #c4b5fd;animation:blink 1.3s ease-in-out infinite}
-.dl-card.done .dl-pulse{background:#34d399;box-shadow:0 0 8px #34d399}
-.dl-foot b{font-weight:900;color:#c4b5fd;background:rgba(139,92,246,.16);padding:2px 9px;border-radius:6px}
-
-/* ============================================================
-   NOTICE
-   ============================================================ */
-.notice-bg{position:fixed;inset:0;z-index:1400;display:flex;align-items:center;justify-content:center;background:transparent;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s,visibility .28s;padding:18px}
-.notice-bg.on{background:rgba(8,5,20,.88);opacity:1;visibility:visible;pointer-events:auto}
-
-.notice-card{position:relative;background:linear-gradient(180deg,#211c40 0%,#0f0c22 100%);
-  border:1px solid rgba(167,139,250,.42);border-radius:28px;
-  padding:36px 26px 26px;max-width:340px;width:100%;text-align:center;
-  transform:scale(.9) translateY(20px);opacity:0;
-  transition:transform .4s cubic-bezier(.34,1.56,.64,1),opacity .3s;
-  box-shadow:0 30px 70px -20px rgba(139,92,246,.7),
-             0 0 0 1px rgba(255,255,255,.05) inset}
-.notice-bg.on .notice-card{transform:scale(1) translateY(0);opacity:1}
-.notice-card::before{content:'';position:absolute;top:0;left:30px;right:30px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(196,181,253,.9),transparent);pointer-events:none}
-
-.notice-close{position:absolute;top:14px;left:14px;width:34px;height:34px;border-radius:50%;
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#94a3b8;
-  font-size:12px;display:flex;align-items:center;justify-content:center;transition:background .2s}
-.notice-close:active{background:rgba(244,63,94,.45);color:#fff}
-
-.notice-icon{position:relative;width:82px;height:82px;margin:0 auto 18px;border-radius:50%;
-  background:linear-gradient(135deg,rgba(139,92,246,.3),rgba(236,72,153,.2));
-  border:1.5px solid rgba(196,181,253,.5);
-  display:flex;align-items:center;justify-content:center;font-size:2.1rem;
-  box-shadow:0 0 45px -8px rgba(167,139,250,.8),inset 0 0 24px rgba(139,92,246,.25);
-  animation:pulseIcon 2s ease-in-out infinite}
-@keyframes pulseIcon{0%,100%{transform:scale(1);box-shadow:0 0 45px -8px rgba(167,139,250,.8),inset 0 0 24px rgba(139,92,246,.25)}50%{transform:scale(1.06);box-shadow:0 0 60px -8px rgba(167,139,250,1),inset 0 0 30px rgba(139,92,246,.35)}}
-
-.notice-title{font-size:16px;font-weight:900;color:#fff;margin-bottom:10px;letter-spacing:-.3px}
-.notice-desc{font-size:12px;color:#a3adc2;line-height:1.8;margin-bottom:18px}
-.notice-desc strong{color:#c4b5fd;font-weight:800}
-
-.notice-progress{height:5px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:14px;position:relative}
-.notice-progress__bar{height:100%;width:0%;background:linear-gradient(90deg,#8b5cf6,#ec4899);border-radius:99px;transition:width 1s linear;box-shadow:0 0 14px rgba(139,92,246,.9)}
-
-.notice-countdown{font-size:12px;color:#94a3b8;font-weight:700;display:flex;align-items:center;justify-content:center;gap:6px}
-.notice-countdown b{color:#fff;background:linear-gradient(135deg,#8b5cf6,#ec4899);padding:3px 11px;border-radius:8px;font-weight:900;min-width:28px;display:inline-block}
-
-/* ============================================================
-   VIDEO LIST & PLAYER
-   ============================================================ */
-.vid-bg,.player-bg{position:fixed;inset:0;z-index:1200;display:flex;align-items:center;justify-content:center;background:transparent;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s,visibility .28s;padding:14px}
-.vid-bg.on,.player-bg.on{background:rgba(8,5,20,.9);opacity:1;visibility:visible;pointer-events:auto}
-
-.vid-card-pop,.player-card{width:100%;max-width:480px;
-  background:linear-gradient(180deg,#211c40 0%,#0f0c22 100%);
-  border:1px solid rgba(167,139,250,.32);border-radius:22px;overflow:hidden;
-  transform:scale(.94) translateY(14px);opacity:0;
-  transition:transform .35s cubic-bezier(.32,.72,0,1),opacity .28s;
-  box-shadow:0 30px 70px -25px rgba(0,0,0,.9),
-             0 0 0 1px rgba(255,255,255,.05) inset;
-  position:relative}
-.vid-card-pop::before,.player-card::before{content:'';position:absolute;top:0;left:24px;right:24px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(196,181,253,.8),transparent);pointer-events:none;z-index:2}
-.vid-bg.on .vid-card-pop,.player-bg.on .player-card{transform:scale(1) translateY(0);opacity:1}
-
-.vid-head,.player-top{display:flex;align-items:center;gap:10px;padding:16px 18px;
-  border-bottom:1px solid rgba(167,139,250,.15);
-  background:linear-gradient(180deg,rgba(139,92,246,.08),transparent)}
-.vid-head h3,.player-top h4{font-size:.85rem;font-weight:800;color:#fff;flex:1;letter-spacing:-.2px}
-.vid-head h3::before,.player-top h4::before{content:'';display:inline-block;width:3px;height:14px;background:linear-gradient(180deg,#c4b5fd,#f472b6);border-radius:3px;margin-left:8px;vertical-align:middle}
-
-.vid-close,.player-close{width:32px;height:32px;border-radius:50%;
-  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#b8bdd0;
-  display:flex;align-items:center;justify-content:center;font-size:12px;transition:background .2s}
-.vid-close:active,.player-close:active{background:rgba(244,63,94,.45);color:#fff}
-
-.vid-list{padding:12px;display:flex;flex-direction:column;gap:10px;max-height:55vh;overflow-y:auto}
-.vid-item{display:flex;gap:11px;padding:9px;border-radius:14px;
-  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.06);
-  cursor:pointer;transition:border-color .2s,background .2s}
-.vid-item:active{border-color:rgba(244,63,94,.5);background:rgba(244,63,94,.08)}
-@media(hover:hover){.vid-item:hover{border-color:rgba(139,92,246,.45);background:rgba(139,92,246,.08)}}
-
-.vid-item__thumb{width:96px;aspect-ratio:16/10;border-radius:11px;overflow:hidden;background:#1a1735;position:relative;flex-shrink:0}
-.vid-item__thumb img{width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s}
-.vid-item__thumb img.loaded{opacity:1}
-.vid-item__play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
-.vid-item__play span{width:28px;height:28px;border-radius:50%;background:#f43f5e;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 12px -3px rgba(244,63,94,.8)}
-.vid-item__play svg{width:11px;height:11px;fill:#fff}
-.vid-item__info{flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px}
-.vid-item__t{font-size:.71rem;font-weight:800;color:#fff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.45}
-.vid-item__meta{font-size:.55rem;color:#94a3b8}
-
-.player-frame{position:relative;width:100%;aspect-ratio:16/9;background:#000}
-.player-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.player-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:#0f0c22;color:#94a3b8;font-size:.7rem}
-.player-loading .spin{width:32px;height:32px;border-radius:50%;border:2.5px solid rgba(167,139,250,.2);border-top-color:#c4b5fd;animation:spin .9s linear infinite;filter:drop-shadow(0 0 8px rgba(196,181,253,.6))}
-
-.footer{position:relative;z-index:2;text-align:center;padding:18px 18px 6px;color:#5a6178;font-size:.58rem}
-.footer__b{display:inline-flex;align-items:center;gap:5px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.18);border-radius:10px;padding:6px 12px;margin-top:4px;color:#94a3b8;font-size:.58rem}
-.footer__b a{color:#c4b5fd;font-weight:800}
-body.lock{overflow:hidden}
-
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.1s!important}
-}
+  @media (max-width: 480px) {
+    .card {
+      padding: 36px 22px;
+      border-radius: 22px;
+    }
+    .icon-wrap {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 20px;
+    }
+    .icon-wrap svg {
+      width: 40px;
+      height: 40px;
+    }
+    body::before,
+    body::after {
+      width: 250px;
+      height: 250px;
+      filter: blur(60px);
+    }
+    .link-btn {
+      padding: 13px 22px;
+      width: 100%;
+      justify-content: center;
+    }
+  }
 </style>
 </head>
 <body>
-<div class="bg">
-  <div class="orb orb--1"></div>
-  <div class="orb orb--2"></div>
-  <div class="orb orb--3"></div>
-  <div class="mesh"></div>
-  <div class="mesh-dots"></div>
-  <div class="topline"></div>
-</div>
-
-<div id="offline">
-  <div class="offline-icon">📡</div>
-  <div class="offline-title">اتصال اینترنت قطع است</div>
-  <div class="offline-desc">لطفاً اتصال اینترنت خود را بررسی کنید و دوباره تلاش کنید.</div>
-  <button class="offline-btn" id="offlineRetry">تلاش مجدد</button>
-</div>
-
-<header class="header">
-  <div class="brand">
-    <div class="brand-mark">🎮</div>
-    <div class="brand-text">
-      <h1><b>TNT</b><i>MOD</i></h1>
-      <p>دانلود مود بازی‌ها و برنامه‌ها</p>
+  <main class="card">
+    <div class="icon-wrap">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 8v4"/>
+        <path d="M12 16h.01"/>
+        <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+      </svg>
     </div>
-  </div>
-</header>
 
-<main class="section">
-  <div class="section__head"><h2>مود بازی‌ها و برنامه‌ها</h2><span class="section__cnt" id="cnt">۰ مورد</span></div>
-  <div class="grid" id="grid"></div>
-</main>
+    <h1>این سایت موقتاً از دسترس خارج شده است</h1>
 
-<section class="videos-section">
-  <div class="videos-head">
-    <h2><span class="rec"></span> ویدیوهای چنل</h2>
-    <span class="count" id="vidCount">۰ ویدیو</span>
-  </div>
-  <div class="videos-scroll" id="videosScroll"></div>
-</section>
+    <p>
+      این سایت توسط صاحب کانال فعلاً از دسترس خارج شده.<br>
+      لطفاً به آدرس زیر مراجعه کنید.
+    </p>
 
-<!-- Modal -->
-<div class="modal-bg" id="modal">
-  <div class="modal">
-    <div class="modal__handle"></div>
-    <button class="modal__close" id="modalClose">✕</button>
-    <div class="modal__media" id="mMedia"></div>
-    <div class="modal__head">
-      <div class="modal__badges" id="mBadges"></div>
-      <h3 class="modal__title" id="mTitle">نام بازی</h3>
-      <p class="modal__sub" id="mSub">مود اختصاصی و تست شده</p>
-    </div>
-    <div class="modal__body">
-      <ul class="modal__feats" id="mFeats"></ul>
-      <div class="modal__ver" id="mVer"></div>
-      <div class="modal__guide">
-        <h4>راهنمای نصب</h4>
-        <p>۱. فایل مود از <strong>چنل روبیکا</strong> در دسترسه.<br>۲. پس از دریافت، نسخه اصلی را حذف کنید.<br>۳. مود را نصب کنید.<br>۴. در صورت مشکل با پشتیبانی تماس بگیرید.</p>
-      </div>
-      <div class="modal__actions">
-        <button class="btn-main" id="mDl">دانلود مود</button>
-        <a class="btn-ghost" href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener">پشتیبانی روبیکا</a>
-      </div>
-      <div class="modal__related" id="mRelated" style="display:none"></div>
-    </div>
-  </div>
-</div>
+    <a class="link-btn" href="https://b2n.ir/TNT1MOD" target="_blank" rel="noopener noreferrer">
+      <svg viewBox="0 0 24 24">
+        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+      </svg>
+      b2n.ir/TNT1MOD
+    </a>
 
-<!-- Video list -->
-<div class="vid-bg" id="vidp">
-  <div class="vid-card-pop">
-    <div class="vid-head">
-      <h3>ویدیوهای چنل</h3>
-      <button class="vid-close" id="vidClose">✕</button>
-    </div>
-    <div class="vid-list" id="vidList"></div>
-  </div>
-</div>
-
-<!-- Player -->
-<div class="player-bg" id="plp">
-  <div class="player-card">
-    <div class="player-top">
-      <h4 id="plTitle">عنوان ویدیو</h4>
-      <button class="player-close" id="plClose">✕</button>
-    </div>
-    <div class="player-frame" id="plFrame"></div>
-  </div>
-</div>
-
-<!-- Download -->
-<div class="dl-bg" id="dlp">
-  <div class="dl-card" id="dlCard">
-    <button class="dl-close" id="dlClose">✕</button>
-    <div class="orbit">
-      <div class="orbit__glow"></div>
-      <div class="orbit__ring"></div>
-      <div class="orbit__ring--spin"></div>
-      <div class="orbit__core">
-        <span class="orbit__ic" id="dlIc">⬇</span>
-        <span class="orbit__pct" id="dlPct">۰٪</span>
-      </div>
-      <div class="orbit__dot"></div>
-    </div>
-    <div class="dl-title" id="dlTitle">در حال آماده‌سازی دانلود</div>
-    <div class="dl-desc" id="dlDesc">فایل روی سرور در حال آماده‌سازیه…</div>
-    <a class="dl-btn" id="dlLink" href="#" target="_blank" rel="noopener">⬇ دریافت فایل</a>
-    <div class="dl-foot"><span class="dl-pulse"></span> انتقال خودکار تا <b id="dlTm">۱۰</b> ثانیه</div>
-  </div>
-</div>
-
-<!-- Notice -->
-<div class="notice-bg" id="ntc">
-  <div class="notice-card">
-    <button class="notice-close" id="ntcClose">✕</button>
-    <div class="notice-icon">📢</div>
-    <h3 class="notice-title">فایل در چنل روبیکا قرار دارد</h3>
-    <p class="notice-desc">نسخه مود شده در <strong>چنل رسمی روبیکا</strong> قرار گرفته. تا لحظاتی دیگر به‌صورت خودکار منتقل می‌شوید.</p>
-    <div class="notice-progress"><div class="notice-progress__bar" id="ntcBar"></div></div>
-    <div class="notice-countdown">انتقال خودکار در <b id="ntcTimer">۵</b> ثانیه</div>
-  </div>
-</div>
-
-<footer class="footer">
-  <p>© ۲۰۲۶ TNT MOD</p>
-  <div class="footer__b"><span>پشتیبانی:</span><a href="https://rubika.ir/ZODIAC_MAFIANIGHTS" target="_blank" rel="noopener">ZODIAC_MAFIANIGHTS</a></div>
-</footer>
-
-<script>
-(function(){
-'use strict';
-var CH = 'https://rubika.ir/ZODIAC_MAFIANIGHTS';
-var MAFIA_DL = 'https://www.mediafire.com/file/stqojk3enl1pihb/%25D9%2585%25D8%25A7%25D9%2581%25DB%258C%25D8%25A7%25D9%2585%25D9%2588%25D9%2586.zip/file';
-
-var currentDl = CH;
-var modalOpen = false, dlOpen = false, vidOpen = false, playerOpen = false, noticeOpen = false;
-var noticeTimer = null, noticeTick = null;
-var skipPopstate = false;
-var PD = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-function toFa(n){ return String(n).replace(/\d/g, function(d){ return PD[+d]; }); }
-function $(id){ return document.getElementById(id); }
-
-/* ============================================================
-   ✅ مدیریت دکمه برگشت گوشی (History API)
-   ============================================================ */
-function pushHistory(){
-  try {
-    history.pushState({tntPopup: true}, '');
-  } catch(e){}
-}
-function popHistory(){
-  if(history.state && history.state.tntPopup){
-    skipPopstate = true;
-    try { history.back(); } catch(e){ skipPopstate = false; }
-  }
-}
-
-var VIDEOS = [
-  {hash:'zdpux57', title:'تک حکم - چت آنلاین مود شده سکه و الماس بی‌نهایت', dur:'', views:''},
-  {hash:'ctjwna4', title:'مربی برتر مود شده سکه و پول بی‌نهایت نسخه جدید', dur:'۰۱:۱۶', views:'۹۱'},
-  {hash:'eqq6zvu', title:'سرعت بی‌نهایت صفحه کلاچ - دانلود صفحه کلاچ مود شده', dur:'۰۰:۳۹', views:'۴۹۰'},
-  {hash:'adu8281', title:'زیرنویس خودکار ویدیو - ترجمه خودکار ویدیو نسخه مود', dur:'۰۱:۰۰', views:'۶۸'},
-  {hash:'ick83ti', title:'صفحه کلاچ مود شده - مود تمامی بازی ها - دانلود مستقیم', dur:'۰۰:۴۴', views:'۱,۹۸۷'},
-  {hash:'xywe90l', title:'چیت سلطان حکم - لینک دانلود مود', dur:'۰۰:۵۰', views:'۴۵۳'},
-  {hash:'zyvluo9', title:'فوتبالیا ۲ مود شده پول بی‌نهایت - بازی جدید مود', dur:'', views:'۱,۹۳۴'},
-  {hash:'jarsd68', title:'بازی دیار باقی مود شده - لینک دانلود | داستانی جدید', dur:'۰۱:۵۲', views:'۷۷۷'}
-];
-
-var GAMES = [
-  {id:'takhokm', title:'تک حکم', emoji:'🃏', badge:'new', badgeTxt:'جدید',
-   feats:['سکه بی‌نهایت','الماس بی‌نهایت','تغییر کارت','مشاهده کارت حریف'],
-   ver:'نسخه مود شده',
-   verDesc:'چت آنلاین مود شده 🔥\n\nسکه و الماس قابل خرج هستن و میتونی راحت آواتار بخری.\n\nبا چیت میتونی کارت بقیه رو ببینی یا کارت خودت رو تغییر بدی.',
-   img:'https://uploadkon.ir/uploads/52e205_26Screenshot-2026-10-05-19-49-21-606-ir-mservices-market-edit.jpg',
-   dl:CH, videoHash:'zdpux57'},
-  {id:'mafamon', title:'مافیامون', emoji:'🕵️', badge:'new', badgeTxt:'جدید',
-   feats:['جم بی‌نهایت','سکه بی‌نهایت','تغییر نام رایگان','باگ روح','چیت نظارت'],
-   ver:'نسخه کامل', verDesc:'مود اختصاصی با جم و سکه بی‌نهایت، تغییر نام رایگان، باگ روح و چیت نظارت.',
-   img:'https://uploadkon.ir/uploads/664902_26Screenshot-2026-10-02-12-37-23-769-ir-mservices-market-edit.jpg',
-   dl:MAFIA_DL, videoHash:''},
-  {id:'fakechat', title:'چت ساز فیک روبیکا', emoji:'💬', badge:'new', badgeTxt:'جدید',
-   feats:['اشتراک ویژه فعال','نسخه طلایی','چت ساز روبیکا','چت ساز تلگرام','ایفون مسیج'],
-   ver:'نسخه ۲.۵', verDesc:'جدیدترین نسخه مود شده با اشتراک ویژه فعال و نسخه طلایی.',
-   img:'https://uploadkon.ir/uploads/80ae01_26file-0000000005c4820abbc461336e3a2783.png',
-   dl:CH, videoHash:''},
-  {id:'morabi', title:'مربی برتر', emoji:'🏆', badge:'new', badgeTxt:'جدید',
-   feats:['سکه بی‌نهایت','پول بی‌نهایت','فول انرژی','رد کردن مرحله'],
-   ver:'نسخه ۲۰۲۶', verDesc:'بهترین نسخه مود شده با تمام امکانات آنلاک شده و بدون بن.',
-   img:'https://uploadkon.ir/uploads/0ca324_26b14c4bb2c69f4e18baed37c1d0b8aafb.png',
-   dl:'https://www.mediafire.com/file/444owt6s75532pu/morabi.zip/file', videoHash:'ctjwna4'},
-  {id:'footballia', title:'فوتبالیا ۲', emoji:'⚽', badge:'mod', badgeTxt:'MOD',
-   feats:['سکه بی‌نهایت','کم حجم','معماری ۶۴ بیت'],
-   ver:'نسخه ۱۰۷', verDesc:'مخصوص گوشی‌های معماری ۶۴ بیت بهینه‌سازی شده.',
-   img:'https://uploadkon.ir/uploads/523901_26Screenshot-2026-10-01-10-58-46-959-ir-mservices-market-edit.jpg',
-   dl:CH, videoHash:'zyvluo9'},
-  {id:'clutch', title:'صفحه کلاچ', emoji:'🏎️', badge:'mod', badgeTxt:'MOD',
-   feats:['سکه بی‌نهایت','جم بی‌نهایت','سرعت بی‌نهایت'],
-   ver:'نسخه ۰.۴۵', verDesc:'برای نسخه ۰.۴۵ بازی تست و بهینه شده است.',
-   img:'https://uploadkon.ir/uploads/646b01_26Screenshot-2026-10-01-10-59-11-454-ir-mservices-market-edit.jpg',
-   dl:'https://www.mediafire.com/file/bnrp8vqgt42es5f/ClutchPlate.zip/file', videoHash:'ick83ti'},
-  {id:'godfather', title:'پدرخوانده', emoji:'🎩', badge:'mod', badgeTxt:'MOD',
-   feats:['ناظر شدن','صحبت روی نوبت','بدون بن'],
-   ver:'نسخه ۰.۰.۶۵۰', verDesc:'برای نسخه ۰.۰.۶۵۰ بهینه و از قابلیت‌های جدید پشتیبانی می‌کند.',
-   img:'https://uploadkon.ir/uploads/027d01_26Screenshot-2026-10-01-11-01-05-682-ir-mservices-market-edit.jpg',
-   dl:CH, videoHash:''},
-  {id:'mehman', title:'مهمان نیمه شب', emoji:'👻', badge:'mod', badgeTxt:'MOD',
-   feats:['سکه بی‌نهایت','کم حجم','معماری ۶۴ بیت'],
-   ver:'نسخه ۱۰۷', verDesc:'برای گوشی‌های معماری ۶۴ بیت بهینه‌سازی شده.',
-   img:'https://uploadkon.ir/uploads/82f301_26Screenshot-2026-10-01-11-01-56-561-ir-mservices-market-edit.jpg',
-   dl:CH, videoHash:''},
-  {id:'diarbaqi', title:'دیار باقی', emoji:'🏰', badge:'mod', badgeTxt:'MOD',
-   feats:['سکه بی‌نهایت','معماری ۶۴ بیت'],
-   ver:'نسخه ۱۰۷', verDesc:'برای معماری ۶۴ بیت بهینه شده است.',
-   img:'https://uploadkon.ir/uploads/473101_26Screenshot-2026-10-01-11-00-21-097-ir-mservices-market-edit.jpg',
-   dl:CH, videoHash:'jarsd68'},
-  {id:'taxido', title:'تاکسیدو', emoji:'🎭', badge:'mod', badgeTxt:'MOD',
-   feats:['سکه بی‌نهایت','معماری ۶۴ بیت'],
-   ver:'نسخه کامل', verDesc:'برای معماری ۶۴ بیت بهینه‌سازی شده است.',
-   img:'https://uploadkon.ir/uploads/9cdf01_26Screenshot-2026-10-01-11-01-31-009-ir-mservices-market-edit.jpg',
-   dl:CH, videoHash:''}
-];
-
-function featInfo(f){
-  if(/اشتراک ویژه|طلا|طلایی/.test(f)) return {t:'gold', i:'👑'};
-  if(/سکه|پول|جم|الماس|آیتم/.test(f)) return {t:'gold', i:'🪙'};
-  if(/سرعت/.test(f)) return {t:'cyan', i:'⚡'};
-  if(/انرژی|فول/.test(f)) return {t:'cyan', i:'🔋'};
-  if(/بدون بن|آنتی بن|امن/.test(f)) return {t:'green', i:'🛡️'};
-  if(/ناظر|نظارت/.test(f)) return {t:'purple', i:'👁'};
-  if(/صحبت|تغییر نام/.test(f)) return {t:'purple', i:'💬'};
-  if(/باگ روح|روح/.test(f)) return {t:'purple', i:'👻'};
-  if(/رد کردن|رد مرحله|مرحله/.test(f)) return {t:'purple', i:'⏭'};
-  if(/کم حجم/.test(f)) return {t:'blue', i:'📦'};
-  if(/۶۴ بیت|64 بیت|معماری/.test(f)) return {t:'blue', i:'📱'};
-  if(/ایفون|مسیج|sms|اس ام اس|پیامک/.test(f)) return {t:'cyan', i:'✉️'};
-  if(/اینستاگرام|توییتر|گوگل|تلگرام|روبیکا|چت/.test(f)) return {t:'purple', i:'📲'};
-  if(/ویدیو|کال/.test(f)) return {t:'cyan', i:'🎬'};
-  if(/تغییر کارت|مشاهده کارت|کارت/.test(f)) return {t:'gold', i:'🃏'};
-  return {t:'cyan', i:'✨'};
-}
-
-function pillHtml(f){ var i = featInfo(f); return '<span class="pill pill--'+i.t+'"><span class="pi">'+i.i+'</span>'+f+'</span>'; }
-function featBoxHtml(f){ var i = featInfo(f); return '<li class="feat-box feat-box--'+i.t+'"><span class="fi">'+i.i+'</span><span>'+f+'</span></li>'; }
-function vidPlaySvg(){ return '<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>'; }
-function isRubikaLink(url){ return url && url.indexOf('rubika.ir') > -1; }
-
-var thumbCache = {};
-function fetchThumb(hash){
-  if(!hash) return Promise.resolve('');
-  if(thumbCache[hash]) return Promise.resolve(thumbCache[hash]);
-  return fetch('https://www.aparat.com/etc/api/video/videohash/'+hash, {mode:'cors'})
-    .then(function(r){ return r.json(); })
-    .then(function(data){
-      var url = '';
-      if(data && data.video) url = data.video.big_poster || data.video.small_poster || data.video.poster || '';
-      thumbCache[hash] = url;
-      return url;
-    }).catch(function(){ return ''; });
-}
-
-function vidImgTag(hash, alt){
-  if(!hash) return '';
-  return '<div class="vid-card__skel"></div><img data-thumb-hash="'+hash+'" alt="'+alt+'" decoding="async">';
-}
-
-function loadAllThumbs(){
-  document.querySelectorAll('img[data-thumb-hash]').forEach(function(img){
-    if(img.dataset.loaded) return;
-    var hash = img.getAttribute('data-thumb-hash');
-    fetchThumb(hash).then(function(url){
-      if(url){
-        img.onload = function(){ img.classList.add('loaded'); };
-        img.onerror = function(){
-          var sk = img.previousElementSibling;
-          if(sk && sk.classList.contains('vid-card__skel')) sk.style.background = '#342860';
-        };
-        img.src = url;
-        img.dataset.loaded = '1';
-      } else {
-        var sk = img.previousElementSibling;
-        if(sk && sk.classList.contains('vid-card__skel')) sk.style.background = '#342860';
-      }
-    });
-  });
-}
-
-function syncLock(){
-  if(modalOpen || dlOpen || vidOpen || playerOpen || noticeOpen) document.body.classList.add('lock');
-  else document.body.classList.remove('lock');
-}
-
-/* ============ توابع بستن بدون تاریخچه (برای popstate) ============ */
-function doCloseMod(){ if(!modalOpen) return; modalOpen = false; $('modal').classList.remove('on'); syncLock(); }
-function doCloseDl(){ if(!dlOpen) return; dlOpen = false; $('dlp').classList.remove('on'); if(window._dlP){ clearInterval(window._dlP); window._dlP = null; } syncLock(); }
-function doCloseVid(){ if(!vidOpen) return; vidOpen = false; $('vidp').classList.remove('on'); syncLock(); }
-function doClosePlayer(){ if(!playerOpen) return; playerOpen = false; $('plp').classList.remove('on'); setTimeout(function(){ var f = $('plFrame'); if(f){ f.innerHTML = ''; f.style.backgroundImage = ''; } }, 300); syncLock(); }
-function doCloseNotice(){ if(!noticeOpen) return; noticeOpen = false; $('ntc').classList.remove('on'); if(noticeTimer){ clearTimeout(noticeTimer); noticeTimer = null; } if(noticeTick){ clearInterval(noticeTick); noticeTick = null; } syncLock(); }
-
-/* ============ توابع بستن با تاریخچه (برای دکمه ضربدر) ============ */
-function forceCloseMod(){ if(!modalOpen) return; doCloseMod(); popHistory(); }
-function forceCloseDl(){ if(!dlOpen) return; doCloseDl(); popHistory(); }
-function forceCloseVid(){ if(!vidOpen) return; doCloseVid(); popHistory(); }
-function forceClosePlayer(){ if(!playerOpen) return; doClosePlayer(); popHistory(); }
-function forceCloseNotice(){ if(!noticeOpen) return; doCloseNotice(); popHistory(); }
-
-/* ============ Popstate listener — دکمه برگشت گوشی ============ */
-window.addEventListener('popstate', function(){
-  if(skipPopstate){ skipPopstate = false; return; }
-  if(noticeOpen){ doCloseNotice(); return; }
-  if(playerOpen){ doClosePlayer(); return; }
-  if(vidOpen){ doCloseVid(); return; }
-  if(dlOpen){ doCloseDl(); return; }
-  if(modalOpen){ doCloseMod(); return; }
-});
-
-function safeOpenLink(url){
-  try {
-    var win = window.open(url, '_blank');
-    if(!win || win.closed || typeof win.closed === 'undefined'){
-      var a = document.createElement('a');
-      a.href = url; a.target = '_blank'; a.rel = 'noopener';
-      document.body.appendChild(a); a.click(); document.body.removeChild(a);
-    }
-  } catch(e) {
-    var a = document.createElement('a');
-    a.href = url; a.target = '_blank'; a.rel = 'noopener';
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  }
-}
-
-function renderGames(){
-  var html = '';
-  GAMES.forEach(function(g){
-    var pills = '';
-    for(var k = 0; k < Math.min(g.feats.length, 3); k++) pills += pillHtml(g.feats[k]);
-    var badges = '<div class="card__badges">';
-    if(g.badge === 'new') badges += '<span class="card__badge card__badge--new">جدید</span>';
-    badges += '<span class="card__badge card__badge--mod">MOD</span></div>';
-    var thumb = g.img
-      ? '<img src="'+g.img+'" alt="'+g.title+'" loading="lazy" decoding="async" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"><div class="em" style="display:none">'+g.emoji+'</div>'
-      : '<div class="em">'+g.emoji+'</div>';
-    html += '<div class="card"><div class="card__top" data-open="'+g.id+'"><div class="card__thumb">'+thumb+'</div><div class="card__info"><div class="card__row"><h3 class="card__title">'+g.title+'</h3>'+badges+'</div><div class="card__feats">'+pills+'</div></div></div><div class="card__cta"><button class="card__btn" data-open="'+g.id+'">دریافت مود</button></div></div>';
-  });
-  $('grid').innerHTML = html;
-  $('cnt').textContent = toFa(GAMES.length) + ' مورد';
-
-  document.querySelectorAll('[data-open]').forEach(function(el){
-    el.addEventListener('click', function(){ openMod(this.getAttribute('data-open')); });
-  });
-  renderVideos();
-}
-
-function renderVideos(){
-  var html = '';
-  VIDEOS.forEach(function(v, i){
-    html += '<div class="vid-card" data-vid="'+i+'"><div class="vid-card__thumb">'+vidImgTag(v.hash, v.title)+'<div class="vid-card__play"><span>'+vidPlaySvg()+'</span></div>'+(v.dur ? '<span class="vid-card__dur">'+v.dur+'</span>' : '')+'</div><div class="vid-card__body"><div class="vid-card__t">'+v.title+'</div><div class="vid-card__meta">'+(v.views ? '<span>👁 '+v.views+'</span> ' : '')+'آپارات</div></div></div>';
-  });
-  $('videosScroll').innerHTML = html;
-  $('vidCount').textContent = toFa(VIDEOS.length) + ' ویدیو';
-  document.querySelectorAll('[data-vid]').forEach(function(el){
-    el.addEventListener('click', function(){ openVidList(+this.getAttribute('data-vid')); });
-  });
-  loadAllThumbs();
-}
-
-function openVidList(highlightIdx){
-  var html = '';
-  VIDEOS.forEach(function(v, i){
-    html += '<div class="vid-item" data-vid="'+i+'"><div class="vid-item__thumb">'+vidImgTag(v.hash, v.title)+'<div class="vid-item__play"><span>'+vidPlaySvg()+'</span></div></div><div class="vid-item__info"><div class="vid-item__t">'+v.title+'</div><div class="vid-item__meta">'+(v.views ? '👁 '+v.views : 'آپارات')+'</div></div></div>';
-  });
-  $('vidList').innerHTML = html;
-  document.querySelectorAll('#vidList [data-vid]').forEach(function(el){
-    el.addEventListener('click', function(){ openPlayer(+this.getAttribute('data-vid')); });
-  });
-  loadAllThumbs();
-  $('vidp').classList.add('on');
-  document.body.classList.add('lock');
-  vidOpen = true;
-  pushHistory();
-  if(typeof highlightIdx === 'number' && highlightIdx >= 0) setTimeout(function(){ openPlayer(highlightIdx); }, 180);
-}
-
-function openPlayer(idx){
-  var v = VIDEOS[idx]; if(!v) return;
-  var frame = $('plFrame');
-  $('plTitle').textContent = v.title || 'ویدیو';
-  frame.style.backgroundImage = '';
-  frame.innerHTML = '<div class="player-loading"><div class="spin"></div><span>در حال بارگذاری…</span></div>';
-  $('plp').classList.add('on');
-  document.body.classList.add('lock');
-  playerOpen = true;
-  pushHistory();
-  fetchThumb(v.hash).then(function(url){
-    if(url && playerOpen){ frame.style.backgroundImage = 'url('+url+')'; frame.style.backgroundSize = 'cover'; frame.style.backgroundPosition = 'center'; }
-  });
-  setTimeout(function(){
-    if(!playerOpen) return;
-    if(v.hash){
-      var iframe = document.createElement('iframe');
-      iframe.src = 'https://www.aparat.com/video/video/embed/videohash/'+v.hash+'/vt/frame';
-      iframe.setAttribute('allowfullscreen', 'true');
-      iframe.setAttribute('frameborder', '0');
-      iframe.setAttribute('allow', 'autoplay; encrypted-media; fullscreen');
-      iframe.onload = function(){ var ld = frame.querySelector('.player-loading'); if(ld) ld.remove(); };
-      frame.appendChild(iframe);
-      setTimeout(function(){ var ld = frame.querySelector('.player-loading'); if(ld) ld.remove(); }, 2500);
-    } else {
-      frame.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:.75rem">کد ویدیو ثبت نشده</div>';
-    }
-  }, 100);
-}
-
-function openMod(id){
-  var g = GAMES.find(function(x){ return x.id === id; }); if(!g) return;
-  var media = $('mMedia');
-  media.innerHTML = '<div class="modal__media-bg" id="mBg"></div><div class="modal__media-ring"></div><img id="mImg" alt="'+g.title+'" style="display:none"><div class="modal__media-em" id="mEm">'+g.emoji+'</div>';
-
-  var badgesHtml = '';
-  if(g.badge === 'new') badgesHtml += '<span class="modal__badge modal__badge--new">جدید</span>';
-  badgesHtml += '<span class="modal__badge modal__badge--mod">MOD</span>';
-  $('mBadges').innerHTML = badgesHtml;
-  $('mTitle').textContent = g.title;
-  $('mSub').textContent = 'مود اختصاصی و تست شده';
-  $('mFeats').innerHTML = g.feats.map(featBoxHtml).join('');
-  $('mVer').innerHTML = '<span class="tag">'+g.ver+'</span><p>'+g.verDesc+'</p>';
-  currentDl = g.dl || CH;
-
-  var relEl = $('mRelated');
-  var relIdx = -1;
-  if(g.videoHash){
-    for(var vi = 0; vi < VIDEOS.length; vi++){
-      if(VIDEOS[vi].hash === g.videoHash){ relIdx = vi; break; }
-    }
-  }
-  if(relIdx >= 0){
-    var vv = VIDEOS[relIdx];
-    relEl.style.display = 'block';
-    relEl.innerHTML = '<h4><span class="rec"></span> ویدیو مرتبط</h4><div class="modal__rel-card" data-relvid="'+relIdx+'"><div class="modal__rel-thumb">'+vidImgTag(vv.hash, vv.title)+'<div class="vid-card__play"><span>'+vidPlaySvg()+'</span></div></div><div class="modal__rel-info"><div class="modal__rel-t">'+vv.title+'</div></div></div>';
-    var rc = relEl.querySelector('[data-relvid]');
-    if(rc) rc.addEventListener('click', function(){ openPlayer(+this.getAttribute('data-relvid')); });
-    loadAllThumbs();
-  } else {
-    relEl.style.display = 'none';
-    relEl.innerHTML = '';
-  }
-
-  $('modal').classList.add('on');
-  document.body.classList.add('lock');
-  modalOpen = true;
-  pushHistory();
-
-  if(g.img){
-    var pre = new Image();
-    pre.onload = function(){
-      var bg = document.getElementById('mBg');
-      var img = document.getElementById('mImg');
-      var em = document.getElementById('mEm');
-      if(!bg || !img || !em) return;
-      bg.style.backgroundImage = 'url('+g.img+')';
-      img.src = g.img;
-      img.style.display = 'block';
-      requestAnimationFrame(function(){
-        bg.classList.add('loaded');
-        img.classList.add('loaded');
-        em.classList.add('hide');
-      });
-    };
-    pre.src = g.img;
-  }
-}
-
-function handleDownload(dl){
-  if(modalOpen) forceCloseMod();
-  if(isRubikaLink(dl)){
-    currentDl = dl;
-    setTimeout(function(){ openNotice(dl); }, 320);
-  } else {
-    currentDl = dl;
-    setTimeout(openDl, 320);
-  }
-}
-
-function openNotice(link){
-  var sec = 5;
-  $('ntcTimer').textContent = toFa(sec);
-  var bar = $('ntcBar');
-  bar.style.width = '0%';
-  setTimeout(function(){ bar.style.width = '100%'; }, 50);
-
-  $('ntc').classList.add('on');
-  document.body.classList.add('lock');
-  noticeOpen = true;
-  pushHistory();
-
-  if(noticeTimer) clearTimeout(noticeTimer);
-  if(noticeTick) clearInterval(noticeTick);
-
-  noticeTick = setInterval(function(){
-    sec -= 1;
-    if(sec < 0) sec = 0;
-    $('ntcTimer').textContent = toFa(sec);
-    if(sec <= 0){ clearInterval(noticeTick); noticeTick = null; }
-  }, 1000);
-
-  noticeTimer = setTimeout(function(){
-    // قبل از ریدایرکت، پاپ‌آپ رو ببند و state رو پاک کن
-    doCloseNotice();
-    popHistory();
-    setTimeout(function(){ safeOpenLink(link || CH); }, 150);
-  }, 5000);
-}
-
-function openDl(){
-  var pct = $('dlPct'), tm = $('dlTm'), card = $('dlCard'), link = currentDl || CH;
-  card.classList.remove('done');
-  $('dlIc').textContent = '⬇';
-  $('dlTitle').textContent = 'در حال آماده‌سازی دانلود';
-  $('dlDesc').innerHTML = 'فایل روی سرور در حال آماده‌سازیه…';
-  $('dlLink').textContent = '⬇ دریافت فایل';
-  $('dlLink').href = link;
-  pct.textContent = toFa(0) + '٪';
-  tm.textContent = toFa(10);
-
-  $('dlp').classList.add('on');
-  document.body.classList.add('lock');
-  dlOpen = true;
-  pushHistory();
-
-  if(window._dlP) clearInterval(window._dlP);
-  var p = 0;
-  window._dlP = setInterval(function(){
-    p += 2;
-    if(p > 100) p = 100;
-    pct.textContent = toFa(p) + '٪';
-    tm.textContent = toFa(Math.max(0, Math.ceil((100 - p) / 10)));
-    if(p >= 100){
-      clearInterval(window._dlP);
-      window._dlP = null;
-      card.classList.add('done');
-      $('dlIc').textContent = '✓';
-      $('dlTitle').textContent = 'دانلود آماده است!';
-      $('dlDesc').innerHTML = 'اگر دانلود به‌صورت خودکار باز نشد، روی دکمه زیر بزنید.';
-      setTimeout(function(){
-        doCloseDl();
-        popHistory();
-        setTimeout(function(){ safeOpenLink(link); }, 150);
-      }, 650);
-    }
-  }, 80);
-}
-
-// Event listeners — از forceClose استفاده می‌کنند تا state تاریخچه هم پاک بشه
-$('modalClose').addEventListener('click', function(){ if(modalOpen) forceCloseMod(); });
-$('modal').addEventListener('click', function(e){ if(e.target === this && modalOpen) forceCloseMod(); });
-$('mDl').addEventListener('click', function(){ handleDownload(currentDl || CH); });
-
-$('dlClose').addEventListener('click', function(){ if(dlOpen) forceCloseDl(); });
-$('dlp').addEventListener('click', function(e){ if(e.target === this && dlOpen) forceCloseDl(); });
-
-$('vidClose').addEventListener('click', function(){ if(vidOpen) forceCloseVid(); });
-$('vidp').addEventListener('click', function(e){ if(e.target === this && vidOpen) forceCloseVid(); });
-
-$('plClose').addEventListener('click', function(){ if(playerOpen) forceClosePlayer(); });
-$('plp').addEventListener('click', function(e){ if(e.target === this && playerOpen) forceClosePlayer(); });
-
-$('ntcClose').addEventListener('click', function(){ if(noticeOpen) forceCloseNotice(); });
-$('ntc').addEventListener('click', function(e){ if(e.target === this && noticeOpen) forceCloseNotice(); });
-
-document.addEventListener('keydown', function(e){
-  if(e.key !== 'Escape') return;
-  if(noticeOpen){ forceCloseNotice(); return; }
-  if(playerOpen){ forceClosePlayer(); return; }
-  if(vidOpen){ forceCloseVid(); return; }
-  if(dlOpen){ forceCloseDl(); return; }
-  if(modalOpen){ forceCloseMod(); return; }
-});
-
-$('offlineRetry').addEventListener('click', function(){ location.reload(); });
-function setOffline(s){
-  if(s){ document.body.classList.add('is-offline'); $('offline').classList.add('show'); }
-  else { document.body.classList.remove('is-offline'); $('offline').classList.remove('show'); }
-}
-window.addEventListener('online', function(){ setOffline(false); });
-window.addEventListener('offline', function(){ setOffline(true); });
-
-if(!navigator.onLine) setOffline(true);
-else renderGames();
-})();
-</script>
+    <div class="footer-note">با تشکر از همراهی شما 🙏</div>
+  </main>
 </body>
 </html>
